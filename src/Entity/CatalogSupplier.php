@@ -4,6 +4,8 @@ namespace Sellastica\CatalogSupplier\Entity;
 /**
  * @generate-builder
  * @see CatalogSupplierBuilder
+ * 
+ * @property CatalogSupplierRelations $relationService
  */
 class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	implements \Sellastica\Entity\Entity\IEntity
@@ -19,9 +21,9 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 
 
 	/**
-	 * @param \Sellastica\CatalogSupplier\Entity\CatalogSupplierBuilder $builder
+	 * @param CatalogSupplierBuilder $builder
 	 */
-	public function __construct(\Sellastica\CatalogSupplier\Entity\CatalogSupplierBuilder $builder)
+	public function __construct(CatalogSupplierBuilder $builder)
 	{
 		$this->hydrate($builder);
 	}
@@ -82,9 +84,12 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 		$this->xsd = $xsd;
 	}
 
-	public function getUrls()
+	/**
+	 * @return CatalogSupplierUrlCollection
+	 */
+	public function getUrls(): CatalogSupplierUrlCollection
 	{
-		
+		return $this->relationService->getUrls();
 	}
 
 	/**

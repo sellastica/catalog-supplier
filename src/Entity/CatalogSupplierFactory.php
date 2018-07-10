@@ -16,6 +16,7 @@ class CatalogSupplierFactory extends EntityFactory
 	 */
 	public function doInitialize(IEntity $entity)
 	{
+		$entity->setRelationService(new CatalogSupplierRelations($entity, $this->em));
 	}
 
 	/**
