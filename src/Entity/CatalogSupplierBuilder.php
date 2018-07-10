@@ -5,9 +5,9 @@ use Sellastica\Entity\IBuilder;
 use Sellastica\Entity\TBuilder;
 
 /**
- * @see Supplier
+ * @see CatalogSupplier
  */
-class SupplierBuilder implements IBuilder
+class CatalogSupplierBuilder implements IBuilder
 {
 	use TBuilder;
 
@@ -15,6 +15,8 @@ class SupplierBuilder implements IBuilder
 	private $title;
 	/** @var string */
 	private $code;
+	/** @var string|null */
+	private $xsd;
 
 	/**
 	 * @param string $title
@@ -46,19 +48,37 @@ class SupplierBuilder implements IBuilder
 	}
 
 	/**
+	 * @return string|null
+	 */
+	public function getXsd()
+	{
+		return $this->xsd;
+	}
+
+	/**
+	 * @param string|null $xsd
+	 * @return $this
+	 */
+	public function xsd(string $xsd = null)
+	{
+		$this->xsd = $xsd;
+		return $this;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function generateId(): bool
 	{
-		return !Supplier::isIdGeneratedByStorage();
+		return !CatalogSupplier::isIdGeneratedByStorage();
 	}
 
 	/**
-	 * @return Supplier
+	 * @return CatalogSupplier
 	 */
-	public function build(): Supplier
+	public function build(): CatalogSupplier
 	{
-		return new Supplier($this);
+		return new CatalogSupplier($this);
 	}
 
 	/**

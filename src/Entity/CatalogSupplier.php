@@ -5,7 +5,7 @@ namespace Sellastica\CatalogSupplier\Entity;
  * @generate-builder
  * @see CatalogSupplierBuilder
  */
-class Supplier extends \Sellastica\Entity\Entity\AbstractEntity
+class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	implements \Sellastica\Entity\Entity\IEntity
 {
 	use \Sellastica\Entity\Entity\TAbstractEntity;
@@ -14,6 +14,8 @@ class Supplier extends \Sellastica\Entity\Entity\AbstractEntity
 	private $title;
 	/** @var string @required */
 	private $code;
+	/** @var string|null @optional */
+	private $xsd;
 
 
 	/**
@@ -22,6 +24,14 @@ class Supplier extends \Sellastica\Entity\Entity\AbstractEntity
 	public function __construct(\Sellastica\CatalogSupplier\Entity\CatalogSupplierBuilder $builder)
 	{
 		$this->hydrate($builder);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function isIdGeneratedByStorage(): bool
+	{
+		return true;
 	}
 
 	/**
@@ -57,13 +67,35 @@ class Supplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getXsd(): ?string
+	{
+		return $this->xsd;
+	}
+
+	/**
+	 * @param null|string $xsd
+	 */
+	public function setXsd(?string $xsd): void
+	{
+		$this->xsd = $xsd;
+	}
+
+	public function getUrls()
+	{
+		
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
 	{
 		return [
-				'title' => $this->title,
-				'code' => $this->code,
-			];
+			'title' => $this->title,
+			'code' => $this->code,
+			'xsd' => $this->xsd,
+		];
 	}
 }
