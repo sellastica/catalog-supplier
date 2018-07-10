@@ -1,12 +1,12 @@
 <?php
-namespace Sellastica\CatalogSupplierUrl\Mapping;
+namespace Sellastica\CatalogSupplier\Mapping;
 
 use Sellastica\Entity\IBuilder;
 use Sellastica\Entity\Mapping\Dao;
-use Sellastica\CatalogSupplierUrl\Entity\CatalogSupplierUrl;
-use Sellastica\CatalogSupplierUrl\Entity\CatalogSupplierUrlBuilder;
+use Sellastica\CatalogSupplier\Entity\CatalogSupplierUrl;
+use Sellastica\CatalogSupplier\Entity\CatalogSupplierUrlBuilder;
 use Sellastica\Entity\Entity\EntityCollection;
-use Sellastica\CatalogSupplierUrl\Entity\CatalogSupplierUrlCollection;
+use Sellastica\CatalogSupplier\Entity\CatalogSupplierUrlCollection;
 
 /**
  * @see CatalogSupplierUrl

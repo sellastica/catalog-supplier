@@ -1,8 +1,8 @@
 <?php
-namespace Sellastica\CatalogSupplierUrl\Mapping;
+namespace Sellastica\CatalogSupplier\Mapping;
 
+use Sellastica\CatalogSupplier\Entity\CatalogSupplierUrl;
 use Sellastica\Entity\Mapping\DibiMapper;
-use Sellastica\CatalogSupplierUrl\Entity\CatalogSupplierUrl;
 
 /**
  * @see CatalogSupplierUrl

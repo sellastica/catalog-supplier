@@ -1,5 +1,5 @@
 <?php
-namespace Sellastica\CatalogSupplierUrl\Entity;
+namespace Sellastica\CatalogSupplier\Entity;
 
 use Sellastica\Entity\IBuilder;
 use Sellastica\Entity\TBuilder;
