@@ -11,6 +11,15 @@ class CatalogSupplierDao extends \Sellastica\Entity\Mapping\Dao
 
 
 	/**
+	 * @param array $hosts
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
+	 */
+	public function findByHosts(array $hosts): \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
+	{
+		return $this->getEntitiesFromCacheOrStorage($this->mapper->findByHosts($hosts));
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	protected function getBuilder(

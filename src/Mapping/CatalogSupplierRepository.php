@@ -12,4 +12,14 @@ use Sellastica\Entity\Mapping\Repository;
 class CatalogSupplierRepository extends Repository implements ICatalogSupplierRepository
 {
 	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesRepository;
+
+
+	/**
+	 * @param array $hosts
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
+	 */
+	public function findByHosts(array $hosts): \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
+	{
+		return $this->initialize($this->dao->findByHosts($hosts));
+	}
 }

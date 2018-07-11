@@ -10,6 +10,18 @@ class CatalogSupplierDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 
 
 	/**
+	 * @param array $hosts
+	 * @return array
+	 */
+	public function findByHosts(array $hosts): array
+	{
+		return $this->database->select('supplierId')
+			->from('%n.suppliers_catalogue_supplier_url', $this->environment->getCrmDatabaseName())
+			->where('host IN (%sN)', $hosts)
+			->fetchPairs();
+	}
+
+	/**
 	 * @return bool
 	 */
 	protected function isInCrmDatabase(): bool
@@ -23,6 +35,7 @@ class CatalogSupplierDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	 */
 	protected function getTableName($databaseName = false): string
 	{
-		return 'suppliers_catalogue_supplier';
+		return ($databaseName ? $this->environment->getCrmDatabaseName() . '.' : '')
+			. 'suppliers_catalogue_supplier';
 	}
 }

@@ -12,4 +12,10 @@ use Sellastica\Entity\Mapping\RepositoryProxy;
 class CatalogSupplierRepositoryProxy extends RepositoryProxy implements ICatalogSupplierRepository
 {
 	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesRepositoryProxy;
+
+
+	public function findByHosts(array $hosts): \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
+	{
+		return $this->getRepository()->findByHosts($hosts);
+	}
 }
