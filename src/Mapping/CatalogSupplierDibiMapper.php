@@ -6,21 +6,6 @@ namespace Sellastica\CatalogSupplier\Mapping;
  */
 class CatalogSupplierDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 {
-	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesDibiMapper;
-
-
-	/**
-	 * @param array $hosts
-	 * @return array
-	 */
-	public function findByHosts(array $hosts): array
-	{
-		return $this->database->select('supplierId')
-			->from('%n.suppliers_catalogue_supplier_url', $this->environment->getCrmDatabaseName())
-			->where('host IN (%sN)', $hosts)
-			->fetchPairs();
-	}
-
 	/**
 	 * @return bool
 	 */
@@ -36,6 +21,6 @@ class CatalogSupplierDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	protected function getTableName($databaseName = false): string
 	{
 		return ($databaseName ? $this->environment->getCrmDatabaseName() . '.' : '')
-			. 'suppliers_catalogue_supplier';
+			. 'suppliers_supplier';
 	}
 }

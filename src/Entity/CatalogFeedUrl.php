@@ -3,21 +3,23 @@ namespace Sellastica\CatalogSupplier\Entity;
 
 /**
  * @generate-builder
- * @see CatalogSupplierUrlBuilder
+ * @see CatalogFeedUrlBuilder
  */
-class CatalogSupplierUrl extends \Sellastica\Entity\Entity\AbstractEntity
+class CatalogFeedUrl extends \Sellastica\Entity\Entity\AbstractEntity
 	implements \Sellastica\Entity\Entity\IEntity
 {
 	use \Sellastica\Entity\Entity\TAbstractEntity;
 
+	/** @var int @required */
+	private $feedId;
 	/** @var string @required */
 	private $host;
 
 
 	/**
-	 * @param CatalogSupplierUrlBuilder $builder
+	 * @param CatalogFeedUrlBuilder $builder
 	 */
-	public function __construct(CatalogSupplierUrlBuilder $builder)
+	public function __construct(CatalogFeedUrlBuilder $builder)
 	{
 		$this->hydrate($builder);
 	}
@@ -28,6 +30,22 @@ class CatalogSupplierUrl extends \Sellastica\Entity\Entity\AbstractEntity
 	public static function isIdGeneratedByStorage(): bool
 	{
 		return true;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getFeedId(): int
+	{
+		return $this->feedId;
+	}
+
+	/**
+	 * @param int $feedId
+	 */
+	public function setFeedId(int $feedId): void
+	{
+		$this->feedId = $feedId;
 	}
 
 	/**
@@ -52,6 +70,7 @@ class CatalogSupplierUrl extends \Sellastica\Entity\Entity\AbstractEntity
 	public function toArray(): array
 	{
 		return [
+			'feedId' => $this->feedId,
 			'host' => $this->host,
 		];
 	}

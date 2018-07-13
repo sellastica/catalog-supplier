@@ -4,7 +4,7 @@ namespace Sellastica\CatalogSupplier\Entity;
 /**
  * @generate-builder
  * @see CatalogSupplierBuilder
- * 
+ *
  * @property CatalogSupplierRelations $relationService
  */
 class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
@@ -14,10 +14,8 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 
 	/** @var string @required */
 	private $title;
-	/** @var string @required */
-	private $code;
 	/** @var string|null @optional */
-	private $xsd;
+	private $homepage;
 
 
 	/**
@@ -53,43 +51,27 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getCode(): string
-	{
-		return $this->code;
-	}
-
-	/**
-	 * @param string $code
-	 */
-	public function setCode(string $code): void
-	{
-		$this->code = $code;
-	}
-
-	/**
 	 * @return null|string
 	 */
-	public function getXsd(): ?string
+	public function getHomepage(): ?string
 	{
-		return $this->xsd;
+		return $this->homepage;
 	}
 
 	/**
-	 * @param null|string $xsd
+	 * @param null|string $homepage
 	 */
-	public function setXsd(?string $xsd): void
+	public function setHomepage(?string $homepage): void
 	{
-		$this->xsd = $xsd;
+		$this->homepage = $homepage;
 	}
 
 	/**
-	 * @return CatalogSupplierUrlCollection
+	 * @return CatalogFeedCollection|CatalogFeed[]
 	 */
-	public function getUrls(): CatalogSupplierUrlCollection
+	public function getCatalogFeeds(): CatalogFeedCollection
 	{
-		return $this->relationService->getUrls();
+		return $this->relationService->getCatalogFeeds();
 	}
 
 	/**
@@ -99,8 +81,7 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	{
 		return [
 			'title' => $this->title,
-			'code' => $this->code,
-			'xsd' => $this->xsd,
+			'homepage' => $this->homepage,
 		];
 	}
 }

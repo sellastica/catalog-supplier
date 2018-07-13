@@ -6,13 +6,13 @@ use Sellastica\Entity\Entity\IEntity;
 use Sellastica\Entity\Entity\EntityFactory;
 
 /**
- * @method CatalogSupplierUrl build(IBuilder $builder, bool $initialize = true, int $assignedId = null)
- * @see CatalogSupplierUrl
+ * @method CatalogFeedUrl build(IBuilder $builder, bool $initialize = true, int $assignedId = null)
+ * @see CatalogFeedUrl
  */
-class CatalogSupplierUrlFactory extends EntityFactory
+class CatalogFeedUrlFactory extends EntityFactory
 {
 	/**
-	 * @param IEntity|CatalogSupplierUrl $entity
+	 * @param IEntity|CatalogFeedUrl $entity
 	 */
 	public function doInitialize(IEntity $entity)
 	{
@@ -23,6 +23,6 @@ class CatalogSupplierUrlFactory extends EntityFactory
 	 */
 	public function getEntityClass(): string
 	{
-		return CatalogSupplierUrl::class;
+		return CatalogFeedUrl::class;
 	}
 }

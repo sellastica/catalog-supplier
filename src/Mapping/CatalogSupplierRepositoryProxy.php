@@ -1,9 +1,9 @@
 <?php
 namespace Sellastica\CatalogSupplier\Mapping;
 
-use Sellastica\CatalogSupplier\Entity\CatalogSupplier;
-use Sellastica\CatalogSupplier\Entity\ICatalogSupplierRepository;
 use Sellastica\Entity\Mapping\RepositoryProxy;
+use Sellastica\CatalogSupplier\Entity\ICatalogSupplierRepository;
+use Sellastica\CatalogSupplier\Entity\CatalogSupplier;
 
 /**
  * @method CatalogSupplierRepository getRepository()
@@ -11,11 +11,4 @@ use Sellastica\Entity\Mapping\RepositoryProxy;
  */
 class CatalogSupplierRepositoryProxy extends RepositoryProxy implements ICatalogSupplierRepository
 {
-	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesRepositoryProxy;
-
-
-	public function findByHosts(array $hosts): \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
-	{
-		return $this->getRepository()->findByHosts($hosts);
-	}
 }

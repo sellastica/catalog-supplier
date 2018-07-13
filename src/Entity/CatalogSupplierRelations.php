@@ -23,11 +23,11 @@ class CatalogSupplierRelations implements \Sellastica\Entity\Relation\IEntityRel
 	}
 
 	/**
-	 * @return CatalogSupplierUrlCollection
+	 * @return CatalogFeedCollection
 	 */
-	public function getUrls(): CatalogSupplierUrlCollection
+	public function getCatalogFeeds(): CatalogFeedCollection
 	{
-		return $this->em->getRepository(CatalogSupplierUrl::class)->findBy([
+		return $this->em->getRepository(CatalogFeed::class)->findBy([
 			'supplierId' => $this->catalogSupplier->getId(),
 		]);
 	}

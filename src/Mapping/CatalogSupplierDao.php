@@ -7,18 +7,6 @@ namespace Sellastica\CatalogSupplier\Mapping;
  */
 class CatalogSupplierDao extends \Sellastica\Entity\Mapping\Dao
 {
-	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesDao;
-
-
-	/**
-	 * @param array $hosts
-	 * @return \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
-	 */
-	public function findByHosts(array $hosts): \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
-	{
-		return $this->getEntitiesFromCacheOrStorage($this->mapper->findByHosts($hosts));
-	}
-
 	/**
 	 * @inheritDoc
 	 */
@@ -28,7 +16,7 @@ class CatalogSupplierDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
-		return \Sellastica\CatalogSupplier\Entity\CatalogSupplierBuilder::create($data->title, $data->code)
+		return \Sellastica\CatalogSupplier\Entity\CatalogSupplierBuilder::create($data->title)
 			->hydrate($data);
 	}
 

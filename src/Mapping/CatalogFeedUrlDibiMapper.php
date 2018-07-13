@@ -1,13 +1,13 @@
 <?php
 namespace Sellastica\CatalogSupplier\Mapping;
 
-use Sellastica\CatalogSupplier\Entity\CatalogSupplierUrl;
+use Sellastica\CatalogSupplier\Entity\CatalogFeedUrl;
 use Sellastica\Entity\Mapping\DibiMapper;
 
 /**
- * @see CatalogSupplierUrl
+ * @see CatalogFeedUrl
  */
-class CatalogSupplierUrlDibiMapper extends DibiMapper
+class CatalogFeedUrlDibiMapper extends DibiMapper
 {
 	/**
 	 * @param bool $databaseName
@@ -15,6 +15,6 @@ class CatalogSupplierUrlDibiMapper extends DibiMapper
 	 */
 	protected function getTableName($databaseName = false): string
 	{
-		return 'suppliers_catalogue_supplier_url';
+		return 'suppliers_feed_url';
 	}
 }

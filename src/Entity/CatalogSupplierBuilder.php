@@ -13,22 +13,15 @@ class CatalogSupplierBuilder implements IBuilder
 
 	/** @var string */
 	private $title;
-	/** @var string */
-	private $code;
 	/** @var string|null */
-	private $xsd;
+	private $homepage;
 
 	/**
 	 * @param string $title
-	 * @param string $code
 	 */
-	public function __construct(
-		string $title,
-		string $code
-	)
+	public function __construct(string $title)
 	{
 		$this->title = $title;
-		$this->code = $code;
 	}
 
 	/**
@@ -40,28 +33,20 @@ class CatalogSupplierBuilder implements IBuilder
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getCode(): string
-	{
-		return $this->code;
-	}
-
-	/**
 	 * @return string|null
 	 */
-	public function getXsd()
+	public function getHomepage()
 	{
-		return $this->xsd;
+		return $this->homepage;
 	}
 
 	/**
-	 * @param string|null $xsd
+	 * @param string|null $homepage
 	 * @return $this
 	 */
-	public function xsd(string $xsd = null)
+	public function homepage(string $homepage = null)
 	{
-		$this->xsd = $xsd;
+		$this->homepage = $homepage;
 		return $this;
 	}
 
@@ -83,14 +68,10 @@ class CatalogSupplierBuilder implements IBuilder
 
 	/**
 	 * @param string $title
-	 * @param string $code
 	 * @return self
 	 */
-	public static function create(
-		string $title,
-		string $code
-	): self
+	public static function create(string $title): self
 	{
-		return new self($title, $code);
+		return new self($title);
 	}
 }
