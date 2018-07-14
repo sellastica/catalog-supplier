@@ -23,7 +23,7 @@ class CatalogFeedUrlDao extends Dao
 		$second = null
 	): IBuilder
 	{
-		return CatalogFeedUrlBuilder::create($data->host)
+		return CatalogFeedUrlBuilder::create($data->feedId, $data->host)
 			->hydrate($data);
 	}
 
