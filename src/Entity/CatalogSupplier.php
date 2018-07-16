@@ -14,6 +14,8 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 
 	/** @var string @required */
 	private $title;
+	/** @var string @required */
+	private $code;
 	/** @var string|null @optional */
 	private $homepage;
 
@@ -51,6 +53,22 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getCode(): string
+	{
+		return $this->code;
+	}
+
+	/**
+	 * @param string $code
+	 */
+	public function setCode(string $code): void
+	{
+		$this->code = $code;
+	}
+
+	/**
 	 * @return null|string
 	 */
 	public function getHomepage(): ?string
@@ -81,6 +99,7 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	{
 		return [
 			'title' => $this->title,
+			'code' => $this->code,
 			'homepage' => $this->homepage,
 		];
 	}

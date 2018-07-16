@@ -15,20 +15,27 @@ class CatalogFeedBuilder implements IBuilder
 	private $supplierId;
 	/** @var string */
 	private $title;
+	/** @var string */
+	private $itemXPath;
+	/** @var string|null */
+	private $xsl;
 	/** @var string|null */
 	private $xsd;
 
 	/**
 	 * @param int $supplierId
 	 * @param string $title
+	 * @param string $itemXPath
 	 */
 	public function __construct(
 		int $supplierId,
-		string $title
+		string $title,
+		string $itemXPath
 	)
 	{
 		$this->supplierId = $supplierId;
 		$this->title = $title;
+		$this->itemXPath = $itemXPath;
 	}
 
 	/**
@@ -45,6 +52,32 @@ class CatalogFeedBuilder implements IBuilder
 	public function getTitle(): string
 	{
 		return $this->title;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getItemXPath(): string
+	{
+		return $this->itemXPath;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getXsl()
+	{
+		return $this->xsl;
+	}
+
+	/**
+	 * @param string|null $xsl
+	 * @return $this
+	 */
+	public function xsl(string $xsl = null)
+	{
+		$this->xsl = $xsl;
+		return $this;
 	}
 
 	/**
@@ -84,13 +117,15 @@ class CatalogFeedBuilder implements IBuilder
 	/**
 	 * @param int $supplierId
 	 * @param string $title
+	 * @param string $itemXPath
 	 * @return self
 	 */
 	public static function create(
 		int $supplierId,
-		string $title
+		string $title,
+		string $itemXPath
 	): self
 	{
-		return new self($supplierId, $title);
+		return new self($supplierId, $title, $itemXPath);
 	}
 }

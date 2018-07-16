@@ -28,8 +28,11 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
-		return \Sellastica\CatalogSupplier\Entity\CatalogFeedBuilder::create($data->supplierId, $data->title)
-			->hydrate($data);
+		return \Sellastica\CatalogSupplier\Entity\CatalogFeedBuilder::create(
+			$data->supplierId,
+			$data->title,
+			$data->itemXPath
+		)->hydrate($data);
 	}
 
 	/**
