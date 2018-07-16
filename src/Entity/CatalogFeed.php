@@ -116,6 +116,16 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return null|string
 	 */
+	public function getXslPath(): ?string
+	{
+		return $this->xsl
+			? $this->getSupplierRelativeRootDirectory() . '/' . $this->xsl
+			: null;
+	}
+
+	/**
+	 * @return null|string
+	 */
 	public function getXsd(): ?string
 	{
 		return $this->xsd;
@@ -127,6 +137,24 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setXsd(?string $xsd): void
 	{
 		$this->xsd = $xsd;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getXsdPath(): ?string
+	{
+		return $this->xsd
+			? $this->getSupplierRelativeRootDirectory() . '/' . $this->xsd
+			: null;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSupplierRelativeRootDirectory(): string
+	{
+		return 'app/model/Suppliers/Suppliers/' . $this->getSupplier()->getCode();
 	}
 
 	/**

@@ -16,7 +16,7 @@ class CatalogSupplierDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
-		return \Sellastica\CatalogSupplier\Entity\CatalogSupplierBuilder::create($data->title)
+		return \Sellastica\CatalogSupplier\Entity\CatalogSupplierBuilder::create($data->title, $data->code)
 			->hydrate($data);
 	}
 
