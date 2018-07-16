@@ -4,7 +4,7 @@ namespace Sellastica\CatalogSupplier\Entity;
 /**
  * @generate-builder
  * @see CatalogFeedBuilder
- * 
+ *
  * @property CatalogFeedRelations $relationService
  */
 class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
@@ -106,10 +106,13 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	 */
 	public function toArray(): array
 	{
-		return [
-			'supplierId' => $this->supplierId,
-			'title' => $this->title,
-			'xsd' => $this->xsd,
-		];
+		return array_merge(
+			$this->parentToArray(),
+			[
+				'supplierId' => $this->supplierId,
+				'title' => $this->title,
+				'xsd' => $this->xsd,
+			]
+		);
 	}
 }
