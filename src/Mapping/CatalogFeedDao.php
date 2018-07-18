@@ -28,8 +28,10 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
+		$data->type = \Suppliers\Model\FeedType::from($data->type);
 		return \Sellastica\CatalogSupplier\Entity\CatalogFeedBuilder::create(
 			$data->supplierId,
+			$data->type,
 			$data->title,
 			$data->itemXPath
 		)->hydrate($data);

@@ -14,6 +14,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 
 	/** @var int @required */
 	private $supplierId;
+	/** @var \Suppliers\Model\FeedType @required */
+	private $type;
 	/** @var string @required */
 	private $title;
 	/** @var string @required */
@@ -64,6 +66,21 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 		return $this->relationService->getSupplier();
 	}
 
+	/**
+	 * @return \Suppliers\Model\FeedType
+	 */
+	public function getType(): \Suppliers\Model\FeedType
+	{
+		return $this->type;
+	}
+
+	/**
+	 * @param \Suppliers\Model\FeedType $type
+	 */
+	public function setType(\Suppliers\Model\FeedType $type): void
+	{
+		$this->type = $type;
+	}
 
 	/**
 	 * @return string
@@ -166,6 +183,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 			$this->parentToArray(),
 			[
 				'supplierId' => $this->supplierId,
+				'type' => $this->type->getValue(),
 				'title' => $this->title,
 				'itemXPath' => $this->itemXPath,
 				'xsl' => $this->xsl,
