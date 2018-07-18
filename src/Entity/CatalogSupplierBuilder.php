@@ -17,6 +17,8 @@ class CatalogSupplierBuilder implements IBuilder
 	private $code;
 	/** @var string|null */
 	private $homepage;
+	/** @var string|null */
+	private $logo;
 
 	/**
 	 * @param string $title
@@ -62,6 +64,24 @@ class CatalogSupplierBuilder implements IBuilder
 	public function homepage(string $homepage = null)
 	{
 		$this->homepage = $homepage;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getLogo()
+	{
+		return $this->logo;
+	}
+
+	/**
+	 * @param string|null $logo
+	 * @return $this
+	 */
+	public function logo(string $logo = null)
+	{
+		$this->logo = $logo;
 		return $this;
 	}
 

@@ -18,6 +18,8 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	private $code;
 	/** @var string|null @optional */
 	private $homepage;
+	/** @var string|null @optional */
+	private $logo;
 
 
 	/**
@@ -93,14 +95,60 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getRelativeRootDirectory(): string
+	{
+		return 'app/model/Suppliers/Suppliers/' . $this->getCode();
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getRelativePublicDirectory(): string
+	{
+		return 'www/applications/suppliers/suppliers/' . $this->getCode();
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getLogo(): ?string
+	{
+		return $this->logo;
+	}
+
+	/**
+	 * @param null|string $logo
+	 */
+	public function setLogo(?string $logo): void
+	{
+		$this->logo = $logo;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getLogoPath(): ?string
+	{
+		return $this->logo
+			? $this->getRelativePublicDirectory() . '/' . $this->logo
+			: null;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
 	{
-		return [
-			'title' => $this->title,
-			'code' => $this->code,
-			'homepage' => $this->homepage,
-		];
+		return array_merge(
+			$this->parentToArray(),
+			[
+				'title' => $this->title,
+				'code' => $this->code,
+				'homepage' => $this->homepage,
+				'logo' => $this->logo,
+			]
+		);
 	}
 }
