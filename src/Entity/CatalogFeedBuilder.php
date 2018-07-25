@@ -22,6 +22,8 @@ class CatalogFeedBuilder implements IBuilder
 	/** @var string|null */
 	private $xsl;
 	/** @var string|null */
+	private $xslVersion;
+	/** @var string|null */
 	private $xsd;
 
 	/**
@@ -90,6 +92,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function xsl(string $xsl = null)
 	{
 		$this->xsl = $xsl;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getXslVersion()
+	{
+		return $this->xslVersion;
+	}
+
+	/**
+	 * @param string|null $xslVersion
+	 * @return $this
+	 */
+	public function xslVersion(string $xslVersion = null)
+	{
+		$this->xslVersion = $xslVersion;
 		return $this;
 	}
 

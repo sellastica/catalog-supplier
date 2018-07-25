@@ -107,7 +107,7 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	 */
 	public function getRelativePublicDirectory(): string
 	{
-		return 'www/applications/suppliers/suppliers/' . $this->getCode();
+		return 'www/applications/suppliers/assets/' . $this->getCode();
 	}
 
 	/**

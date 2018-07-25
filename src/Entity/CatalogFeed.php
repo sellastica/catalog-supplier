@@ -23,6 +23,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var string|null @optional */
 	private $xsl;
 	/** @var string|null @optional */
+	private $xslVersion;
+	/** @var string|null @optional */
 	private $xsd;
 
 
@@ -143,6 +145,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return null|string
 	 */
+	public function getXslVersion(): ?string
+	{
+		return $this->xslVersion;
+	}
+
+	/**
+	 * @param null|string $xslVersion
+	 */
+	public function setXslVersion(?string $xslVersion): void
+	{
+		$this->xslVersion = $xslVersion;
+	}
+
+	/**
+	 * @return null|string
+	 */
 	public function getXsd(): ?string
 	{
 		return $this->xsd;
@@ -187,6 +205,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'title' => $this->title,
 				'itemXPath' => $this->itemXPath,
 				'xsl' => $this->xsl,
+				'xslVersion' => $this->xslVersion,
 				'xsd' => $this->xsd,
 			]
 		);
