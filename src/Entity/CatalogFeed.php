@@ -20,10 +20,10 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $title;
 	/** @var string @required */
 	private $itemXPath;
-	/** @var string|null @optional */
-	private $xsl;
-	/** @var string|null @optional */
-	private $xslVersion;
+	/** @var string @required */
+	private $converterClass;
+	/** @var \Sellastica\Localization\Model\Currency @required */
+	private $defaultCurrency;
 	/** @var string|null @optional */
 	private $xsd;
 
@@ -117,45 +117,35 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return null|string
+	 * @return string
 	 */
-	public function getXsl(): ?string
+	public function getConverterClass(): string
 	{
-		return $this->xsl;
+		return $this->converterClass;
 	}
 
 	/**
-	 * @param null|string $xsl
+	 * @param string $converterClass
 	 */
-	public function setXsl(?string $xsl): void
+	public function setConverterClass(string $converterClass): void
 	{
-		$this->xsl = $xsl;
+		$this->converterClass = $converterClass;
 	}
 
 	/**
-	 * @return null|string
+	 * @return \Sellastica\Localization\Model\Currency
 	 */
-	public function getXslPath(): ?string
+	public function getDefaultCurrency(): \Sellastica\Localization\Model\Currency
 	{
-		return $this->xsl
-			? $this->getSupplier()->getRelativeRootDirectory() . '/' . $this->xsl
-			: null;
+		return $this->defaultCurrency;
 	}
 
 	/**
-	 * @return null|string
+	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 */
-	public function getXslVersion(): ?string
+	public function setDefaultCurrency(\Sellastica\Localization\Model\Currency $defaultCurrency): void
 	{
-		return $this->xslVersion;
-	}
-
-	/**
-	 * @param null|string $xslVersion
-	 */
-	public function setXslVersion(?string $xslVersion): void
-	{
-		$this->xslVersion = $xslVersion;
+		$this->defaultCurrency = $defaultCurrency;
 	}
 
 	/**
@@ -204,8 +194,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'type' => $this->type->getValue(),
 				'title' => $this->title,
 				'itemXPath' => $this->itemXPath,
-				'xsl' => $this->xsl,
-				'xslVersion' => $this->xslVersion,
+				'converterClass' => $this->converterClass,
+				'defaultCurrency' => $this->defaultCurrency->getCode(),
 				'xsd' => $this->xsd,
 			]
 		);

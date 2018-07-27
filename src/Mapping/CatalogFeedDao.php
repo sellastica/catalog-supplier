@@ -29,11 +29,14 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 	): \Sellastica\Entity\IBuilder
 	{
 		$data->type = \Suppliers\Model\FeedType::from($data->type);
+		$data->defaultCurrency = \Sellastica\Localization\Model\Currency::from($data->defaultCurrency);
 		return \Sellastica\CatalogSupplier\Entity\CatalogFeedBuilder::create(
 			$data->supplierId,
 			$data->type,
 			$data->title,
-			$data->itemXPath
+			$data->itemXPath,
+			$data->converterClass,
+			$data->defaultCurrency
 		)->hydrate($data);
 	}
 

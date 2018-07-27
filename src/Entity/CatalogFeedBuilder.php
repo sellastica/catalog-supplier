@@ -19,10 +19,10 @@ class CatalogFeedBuilder implements IBuilder
 	private $title;
 	/** @var string */
 	private $itemXPath;
-	/** @var string|null */
-	private $xsl;
-	/** @var string|null */
-	private $xslVersion;
+	/** @var string */
+	private $converterClass;
+	/** @var \Sellastica\Localization\Model\Currency */
+	private $defaultCurrency;
 	/** @var string|null */
 	private $xsd;
 
@@ -31,18 +31,24 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param \Suppliers\Model\FeedType $type
 	 * @param string $title
 	 * @param string $itemXPath
+	 * @param string $converterClass
+	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 */
 	public function __construct(
 		int $supplierId,
 		\Suppliers\Model\FeedType $type,
 		string $title,
-		string $itemXPath
+		string $itemXPath,
+		string $converterClass,
+		\Sellastica\Localization\Model\Currency $defaultCurrency
 	)
 	{
 		$this->supplierId = $supplierId;
 		$this->type = $type;
 		$this->title = $title;
 		$this->itemXPath = $itemXPath;
+		$this->converterClass = $converterClass;
+		$this->defaultCurrency = $defaultCurrency;
 	}
 
 	/**
@@ -78,39 +84,19 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return string|null
+	 * @return string
 	 */
-	public function getXsl()
+	public function getConverterClass(): string
 	{
-		return $this->xsl;
+		return $this->converterClass;
 	}
 
 	/**
-	 * @param string|null $xsl
-	 * @return $this
+	 * @return \Sellastica\Localization\Model\Currency
 	 */
-	public function xsl(string $xsl = null)
+	public function getDefaultCurrency(): \Sellastica\Localization\Model\Currency
 	{
-		$this->xsl = $xsl;
-		return $this;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getXslVersion()
-	{
-		return $this->xslVersion;
-	}
-
-	/**
-	 * @param string|null $xslVersion
-	 * @return $this
-	 */
-	public function xslVersion(string $xslVersion = null)
-	{
-		$this->xslVersion = $xslVersion;
-		return $this;
+		return $this->defaultCurrency;
 	}
 
 	/**
@@ -152,15 +138,19 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param \Suppliers\Model\FeedType $type
 	 * @param string $title
 	 * @param string $itemXPath
+	 * @param string $converterClass
+	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @return self
 	 */
 	public static function create(
 		int $supplierId,
 		\Suppliers\Model\FeedType $type,
 		string $title,
-		string $itemXPath
+		string $itemXPath,
+		string $converterClass,
+		\Sellastica\Localization\Model\Currency $defaultCurrency
 	): self
 	{
-		return new self($supplierId, $type, $title, $itemXPath);
+		return new self($supplierId, $type, $title, $itemXPath, $converterClass, $defaultCurrency);
 	}
 }
