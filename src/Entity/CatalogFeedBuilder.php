@@ -18,6 +18,8 @@ class CatalogFeedBuilder implements IBuilder
 	/** @var string */
 	private $title;
 	/** @var string */
+	private $url;
+	/** @var string */
 	private $itemXPath;
 	/** @var string */
 	private $converterClass;
@@ -25,11 +27,16 @@ class CatalogFeedBuilder implements IBuilder
 	private $defaultCurrency;
 	/** @var string|null */
 	private $xsd;
+	/** @var bool */
+	private $loginRequired = false;
+	/** @var bool */
+	private $passwordRequired = false;
 
 	/**
 	 * @param int $supplierId
 	 * @param \Suppliers\Model\FeedType $type
 	 * @param string $title
+	 * @param string $url
 	 * @param string $itemXPath
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
@@ -38,6 +45,7 @@ class CatalogFeedBuilder implements IBuilder
 		int $supplierId,
 		\Suppliers\Model\FeedType $type,
 		string $title,
+		string $url,
 		string $itemXPath,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency
@@ -46,6 +54,7 @@ class CatalogFeedBuilder implements IBuilder
 		$this->supplierId = $supplierId;
 		$this->type = $type;
 		$this->title = $title;
+		$this->url = $url;
 		$this->itemXPath = $itemXPath;
 		$this->converterClass = $converterClass;
 		$this->defaultCurrency = $defaultCurrency;
@@ -73,6 +82,14 @@ class CatalogFeedBuilder implements IBuilder
 	public function getTitle(): string
 	{
 		return $this->title;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrl(): string
+	{
+		return $this->url;
 	}
 
 	/**
@@ -120,6 +137,42 @@ class CatalogFeedBuilder implements IBuilder
 	/**
 	 * @return bool
 	 */
+	public function getLoginRequired(): bool
+	{
+		return $this->loginRequired;
+	}
+
+	/**
+	 * @param bool $loginRequired
+	 * @return $this
+	 */
+	public function loginRequired(bool $loginRequired)
+	{
+		$this->loginRequired = $loginRequired;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getPasswordRequired(): bool
+	{
+		return $this->passwordRequired;
+	}
+
+	/**
+	 * @param bool $passwordRequired
+	 * @return $this
+	 */
+	public function passwordRequired(bool $passwordRequired)
+	{
+		$this->passwordRequired = $passwordRequired;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
 	public function generateId(): bool
 	{
 		return !CatalogFeed::isIdGeneratedByStorage();
@@ -137,6 +190,7 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param int $supplierId
 	 * @param \Suppliers\Model\FeedType $type
 	 * @param string $title
+	 * @param string $url
 	 * @param string $itemXPath
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
@@ -146,11 +200,12 @@ class CatalogFeedBuilder implements IBuilder
 		int $supplierId,
 		\Suppliers\Model\FeedType $type,
 		string $title,
+		string $url,
 		string $itemXPath,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency
 	): self
 	{
-		return new self($supplierId, $type, $title, $itemXPath, $converterClass, $defaultCurrency);
+		return new self($supplierId, $type, $title, $url, $itemXPath, $converterClass, $defaultCurrency);
 	}
 }

@@ -19,6 +19,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var string @required */
 	private $title;
 	/** @var string @required */
+	private $url;
+	/** @var string @required */
 	private $itemXPath;
 	/** @var string @required */
 	private $converterClass;
@@ -26,6 +28,10 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $defaultCurrency;
 	/** @var string|null @optional */
 	private $xsd;
+	/** @var bool @optional */
+	private $loginRequired = false;
+	/** @var bool @optional */
+	private $passwordRequired = false;
 
 
 	/**
@@ -98,6 +104,14 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setTitle(string $title): void
 	{
 		$this->title = $title;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrl(): string
+	{
+		return $this->url;
 	}
 
 	/**
@@ -183,6 +197,46 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isLoginRequired(): bool
+	{
+		return $this->loginRequired;
+	}
+
+	/**
+	 * @param bool $loginRequired
+	 */
+	public function setLoginRequired(bool $loginRequired): void
+	{
+		$this->loginRequired = $loginRequired;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isPasswordRequired(): bool
+	{
+		return $this->passwordRequired;
+	}
+
+	/**
+	 * @param bool $passwordRequired
+	 */
+	public function setPasswordRequired(bool $passwordRequired): void
+	{
+		$this->passwordRequired = $passwordRequired;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function areCredentialsRequired(): bool
+	{
+		return $this->loginRequired || $this->passwordRequired;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -193,10 +247,13 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'supplierId' => $this->supplierId,
 				'type' => $this->type->getValue(),
 				'title' => $this->title,
+				'url' => $this->url,
 				'itemXPath' => $this->itemXPath,
 				'converterClass' => $this->converterClass,
 				'defaultCurrency' => $this->defaultCurrency->getCode(),
 				'xsd' => $this->xsd,
+				'loginRequired' => $this->loginRequired,
+				'passwordRequired' => $this->passwordRequired,
 			]
 		);
 	}
