@@ -13,7 +13,7 @@ class CatalogFeedBuilder implements IBuilder
 
 	/** @var int */
 	private $supplierId;
-	/** @var \Suppliers\Model\FeedType */
+	/** @var \Sellastica\CatalogSupplier\Model\FeedType */
 	private $type;
 	/** @var string */
 	private $title;
@@ -34,7 +34,7 @@ class CatalogFeedBuilder implements IBuilder
 
 	/**
 	 * @param int $supplierId
-	 * @param \Suppliers\Model\FeedType $type
+	 * @param \Sellastica\CatalogSupplier\Model\FeedType $type
 	 * @param string $title
 	 * @param string $url
 	 * @param string $itemXPath
@@ -43,7 +43,7 @@ class CatalogFeedBuilder implements IBuilder
 	 */
 	public function __construct(
 		int $supplierId,
-		\Suppliers\Model\FeedType $type,
+		\Sellastica\CatalogSupplier\Model\FeedType $type,
 		string $title,
 		string $url,
 		string $itemXPath,
@@ -69,9 +69,9 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \Suppliers\Model\FeedType
+	 * @return \Sellastica\CatalogSupplier\Model\FeedType
 	 */
-	public function getType(): \Suppliers\Model\FeedType
+	public function getType(): \Sellastica\CatalogSupplier\Model\FeedType
 	{
 		return $this->type;
 	}
@@ -188,7 +188,7 @@ class CatalogFeedBuilder implements IBuilder
 
 	/**
 	 * @param int $supplierId
-	 * @param \Suppliers\Model\FeedType $type
+	 * @param \Sellastica\CatalogSupplier\Model\FeedType $type
 	 * @param string $title
 	 * @param string $url
 	 * @param string $itemXPath
@@ -198,7 +198,7 @@ class CatalogFeedBuilder implements IBuilder
 	 */
 	public static function create(
 		int $supplierId,
-		\Suppliers\Model\FeedType $type,
+		\Sellastica\CatalogSupplier\Model\FeedType $type,
 		string $title,
 		string $url,
 		string $itemXPath,

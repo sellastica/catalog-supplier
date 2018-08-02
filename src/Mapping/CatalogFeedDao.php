@@ -28,7 +28,7 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
-		$data->type = \Suppliers\Model\FeedType::from($data->type);
+		$data->type = \Sellastica\CatalogSupplier\Model\FeedType::from($data->type);
 		$data->defaultCurrency = \Sellastica\Localization\Model\Currency::from($data->defaultCurrency);
 		return \Sellastica\CatalogSupplier\Entity\CatalogFeedBuilder::create(
 			$data->supplierId,
