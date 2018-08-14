@@ -16,6 +16,12 @@ class SupplierInquiryBuilder implements IBuilder
 	/** @var string */
 	private $supplier;
 	/** @var string|null */
+	private $supplierHomepage;
+	/** @var string|null */
+	private $supplierEmail;
+	/** @var string|null */
+	private $supplierPhone;
+	/** @var string|null */
 	private $feedUrl;
 	/** @var string|null */
 	private $note;
@@ -47,6 +53,60 @@ class SupplierInquiryBuilder implements IBuilder
 	public function getSupplier(): string
 	{
 		return $this->supplier;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getSupplierHomepage()
+	{
+		return $this->supplierHomepage;
+	}
+
+	/**
+	 * @param string|null $supplierHomepage
+	 * @return $this
+	 */
+	public function supplierHomepage(string $supplierHomepage = null)
+	{
+		$this->supplierHomepage = $supplierHomepage;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getSupplierEmail()
+	{
+		return $this->supplierEmail;
+	}
+
+	/**
+	 * @param string|null $supplierEmail
+	 * @return $this
+	 */
+	public function supplierEmail(string $supplierEmail = null)
+	{
+		$this->supplierEmail = $supplierEmail;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getSupplierPhone()
+	{
+		return $this->supplierPhone;
+	}
+
+	/**
+	 * @param string|null $supplierPhone
+	 * @return $this
+	 */
+	public function supplierPhone(string $supplierPhone = null)
+	{
+		$this->supplierPhone = $supplierPhone;
+		return $this;
 	}
 
 	/**

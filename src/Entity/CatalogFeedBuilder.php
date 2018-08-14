@@ -25,12 +25,18 @@ class CatalogFeedBuilder implements IBuilder
 	private $converterClass;
 	/** @var \Sellastica\Localization\Model\Currency */
 	private $defaultCurrency;
+	/** @var \Sellastica\Localization\Model\Country */
+	private $defaultCountry;
+	/** @var \Sellastica\Localization\Model\Currency|null */
+	private $secondCurrency;
 	/** @var string|null */
 	private $xsd;
 	/** @var bool */
 	private $loginRequired = false;
 	/** @var bool */
 	private $passwordRequired = false;
+	/** @var string */
+	private $authentication = 'none';
 
 	/**
 	 * @param int $supplierId
@@ -40,6 +46,7 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param string $itemXPath
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
+	 * @param \Sellastica\Localization\Model\Country $defaultCountry
 	 */
 	public function __construct(
 		int $supplierId,
@@ -48,7 +55,8 @@ class CatalogFeedBuilder implements IBuilder
 		string $url,
 		string $itemXPath,
 		string $converterClass,
-		\Sellastica\Localization\Model\Currency $defaultCurrency
+		\Sellastica\Localization\Model\Currency $defaultCurrency,
+		\Sellastica\Localization\Model\Country $defaultCountry
 	)
 	{
 		$this->supplierId = $supplierId;
@@ -58,6 +66,7 @@ class CatalogFeedBuilder implements IBuilder
 		$this->itemXPath = $itemXPath;
 		$this->converterClass = $converterClass;
 		$this->defaultCurrency = $defaultCurrency;
+		$this->defaultCountry = $defaultCountry;
 	}
 
 	/**
@@ -117,6 +126,32 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
+	 * @return \Sellastica\Localization\Model\Country
+	 */
+	public function getDefaultCountry(): \Sellastica\Localization\Model\Country
+	{
+		return $this->defaultCountry;
+	}
+
+	/**
+	 * @return \Sellastica\Localization\Model\Currency|null
+	 */
+	public function getSecondCurrency()
+	{
+		return $this->secondCurrency;
+	}
+
+	/**
+	 * @param \Sellastica\Localization\Model\Currency|null $secondCurrency
+	 * @return $this
+	 */
+	public function secondCurrency(\Sellastica\Localization\Model\Currency $secondCurrency = null)
+	{
+		$this->secondCurrency = $secondCurrency;
+		return $this;
+	}
+
+	/**
 	 * @return string|null
 	 */
 	public function getXsd()
@@ -171,6 +206,24 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getAuthentication(): string
+	{
+		return $this->authentication;
+	}
+
+	/**
+	 * @param string $authentication
+	 * @return $this
+	 */
+	public function authentication(string $authentication = 'none')
+	{
+		$this->authentication = $authentication;
+		return $this;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function generateId(): bool
@@ -194,6 +247,7 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param string $itemXPath
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
+	 * @param \Sellastica\Localization\Model\Country $defaultCountry
 	 * @return self
 	 */
 	public static function create(
@@ -203,9 +257,10 @@ class CatalogFeedBuilder implements IBuilder
 		string $url,
 		string $itemXPath,
 		string $converterClass,
-		\Sellastica\Localization\Model\Currency $defaultCurrency
+		\Sellastica\Localization\Model\Currency $defaultCurrency,
+		\Sellastica\Localization\Model\Country $defaultCountry
 	): self
 	{
-		return new self($supplierId, $type, $title, $url, $itemXPath, $converterClass, $defaultCurrency);
+		return new self($supplierId, $type, $title, $url, $itemXPath, $converterClass, $defaultCurrency, $defaultCountry);
 	}
 }

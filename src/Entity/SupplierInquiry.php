@@ -15,6 +15,12 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var string @required */
 	private $supplier;
 	/** @var string|null @optional */
+	private $supplierHomepage;
+	/** @var string|null @optional */
+	private $supplierEmail;
+	/** @var string|null @optional */
+	private $supplierPhone;
+	/** @var string|null @optional */
 	private $feedUrl;
 	/** @var string|null @optional */
 	private $note;
@@ -110,6 +116,9 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 			$this->getContact()->toArray(),
 			[
 				'supplier' => $this->supplier,
+				'supplierHomepage' => $this->supplierHomepage,
+				'supplierEmail' => $this->supplierEmail,
+				'supplierPhone' => $this->supplierPhone,
 				'feedUrl' => $this->feedUrl,
 				'note' => $this->note,
 			]

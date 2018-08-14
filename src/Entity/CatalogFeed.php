@@ -12,6 +12,10 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 {
 	use \Sellastica\Entity\Entity\TAbstractEntity;
 
+	const AUTH_NONE = 'none',
+		AUTH_BASIC = 'basic',
+		AUTH_NTLM = 'ntlm';
+
 	/** @var int @required */
 	private $supplierId;
 	/** @var \Sellastica\CatalogSupplier\Model\FeedType @required */
@@ -26,12 +30,18 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $converterClass;
 	/** @var \Sellastica\Localization\Model\Currency @required */
 	private $defaultCurrency;
+	/** @var \Sellastica\Localization\Model\Country @required */
+	private $defaultCountry;
+	/** @var \Sellastica\Localization\Model\Currency|null @optional */
+	private $secondCurrency;
 	/** @var string|null @optional */
 	private $xsd;
 	/** @var bool @optional */
 	private $loginRequired = false;
 	/** @var bool @optional */
 	private $passwordRequired = false;
+	/** @var string @optional */
+	private $authentication = self::AUTH_NONE;
 
 
 	/**
@@ -163,6 +173,38 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \Sellastica\Localization\Model\Country
+	 */
+	public function getDefaultCountry(): \Sellastica\Localization\Model\Country
+	{
+		return $this->defaultCountry;
+	}
+
+	/**
+	 * @param \Sellastica\Localization\Model\Country $defaultCountry
+	 */
+	public function setDefaultCountry(\Sellastica\Localization\Model\Country $defaultCountry): void
+	{
+		$this->defaultCountry = $defaultCountry;
+	}
+
+	/**
+	 * @return null|\Sellastica\Localization\Model\Currency
+	 */
+	public function getSecondCurrency(): ?\Sellastica\Localization\Model\Currency
+	{
+		return $this->secondCurrency;
+	}
+
+	/**
+	 * @param null|\Sellastica\Localization\Model\Currency $secondCurrency
+	 */
+	public function setSecondCurrency(?\Sellastica\Localization\Model\Currency $secondCurrency): void
+	{
+		$this->secondCurrency = $secondCurrency;
+	}
+
+	/**
 	 * @return null|string
 	 */
 	public function getXsd(): ?string
@@ -237,6 +279,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getAuthentication(): string
+	{
+		return $this->authentication;
+	}
+
+	/**
+	 * @param string $authentication
+	 */
+	public function setAuthentication(string $authentication): void
+	{
+		$this->authentication = $authentication;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -251,9 +309,12 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'itemXPath' => $this->itemXPath,
 				'converterClass' => $this->converterClass,
 				'defaultCurrency' => $this->defaultCurrency->getCode(),
+				'defaultCountry' => $this->defaultCountry->getCode(),
+				'secondCurrency' => $this->secondCurrency ? $this->secondCurrency->getCode() : null,
 				'xsd' => $this->xsd,
 				'loginRequired' => $this->loginRequired,
 				'passwordRequired' => $this->passwordRequired,
+				'authentication' => $this->authentication,
 			]
 		);
 	}
