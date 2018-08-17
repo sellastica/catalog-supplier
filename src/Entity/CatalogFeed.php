@@ -36,10 +36,10 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $secondCurrency;
 	/** @var string|null @optional */
 	private $xsd;
-	/** @var bool @optional */
-	private $loginRequired = false;
-	/** @var bool @optional */
-	private $passwordRequired = false;
+	/** @var string|null @optional */
+	private $login;
+	/** @var string|null @optional */
+	private $password;
 	/** @var string @optional */
 	private $authentication = self::AUTH_NONE;
 
@@ -117,11 +117,25 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @param string|null $login
+	 * @param string|null $password
 	 * @return string
 	 */
-	public function getUrl(): string
+	public function getUrl(
+		string $login = null,
+		string $password = null
+	): string
 	{
-		return $this->url;
+		$url = $this->url;
+		if (isset($login)) {
+			$url = str_replace('{{ login }}', $login, $url);
+		}
+
+		if (isset($password)) {
+			$url = str_replace('{{ password }}', $password, $url);
+		}
+
+		return $url;
 	}
 
 	/**
@@ -239,35 +253,35 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return bool
+	 * @return null|string
 	 */
-	public function isLoginRequired(): bool
+	public function getLogin(): ?string
 	{
-		return $this->loginRequired;
+		return $this->login;
 	}
 
 	/**
-	 * @param bool $loginRequired
+	 * @param null|string $login
 	 */
-	public function setLoginRequired(bool $loginRequired): void
+	public function setLogin(?string $login): void
 	{
-		$this->loginRequired = $loginRequired;
+		$this->login = $login;
 	}
 
 	/**
-	 * @return bool
+	 * @return null|string
 	 */
-	public function isPasswordRequired(): bool
+	public function getPassword(): ?string
 	{
-		return $this->passwordRequired;
+		return $this->password;
 	}
 
 	/**
-	 * @param bool $passwordRequired
+	 * @param null|string $password
 	 */
-	public function setPasswordRequired(bool $passwordRequired): void
+	public function setPassword(?string $password): void
 	{
-		$this->passwordRequired = $passwordRequired;
+		$this->password = $password;
 	}
 
 	/**
@@ -275,7 +289,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	 */
 	public function areCredentialsRequired(): bool
 	{
-		return $this->loginRequired || $this->passwordRequired;
+		return $this->login || $this->password;
 	}
 
 	/**
@@ -312,8 +326,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'defaultCountry' => $this->defaultCountry->getCode(),
 				'secondCurrency' => $this->secondCurrency ? $this->secondCurrency->getCode() : null,
 				'xsd' => $this->xsd,
-				'loginRequired' => $this->loginRequired,
-				'passwordRequired' => $this->passwordRequired,
+				'login' => $this->login,
+				'password' => $this->password,
 				'authentication' => $this->authentication,
 			]
 		);

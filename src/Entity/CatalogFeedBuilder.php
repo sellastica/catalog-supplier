@@ -31,10 +31,10 @@ class CatalogFeedBuilder implements IBuilder
 	private $secondCurrency;
 	/** @var string|null */
 	private $xsd;
-	/** @var bool */
-	private $loginRequired = false;
-	/** @var bool */
-	private $passwordRequired = false;
+	/** @var string|null */
+	private $login;
+	/** @var string|null */
+	private $password;
 	/** @var string */
 	private $authentication = 'none';
 
@@ -170,38 +170,38 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return bool
+	 * @return string|null
 	 */
-	public function getLoginRequired(): bool
+	public function getLogin()
 	{
-		return $this->loginRequired;
+		return $this->login;
 	}
 
 	/**
-	 * @param bool $loginRequired
+	 * @param string|null $login
 	 * @return $this
 	 */
-	public function loginRequired(bool $loginRequired)
+	public function login(string $login = null)
 	{
-		$this->loginRequired = $loginRequired;
+		$this->login = $login;
 		return $this;
 	}
 
 	/**
-	 * @return bool
+	 * @return string|null
 	 */
-	public function getPasswordRequired(): bool
+	public function getPassword()
 	{
-		return $this->passwordRequired;
+		return $this->password;
 	}
 
 	/**
-	 * @param bool $passwordRequired
+	 * @param string|null $password
 	 * @return $this
 	 */
-	public function passwordRequired(bool $passwordRequired)
+	public function password(string $password = null)
 	{
-		$this->passwordRequired = $passwordRequired;
+		$this->password = $password;
 		return $this;
 	}
 
