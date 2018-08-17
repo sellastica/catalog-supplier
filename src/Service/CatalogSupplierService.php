@@ -26,4 +26,18 @@ class CatalogSupplierService
 		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogSupplier::class)
 			->findAll($configuration);
 	}
+
+	/**
+	 * @param string $title
+	 * @param string $code
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogSupplier
+	 */
+	public function create(string $title, string $code): \Sellastica\CatalogSupplier\Entity\CatalogSupplier
+	{
+		$supplier = \Sellastica\CatalogSupplier\Entity\CatalogSupplierBuilder::create($title, $code)
+			->build();
+		$this->em->persist($supplier);
+
+		return $supplier;
+	}
 }
