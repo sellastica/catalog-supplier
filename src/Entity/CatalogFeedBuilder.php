@@ -37,6 +37,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $password;
 	/** @var string */
 	private $authentication = 'none';
+	/** @var bool */
+	private $visible = true;
 
 	/**
 	 * @param int $supplierId
@@ -220,6 +222,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function authentication(string $authentication = 'none')
 	{
 		$this->authentication = $authentication;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getVisible(): bool
+	{
+		return $this->visible;
+	}
+
+	/**
+	 * @param bool $visible
+	 * @return $this
+	 */
+	public function visible(bool $visible = true)
+	{
+		$this->visible = $visible;
 		return $this;
 	}
 
