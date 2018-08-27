@@ -34,8 +34,12 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $defaultCountry;
 	/** @var \Sellastica\Localization\Model\Currency|null @optional */
 	private $secondCurrency;
+	/** @var \Suppliers\Model\Validator\DataType @required */
+	private $dataType;
+	/** @var \Suppliers\Model\Validator\SchemaType @optional */
+	private $schemaType;
 	/** @var string|null @optional */
-	private $xsd;
+	private $schemaFilename;
 	/** @var string|null @optional */
 	private $login;
 	/** @var string|null @optional */
@@ -221,28 +225,60 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return null|string
+	 * @return \Suppliers\Model\Validator\DataType
 	 */
-	public function getXsd(): ?string
+	public function getDataType(): \Suppliers\Model\Validator\DataType
 	{
-		return $this->xsd;
+		return $this->dataType;
 	}
 
 	/**
-	 * @param null|string $xsd
+	 * @param \Suppliers\Model\Validator\DataType $dataType
 	 */
-	public function setXsd(?string $xsd): void
+	public function setDataType(\Suppliers\Model\Validator\DataType $dataType): void
 	{
-		$this->xsd = $xsd;
+		$this->dataType = $dataType;
+	}
+
+	/**
+	 * @return \Suppliers\Model\Validator\SchemaType
+	 */
+	public function getSchemaType(): \Suppliers\Model\Validator\SchemaType
+	{
+		return $this->schemaType;
+	}
+
+	/**
+	 * @param \Suppliers\Model\Validator\SchemaType $schemaType
+	 */
+	public function setSchemaType(\Suppliers\Model\Validator\SchemaType $schemaType): void
+	{
+		$this->schemaType = $schemaType;
 	}
 
 	/**
 	 * @return null|string
 	 */
-	public function getXsdPath(): ?string
+	public function getSchemaFilename(): ?string
 	{
-		return $this->xsd
-			? $this->getSupplier()->getRelativeRootDirectory() . '/' . $this->xsd
+		return $this->schemaFilename;
+	}
+
+	/**
+	 * @param null|string $schemaFilename
+	 */
+	public function setSchemaFilename(?string $schemaFilename): void
+	{
+		$this->schemaFilename = $schemaFilename;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getSchemaPath(): ?string
+	{
+		return $this->schemaFilename
+			? $this->getSupplier()->getRelativeRootDirectory() . '/' . $this->schemaFilename
 			: null;
 	}
 
@@ -343,7 +379,9 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'defaultCurrency' => $this->defaultCurrency->getCode(),
 				'defaultCountry' => $this->defaultCountry->getCode(),
 				'secondCurrency' => $this->secondCurrency ? $this->secondCurrency->getCode() : null,
-				'xsd' => $this->xsd,
+				'datatype' => $this->dataType->getValue(),
+				'schemaType' => $this->schemaType ? $this->schemaType->getValue() : null,
+				'schemaFilename' => $this->schemaFilename,
 				'login' => $this->login,
 				'password' => $this->password,
 				'authentication' => $this->authentication,

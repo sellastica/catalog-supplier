@@ -27,10 +27,14 @@ class CatalogFeedBuilder implements IBuilder
 	private $defaultCurrency;
 	/** @var \Sellastica\Localization\Model\Country */
 	private $defaultCountry;
+	/** @var \Suppliers\Model\Validator\DataType */
+	private $dataType;
 	/** @var \Sellastica\Localization\Model\Currency|null */
 	private $secondCurrency;
+	/** @var \Suppliers\Model\Validator\SchemaType */
+	private $schemaType;
 	/** @var string|null */
-	private $xsd;
+	private $schemaFilename;
 	/** @var string|null */
 	private $login;
 	/** @var string|null */
@@ -49,6 +53,7 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @param \Sellastica\Localization\Model\Country $defaultCountry
+	 * @param \Suppliers\Model\Validator\DataType $dataType
 	 */
 	public function __construct(
 		int $supplierId,
@@ -58,7 +63,8 @@ class CatalogFeedBuilder implements IBuilder
 		string $itemXPath,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
-		\Sellastica\Localization\Model\Country $defaultCountry
+		\Sellastica\Localization\Model\Country $defaultCountry,
+		\Suppliers\Model\Validator\DataType $dataType
 	)
 	{
 		$this->supplierId = $supplierId;
@@ -69,6 +75,7 @@ class CatalogFeedBuilder implements IBuilder
 		$this->converterClass = $converterClass;
 		$this->defaultCurrency = $defaultCurrency;
 		$this->defaultCountry = $defaultCountry;
+		$this->dataType = $dataType;
 	}
 
 	/**
@@ -136,6 +143,14 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
+	 * @return \Suppliers\Model\Validator\DataType
+	 */
+	public function getDataType(): \Suppliers\Model\Validator\DataType
+	{
+		return $this->dataType;
+	}
+
+	/**
 	 * @return \Sellastica\Localization\Model\Currency|null
 	 */
 	public function getSecondCurrency()
@@ -154,20 +169,38 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return string|null
+	 * @return \Suppliers\Model\Validator\SchemaType
 	 */
-	public function getXsd()
+	public function getSchemaType(): \Suppliers\Model\Validator\SchemaType
 	{
-		return $this->xsd;
+		return $this->schemaType;
 	}
 
 	/**
-	 * @param string|null $xsd
+	 * @param \Suppliers\Model\Validator\SchemaType $schemaType
 	 * @return $this
 	 */
-	public function xsd(string $xsd = null)
+	public function schemaType(\Suppliers\Model\Validator\SchemaType $schemaType)
 	{
-		$this->xsd = $xsd;
+		$this->schemaType = $schemaType;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getSchemaFilename()
+	{
+		return $this->schemaFilename;
+	}
+
+	/**
+	 * @param string|null $schemaFilename
+	 * @return $this
+	 */
+	public function schemaFilename(string $schemaFilename = null)
+	{
+		$this->schemaFilename = $schemaFilename;
 		return $this;
 	}
 
@@ -268,6 +301,7 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @param \Sellastica\Localization\Model\Country $defaultCountry
+	 * @param \Suppliers\Model\Validator\DataType $dataType
 	 * @return self
 	 */
 	public static function create(
@@ -278,9 +312,10 @@ class CatalogFeedBuilder implements IBuilder
 		string $itemXPath,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
-		\Sellastica\Localization\Model\Country $defaultCountry
+		\Sellastica\Localization\Model\Country $defaultCountry,
+		\Suppliers\Model\Validator\DataType $dataType
 	): self
 	{
-		return new self($supplierId, $type, $title, $url, $itemXPath, $converterClass, $defaultCurrency, $defaultCountry);
+		return new self($supplierId, $type, $title, $url, $itemXPath, $converterClass, $defaultCurrency, $defaultCountry, $dataType);
 	}
 }
