@@ -40,6 +40,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $login;
 	/** @var string|null @optional */
 	private $password;
+	/** @var bool @optional */
+	private $customUrl = false;
 	/** @var string @optional */
 	private $authentication = self::AUTH_NONE;
 	/** @var bool @optional */
@@ -343,6 +345,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isCustomUrl(): bool
+	{
+		return $this->customUrl;
+	}
+
+	/**
+	 * @param bool $customUrl
+	 */
+	public function setCustomUrl(bool $customUrl): void
+	{
+		$this->customUrl = $customUrl;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -362,6 +380,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'schemaFilename' => $this->schemaFilename,
 				'login' => $this->login,
 				'password' => $this->password,
+				'customUrl' => $this->customUrl,
 				'authentication' => $this->authentication,
 				'visible' => $this->visible,
 			]
