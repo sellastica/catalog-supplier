@@ -32,9 +32,9 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $defaultCountry;
 	/** @var \Sellastica\Localization\Model\Currency|null @optional */
 	private $secondCurrency;
-	/** @var \Suppliers\Model\Validator\DataType @required */
+	/** @var \Sellastica\CatalogSupplier\Model\DataType @required */
 	private $dataType;
-	/** @var \Suppliers\Model\Validator\SchemaType @optional */
+	/** @var \Sellastica\CatalogSupplier\Model\SchemaType @optional */
 	private $schemaType;
 	/** @var string|null @optional */
 	private $schemaFilename;
@@ -215,33 +215,33 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return \Suppliers\Model\Validator\DataType
+	 * @return \Sellastica\CatalogSupplier\Model\DataType
 	 */
-	public function getDataType(): \Suppliers\Model\Validator\DataType
+	public function getDataType(): \Sellastica\CatalogSupplier\Model\DataType
 	{
 		return $this->dataType;
 	}
 
 	/**
-	 * @param \Suppliers\Model\Validator\DataType $dataType
+	 * @param \Sellastica\CatalogSupplier\Model\DataType $dataType
 	 */
-	public function setDataType(\Suppliers\Model\Validator\DataType $dataType): void
+	public function setDataType(\Sellastica\CatalogSupplier\Model\DataType $dataType): void
 	{
 		$this->dataType = $dataType;
 	}
 
 	/**
-	 * @return \Suppliers\Model\Validator\SchemaType
+	 * @return \Sellastica\CatalogSupplier\Model\SchemaType
 	 */
-	public function getSchemaType(): \Suppliers\Model\Validator\SchemaType
+	public function getSchemaType(): \Sellastica\CatalogSupplier\Model\SchemaType
 	{
 		return $this->schemaType;
 	}
 
 	/**
-	 * @param \Suppliers\Model\Validator\SchemaType $schemaType
+	 * @param \Sellastica\CatalogSupplier\Model\SchemaType $schemaType
 	 */
-	public function setSchemaType(\Suppliers\Model\Validator\SchemaType $schemaType): void
+	public function setSchemaType(\Sellastica\CatalogSupplier\Model\SchemaType $schemaType): void
 	{
 		$this->schemaType = $schemaType;
 	}

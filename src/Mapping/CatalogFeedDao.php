@@ -36,7 +36,7 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		}
 
 		if ($data->schemaType) {
-			$data->schemaType = \Suppliers\Model\Validator\SchemaType::from($data->schemaType);
+			$data->schemaType = \Sellastica\CatalogSupplier\Model\SchemaType::from($data->schemaType);
 		}
 
 		return \Sellastica\CatalogSupplier\Entity\CatalogFeedBuilder::create(
@@ -47,7 +47,7 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 			$data->converterClass,
 			$data->defaultCurrency,
 			$data->defaultCountry,
-			\Suppliers\Model\Validator\DataType::from($data->dataType)
+			\Sellastica\CatalogSupplier\Model\DataType::from($data->dataType)
 		)->hydrate($data);
 	}
 

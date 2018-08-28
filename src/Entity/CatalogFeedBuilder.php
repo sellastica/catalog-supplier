@@ -25,11 +25,11 @@ class CatalogFeedBuilder implements IBuilder
 	private $defaultCurrency;
 	/** @var \Sellastica\Localization\Model\Country */
 	private $defaultCountry;
-	/** @var \Suppliers\Model\Validator\DataType */
+	/** @var \Sellastica\CatalogSupplier\Model\DataType */
 	private $dataType;
 	/** @var \Sellastica\Localization\Model\Currency|null */
 	private $secondCurrency;
-	/** @var \Suppliers\Model\Validator\SchemaType */
+	/** @var \Sellastica\CatalogSupplier\Model\SchemaType */
 	private $schemaType;
 	/** @var string|null */
 	private $schemaFilename;
@@ -50,7 +50,7 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @param \Sellastica\Localization\Model\Country $defaultCountry
-	 * @param \Suppliers\Model\Validator\DataType $dataType
+	 * @param \Sellastica\CatalogSupplier\Model\DataType $dataType
 	 */
 	public function __construct(
 		int $supplierId,
@@ -60,7 +60,7 @@ class CatalogFeedBuilder implements IBuilder
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
 		\Sellastica\Localization\Model\Country $defaultCountry,
-		\Suppliers\Model\Validator\DataType $dataType
+		\Sellastica\CatalogSupplier\Model\DataType $dataType
 	)
 	{
 		$this->supplierId = $supplierId;
@@ -130,9 +130,9 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \Suppliers\Model\Validator\DataType
+	 * @return \Sellastica\CatalogSupplier\Model\DataType
 	 */
-	public function getDataType(): \Suppliers\Model\Validator\DataType
+	public function getDataType(): \Sellastica\CatalogSupplier\Model\DataType
 	{
 		return $this->dataType;
 	}
@@ -156,18 +156,18 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \Suppliers\Model\Validator\SchemaType
+	 * @return \Sellastica\CatalogSupplier\Model\SchemaType
 	 */
-	public function getSchemaType(): \Suppliers\Model\Validator\SchemaType
+	public function getSchemaType(): \Sellastica\CatalogSupplier\Model\SchemaType
 	{
 		return $this->schemaType;
 	}
 
 	/**
-	 * @param \Suppliers\Model\Validator\SchemaType $schemaType
+	 * @param \Sellastica\CatalogSupplier\Model\SchemaType $schemaType
 	 * @return $this
 	 */
-	public function schemaType(\Suppliers\Model\Validator\SchemaType $schemaType)
+	public function schemaType(\Sellastica\CatalogSupplier\Model\SchemaType $schemaType)
 	{
 		$this->schemaType = $schemaType;
 		return $this;
@@ -287,7 +287,7 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @param \Sellastica\Localization\Model\Country $defaultCountry
-	 * @param \Suppliers\Model\Validator\DataType $dataType
+	 * @param \Sellastica\CatalogSupplier\Model\DataType $dataType
 	 * @return self
 	 */
 	public static function create(
@@ -298,7 +298,7 @@ class CatalogFeedBuilder implements IBuilder
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
 		\Sellastica\Localization\Model\Country $defaultCountry,
-		\Suppliers\Model\Validator\DataType $dataType
+		\Sellastica\CatalogSupplier\Model\DataType $dataType
 	): self
 	{
 		return new self($supplierId, $type, $url, $itemXPath, $converterClass, $defaultCurrency, $defaultCountry, $dataType);
