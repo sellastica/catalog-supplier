@@ -29,8 +29,6 @@ class CatalogFeedBuilder implements IBuilder
 	private $dataType;
 	/** @var \Sellastica\Localization\Model\Currency|null */
 	private $secondCurrency;
-	/** @var \Sellastica\CatalogSupplier\Model\SchemaType */
-	private $schemaType;
 	/** @var string|null */
 	private $schemaFilename;
 	/** @var string|null */
@@ -152,24 +150,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function secondCurrency(\Sellastica\Localization\Model\Currency $secondCurrency = null)
 	{
 		$this->secondCurrency = $secondCurrency;
-		return $this;
-	}
-
-	/**
-	 * @return \Sellastica\CatalogSupplier\Model\SchemaType
-	 */
-	public function getSchemaType(): \Sellastica\CatalogSupplier\Model\SchemaType
-	{
-		return $this->schemaType;
-	}
-
-	/**
-	 * @param \Sellastica\CatalogSupplier\Model\SchemaType $schemaType
-	 * @return $this
-	 */
-	public function schemaType(\Sellastica\CatalogSupplier\Model\SchemaType $schemaType)
-	{
-		$this->schemaType = $schemaType;
 		return $this;
 	}
 

@@ -35,10 +35,6 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 			$data->secondCurrency = \Sellastica\Localization\Model\Currency::from($data->secondCurrency);
 		}
 
-		if ($data->schemaType) {
-			$data->schemaType = \Sellastica\CatalogSupplier\Model\SchemaType::from($data->schemaType);
-		}
-
 		return \Sellastica\CatalogSupplier\Entity\CatalogFeedBuilder::create(
 			$data->supplierId,
 			$data->type,
