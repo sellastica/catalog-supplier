@@ -133,6 +133,14 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @param string $url
+	 */
+	public function setUrl(string $url): void
+	{
+		$this->url = $url;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getItemXPath(): string
