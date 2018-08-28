@@ -42,7 +42,6 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		return \Sellastica\CatalogSupplier\Entity\CatalogFeedBuilder::create(
 			$data->supplierId,
 			$data->type,
-			$data->title,
 			$data->url,
 			$data->itemXPath,
 			$data->converterClass,

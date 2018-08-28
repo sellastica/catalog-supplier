@@ -16,8 +16,6 @@ class CatalogFeedBuilder implements IBuilder
 	/** @var \Sellastica\CatalogSupplier\Model\FeedType */
 	private $type;
 	/** @var string */
-	private $title;
-	/** @var string */
 	private $url;
 	/** @var string */
 	private $itemXPath;
@@ -47,7 +45,6 @@ class CatalogFeedBuilder implements IBuilder
 	/**
 	 * @param int $supplierId
 	 * @param \Sellastica\CatalogSupplier\Model\FeedType $type
-	 * @param string $title
 	 * @param string $url
 	 * @param string $itemXPath
 	 * @param string $converterClass
@@ -58,7 +55,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function __construct(
 		int $supplierId,
 		\Sellastica\CatalogSupplier\Model\FeedType $type,
-		string $title,
 		string $url,
 		string $itemXPath,
 		string $converterClass,
@@ -69,7 +65,6 @@ class CatalogFeedBuilder implements IBuilder
 	{
 		$this->supplierId = $supplierId;
 		$this->type = $type;
-		$this->title = $title;
 		$this->url = $url;
 		$this->itemXPath = $itemXPath;
 		$this->converterClass = $converterClass;
@@ -92,14 +87,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function getType(): \Sellastica\CatalogSupplier\Model\FeedType
 	{
 		return $this->type;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTitle(): string
-	{
-		return $this->title;
 	}
 
 	/**
@@ -295,7 +282,6 @@ class CatalogFeedBuilder implements IBuilder
 	/**
 	 * @param int $supplierId
 	 * @param \Sellastica\CatalogSupplier\Model\FeedType $type
-	 * @param string $title
 	 * @param string $url
 	 * @param string $itemXPath
 	 * @param string $converterClass
@@ -307,7 +293,6 @@ class CatalogFeedBuilder implements IBuilder
 	public static function create(
 		int $supplierId,
 		\Sellastica\CatalogSupplier\Model\FeedType $type,
-		string $title,
 		string $url,
 		string $itemXPath,
 		string $converterClass,
@@ -316,6 +301,6 @@ class CatalogFeedBuilder implements IBuilder
 		\Suppliers\Model\Validator\DataType $dataType
 	): self
 	{
-		return new self($supplierId, $type, $title, $url, $itemXPath, $converterClass, $defaultCurrency, $defaultCountry, $dataType);
+		return new self($supplierId, $type, $url, $itemXPath, $converterClass, $defaultCurrency, $defaultCountry, $dataType);
 	}
 }

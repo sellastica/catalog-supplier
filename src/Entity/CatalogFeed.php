@@ -21,8 +21,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var \Sellastica\CatalogSupplier\Model\FeedType @required */
 	private $type;
 	/** @var string @required */
-	private $title;
-	/** @var string @required */
 	private $url;
 	/** @var string @required */
 	private $itemXPath;
@@ -111,15 +109,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	 */
 	public function getTitle(): string
 	{
-		return $this->title;
-	}
-
-	/**
-	 * @param string $title
-	 */
-	public function setTitle(string $title): void
-	{
-		$this->title = $title;
+		return \Sellastica\Project\Utils\Helpers::getProjectTitle($this->getSupplier()->getHomepage());
 	}
 
 	/**
@@ -372,7 +362,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 			[
 				'supplierId' => $this->supplierId,
 				'type' => $this->type->getValue(),
-				'title' => $this->title,
 				'url' => $this->url,
 				'itemXPath' => $this->itemXPath,
 				'converterClass' => $this->converterClass,

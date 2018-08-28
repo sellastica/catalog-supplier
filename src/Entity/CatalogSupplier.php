@@ -16,10 +16,17 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	private $title;
 	/** @var string @required */
 	private $code;
-	/** @var string|null @optional */
+	/** @var \Nette\Http\Url @optional */
 	private $homepage;
 	/** @var string|null @optional */
 	private $logo;
+	/** @var string|null @optional */
+	private $company;
+	/** @var \Sellastica\Identity\Model\Email|null @optional */
+	private $email;
+	/** @var string|null @optional */
+	private $phone;
+
 
 
 	/**
@@ -71,17 +78,17 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return null|string
+	 * @return \Nette\Http\Url
 	 */
-	public function getHomepage(): ?string
+	public function getHomepage(): \Nette\Http\Url
 	{
 		return $this->homepage;
 	}
 
 	/**
-	 * @param null|string $homepage
+	 * @param \Nette\Http\Url $homepage
 	 */
-	public function setHomepage(?string $homepage): void
+	public function setHomepage(\Nette\Http\Url $homepage): void
 	{
 		$this->homepage = $homepage;
 	}
@@ -137,6 +144,61 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getCompany(): ?string
+	{
+		return $this->company;
+	}
+
+	/**
+	 * @param null|string $company
+	 */
+	public function setCompany(?string $company): void
+	{
+		$this->company = $company;
+	}
+
+	/**
+	 * @param bool $object
+	 * @return null|string|\Sellastica\Identity\Model\Email
+	 */
+	public function getEmail(bool $object = false)
+	{
+		if (!isset($this->email)) {
+			return null;
+		} else {
+			return $object
+				? $this->email
+				: $this->email->getEmail();
+		}
+	}
+
+	/**
+	 * @param null|\Sellastica\Identity\Model\Email $email
+	 */
+	public function setEmail(?\Sellastica\Identity\Model\Email $email): void
+	{
+		$this->email = $email;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getPhone(): ?string
+	{
+		return $this->phone;
+	}
+
+	/**
+	 * @param null|string $phone
+	 */
+	public function setPhone(?string $phone): void
+	{
+		$this->phone = $phone;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -146,8 +208,11 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 			[
 				'title' => $this->title,
 				'code' => $this->code,
-				'homepage' => $this->homepage,
+				'homepage' => $this->homepage->getAbsoluteUrl(),
 				'logo' => $this->logo,
+				'company' => $this->company,
+				'email' => $this->getEmail(),
+				'phone' => $this->phone,
 			]
 		);
 	}
