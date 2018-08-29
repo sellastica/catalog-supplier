@@ -113,25 +113,11 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @param string|null $login
-	 * @param string|null $password
 	 * @return string
 	 */
-	public function getUrl(
-		string $login = null,
-		string $password = null
-	): string
+	public function getUrl(): string
 	{
-		$url = $this->url;
-		if (isset($login)) {
-			$url = str_replace('{{ login }}', $login, $url);
-		}
-
-		if (isset($password)) {
-			$url = str_replace('{{ password }}', $password, $url);
-		}
-
-		return $url;
+		return $this->url;
 	}
 
 	/**
