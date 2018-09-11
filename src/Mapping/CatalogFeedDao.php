@@ -42,8 +42,7 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 			$data->itemXPath,
 			$data->converterClass,
 			$data->defaultCurrency,
-			$data->defaultCountry,
-			\Sellastica\CatalogSupplier\Model\DataType::from($data->dataType)
+			$data->defaultCountry
 		)->hydrate($data);
 	}
 

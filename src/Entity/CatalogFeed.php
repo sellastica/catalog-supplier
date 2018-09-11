@@ -32,8 +32,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $defaultCountry;
 	/** @var \Sellastica\Localization\Model\Currency|null @optional */
 	private $secondCurrency;
-	/** @var \Sellastica\CatalogSupplier\Model\DataType @required */
-	private $dataType;
 	/** @var string|null @optional */
 	private $schemaFilename;
 	/** @var string|null @optional */
@@ -209,22 +207,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return \Sellastica\CatalogSupplier\Model\DataType
-	 */
-	public function getDataType(): \Sellastica\CatalogSupplier\Model\DataType
-	{
-		return $this->dataType;
-	}
-
-	/**
-	 * @param \Sellastica\CatalogSupplier\Model\DataType $dataType
-	 */
-	public function setDataType(\Sellastica\CatalogSupplier\Model\DataType $dataType): void
-	{
-		$this->dataType = $dataType;
-	}
-
-	/**
 	 * @return null|string
 	 */
 	public function getSchemaFilename(): ?string
@@ -362,7 +344,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'defaultCurrency' => $this->defaultCurrency->getCode(),
 				'defaultCountry' => $this->defaultCountry->getCode(),
 				'secondCurrency' => $this->secondCurrency ? $this->secondCurrency->getCode() : null,
-				'datatype' => $this->dataType->getValue(),
 				'schemaFilename' => $this->schemaFilename,
 				'login' => $this->login,
 				'password' => $this->password,

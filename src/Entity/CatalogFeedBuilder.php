@@ -25,8 +25,6 @@ class CatalogFeedBuilder implements IBuilder
 	private $defaultCurrency;
 	/** @var \Sellastica\Localization\Model\Country */
 	private $defaultCountry;
-	/** @var \Sellastica\CatalogSupplier\Model\DataType */
-	private $dataType;
 	/** @var \Sellastica\Localization\Model\Currency|null */
 	private $secondCurrency;
 	/** @var string|null */
@@ -50,7 +48,6 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @param \Sellastica\Localization\Model\Country $defaultCountry
-	 * @param \Sellastica\CatalogSupplier\Model\DataType $dataType
 	 */
 	public function __construct(
 		int $supplierId,
@@ -59,8 +56,7 @@ class CatalogFeedBuilder implements IBuilder
 		string $itemXPath,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
-		\Sellastica\Localization\Model\Country $defaultCountry,
-		\Sellastica\CatalogSupplier\Model\DataType $dataType
+		\Sellastica\Localization\Model\Country $defaultCountry
 	)
 	{
 		$this->supplierId = $supplierId;
@@ -70,7 +66,6 @@ class CatalogFeedBuilder implements IBuilder
 		$this->converterClass = $converterClass;
 		$this->defaultCurrency = $defaultCurrency;
 		$this->defaultCountry = $defaultCountry;
-		$this->dataType = $dataType;
 	}
 
 	/**
@@ -127,14 +122,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function getDefaultCountry(): \Sellastica\Localization\Model\Country
 	{
 		return $this->defaultCountry;
-	}
-
-	/**
-	 * @return \Sellastica\CatalogSupplier\Model\DataType
-	 */
-	public function getDataType(): \Sellastica\CatalogSupplier\Model\DataType
-	{
-		return $this->dataType;
 	}
 
 	/**
@@ -287,7 +274,6 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @param \Sellastica\Localization\Model\Country $defaultCountry
-	 * @param \Sellastica\CatalogSupplier\Model\DataType $dataType
 	 * @return self
 	 */
 	public static function create(
@@ -297,10 +283,9 @@ class CatalogFeedBuilder implements IBuilder
 		string $itemXPath,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
-		\Sellastica\Localization\Model\Country $defaultCountry,
-		\Sellastica\CatalogSupplier\Model\DataType $dataType
+		\Sellastica\Localization\Model\Country $defaultCountry
 	): self
 	{
-		return new self($supplierId, $type, $url, $itemXPath, $converterClass, $defaultCurrency, $defaultCountry, $dataType);
+		return new self($supplierId, $type, $url, $itemXPath, $converterClass, $defaultCurrency, $defaultCountry);
 	}
 }
