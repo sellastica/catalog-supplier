@@ -8,7 +8,7 @@ namespace Sellastica\CatalogSupplier\Entity;
  * @property CatalogSupplierRelations $relationService
  */
 class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
-	implements \Sellastica\Entity\Entity\IEntity
+	implements \Sellastica\Entity\Entity\IEntity, \Sellastica\Twig\Model\IProxable
 {
 	use \Sellastica\Entity\Entity\TAbstractEntity;
 
@@ -215,5 +215,13 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 				'phone' => $this->phone,
 			]
 		);
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Presentation\CatalogSupplierProxy
+	 */
+	public function toProxy(): \Sellastica\CatalogSupplier\Presentation\CatalogSupplierProxy
+	{
+		return new \Sellastica\CatalogSupplier\Presentation\CatalogSupplierProxy($this);
 	}
 }
