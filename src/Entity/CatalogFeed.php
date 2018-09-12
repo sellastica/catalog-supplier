@@ -233,14 +233,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return CatalogFeedUrlCollection
-	 */
-	public function getUrls(): CatalogFeedUrlCollection
-	{
-		return $this->relationService->getUrls();
-	}
-
-	/**
 	 * @return null|string
 	 */
 	public function getLogin(): ?string

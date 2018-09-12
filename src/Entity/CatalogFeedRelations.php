@@ -29,14 +29,4 @@ class CatalogFeedRelations implements \Sellastica\Entity\Relation\IEntityRelatio
 	{
 		return $this->em->getRepository(CatalogSupplier::class)->find($this->catalogFeed->getSupplierId());
 	}
-
-	/**
-	 * @return CatalogFeedUrlCollection
-	 */
-	public function getUrls(): CatalogFeedUrlCollection
-	{
-		return $this->em->getRepository(CatalogFeedUrl::class)->findBy([
-			'feedId' => $this->catalogFeed->getId(),
-		]);
-	}
 }
