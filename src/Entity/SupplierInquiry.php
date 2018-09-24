@@ -107,6 +107,54 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getSupplierHomepage(): ?string
+	{
+		return $this->supplierHomepage;
+	}
+
+	/**
+	 * @param null|string $supplierHomepage
+	 */
+	public function setSupplierHomepage(?string $supplierHomepage): void
+	{
+		$this->supplierHomepage = $supplierHomepage;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getSupplierEmail(): ?string
+	{
+		return $this->supplierEmail;
+	}
+
+	/**
+	 * @param null|string $supplierEmail
+	 */
+	public function setSupplierEmail(?string $supplierEmail): void
+	{
+		$this->supplierEmail = $supplierEmail;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getSupplierPhone(): ?string
+	{
+		return $this->supplierPhone;
+	}
+
+	/**
+	 * @param null|string $supplierPhone
+	 */
+	public function setSupplierPhone(?string $supplierPhone): void
+	{
+		$this->supplierPhone = $supplierPhone;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array

@@ -7,6 +7,9 @@ namespace Sellastica\CatalogSupplier\Mapping;
  */
 class SupplierInquiryDao extends \Sellastica\Entity\Mapping\Dao
 {
+	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesDao;
+
+
 	/**
 	 * @inheritDoc
 	 */

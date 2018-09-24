@@ -11,4 +11,5 @@ use Sellastica\CatalogSupplier\Entity\SupplierInquiry;
  */
 class SupplierInquiryRepositoryProxy extends RepositoryProxy implements ISupplierInquiryRepository
 {
+	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesRepositoryProxy;
 }
