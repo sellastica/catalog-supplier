@@ -35,6 +35,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $password;
 	/** @var bool */
 	private $customUrl = false;
+	/** @var bool */
+	private $demo = false;
 	/** @var string */
 	private $authentication = 'none';
 	/** @var bool */
@@ -211,6 +213,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function customUrl(bool $customUrl)
 	{
 		$this->customUrl = $customUrl;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getDemo(): bool
+	{
+		return $this->demo;
+	}
+
+	/**
+	 * @param bool $demo
+	 * @return $this
+	 */
+	public function demo(bool $demo)
+	{
+		$this->demo = $demo;
 		return $this;
 	}
 
