@@ -24,6 +24,10 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	private $feedUrl;
 	/** @var string|null @optional */
 	private $note;
+	/** @var bool @optional */
+	private $confirmed = false;
+	/** @var int|null @optional */
+	private $ticketId;
 
 
 	/**
@@ -155,6 +159,38 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isConfirmed(): bool
+	{
+		return $this->confirmed;
+	}
+
+	/**
+	 * @param bool $confirmed
+	 */
+	public function setConfirmed(bool $confirmed): void
+	{
+		$this->confirmed = $confirmed;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getTicketId(): ?int
+	{
+		return $this->ticketId;
+	}
+
+	/**
+	 * @param int|null $ticketId
+	 */
+	public function setTicketId(?int $ticketId): void
+	{
+		$this->ticketId = $ticketId;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -169,6 +205,8 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'supplierPhone' => $this->supplierPhone,
 				'feedUrl' => $this->feedUrl,
 				'note' => $this->note,
+				'confirmed' => $this->confirmed,
+				'ticketId' => $this->ticketId,
 			]
 		);
 	}

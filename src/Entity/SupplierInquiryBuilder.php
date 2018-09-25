@@ -25,6 +25,10 @@ class SupplierInquiryBuilder implements IBuilder
 	private $feedUrl;
 	/** @var string|null */
 	private $note;
+	/** @var bool */
+	private $confirmed = false;
+	/** @var int|null */
+	private $ticketId;
 
 	/**
 	 * @param \Sellastica\Identity\Model\Contact $contact
@@ -142,6 +146,42 @@ class SupplierInquiryBuilder implements IBuilder
 	public function note(string $note = null)
 	{
 		$this->note = $note;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getConfirmed(): bool
+	{
+		return $this->confirmed;
+	}
+
+	/**
+	 * @param bool $confirmed
+	 * @return $this
+	 */
+	public function confirmed(bool $confirmed)
+	{
+		$this->confirmed = $confirmed;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getTicketId()
+	{
+		return $this->ticketId;
+	}
+
+	/**
+	 * @param int|null $ticketId
+	 * @return $this
+	 */
+	public function ticketId(int $ticketId = null)
+	{
+		$this->ticketId = $ticketId;
 		return $this;
 	}
 
