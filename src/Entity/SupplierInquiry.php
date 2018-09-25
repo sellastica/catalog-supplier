@@ -26,6 +26,8 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	private $note;
 	/** @var bool @optional */
 	private $confirmed = false;
+	/** @var bool @optional */
+	private $closed = false;
 	/** @var int|null @optional */
 	private $ticketId;
 
@@ -191,6 +193,22 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isClosed(): bool
+	{
+		return $this->closed;
+	}
+
+	/**
+	 * @param bool $closed
+	 */
+	public function setClosed(bool $closed): void
+	{
+		$this->closed = $closed;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -206,6 +224,7 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'feedUrl' => $this->feedUrl,
 				'note' => $this->note,
 				'confirmed' => $this->confirmed,
+				'closed' => $this->closed,
 				'ticketId' => $this->ticketId,
 			]
 		);

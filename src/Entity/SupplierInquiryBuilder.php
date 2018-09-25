@@ -27,6 +27,8 @@ class SupplierInquiryBuilder implements IBuilder
 	private $note;
 	/** @var bool */
 	private $confirmed = false;
+	/** @var bool */
+	private $closed = false;
 	/** @var int|null */
 	private $ticketId;
 
@@ -164,6 +166,24 @@ class SupplierInquiryBuilder implements IBuilder
 	public function confirmed(bool $confirmed)
 	{
 		$this->confirmed = $confirmed;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getClosed(): bool
+	{
+		return $this->closed;
+	}
+
+	/**
+	 * @param bool $closed
+	 * @return $this
+	 */
+	public function closed(bool $closed)
+	{
+		$this->closed = $closed;
 		return $this;
 	}
 
