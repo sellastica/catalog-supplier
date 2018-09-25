@@ -39,7 +39,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var string|null @optional */
 	private $password;
 	/** @var bool @optional */
-	private $customUrl = false;
+	private $customUrl = true;
 	/** @var bool @optional */
 	private $demo = false;
 	/** @var string @optional */
