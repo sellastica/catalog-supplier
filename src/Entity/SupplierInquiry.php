@@ -23,6 +23,10 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var string|null @optional */
 	private $feedUrl;
 	/** @var string|null @optional */
+	private $login;
+	/** @var string|null @optional */
+	private $password;
+	/** @var string|null @optional */
 	private $note;
 	/** @var bool @optional */
 	private $confirmed = false;
@@ -209,6 +213,38 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getLogin(): ?string
+	{
+		return $this->login;
+	}
+
+	/**
+	 * @param null|string $login
+	 */
+	public function setLogin(?string $login): void
+	{
+		$this->login = $login;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getPassword(): ?string
+	{
+		return $this->password;
+	}
+
+	/**
+	 * @param null|string $password
+	 */
+	public function setPassword(?string $password): void
+	{
+		$this->password = $password;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -222,6 +258,8 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'supplierEmail' => $this->supplierEmail,
 				'supplierPhone' => $this->supplierPhone,
 				'feedUrl' => $this->feedUrl,
+				'login' => $this->login,
+				'password' => $this->password,
 				'note' => $this->note,
 				'confirmed' => $this->confirmed,
 				'closed' => $this->closed,

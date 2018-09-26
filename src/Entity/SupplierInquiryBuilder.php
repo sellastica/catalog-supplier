@@ -24,6 +24,10 @@ class SupplierInquiryBuilder implements IBuilder
 	/** @var string|null */
 	private $feedUrl;
 	/** @var string|null */
+	private $login;
+	/** @var string|null */
+	private $password;
+	/** @var string|null */
 	private $note;
 	/** @var bool */
 	private $confirmed = false;
@@ -130,6 +134,42 @@ class SupplierInquiryBuilder implements IBuilder
 	public function feedUrl(string $feedUrl = null)
 	{
 		$this->feedUrl = $feedUrl;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getLogin()
+	{
+		return $this->login;
+	}
+
+	/**
+	 * @param string|null $login
+	 * @return $this
+	 */
+	public function login(string $login = null)
+	{
+		$this->login = $login;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getPassword()
+	{
+		return $this->password;
+	}
+
+	/**
+	 * @param string|null $password
+	 * @return $this
+	 */
+	public function password(string $password = null)
+	{
+		$this->password = $password;
 		return $this;
 	}
 
