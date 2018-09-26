@@ -34,6 +34,8 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	private $closed = false;
 	/** @var int|null @optional */
 	private $ticketId;
+	/** @var int|null @optional */
+	private $supplierId;
 
 
 	/**
@@ -245,6 +247,22 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return int|null
+	 */
+	public function getSupplierId(): ?int
+	{
+		return $this->supplierId;
+	}
+
+	/**
+	 * @param int|null $supplierId
+	 */
+	public function setSupplierId(?int $supplierId): void
+	{
+		$this->supplierId = $supplierId;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -264,6 +282,7 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'confirmed' => $this->confirmed,
 				'closed' => $this->closed,
 				'ticketId' => $this->ticketId,
+				'supplierId' => $this->supplierId,
 			]
 		);
 	}
