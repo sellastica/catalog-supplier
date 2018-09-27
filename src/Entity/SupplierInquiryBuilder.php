@@ -37,6 +37,8 @@ class SupplierInquiryBuilder implements IBuilder
 	private $ticketId;
 	/** @var int|null */
 	private $supplierId;
+	/** @var int|null */
+	private $feedId;
 
 	/**
 	 * @param \Sellastica\Identity\Model\Contact $contact
@@ -262,6 +264,24 @@ class SupplierInquiryBuilder implements IBuilder
 	public function supplierId(int $supplierId = null)
 	{
 		$this->supplierId = $supplierId;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getFeedId()
+	{
+		return $this->feedId;
+	}
+
+	/**
+	 * @param int|null $feedId
+	 * @return $this
+	 */
+	public function feedId(int $feedId = null)
+	{
+		$this->feedId = $feedId;
 		return $this;
 	}
 

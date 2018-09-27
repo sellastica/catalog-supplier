@@ -36,6 +36,8 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	private $ticketId;
 	/** @var int|null @optional */
 	private $supplierId;
+	/** @var int|null @optional */
+	private $feedId;
 
 
 	/**
@@ -263,6 +265,22 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return int|null
+	 */
+	public function getFeedId(): ?int
+	{
+		return $this->feedId;
+	}
+
+	/**
+	 * @param int|null $feedId
+	 */
+	public function setFeedId(?int $feedId): void
+	{
+		$this->feedId = $feedId;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -283,6 +301,7 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'closed' => $this->closed,
 				'ticketId' => $this->ticketId,
 				'supplierId' => $this->supplierId,
+				'feedId' => $this->feedId,
 			]
 		);
 	}
