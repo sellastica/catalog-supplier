@@ -16,6 +16,7 @@ class SupplierInquiryFactory extends EntityFactory
 	 */
 	public function doInitialize(IEntity $entity)
 	{
+		$entity->setRelationService(new SupplierInquiryRelations($entity, $this->em));
 	}
 
 	/**

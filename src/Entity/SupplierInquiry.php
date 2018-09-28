@@ -4,12 +4,18 @@ namespace Sellastica\CatalogSupplier\Entity;
 /**
  * @generate-builder
  * @see SupplierInquiryBuilder
+ *
+ * @property SupplierInquiryRelations $relationService
  */
 class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	implements \Sellastica\Entity\Entity\IEntity
 {
 	use \Sellastica\Entity\Entity\TAbstractEntity;
 
+	/** @var int|null @optional */
+	private $projectId;
+	/** @var int|null @optional */
+	private $adminUserId;
 	/** @var \Sellastica\Identity\Model\Contact @required */
 	private $contact;
 	/** @var string @required */
@@ -54,6 +60,54 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	public static function isIdGeneratedByStorage(): bool
 	{
 		return true;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getProjectId(): ?int
+	{
+		return $this->projectId;
+	}
+
+	/**
+	 * @param int|null $projectId
+	 */
+	public function setProjectId(?int $projectId): void
+	{
+		$this->projectId = $projectId;
+	}
+
+	/**
+	 * @return \Sellastica\Project\Entity\Project|null
+	 */
+	public function getProject(): ?\Sellastica\Project\Entity\Project
+	{
+		return $this->relationService->getProject();
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getAdminUserId(): ?int
+	{
+		return $this->adminUserId;
+	}
+
+	/**
+	 * @param int|null $adminUserId
+	 */
+	public function setAdminUserId(?int $adminUserId): void
+	{
+		$this->adminUserId = $adminUserId;
+	}
+
+	/**
+	 * @return null|\Sellastica\Integroid\Entity\IntegroidUser
+	 */
+	public function getAdminUser(): ?\Sellastica\Integroid\Entity\IntegroidUser
+	{
+		return $this->relationService->getAdminUser();
 	}
 
 	/**
@@ -290,6 +344,8 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 			$this->getContact()->toArray(),
 			[
 				'supplier' => $this->supplier,
+				'projectId' => $this->projectId,
+				'adminUserId' => $this->adminUserId,
 				'supplierHomepage' => $this->supplierHomepage,
 				'supplierEmail' => $this->supplierEmail,
 				'supplierPhone' => $this->supplierPhone,

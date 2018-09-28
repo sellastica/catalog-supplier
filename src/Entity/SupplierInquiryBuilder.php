@@ -15,6 +15,10 @@ class SupplierInquiryBuilder implements IBuilder
 	private $contact;
 	/** @var string */
 	private $supplier;
+	/** @var int|null */
+	private $projectId;
+	/** @var int|null */
+	private $adminUserId;
 	/** @var string|null */
 	private $supplierHomepage;
 	/** @var string|null */
@@ -67,6 +71,42 @@ class SupplierInquiryBuilder implements IBuilder
 	public function getSupplier(): string
 	{
 		return $this->supplier;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getProjectId()
+	{
+		return $this->projectId;
+	}
+
+	/**
+	 * @param int|null $projectId
+	 * @return $this
+	 */
+	public function projectId(int $projectId = null)
+	{
+		$this->projectId = $projectId;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getAdminUserId()
+	{
+		return $this->adminUserId;
+	}
+
+	/**
+	 * @param int|null $adminUserId
+	 * @return $this
+	 */
+	public function adminUserId(int $adminUserId = null)
+	{
+		$this->adminUserId = $adminUserId;
+		return $this;
 	}
 
 	/**
