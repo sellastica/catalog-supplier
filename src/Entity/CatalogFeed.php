@@ -24,6 +24,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $feedFormat;
 	/** @var \Sellastica\CatalogSupplier\Model\Compression @optional */
 	private $compression;
+	/** @var string|null @optional */
+	private $uncompressedFilename;
 	/** @var string @required */
 	private $url;
 	/** @var string @required */
@@ -395,6 +397,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getUncompressedFilename(): ?string
+	{
+		return $this->uncompressedFilename;
+	}
+
+	/**
+	 * @param null|string $uncompressedFilename
+	 */
+	public function setUncompressedFilename(?string $uncompressedFilename): void
+	{
+		$this->uncompressedFilename = $uncompressedFilename;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -418,6 +436,9 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'authentication' => $this->authentication,
 				'hasUniqueIdentifier' => $this->hasUniqueIdentifier,
 				'visible' => $this->visible,
+				'feedFormat' => $this->feedFormat,
+				'compression' => $this->compression,
+				'uncompressedFilename' => $this->uncompressedFilename,
 			]
 		);
 	}

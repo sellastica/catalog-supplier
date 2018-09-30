@@ -25,6 +25,12 @@ class CatalogFeedBuilder implements IBuilder
 	private $defaultCurrency;
 	/** @var \Sellastica\Localization\Model\Country */
 	private $defaultCountry;
+	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat */
+	private $feedFormat;
+	/** @var \Sellastica\CatalogSupplier\Model\Compression */
+	private $compression;
+	/** @var string|null */
+	private $uncompressedFilename;
 	/** @var \Sellastica\Localization\Model\Currency|null */
 	private $secondCurrency;
 	/** @var string|null */
@@ -40,11 +46,9 @@ class CatalogFeedBuilder implements IBuilder
 	/** @var string */
 	private $authentication = 'none';
 	/** @var bool */
+	private $hasUniqueIdentifier = true;
+	/** @var bool */
 	private $visible = true;
-	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat */
-	private $feedFormat;
-	/** @var \Sellastica\CatalogSupplier\Model\Compression */
-	private $compression;
 
 	/**
 	 * @param int $supplierId
@@ -128,6 +132,60 @@ class CatalogFeedBuilder implements IBuilder
 	public function getDefaultCountry(): \Sellastica\Localization\Model\Country
 	{
 		return $this->defaultCountry;
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Model\FeedFormat
+	 */
+	public function getFeedFormat(): \Sellastica\CatalogSupplier\Model\FeedFormat
+	{
+		return $this->feedFormat;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat
+	 * @return $this
+	 */
+	public function feedFormat(\Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat)
+	{
+		$this->feedFormat = $feedFormat;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Model\Compression
+	 */
+	public function getCompression(): \Sellastica\CatalogSupplier\Model\Compression
+	{
+		return $this->compression;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\Compression $compression
+	 * @return $this
+	 */
+	public function compression(\Sellastica\CatalogSupplier\Model\Compression $compression)
+	{
+		$this->compression = $compression;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getUncompressedFilename()
+	{
+		return $this->uncompressedFilename;
+	}
+
+	/**
+	 * @param string|null $uncompressedFilename
+	 * @return $this
+	 */
+	public function uncompressedFilename(string $uncompressedFilename = null)
+	{
+		$this->uncompressedFilename = $uncompressedFilename;
+		return $this;
 	}
 
 	/**
@@ -259,6 +317,24 @@ class CatalogFeedBuilder implements IBuilder
 	/**
 	 * @return bool
 	 */
+	public function getHasUniqueIdentifier(): bool
+	{
+		return $this->hasUniqueIdentifier;
+	}
+
+	/**
+	 * @param bool $hasUniqueIdentifier
+	 * @return $this
+	 */
+	public function hasUniqueIdentifier(bool $hasUniqueIdentifier = true)
+	{
+		$this->hasUniqueIdentifier = $hasUniqueIdentifier;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
 	public function getVisible(): bool
 	{
 		return $this->visible;
@@ -271,42 +347,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function visible(bool $visible = true)
 	{
 		$this->visible = $visible;
-		return $this;
-	}
-
-	/**
-	 * @return \Sellastica\CatalogSupplier\Model\FeedFormat
-	 */
-	public function getFeedFormat(): \Sellastica\CatalogSupplier\Model\FeedFormat
-	{
-		return $this->feedFormat;
-	}
-
-	/**
-	 * @param \Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat
-	 * @return $this
-	 */
-	public function feedFormat(\Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat)
-	{
-		$this->feedFormat = $feedFormat;
-		return $this;
-	}
-
-	/**
-	 * @return \Sellastica\CatalogSupplier\Model\Compression
-	 */
-	public function getCompression(): \Sellastica\CatalogSupplier\Model\Compression
-	{
-		return $this->compression;
-	}
-
-	/**
-	 * @param \Sellastica\CatalogSupplier\Model\Compression $compression
-	 * @return $this
-	 */
-	public function compression(\Sellastica\CatalogSupplier\Model\Compression $compression)
-	{
-		$this->compression = $compression;
 		return $this;
 	}
 
