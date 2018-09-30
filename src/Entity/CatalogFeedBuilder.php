@@ -41,6 +41,10 @@ class CatalogFeedBuilder implements IBuilder
 	private $authentication = 'none';
 	/** @var bool */
 	private $visible = true;
+	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat */
+	private $feedFormat;
+	/** @var \Sellastica\CatalogSupplier\Model\Compression */
+	private $compression;
 
 	/**
 	 * @param int $supplierId
@@ -267,6 +271,42 @@ class CatalogFeedBuilder implements IBuilder
 	public function visible(bool $visible = true)
 	{
 		$this->visible = $visible;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Model\FeedFormat
+	 */
+	public function getFeedFormat(): \Sellastica\CatalogSupplier\Model\FeedFormat
+	{
+		return $this->feedFormat;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat
+	 * @return $this
+	 */
+	public function feedFormat(\Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat)
+	{
+		$this->feedFormat = $feedFormat;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Model\Compression
+	 */
+	public function getCompression(): \Sellastica\CatalogSupplier\Model\Compression
+	{
+		return $this->compression;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\Compression $compression
+	 * @return $this
+	 */
+	public function compression(\Sellastica\CatalogSupplier\Model\Compression $compression)
+	{
+		$this->compression = $compression;
 		return $this;
 	}
 

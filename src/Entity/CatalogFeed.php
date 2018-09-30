@@ -20,6 +20,10 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $supplierId;
 	/** @var \Sellastica\CatalogSupplier\Model\FeedType @required */
 	private $type;
+	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat @optional */
+	private $feedFormat;
+	/** @var \Sellastica\CatalogSupplier\Model\Compression @optional */
+	private $compression;
 	/** @var string @required */
 	private $url;
 	/** @var string @required */
@@ -45,6 +49,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var string @optional */
 	private $authentication = self::AUTH_NONE;
 	/** @var bool @optional */
+	private $hasUniqueIdentifier = true;
+	/** @var bool @optional */
 	private $visible = true;
 
 
@@ -54,6 +60,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	public function __construct(CatalogFeedBuilder $builder)
 	{
 		$this->hydrate($builder);
+		$this->feedFormat = $this->feedFormat ?? \Sellastica\CatalogSupplier\Model\FeedFormat::xml();
+		$this->compression = $this->compression ?? \Sellastica\CatalogSupplier\Model\Compression::none();
 	}
 
 	/**
@@ -339,6 +347,54 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function hasUniqueIdentifier(): bool
+	{
+		return $this->hasUniqueIdentifier;
+	}
+
+	/**
+	 * @param bool $hasUniqueIdentifier
+	 */
+	public function setHasUniqueIdentifier(bool $hasUniqueIdentifier): void
+	{
+		$this->hasUniqueIdentifier = $hasUniqueIdentifier;
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Model\FeedFormat
+	 */
+	public function getFeedFormat(): \Sellastica\CatalogSupplier\Model\FeedFormat
+	{
+		return $this->feedFormat;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat
+	 */
+	public function setFeedFormat(\Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat): void
+	{
+		$this->feedFormat = $feedFormat;
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Model\Compression
+	 */
+	public function getCompression(): \Sellastica\CatalogSupplier\Model\Compression
+	{
+		return $this->compression;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\Compression $compression
+	 */
+	public function setCompression(\Sellastica\CatalogSupplier\Model\Compression $compression): void
+	{
+		$this->compression = $compression;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -360,6 +416,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'customUrl' => $this->customUrl,
 				'demo' => $this->demo,
 				'authentication' => $this->authentication,
+				'hasUniqueIdentifier' => $this->hasUniqueIdentifier,
 				'visible' => $this->visible,
 			]
 		);

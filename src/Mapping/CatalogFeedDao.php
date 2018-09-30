@@ -28,6 +28,8 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
+		$data->compression = \Sellastica\CatalogSupplier\Model\Compression::from($data->compression);
+		$data->feedFormat = \Sellastica\CatalogSupplier\Model\FeedFormat::from($data->feedFormat);
 		$data->type = \Sellastica\CatalogSupplier\Model\FeedType::from($data->type);
 		$data->defaultCurrency = \Sellastica\Localization\Model\Currency::from($data->defaultCurrency);
 		$data->defaultCountry = \Sellastica\Localization\Model\Country::from($data->defaultCountry);
