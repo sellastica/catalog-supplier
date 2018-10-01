@@ -44,6 +44,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $login;
 	/** @var string|null @optional */
 	private $password;
+	/** @var int @optional */
+	private $timeout = 180;
 	/** @var bool @optional */
 	private $customUrl = true;
 	/** @var bool @optional */
@@ -413,6 +415,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getTimeout(): int
+	{
+		return $this->timeout;
+	}
+
+	/**
+	 * @param int $timeout
+	 */
+	public function setTimeout(int $timeout): void
+	{
+		$this->timeout = $timeout;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -439,6 +457,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'feedFormat' => $this->feedFormat,
 				'compression' => $this->compression,
 				'uncompressedFilename' => $this->uncompressedFilename,
+				'timeout' => $this->timeout,
 			]
 		);
 	}

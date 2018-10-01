@@ -39,6 +39,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $login;
 	/** @var string|null */
 	private $password;
+	/** @var int */
+	private $timeout = 180;
 	/** @var bool */
 	private $customUrl = true;
 	/** @var bool */
@@ -257,6 +259,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function password(string $password = null)
 	{
 		$this->password = $password;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getTimeout(): int
+	{
+		return $this->timeout;
+	}
+
+	/**
+	 * @param int $timeout
+	 * @return $this
+	 */
+	public function timeout(int $timeout = 180)
+	{
+		$this->timeout = $timeout;
 		return $this;
 	}
 
