@@ -42,6 +42,8 @@ class CatalogFeedBuilder implements IBuilder
 	/** @var int */
 	private $timeout = 180;
 	/** @var bool */
+	private $supportsHead = true;
+	/** @var bool */
 	private $customUrl = true;
 	/** @var bool */
 	private $demo = false;
@@ -277,6 +279,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function timeout(int $timeout = 180)
 	{
 		$this->timeout = $timeout;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getSupportsHead(): bool
+	{
+		return $this->supportsHead;
+	}
+
+	/**
+	 * @param bool $supportsHead
+	 * @return $this
+	 */
+	public function supportsHead(bool $supportsHead = true)
+	{
+		$this->supportsHead = $supportsHead;
 		return $this;
 	}
 

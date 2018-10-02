@@ -47,6 +47,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var int @optional */
 	private $timeout = 180;
 	/** @var bool @optional */
+	private $supportsHead = true;
+	/** @var bool @optional */
 	private $customUrl = true;
 	/** @var bool @optional */
 	private $demo = false;
@@ -321,6 +323,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return bool
 	 */
+	public function supportsHead(): bool
+	{
+		return $this->supportsHead;
+	}
+
+	/**
+	 * @param bool $supportsHead
+	 */
+	public function setSupportsHead(bool $supportsHead): void
+	{
+		$this->supportsHead = $supportsHead;
+	}
+
+	/**
+	 * @return bool
+	 */
 	public function isCustomUrl(): bool
 	{
 		return $this->customUrl;
@@ -449,6 +467,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'schemaFilename' => $this->schemaFilename,
 				'login' => $this->login,
 				'password' => $this->password,
+				'supportsHead' => $this->supportsHead,
 				'customUrl' => $this->customUrl,
 				'demo' => $this->demo,
 				'authentication' => $this->authentication,
