@@ -33,10 +33,10 @@ class SupplierInquiryBuilder implements IBuilder
 	private $password;
 	/** @var string|null */
 	private $note;
-	/** @var bool */
-	private $confirmed = false;
-	/** @var bool */
-	private $closed = false;
+	/** @var \DateTime|null */
+	private $confirmed;
+	/** @var \DateTime|null */
+	private $closed;
 	/** @var int|null */
 	private $ticketId;
 	/** @var int|null */
@@ -236,36 +236,36 @@ class SupplierInquiryBuilder implements IBuilder
 	}
 
 	/**
-	 * @return bool
+	 * @return \DateTime|null
 	 */
-	public function getConfirmed(): bool
+	public function getConfirmed()
 	{
 		return $this->confirmed;
 	}
 
 	/**
-	 * @param bool $confirmed
+	 * @param \DateTime|null $confirmed
 	 * @return $this
 	 */
-	public function confirmed(bool $confirmed)
+	public function confirmed(\DateTime $confirmed = null)
 	{
 		$this->confirmed = $confirmed;
 		return $this;
 	}
 
 	/**
-	 * @return bool
+	 * @return \DateTime|null
 	 */
-	public function getClosed(): bool
+	public function getClosed()
 	{
 		return $this->closed;
 	}
 
 	/**
-	 * @param bool $closed
+	 * @param \DateTime|null $closed
 	 * @return $this
 	 */
-	public function closed(bool $closed)
+	public function closed(\DateTime $closed = null)
 	{
 		$this->closed = $closed;
 		return $this;

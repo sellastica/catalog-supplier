@@ -37,4 +37,12 @@ class SupplierInquiryRelations implements \Sellastica\Entity\Relation\IEntityRel
 	{
 		return $this->em->getRepository(\Sellastica\Integroid\Entity\IntegroidUser::class)->find($this->inquiry->getAdminUserId());
 	}
+
+	/**
+	 * @return null|\Sellastica\Helpdesk\Entity\Ticket
+	 */
+	public function getTicket(): ?\Sellastica\Helpdesk\Entity\Ticket
+	{
+		return $this->em->getRepository(\Sellastica\Helpdesk\Entity\Ticket::class)->find($this->inquiry->getTicketId());
+	}
 }

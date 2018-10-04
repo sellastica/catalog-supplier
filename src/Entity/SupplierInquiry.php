@@ -34,10 +34,10 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	private $password;
 	/** @var string|null @optional */
 	private $note;
-	/** @var bool @optional */
-	private $confirmed = false;
-	/** @var bool @optional */
-	private $closed = false;
+	/** @var \DateTime|null @optional */
+	private $confirmed;
+	/** @var \DateTime|null @optional */
+	private $closed;
 	/** @var int|null @optional */
 	private $ticketId;
 	/** @var int|null @optional */
@@ -60,6 +60,14 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	public static function isIdGeneratedByStorage(): bool
 	{
 		return true;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getNumber(): string
+	{
+		return '#' . $this->id;
 	}
 
 	/**
@@ -223,17 +231,17 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return bool
+	 * @return \DateTime|null
 	 */
-	public function isConfirmed(): bool
+	public function getConfirmed(): ?\DateTime
 	{
 		return $this->confirmed;
 	}
 
 	/**
-	 * @param bool $confirmed
+	 * @param \DateTime|null $confirmed
 	 */
-	public function setConfirmed(bool $confirmed): void
+	public function setConfirmed(?\DateTime $confirmed): void
 	{
 		$this->confirmed = $confirmed;
 	}
@@ -255,17 +263,25 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return bool
+	 * @return null|\Sellastica\Helpdesk\Entity\Ticket
 	 */
-	public function isClosed(): bool
+	public function getTicket(): ?\Sellastica\Helpdesk\Entity\Ticket
+	{
+		return $this->relationService->getTicket();
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getClosed(): ?\DateTime
 	{
 		return $this->closed;
 	}
 
 	/**
-	 * @param bool $closed
+	 * @param \DateTime|null $closed
 	 */
-	public function setClosed(bool $closed): void
+	public function setClosed(?\DateTime $closed): void
 	{
 		$this->closed = $closed;
 	}
