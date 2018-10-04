@@ -71,6 +71,14 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getTitle(): string
+	{
+		return $this->getNumber() . ': ' . $this->getSupplier();
+	}
+
+	/**
 	 * @return int|null
 	 */
 	public function getProjectId(): ?int
