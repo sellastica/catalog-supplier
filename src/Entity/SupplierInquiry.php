@@ -37,14 +37,19 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var \DateTime|null @optional */
 	private $confirmed;
 	/** @var \DateTime|null @optional */
+	private $accomplished;
+	/** @var \DateTime|null @optional */
 	private $closed;
+	/** @var \DateTime|null @optional */
+	private $cancelled;
 	/** @var int|null @optional */
 	private $ticketId;
 	/** @var int|null @optional */
 	private $supplierId;
 	/** @var int|null @optional */
 	private $feedId;
-
+	/** @var \Sellastica\CatalogSupplier\Model\InquiryStatus @optional */
+	private $status;
 
 	/**
 	 * @param SupplierInquiryBuilder $builder
@@ -52,6 +57,7 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	public function __construct(SupplierInquiryBuilder $builder)
 	{
 		$this->hydrate($builder);
+		$this->status = $this->status ?? \Sellastica\CatalogSupplier\Model\InquiryStatus::new();
 	}
 
 	/**
@@ -255,6 +261,22 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \DateTime|null
+	 */
+	public function getAccomplished(): ?\DateTime
+	{
+		return $this->accomplished;
+	}
+
+	/**
+	 * @param \DateTime|null $accomplished
+	 */
+	public function setAccomplished(?\DateTime $accomplished): void
+	{
+		$this->accomplished = $accomplished;
+	}
+
+	/**
 	 * @return int|null
 	 */
 	public function getTicketId(): ?int
@@ -292,6 +314,22 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setClosed(?\DateTime $closed): void
 	{
 		$this->closed = $closed;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getCancelled(): ?\DateTime
+	{
+		return $this->cancelled;
+	}
+
+	/**
+	 * @param \DateTime|null $cancelled
+	 */
+	public function setCancelled(?\DateTime $cancelled): void
+	{
+		$this->cancelled = $cancelled;
 	}
 
 	/**
@@ -359,6 +397,22 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \Sellastica\CatalogSupplier\Model\InquiryStatus
+	 */
+	public function getStatus(): \Sellastica\CatalogSupplier\Model\InquiryStatus
+	{
+		return $this->status;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\InquiryStatus $status
+	 */
+	public function setStatus(\Sellastica\CatalogSupplier\Model\InquiryStatus $status): void
+	{
+		$this->status = $status;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -378,10 +432,13 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'password' => $this->password,
 				'note' => $this->note,
 				'confirmed' => $this->confirmed,
+				'accomplished' => $this->accomplished,
 				'closed' => $this->closed,
+				'cancelled' => $this->cancelled,
 				'ticketId' => $this->ticketId,
 				'supplierId' => $this->supplierId,
 				'feedId' => $this->feedId,
+				'status' => $this->status->getValue(),
 			]
 		);
 	}

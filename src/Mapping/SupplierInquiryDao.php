@@ -25,6 +25,7 @@ class SupplierInquiryDao extends \Sellastica\Entity\Mapping\Dao
 			new \Sellastica\Identity\Model\Email($data->email)
 		);
 		$contact->setPhone($data->phone);
+		$data->status = \Sellastica\CatalogSupplier\Model\InquiryStatus::from($data->status);
 
 		return \Sellastica\CatalogSupplier\Entity\SupplierInquiryBuilder::create($contact, $data->supplier)
 			->hydrate($data);

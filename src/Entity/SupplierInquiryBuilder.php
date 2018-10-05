@@ -36,13 +36,19 @@ class SupplierInquiryBuilder implements IBuilder
 	/** @var \DateTime|null */
 	private $confirmed;
 	/** @var \DateTime|null */
+	private $accomplished;
+	/** @var \DateTime|null */
 	private $closed;
+	/** @var \DateTime|null */
+	private $cancelled;
 	/** @var int|null */
 	private $ticketId;
 	/** @var int|null */
 	private $supplierId;
 	/** @var int|null */
 	private $feedId;
+	/** @var \Sellastica\CatalogSupplier\Model\InquiryStatus */
+	private $status;
 
 	/**
 	 * @param \Sellastica\Identity\Model\Contact $contact
@@ -256,6 +262,24 @@ class SupplierInquiryBuilder implements IBuilder
 	/**
 	 * @return \DateTime|null
 	 */
+	public function getAccomplished()
+	{
+		return $this->accomplished;
+	}
+
+	/**
+	 * @param \DateTime|null $accomplished
+	 * @return $this
+	 */
+	public function accomplished(\DateTime $accomplished = null)
+	{
+		$this->accomplished = $accomplished;
+		return $this;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
 	public function getClosed()
 	{
 		return $this->closed;
@@ -268,6 +292,24 @@ class SupplierInquiryBuilder implements IBuilder
 	public function closed(\DateTime $closed = null)
 	{
 		$this->closed = $closed;
+		return $this;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getCancelled()
+	{
+		return $this->cancelled;
+	}
+
+	/**
+	 * @param \DateTime|null $cancelled
+	 * @return $this
+	 */
+	public function cancelled(\DateTime $cancelled = null)
+	{
+		$this->cancelled = $cancelled;
 		return $this;
 	}
 
@@ -322,6 +364,24 @@ class SupplierInquiryBuilder implements IBuilder
 	public function feedId(int $feedId = null)
 	{
 		$this->feedId = $feedId;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Model\InquiryStatus
+	 */
+	public function getStatus(): \Sellastica\CatalogSupplier\Model\InquiryStatus
+	{
+		return $this->status;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\InquiryStatus $status
+	 * @return $this
+	 */
+	public function status(\Sellastica\CatalogSupplier\Model\InquiryStatus $status)
+	{
+		$this->status = $status;
 		return $this;
 	}
 
