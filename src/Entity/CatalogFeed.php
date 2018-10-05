@@ -473,8 +473,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'authentication' => $this->authentication,
 				'hasUniqueIdentifier' => $this->hasUniqueIdentifier,
 				'visible' => $this->visible,
-				'feedFormat' => $this->feedFormat,
-				'compression' => $this->compression,
+				'feedFormat' => $this->feedFormat->getValue(),
+				'compression' => $this->compression->getValue(),
 				'uncompressedFilename' => $this->uncompressedFilename,
 				'timeout' => $this->timeout,
 			]
