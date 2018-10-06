@@ -48,6 +48,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $timeout = 180;
 	/** @var bool @optional */
 	private $supportsHead = true;
+	/** @var \Sellastica\CatalogSupplier\Model\Stream @optional */
+	private $stream;
 	/** @var bool @optional */
 	private $customUrl = true;
 	/** @var bool @optional */
@@ -68,6 +70,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 		$this->hydrate($builder);
 		$this->feedFormat = $this->feedFormat ?? \Sellastica\CatalogSupplier\Model\FeedFormat::xml();
 		$this->compression = $this->compression ?? \Sellastica\CatalogSupplier\Model\Compression::none();
+		$this->stream = $this->stream ?? \Sellastica\CatalogSupplier\Model\Stream::http();
 	}
 
 	/**
@@ -337,6 +340,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \Sellastica\CatalogSupplier\Model\Stream
+	 */
+	public function getStream(): \Sellastica\CatalogSupplier\Model\Stream
+	{
+		return $this->stream;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\Stream $stream
+	 */
+	public function setStream(\Sellastica\CatalogSupplier\Model\Stream $stream): void
+	{
+		$this->stream = $stream;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function isCustomUrl(): bool
@@ -468,6 +487,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'login' => $this->login,
 				'password' => $this->password,
 				'supportsHead' => $this->supportsHead,
+				'stream' => $this->stream->getValue(),
 				'customUrl' => $this->customUrl,
 				'demo' => $this->demo,
 				'authentication' => $this->authentication,

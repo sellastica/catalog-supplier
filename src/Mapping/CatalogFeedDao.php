@@ -28,6 +28,7 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
+		$data->stream = \Sellastica\CatalogSupplier\Model\Stream::from($data->stream);
 		$data->compression = \Sellastica\CatalogSupplier\Model\Compression::from($data->compression);
 		$data->feedFormat = \Sellastica\CatalogSupplier\Model\FeedFormat::from($data->feedFormat);
 		$data->type = \Sellastica\CatalogSupplier\Model\FeedType::from($data->type);

@@ -43,6 +43,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $timeout = 180;
 	/** @var bool */
 	private $supportsHead = true;
+	/** @var \Sellastica\CatalogSupplier\Model\Stream */
+	private $stream;
 	/** @var bool */
 	private $customUrl = true;
 	/** @var bool */
@@ -297,6 +299,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function supportsHead(bool $supportsHead = true)
 	{
 		$this->supportsHead = $supportsHead;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Model\Stream
+	 */
+	public function getStream(): \Sellastica\CatalogSupplier\Model\Stream
+	{
+		return $this->stream;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\Stream $stream
+	 * @return $this
+	 */
+	public function stream(\Sellastica\CatalogSupplier\Model\Stream $stream)
+	{
+		$this->stream = $stream;
 		return $this;
 	}
 
