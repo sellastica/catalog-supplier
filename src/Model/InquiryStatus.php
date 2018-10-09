@@ -97,6 +97,14 @@ class InquiryStatus
 	/**
 	 * @return InquiryStatus
 	 */
+	public static function confirmed(): InquiryStatus
+	{
+		return new self(self::CONFIRMED);
+	}
+
+	/**
+	 * @return InquiryStatus
+	 */
 	public static function closed(): InquiryStatus
 	{
 		return new self(self::CLOSED);
