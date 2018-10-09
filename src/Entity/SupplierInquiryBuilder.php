@@ -36,6 +36,8 @@ class SupplierInquiryBuilder implements IBuilder
 	/** @var \DateTime|null */
 	private $confirmed;
 	/** @var \DateTime|null */
+	private $deadline;
+	/** @var \DateTime|null */
 	private $accomplished;
 	/** @var \DateTime|null */
 	private $closed;
@@ -256,6 +258,24 @@ class SupplierInquiryBuilder implements IBuilder
 	public function confirmed(\DateTime $confirmed = null)
 	{
 		$this->confirmed = $confirmed;
+		return $this;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getDeadline()
+	{
+		return $this->deadline;
+	}
+
+	/**
+	 * @param \DateTime|null $deadline
+	 * @return $this
+	 */
+	public function deadline(\DateTime $deadline = null)
+	{
+		$this->deadline = $deadline;
 		return $this;
 	}
 

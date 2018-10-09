@@ -37,6 +37,8 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var \DateTime|null @optional */
 	private $confirmed;
 	/** @var \DateTime|null @optional */
+	private $deadline;
+	/** @var \DateTime|null @optional */
 	private $accomplished;
 	/** @var \DateTime|null @optional */
 	private $closed;
@@ -263,6 +265,40 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return \DateTime|null
 	 */
+	public function getDeadline(): ?\DateTime
+	{
+		return $this->deadline;
+	}
+
+	/**
+	 * @param \DateTime|null $deadline
+	 */
+	public function setDeadline(?\DateTime $deadline): void
+	{
+		$this->deadline = $deadline;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isDeadline(): bool
+	{
+		return isset($this->deadline)
+			&& $this->deadline == new \DateTime('today');
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isDeadlineOverdue(): bool
+	{
+		return isset($this->deadline)
+			&& $this->deadline < new \DateTime('today');
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
 	public function getAccomplished(): ?\DateTime
 	{
 		return $this->accomplished;
@@ -432,6 +468,7 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'password' => $this->password,
 				'note' => $this->note,
 				'confirmed' => $this->confirmed,
+				'deadline' => $this->deadline,
 				'accomplished' => $this->accomplished,
 				'closed' => $this->closed,
 				'cancelled' => $this->cancelled,
