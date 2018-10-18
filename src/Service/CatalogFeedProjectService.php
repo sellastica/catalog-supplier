@@ -51,4 +51,27 @@ class CatalogFeedProjectService
 		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogFeedProject::class)
 			->findBy($filter, $configuration);
 	}
+
+	/**
+	 * @param \Sellastica\Project\Entity\Project $project
+	 * @param \Sellastica\CatalogSupplier\Entity\CatalogFeed $feed
+	 * @param int $productCount
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedProject
+	 */
+	public function create(
+		\Sellastica\Project\Entity\Project $project,
+		\Sellastica\CatalogSupplier\Entity\CatalogFeed $feed,
+		int $productCount
+	): \Sellastica\CatalogSupplier\Entity\CatalogFeedProject
+	{
+		$feedProject = \Sellastica\CatalogSupplier\Entity\CatalogFeedProjectBuilder::create(
+			$project->getId(),
+			$feed->getSupplierId(),
+			$feed->getId(),
+			$productCount
+		)->build();
+		$this->em->persist($feedProject);
+
+		return $feedProject;
+	}
 }
