@@ -11,4 +11,5 @@ use Sellastica\CatalogSupplier\Entity\ICatalogSupplierRepository;
  */
 class CatalogSupplierRepository extends Repository implements ICatalogSupplierRepository
 {
+	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesRepository;
 }

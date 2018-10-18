@@ -7,6 +7,8 @@ namespace Sellastica\CatalogSupplier\Mapping;
  */
 class CatalogSupplierDao extends \Sellastica\Entity\Mapping\Dao
 {
+	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesDao;
+
 	/**
 	 * @inheritDoc
 	 */
@@ -16,7 +18,14 @@ class CatalogSupplierDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
-		$data->homepage = new \Nette\Http\Url($data->homepage);
+		if ($data->homepage) {
+			$data->homepage = new \Nette\Http\Url($data->homepage);
+		}
+
+		if ($data->email) {
+			$data->email = new \Sellastica\Identity\Model\Email($data->email);
+		}
+
 		return \Sellastica\CatalogSupplier\Entity\CatalogSupplierBuilder::create($data->title, $data->code)
 			->hydrate($data);
 	}

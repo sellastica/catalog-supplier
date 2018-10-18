@@ -16,7 +16,7 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	private $title;
 	/** @var string @required */
 	private $code;
-	/** @var \Nette\Http\Url @optional */
+	/** @var \Nette\Http\Url|null @optional */
 	private $homepage;
 	/** @var string|null @optional */
 	private $logo;
@@ -80,17 +80,17 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return \Nette\Http\Url
+	 * @return \Nette\Http\Url|null
 	 */
-	public function getHomepage(): \Nette\Http\Url
+	public function getHomepage(): ?\Nette\Http\Url
 	{
 		return $this->homepage;
 	}
 
 	/**
-	 * @param \Nette\Http\Url $homepage
+	 * @param \Nette\Http\Url|null $homepage
 	 */
-	public function setHomepage(\Nette\Http\Url $homepage): void
+	public function setHomepage(?\Nette\Http\Url $homepage): void
 	{
 		$this->homepage = $homepage;
 	}
@@ -226,7 +226,9 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 			[
 				'title' => $this->title,
 				'code' => $this->code,
-				'homepage' => $this->homepage->getAbsoluteUrl(),
+				'homepage' => $this->homepage
+					? $this->homepage->getAbsoluteUrl()
+				 	: null,
 				'logo' => $this->logo,
 				'company' => $this->company,
 				'email' => $this->getEmail(),

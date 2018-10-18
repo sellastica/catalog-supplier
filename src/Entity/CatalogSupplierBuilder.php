@@ -15,7 +15,7 @@ class CatalogSupplierBuilder implements IBuilder
 	private $title;
 	/** @var string */
 	private $code;
-	/** @var \Nette\Http\Url */
+	/** @var \Nette\Http\Url|null */
 	private $homepage;
 	/** @var string|null */
 	private $logo;
@@ -58,18 +58,18 @@ class CatalogSupplierBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \Nette\Http\Url
+	 * @return \Nette\Http\Url|null
 	 */
-	public function getHomepage(): \Nette\Http\Url
+	public function getHomepage()
 	{
 		return $this->homepage;
 	}
 
 	/**
-	 * @param \Nette\Http\Url $homepage
+	 * @param \Nette\Http\Url|null $homepage
 	 * @return $this
 	 */
-	public function homepage(\Nette\Http\Url $homepage)
+	public function homepage(\Nette\Http\Url $homepage = null)
 	{
 		$this->homepage = $homepage;
 		return $this;
