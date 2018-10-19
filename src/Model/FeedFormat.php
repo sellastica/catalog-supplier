@@ -35,6 +35,22 @@ class FeedFormat
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isXml(): bool
+	{
+		return $this->value === self::XML;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isCsv(): bool
+	{
+		return $this->value === self::CSV;
+	}
+
+	/**
 	 * @param string $format
 	 * @return FeedFormat
 	 */
