@@ -18,8 +18,6 @@ class CatalogFeedBuilder implements IBuilder
 	/** @var string */
 	private $url;
 	/** @var string */
-	private $itemXPath;
-	/** @var string */
 	private $converterClass;
 	/** @var \Sellastica\Localization\Model\Currency */
 	private $defaultCurrency;
@@ -31,6 +29,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $compression;
 	/** @var string|null */
 	private $uncompressedFilename;
+	/** @var string|null */
+	private $itemXPath;
 	/** @var \Sellastica\Localization\Model\Currency|null */
 	private $secondCurrency;
 	/** @var string|null */
@@ -60,7 +60,6 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param int $supplierId
 	 * @param \Sellastica\CatalogSupplier\Model\FeedType $type
 	 * @param string $url
-	 * @param string $itemXPath
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @param \Sellastica\Localization\Model\Country $defaultCountry
@@ -69,7 +68,6 @@ class CatalogFeedBuilder implements IBuilder
 		int $supplierId,
 		\Sellastica\CatalogSupplier\Model\FeedType $type,
 		string $url,
-		string $itemXPath,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
 		\Sellastica\Localization\Model\Country $defaultCountry
@@ -78,7 +76,6 @@ class CatalogFeedBuilder implements IBuilder
 		$this->supplierId = $supplierId;
 		$this->type = $type;
 		$this->url = $url;
-		$this->itemXPath = $itemXPath;
 		$this->converterClass = $converterClass;
 		$this->defaultCurrency = $defaultCurrency;
 		$this->defaultCountry = $defaultCountry;
@@ -106,14 +103,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function getUrl(): string
 	{
 		return $this->url;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getItemXPath(): string
-	{
-		return $this->itemXPath;
 	}
 
 	/**
@@ -191,6 +180,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function uncompressedFilename(string $uncompressedFilename = null)
 	{
 		$this->uncompressedFilename = $uncompressedFilename;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getItemXPath()
+	{
+		return $this->itemXPath;
+	}
+
+	/**
+	 * @param string|null $itemXPath
+	 * @return $this
+	 */
+	public function itemXPath(string $itemXPath = null)
+	{
+		$this->itemXPath = $itemXPath;
 		return $this;
 	}
 
@@ -430,7 +437,6 @@ class CatalogFeedBuilder implements IBuilder
 	 * @param int $supplierId
 	 * @param \Sellastica\CatalogSupplier\Model\FeedType $type
 	 * @param string $url
-	 * @param string $itemXPath
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @param \Sellastica\Localization\Model\Country $defaultCountry
@@ -440,12 +446,11 @@ class CatalogFeedBuilder implements IBuilder
 		int $supplierId,
 		\Sellastica\CatalogSupplier\Model\FeedType $type,
 		string $url,
-		string $itemXPath,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
 		\Sellastica\Localization\Model\Country $defaultCountry
 	): self
 	{
-		return new self($supplierId, $type, $url, $itemXPath, $converterClass, $defaultCurrency, $defaultCountry);
+		return new self($supplierId, $type, $url, $converterClass, $defaultCurrency, $defaultCountry);
 	}
 }

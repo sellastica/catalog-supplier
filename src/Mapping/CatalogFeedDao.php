@@ -42,7 +42,6 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 			$data->supplierId,
 			$data->type,
 			$data->url,
-			$data->itemXPath,
 			$data->converterClass,
 			$data->defaultCurrency,
 			$data->defaultCountry

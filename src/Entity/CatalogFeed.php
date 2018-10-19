@@ -28,7 +28,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $uncompressedFilename;
 	/** @var string @required */
 	private $url;
-	/** @var string @required */
+	/** @var string|null @optional */
 	private $itemXPath;
 	/** @var string @required */
 	private $converterClass;
@@ -146,17 +146,17 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return string
+	 * @return null|string
 	 */
-	public function getItemXPath(): string
+	public function getItemXPath(): ?string
 	{
 		return $this->itemXPath;
 	}
 
 	/**
-	 * @param string $itemXPath
+	 * @param null|string $itemXPath
 	 */
-	public function setItemXPath(string $itemXPath): void
+	public function setItemXPath(?string $itemXPath): void
 	{
 		$this->itemXPath = $itemXPath;
 	}
