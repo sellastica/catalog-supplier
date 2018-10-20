@@ -25,6 +25,8 @@ class CatalogSupplierBuilder implements IBuilder
 	private $email;
 	/** @var string|null */
 	private $phone;
+	/** @var string|null */
+	private $description;
 	/** @var bool */
 	private $visible = true;
 
@@ -144,6 +146,24 @@ class CatalogSupplierBuilder implements IBuilder
 	public function phone(string $phone = null)
 	{
 		$this->phone = $phone;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getDescription()
+	{
+		return $this->description;
+	}
+
+	/**
+	 * @param string|null $description
+	 * @return $this
+	 */
+	public function description(string $description = null)
+	{
+		$this->description = $description;
 		return $this;
 	}
 

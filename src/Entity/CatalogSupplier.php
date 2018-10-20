@@ -26,6 +26,8 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	private $email;
 	/** @var string|null @optional */
 	private $phone;
+	/** @var string|null @optional */
+	private $description;
 	/** @var bool @optional */
 	private $visible = true;
 
@@ -217,6 +219,22 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getDescription(): ?string
+	{
+		return $this->description;
+	}
+
+	/**
+	 * @param null|string $description
+	 */
+	public function setDescription(?string $description): void
+	{
+		$this->description = $description;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -233,6 +251,7 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 				'company' => $this->company,
 				'email' => $this->getEmail(),
 				'phone' => $this->phone,
+				'description' => $this->description,
 				'visible' => $this->visible,
 			]
 		);
