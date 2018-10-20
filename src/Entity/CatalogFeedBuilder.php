@@ -55,6 +55,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $hasUniqueIdentifier = true;
 	/** @var bool */
 	private $visible = true;
+	/** @var string|null */
+	private $overrideScheme;
 
 	/**
 	 * @param int $supplierId
@@ -414,6 +416,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function visible(bool $visible = true)
 	{
 		$this->visible = $visible;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getOverrideScheme()
+	{
+		return $this->overrideScheme;
+	}
+
+	/**
+	 * @param string|null $overrideScheme
+	 * @return $this
+	 */
+	public function overrideScheme(string $overrideScheme = null)
+	{
+		$this->overrideScheme = $overrideScheme;
 		return $this;
 	}
 

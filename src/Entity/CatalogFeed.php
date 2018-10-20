@@ -60,6 +60,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $hasUniqueIdentifier = true;
 	/** @var bool @optional */
 	private $visible = true;
+	/** @var string|null @optional */
+	private $overrideScheme;
 
 
 	/**
@@ -468,6 +470,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getOverrideScheme(): ?string
+	{
+		return $this->overrideScheme;
+	}
+
+	/**
+	 * @param null|string $overrideScheme
+	 */
+	public function setOverrideScheme(?string $overrideScheme): void
+	{
+		$this->overrideScheme = $overrideScheme;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -497,6 +515,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'compression' => $this->compression->getValue(),
 				'uncompressedFilename' => $this->uncompressedFilename,
 				'timeout' => $this->timeout,
+				'overrideScheme' => $this->overrideScheme,
 			]
 		);
 	}
