@@ -51,6 +51,8 @@ class SupplierInquiryBuilder implements IBuilder
 	private $feedId;
 	/** @var \Sellastica\CatalogSupplier\Model\InquiryStatus */
 	private $status;
+	/** @var float|null */
+	private $price;
 
 	/**
 	 * @param \Sellastica\Identity\Model\Contact $contact
@@ -402,6 +404,24 @@ class SupplierInquiryBuilder implements IBuilder
 	public function status(\Sellastica\CatalogSupplier\Model\InquiryStatus $status)
 	{
 		$this->status = $status;
+		return $this;
+	}
+
+	/**
+	 * @return float|null
+	 */
+	public function getPrice()
+	{
+		return $this->price;
+	}
+
+	/**
+	 * @param float|null $price
+	 * @return $this
+	 */
+	public function price(float $price = null)
+	{
+		$this->price = $price;
 		return $this;
 	}
 

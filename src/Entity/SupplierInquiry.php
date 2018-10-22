@@ -52,6 +52,9 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	private $feedId;
 	/** @var \Sellastica\CatalogSupplier\Model\InquiryStatus @optional */
 	private $status;
+	/** @var float|null @optional */
+	private $price;
+
 
 	/**
 	 * @param SupplierInquiryBuilder $builder
@@ -449,6 +452,22 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return float|null
+	 */
+	public function getPrice(): ?float
+	{
+		return $this->price;
+	}
+
+	/**
+	 * @param float|null $price
+	 */
+	public function setPrice(?float $price): void
+	{
+		$this->price = $price;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -476,6 +495,7 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'supplierId' => $this->supplierId,
 				'feedId' => $this->feedId,
 				'status' => $this->status->getValue(),
+				'price' => $this->price,
 			]
 		);
 	}
