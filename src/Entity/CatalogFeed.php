@@ -486,6 +486,14 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return CatalogFeedRuleCollection|CatalogFeedRule[]
+	 */
+	public function getRules(): CatalogFeedRuleCollection
+	{
+		return $this->relationService->getRules();
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
