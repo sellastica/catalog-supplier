@@ -32,7 +32,6 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	private $visible = true;
 
 
-
 	/**
 	 * @param CatalogSupplierBuilder $builder
 	 */

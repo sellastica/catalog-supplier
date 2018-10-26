@@ -82,13 +82,4 @@ class CatalogFeedService
 		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogFeed::class)
 			->findBy($filter, $configuration);
 	}
-
-	/**
-	 * @param array $hosts
-	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection|\Sellastica\CatalogSupplier\Entity\CatalogFeed[]
-	 */
-	public function findByHosts(array $hosts): \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
-	{
-		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogFeed::class)->findByHosts($hosts);
-	}
 }
