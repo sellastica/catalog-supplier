@@ -26,6 +26,14 @@ class CatalogSupplierProxy extends \Sellastica\Twig\Model\ProxyEntity
 	/**
 	 * @return string
 	 */
+	public function getDescription(): string
+	{
+		return $this->parent->getDescription();
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getCode(): string
 	{
 		return $this->parent->getCode();
@@ -88,6 +96,7 @@ class CatalogSupplierProxy extends \Sellastica\Twig\Model\ProxyEntity
 		return [
 			'code',
 			'company',
+			'description',
 			'email',
 			'homepage',
 			'id',

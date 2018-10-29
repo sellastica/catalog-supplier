@@ -17,6 +17,16 @@ class CatalogSupplierDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	}
 
 	/**
+	 * @param \Sellastica\Entity\Configuration $configuration
+	 * @return \Dibi\Fluent
+	 */
+	protected function getPublishableResource(\Sellastica\Entity\Configuration $configuration = NULL)
+	{
+		return parent::getResource($configuration)
+			->where('visible = 1');
+	}
+
+	/**
 	 * @param bool $databaseName
 	 * @return string
 	 */

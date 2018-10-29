@@ -52,7 +52,7 @@ class CatalogSuppliers extends \Sellastica\Twig\Model\TwigObject
 		$suppliers = new \Sellastica\Twig\Model\ArrayProxy();
 		/** @var \Sellastica\CatalogSupplier\Entity\CatalogSupplier $supplier */
 		foreach ($this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogSupplier::class)
-					 ->findAll(\Sellastica\Entity\Configuration::sortBy('title')) as $supplier) {
+					 ->findAllPublishable(\Sellastica\Entity\Configuration::sortBy('title')) as $supplier) {
 			$suppliers[] = $supplier->toProxy();
 		}
 
@@ -67,7 +67,7 @@ class CatalogSuppliers extends \Sellastica\Twig\Model\TwigObject
 		$suppliers = new \Sellastica\Twig\Model\ArrayProxy();
 		/** @var \Sellastica\CatalogSupplier\Entity\CatalogSupplier $supplier */
 		foreach ($this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogSupplier::class)
-					 ->findAll(\Sellastica\Entity\Configuration::sortBy('RAND()')) as $supplier) {
+					 ->findAllPublishable(\Sellastica\Entity\Configuration::sortBy('RAND()')) as $supplier) {
 			$suppliers[] = $supplier->toProxy();
 		}
 

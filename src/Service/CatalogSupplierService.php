@@ -25,6 +25,15 @@ class CatalogSupplierService
 	}
 
 	/**
+	 * @param array $filter
+	 * @return null|\Sellastica\CatalogSupplier\Entity\CatalogSupplier
+	 */
+	public function findOneBy(array $filter): ?\Sellastica\CatalogSupplier\Entity\CatalogSupplier
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogSupplier::class)->findOneBy($filter);
+	}
+
+	/**
 	 * @param \Sellastica\Entity\Configuration|null $configuration
 	 * @return \Sellastica\Entity\Entity\EntityCollection|\Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection|\Sellastica\CatalogSupplier\Entity\CatalogSupplier[]
 	 */
