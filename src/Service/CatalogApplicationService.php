@@ -3,6 +3,10 @@ namespace Sellastica\CatalogSupplier\Service;
 
 class CatalogApplicationService
 {
+	const
+		UPDATE_STOCK = 'update_stock',
+		ORDERS = 'orders';
+
 	/** @var \Sellastica\Entity\EntityManager */
 	private $em;
 	/** @var \Nette\Localization\ITranslator */
@@ -29,6 +33,26 @@ class CatalogApplicationService
 	public function find(int $id): ?\Sellastica\CatalogSupplier\Entity\CatalogApplication
 	{
 		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogApplication::class)->find($id);
+	}
+
+	/**
+	 * @param string $code
+	 * @return null|\Sellastica\CatalogSupplier\Entity\CatalogApplication
+	 */
+	public function findOneByCode(string $code): ?\Sellastica\CatalogSupplier\Entity\CatalogApplication
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogApplication::class)->findOneBy([
+			'code' => $code,
+		]);
+	}
+
+	/**
+	 * @param array $filter
+	 * @return null|\Sellastica\CatalogSupplier\Entity\CatalogApplication
+	 */
+	public function findOneBy(array $filter): ?\Sellastica\CatalogSupplier\Entity\CatalogApplication
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogApplication::class)->findOneBy($filter);
 	}
 
 	/**

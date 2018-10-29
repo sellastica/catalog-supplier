@@ -12,6 +12,8 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 
 	/** @var string @required */
 	private $title;
+	/** @var string @required */
+	private $code;
 	/** @var string|null @optional */
 	private $perex;
 	/** @var string|null @optional */
@@ -50,6 +52,22 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setTitle(string $title): void
 	{
 		$this->title = $title;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCode(): string
+	{
+		return $this->code;
+	}
+
+	/**
+	 * @param string $code
+	 */
+	public function setCode(string $code): void
+	{
+		$this->code = $code;
 	}
 
 	/**
@@ -109,6 +127,7 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 			$this->parentToArray(),
 			[
 				'title' => $this->title,
+				'code' => $this->code,
 				'perex' => $this->perex,
 				'description' => $this->description,
 				'visible' => $this->visible,

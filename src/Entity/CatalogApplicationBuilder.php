@@ -13,6 +13,8 @@ class CatalogApplicationBuilder implements IBuilder
 
 	/** @var string */
 	private $title;
+	/** @var string */
+	private $code;
 	/** @var string|null */
 	private $perex;
 	/** @var string|null */
@@ -22,10 +24,15 @@ class CatalogApplicationBuilder implements IBuilder
 
 	/**
 	 * @param string $title
+	 * @param string $code
 	 */
-	public function __construct(string $title)
+	public function __construct(
+		string $title,
+		string $code
+	)
 	{
 		$this->title = $title;
+		$this->code = $code;
 	}
 
 	/**
@@ -34,6 +41,14 @@ class CatalogApplicationBuilder implements IBuilder
 	public function getTitle(): string
 	{
 		return $this->title;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCode(): string
+	{
+		return $this->code;
 	}
 
 	/**
@@ -108,10 +123,14 @@ class CatalogApplicationBuilder implements IBuilder
 
 	/**
 	 * @param string $title
+	 * @param string $code
 	 * @return self
 	 */
-	public static function create(string $title): self
+	public static function create(
+		string $title,
+		string $code
+	): self
 	{
-		return new self($title);
+		return new self($title, $code);
 	}
 }
