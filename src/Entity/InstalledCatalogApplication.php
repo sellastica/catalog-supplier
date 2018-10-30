@@ -107,6 +107,29 @@ class InstalledCatalogApplication extends \Sellastica\Entity\Entity\AbstractEnti
 	}
 
 	/**
+	 * @param $name
+	 * @param $default
+	 * @return mixed|null
+	 */
+	public function getOption($name, $default = null)
+	{
+		return $this->options[$name] ?? $default;
+	}
+
+	/**
+	 * @param $name
+	 * @param $value
+	 */
+	public function setOption($name, $value): void
+	{
+		if (isset($value)) {
+			$this->options[$name] = $value;
+		} else {
+			unset($this->options[$name]);
+		}
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
