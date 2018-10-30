@@ -19,6 +19,8 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var string|null @optional */
 	private $description;
 	/** @var bool @optional */
+	private $shoptet = false;
+	/** @var bool @optional */
 	private $visible = true;
 
 
@@ -105,6 +107,22 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return bool
 	 */
+	public function isShoptet(): bool
+	{
+		return $this->shoptet;
+	}
+
+	/**
+	 * @param bool $shoptet
+	 */
+	public function setShoptet(bool $shoptet): void
+	{
+		$this->shoptet = $shoptet;
+	}
+
+	/**
+	 * @return bool
+	 */
 	public function isVisible(): bool
 	{
 		return $this->visible;
@@ -130,6 +148,7 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 				'code' => $this->code,
 				'perex' => $this->perex,
 				'description' => $this->description,
+				'shoptet' => $this->shoptet,
 				'visible' => $this->visible,
 			]
 		);

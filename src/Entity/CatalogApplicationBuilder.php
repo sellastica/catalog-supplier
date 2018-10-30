@@ -20,6 +20,8 @@ class CatalogApplicationBuilder implements IBuilder
 	/** @var string|null */
 	private $description;
 	/** @var bool */
+	private $shoptet = false;
+	/** @var bool */
 	private $visible = true;
 
 	/**
@@ -84,6 +86,24 @@ class CatalogApplicationBuilder implements IBuilder
 	public function description(string $description = null)
 	{
 		$this->description = $description;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getShoptet(): bool
+	{
+		return $this->shoptet;
+	}
+
+	/**
+	 * @param bool $shoptet
+	 * @return $this
+	 */
+	public function shoptet(bool $shoptet)
+	{
+		$this->shoptet = $shoptet;
 		return $this;
 	}
 
