@@ -5,7 +5,8 @@ class CatalogApplicationService
 {
 	const
 		UPDATE_STOCK = 'update_stock',
-		ORDERS = 'orders';
+		ORDERS = 'orders',
+		CNB = 'cnb';
 
 	/** @var \Sellastica\Entity\EntityManager */
 	private $em;
