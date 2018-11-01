@@ -24,9 +24,9 @@ class CatalogSupplierProxy extends \Sellastica\Twig\Model\ProxyEntity
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getDescription(): string
+	public function getDescription(): ?string
 	{
 		return $this->parent->getDescription();
 	}
