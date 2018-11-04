@@ -105,6 +105,14 @@ class InquiryStatus
 	/**
 	 * @return InquiryStatus
 	 */
+	public static function accomplished(): InquiryStatus
+	{
+		return new self(self::ACCOMPLISHED);
+	}
+
+	/**
+	 * @return InquiryStatus
+	 */
 	public static function closed(): InquiryStatus
 	{
 		return new self(self::CLOSED);
