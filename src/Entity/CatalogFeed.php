@@ -30,6 +30,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $url;
 	/** @var string|null @optional */
 	private $itemXPath;
+	/** @var string|null @optional */
+	private $secondaryXPath;
 	/** @var string @required */
 	private $converterClass;
 	/** @var \Sellastica\Localization\Model\Currency @required */
@@ -161,6 +163,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setItemXPath(?string $itemXPath): void
 	{
 		$this->itemXPath = $itemXPath;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getSecondaryXPath(): ?string
+	{
+		return $this->secondaryXPath;
+	}
+
+	/**
+	 * @param null|string $secondaryXPath
+	 */
+	public function setSecondaryXPath(?string $secondaryXPath): void
+	{
+		$this->secondaryXPath = $secondaryXPath;
 	}
 
 	/**
@@ -505,6 +523,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'updateOnly' => $this->updateOnly,
 				'url' => $this->url,
 				'itemXPath' => $this->itemXPath,
+				'secondaryXPath' => $this->secondaryXPath,
 				'converterClass' => $this->converterClass,
 				'defaultCurrency' => $this->defaultCurrency->getCode(),
 				'defaultCountry' => $this->defaultCountry->getCode(),

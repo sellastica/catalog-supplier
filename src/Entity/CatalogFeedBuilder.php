@@ -31,6 +31,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $uncompressedFilename;
 	/** @var string|null */
 	private $itemXPath;
+	/** @var string|null */
+	private $secondaryXPath;
 	/** @var \Sellastica\Localization\Model\Currency|null */
 	private $secondCurrency;
 	/** @var string|null */
@@ -207,6 +209,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function itemXPath(string $itemXPath = null)
 	{
 		$this->itemXPath = $itemXPath;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getSecondaryXPath()
+	{
+		return $this->secondaryXPath;
+	}
+
+	/**
+	 * @param string|null $secondaryXPath
+	 * @return $this
+	 */
+	public function secondaryXPath(string $secondaryXPath = null)
+	{
+		$this->secondaryXPath = $secondaryXPath;
 		return $this;
 	}
 
