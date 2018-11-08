@@ -18,8 +18,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 
 	/** @var int @required */
 	private $supplierId;
-	/** @var \Sellastica\CatalogSupplier\Model\FeedType @required */
-	private $type;
+	/** @var bool @optional */
+	private $updateOnly = false;
 	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat @optional */
 	private $feedFormat;
 	/** @var \Sellastica\CatalogSupplier\Model\Compression @optional */
@@ -108,19 +108,19 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return \Sellastica\CatalogSupplier\Model\FeedType
+	 * @return bool
 	 */
-	public function getType(): \Sellastica\CatalogSupplier\Model\FeedType
+	public function isUpdateOnly(): bool
 	{
-		return $this->type;
+		return $this->updateOnly;
 	}
 
 	/**
-	 * @param \Sellastica\CatalogSupplier\Model\FeedType $type
+	 * @param bool $updateOnly
 	 */
-	public function setType(\Sellastica\CatalogSupplier\Model\FeedType $type): void
+	public function setUpdateOnly(bool $updateOnly): void
 	{
-		$this->type = $type;
+		$this->updateOnly = $updateOnly;
 	}
 
 	/**
@@ -502,7 +502,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 			$this->parentToArray(),
 			[
 				'supplierId' => $this->supplierId,
-				'type' => $this->type->getValue(),
+				'updateOnly' => $this->updateOnly,
 				'url' => $this->url,
 				'itemXPath' => $this->itemXPath,
 				'converterClass' => $this->converterClass,

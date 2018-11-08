@@ -13,8 +13,6 @@ class CatalogFeedBuilder implements IBuilder
 
 	/** @var int */
 	private $supplierId;
-	/** @var \Sellastica\CatalogSupplier\Model\FeedType */
-	private $type;
 	/** @var string */
 	private $url;
 	/** @var string */
@@ -23,6 +21,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $defaultCurrency;
 	/** @var \Sellastica\Localization\Model\Country */
 	private $defaultCountry;
+	/** @var bool */
+	private $updateOnly = false;
 	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat */
 	private $feedFormat;
 	/** @var \Sellastica\CatalogSupplier\Model\Compression */
@@ -60,7 +60,6 @@ class CatalogFeedBuilder implements IBuilder
 
 	/**
 	 * @param int $supplierId
-	 * @param \Sellastica\CatalogSupplier\Model\FeedType $type
 	 * @param string $url
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
@@ -68,7 +67,6 @@ class CatalogFeedBuilder implements IBuilder
 	 */
 	public function __construct(
 		int $supplierId,
-		\Sellastica\CatalogSupplier\Model\FeedType $type,
 		string $url,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
@@ -76,7 +74,6 @@ class CatalogFeedBuilder implements IBuilder
 	)
 	{
 		$this->supplierId = $supplierId;
-		$this->type = $type;
 		$this->url = $url;
 		$this->converterClass = $converterClass;
 		$this->defaultCurrency = $defaultCurrency;
@@ -89,14 +86,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function getSupplierId(): int
 	{
 		return $this->supplierId;
-	}
-
-	/**
-	 * @return \Sellastica\CatalogSupplier\Model\FeedType
-	 */
-	public function getType(): \Sellastica\CatalogSupplier\Model\FeedType
-	{
-		return $this->type;
 	}
 
 	/**
@@ -129,6 +118,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function getDefaultCountry(): \Sellastica\Localization\Model\Country
 	{
 		return $this->defaultCountry;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getUpdateOnly(): bool
+	{
+		return $this->updateOnly;
+	}
+
+	/**
+	 * @param bool $updateOnly
+	 * @return $this
+	 */
+	public function updateOnly(bool $updateOnly)
+	{
+		$this->updateOnly = $updateOnly;
+		return $this;
 	}
 
 	/**
@@ -455,7 +462,6 @@ class CatalogFeedBuilder implements IBuilder
 
 	/**
 	 * @param int $supplierId
-	 * @param \Sellastica\CatalogSupplier\Model\FeedType $type
 	 * @param string $url
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
@@ -464,13 +470,12 @@ class CatalogFeedBuilder implements IBuilder
 	 */
 	public static function create(
 		int $supplierId,
-		\Sellastica\CatalogSupplier\Model\FeedType $type,
 		string $url,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
 		\Sellastica\Localization\Model\Country $defaultCountry
 	): self
 	{
-		return new self($supplierId, $type, $url, $converterClass, $defaultCurrency, $defaultCountry);
+		return new self($supplierId, $url, $converterClass, $defaultCurrency, $defaultCountry);
 	}
 }

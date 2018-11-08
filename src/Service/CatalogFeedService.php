@@ -66,7 +66,7 @@ class CatalogFeedService
 		\Sellastica\Entity\Configuration $configuration = null
 	): \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
 	{
-		return $this->findBy(['visible' => true], $configuration);
+		return $this->findBy(['visible' => true, 'updateOnly' => false], $configuration);
 	}
 
 	/**

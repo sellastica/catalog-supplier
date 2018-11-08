@@ -31,7 +31,6 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		$data->stream = \Sellastica\CatalogSupplier\Model\Stream::from($data->stream);
 		$data->compression = \Sellastica\CatalogSupplier\Model\Compression::from($data->compression);
 		$data->feedFormat = \Sellastica\CatalogSupplier\Model\FeedFormat::from($data->feedFormat);
-		$data->type = \Sellastica\CatalogSupplier\Model\FeedType::from($data->type);
 		$data->defaultCurrency = \Sellastica\Localization\Model\Currency::from($data->defaultCurrency);
 		$data->defaultCountry = \Sellastica\Localization\Model\Country::from($data->defaultCountry);
 		if ($data->secondCurrency) {
@@ -40,7 +39,6 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 
 		return \Sellastica\CatalogSupplier\Entity\CatalogFeedBuilder::create(
 			$data->supplierId,
-			$data->type,
 			$data->url,
 			$data->converterClass,
 			$data->defaultCurrency,
