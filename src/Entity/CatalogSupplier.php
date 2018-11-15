@@ -234,6 +234,16 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function areDataComplete(): bool
+	{
+		return $this->company
+			&& $this->homepage
+			&& $this->description;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
