@@ -38,6 +38,8 @@ class CatalogFeedBuilder implements IBuilder
 	/** @var string|null */
 	private $schemaFilename;
 	/** @var string|null */
+	private $csvDelimiter;
+	/** @var string|null */
 	private $login;
 	/** @var string|null */
 	private $password;
@@ -263,6 +265,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function schemaFilename(string $schemaFilename = null)
 	{
 		$this->schemaFilename = $schemaFilename;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCsvDelimiter()
+	{
+		return $this->csvDelimiter;
+	}
+
+	/**
+	 * @param string|null $csvDelimiter
+	 * @return $this
+	 */
+	public function csvDelimiter(string $csvDelimiter = null)
+	{
+		$this->csvDelimiter = $csvDelimiter;
 		return $this;
 	}
 

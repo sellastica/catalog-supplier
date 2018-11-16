@@ -43,6 +43,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var string|null @optional */
 	private $schemaFilename;
 	/** @var string|null @optional */
+	private $csvDelimiter;
+	/** @var string|null @optional */
 	private $login;
 	/** @var string|null @optional */
 	private $password;
@@ -512,6 +514,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getCsvDelimiter(): ?string
+	{
+		return $this->csvDelimiter;
+	}
+
+	/**
+	 * @param null|string $csvDelimiter
+	 */
+	public function setCsvDelimiter(?string $csvDelimiter): void
+	{
+		$this->csvDelimiter = $csvDelimiter;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -543,6 +561,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'uncompressedFilename' => $this->uncompressedFilename,
 				'timeout' => $this->timeout,
 				'overrideScheme' => $this->overrideScheme,
+				'csvDelimiter' => $this->csvDelimiter,
 			]
 		);
 	}
