@@ -19,6 +19,8 @@ class CatalogFeedProjectBuilder implements IBuilder
 	private $feedId;
 	/** @var int */
 	private $productsCount;
+	/** @var bool */
+	private $supplierDownload = false;
 
 	/**
 	 * @param int $projectId
@@ -69,6 +71,24 @@ class CatalogFeedProjectBuilder implements IBuilder
 	public function getProductsCount(): int
 	{
 		return $this->productsCount;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getSupplierDownload(): bool
+	{
+		return $this->supplierDownload;
+	}
+
+	/**
+	 * @param bool $supplierDownload
+	 * @return $this
+	 */
+	public function supplierDownload(bool $supplierDownload)
+	{
+		$this->supplierDownload = $supplierDownload;
+		return $this;
 	}
 
 	/**
