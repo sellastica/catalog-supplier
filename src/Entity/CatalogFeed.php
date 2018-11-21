@@ -66,6 +66,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $visible = true;
 	/** @var string|null @optional */
 	private $overrideScheme;
+	/** @var int @optional */
+	private $period = 7200;
 
 
 	/**
@@ -530,6 +532,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getPeriod(): int
+	{
+		return $this->period;
+	}
+
+	/**
+	 * @param int $period
+	 */
+	public function setPeriod(int $period): void
+	{
+		$this->period = $period;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -562,6 +580,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'timeout' => $this->timeout,
 				'overrideScheme' => $this->overrideScheme,
 				'csvDelimiter' => $this->csvDelimiter,
+				'period' => $this->period,
 			]
 		);
 	}

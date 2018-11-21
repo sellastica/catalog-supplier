@@ -61,6 +61,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $visible = true;
 	/** @var string|null */
 	private $overrideScheme;
+	/** @var int */
+	private $period = 7200;
 
 	/**
 	 * @param int $supplierId
@@ -481,6 +483,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function overrideScheme(string $overrideScheme = null)
 	{
 		$this->overrideScheme = $overrideScheme;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getPeriod(): int
+	{
+		return $this->period;
+	}
+
+	/**
+	 * @param int $period
+	 * @return $this
+	 */
+	public function period(int $period = 7200)
+	{
+		$this->period = $period;
 		return $this;
 	}
 
