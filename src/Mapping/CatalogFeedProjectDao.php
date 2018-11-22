@@ -18,9 +18,8 @@ class CatalogFeedProjectDao extends \Sellastica\Entity\Mapping\Dao
 	{
 		return \Sellastica\CatalogSupplier\Entity\CatalogFeedProjectBuilder::create(
 			$data->projectId,
-			$data->supplierId,
-			$data->feedId,
-			$data->productsCount
+			$data->productsCount,
+			$data->supplierDownload
 		)->hydrate($data);
 	}
 

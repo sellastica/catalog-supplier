@@ -54,21 +54,20 @@ class CatalogFeedProjectService
 
 	/**
 	 * @param \Sellastica\Project\Entity\Project $project
-	 * @param \Sellastica\CatalogSupplier\Entity\CatalogFeed $feed
 	 * @param int $productCount
+	 * @param bool $supplierDownload
 	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedProject
 	 */
 	public function create(
 		\Sellastica\Project\Entity\Project $project,
-		\Sellastica\CatalogSupplier\Entity\CatalogFeed $feed,
-		int $productCount
+		int $productCount,
+		bool $supplierDownload
 	): \Sellastica\CatalogSupplier\Entity\CatalogFeedProject
 	{
 		$feedProject = \Sellastica\CatalogSupplier\Entity\CatalogFeedProjectBuilder::create(
 			$project->getId(),
-			$feed->getSupplierId(),
-			$feed->getId(),
-			$productCount
+			$productCount,
+			$supplierDownload
 		)->build();
 		$this->em->persist($feedProject);
 

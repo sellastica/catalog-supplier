@@ -14,33 +14,30 @@ class CatalogFeedProjectBuilder implements IBuilder
 	/** @var int */
 	private $projectId;
 	/** @var int */
-	private $supplierId;
-	/** @var int */
-	private $feedId;
-	/** @var int */
 	private $productsCount;
+	/** @var bool */
+	private $supplierDownload;
+	/** @var int|null */
+	private $supplierId;
+	/** @var int|null */
+	private $feedId;
 	/** @var string|null */
 	private $url;
-	/** @var bool */
-	private $supplierDownload = false;
 
 	/**
 	 * @param int $projectId
-	 * @param int $supplierId
-	 * @param int $feedId
 	 * @param int $productsCount
+	 * @param bool $supplierDownload
 	 */
 	public function __construct(
 		int $projectId,
-		int $supplierId,
-		int $feedId,
-		int $productsCount
+		int $productsCount,
+		bool $supplierDownload
 	)
 	{
 		$this->projectId = $projectId;
-		$this->supplierId = $supplierId;
-		$this->feedId = $feedId;
 		$this->productsCount = $productsCount;
+		$this->supplierDownload = $supplierDownload;
 	}
 
 	/**
@@ -54,25 +51,53 @@ class CatalogFeedProjectBuilder implements IBuilder
 	/**
 	 * @return int
 	 */
-	public function getSupplierId(): int
+	public function getProductsCount(): int
+	{
+		return $this->productsCount;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getSupplierDownload(): bool
+	{
+		return $this->supplierDownload;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getSupplierId()
 	{
 		return $this->supplierId;
 	}
 
 	/**
-	 * @return int
+	 * @param int|null $supplierId
+	 * @return $this
 	 */
-	public function getFeedId(): int
+	public function supplierId(int $supplierId = null)
+	{
+		$this->supplierId = $supplierId;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getFeedId()
 	{
 		return $this->feedId;
 	}
 
 	/**
-	 * @return int
+	 * @param int|null $feedId
+	 * @return $this
 	 */
-	public function getProductsCount(): int
+	public function feedId(int $feedId = null)
 	{
-		return $this->productsCount;
+		$this->feedId = $feedId;
+		return $this;
 	}
 
 	/**
@@ -96,24 +121,6 @@ class CatalogFeedProjectBuilder implements IBuilder
 	/**
 	 * @return bool
 	 */
-	public function getSupplierDownload(): bool
-	{
-		return $this->supplierDownload;
-	}
-
-	/**
-	 * @param bool $supplierDownload
-	 * @return $this
-	 */
-	public function supplierDownload(bool $supplierDownload)
-	{
-		$this->supplierDownload = $supplierDownload;
-		return $this;
-	}
-
-	/**
-	 * @return bool
-	 */
 	public function generateId(): bool
 	{
 		return !CatalogFeedProject::isIdGeneratedByStorage();
@@ -129,18 +136,16 @@ class CatalogFeedProjectBuilder implements IBuilder
 
 	/**
 	 * @param int $projectId
-	 * @param int $supplierId
-	 * @param int $feedId
 	 * @param int $productsCount
+	 * @param bool $supplierDownload
 	 * @return self
 	 */
 	public static function create(
 		int $projectId,
-		int $supplierId,
-		int $feedId,
-		int $productsCount
+		int $productsCount,
+		bool $supplierDownload
 	): self
 	{
-		return new self($projectId, $supplierId, $feedId, $productsCount);
+		return new self($projectId, $productsCount, $supplierDownload);
 	}
 }

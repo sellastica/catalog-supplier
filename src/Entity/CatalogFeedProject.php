@@ -15,15 +15,15 @@ class CatalogFeedProject extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var int @required */
 	private $projectId;
 	/** @var int @required */
-	private $supplierId;
-	/** @var int @required */
-	private $feedId;
-	/** @var int @required */
 	private $productsCount;
+	/** @var bool @required */
+	private $supplierDownload;
+	/** @var int|null @optional */
+	private $supplierId;
+	/** @var int|null @optional */
+	private $feedId;
 	/** @var string|null @optional */
 	private $url;
-	/** @var bool @optional */
-	private $supplierDownload = false;
 
 
 	/**
@@ -67,51 +67,51 @@ class CatalogFeedProject extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return int
+	 * @return int|null
 	 */
-	public function getSupplierId(): int
+	public function getSupplierId(): ?int
 	{
 		return $this->supplierId;
 	}
 
 	/**
-	 * @param int $supplierId
+	 * @param int|null $supplierId
 	 */
-	public function setSupplierId(int $supplierId): void
+	public function setSupplierId(?int $supplierId): void
 	{
 		$this->supplierId = $supplierId;
 	}
 
 	/**
-	 * @return CatalogSupplier
+	 * @return CatalogSupplier|null
 	 */
-	public function getSupplier(): CatalogSupplier
+	public function getSupplier(): ?CatalogSupplier
 	{
-		return $this->relationService->getSupplier();
+		return $this->supplierId ? $this->relationService->getSupplier() : null;
 	}
 
 	/**
-	 * @return int
+	 * @return int|null
 	 */
-	public function getFeedId(): int
+	public function getFeedId(): ?int
 	{
 		return $this->feedId;
 	}
 
 	/**
-	 * @param int $feedId
+	 * @param int|null $feedId
 	 */
-	public function setFeedId(int $feedId): void
+	public function setFeedId(?int $feedId): void
 	{
 		$this->feedId = $feedId;
 	}
 
 	/**
-	 * @return CatalogFeed
+	 * @return CatalogFeed|null
 	 */
-	public function getFeed(): CatalogFeed
+	public function getFeed(): ?CatalogFeed
 	{
-		return $this->relationService->getFeed();
+		return $this->feedId ? $this->relationService->getFeed() : null;
 	}
 
 	/**
