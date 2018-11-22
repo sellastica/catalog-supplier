@@ -20,6 +20,8 @@ class CatalogFeedProject extends \Sellastica\Entity\Entity\AbstractEntity
 	private $feedId;
 	/** @var int @required */
 	private $productsCount;
+	/** @var string|null @optional */
+	private $url;
 	/** @var bool @optional */
 	private $supplierDownload = false;
 
@@ -145,6 +147,22 @@ class CatalogFeedProject extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getUrl(): ?string
+	{
+		return $this->url;
+	}
+
+	/**
+	 * @param null|string $url
+	 */
+	public function setUrl(?string $url): void
+	{
+		$this->url = $url;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -157,6 +175,7 @@ class CatalogFeedProject extends \Sellastica\Entity\Entity\AbstractEntity
 				'feedId' => $this->feedId,
 				'productsCount' => $this->productsCount,
 				'supplierDownload' => $this->supplierDownload,
+				'url' => $this->url,
 			]
 		);
 	}
