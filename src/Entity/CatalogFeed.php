@@ -68,6 +68,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $overrideScheme;
 	/** @var int @optional */
 	private $period = 7200;
+	/** @var bool @optional */
+	private $saveSourceData = true;
 
 
 	/**
@@ -548,6 +550,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isSaveSourceData(): bool
+	{
+		return $this->saveSourceData;
+	}
+
+	/**
+	 * @param bool $saveSourceData
+	 */
+	public function setSaveSourceData(bool $saveSourceData): void
+	{
+		$this->saveSourceData = $saveSourceData;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -581,6 +599,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'overrideScheme' => $this->overrideScheme,
 				'csvDelimiter' => $this->csvDelimiter,
 				'period' => $this->period,
+				'saveSourceData' => $this->saveSourceData,
 			]
 		);
 	}

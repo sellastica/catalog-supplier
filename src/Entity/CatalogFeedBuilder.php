@@ -63,6 +63,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $overrideScheme;
 	/** @var int */
 	private $period = 7200;
+	/** @var bool */
+	private $saveSourceData = true;
 
 	/**
 	 * @param int $supplierId
@@ -501,6 +503,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function period(int $period = 7200)
 	{
 		$this->period = $period;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getSaveSourceData(): bool
+	{
+		return $this->saveSourceData;
+	}
+
+	/**
+	 * @param bool $saveSourceData
+	 * @return $this
+	 */
+	public function saveSourceData(bool $saveSourceData = true)
+	{
+		$this->saveSourceData = $saveSourceData;
 		return $this;
 	}
 
