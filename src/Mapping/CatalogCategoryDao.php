@@ -8,6 +8,15 @@ namespace Sellastica\CatalogSupplier\Mapping;
 class CatalogCategoryDao extends \Sellastica\Entity\Mapping\Dao
 {
 	/**
+	 * @param int $supplierId
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogCategoryCollection
+	 */
+	public function findCategories(int $supplierId): \Sellastica\CatalogSupplier\Entity\CatalogCategoryCollection
+	{
+		return $this->getEntitiesFromCacheOrStorage($this->mapper->findCategories($supplierId));
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	protected function getBuilder(

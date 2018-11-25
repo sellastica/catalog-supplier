@@ -31,4 +31,12 @@ class CatalogSupplierRelations implements \Sellastica\Entity\Relation\IEntityRel
 			'supplierId' => $this->catalogSupplier->getId(),
 		]);
 	}
+
+	/**
+	 * @return CatalogCategoryCollection
+	 */
+	public function getCategories(): CatalogCategoryCollection
+	{
+		return $this->em->getRepository(CatalogCategory::class)->findCategories($this->catalogSupplier->getId());
+	}
 }

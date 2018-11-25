@@ -1,27 +1,27 @@
 <?php
-namespace Supplierlication\Entity;
+namespace Sellastica\CatalogSupplier\Entity;
 
 use Sellastica\Entity\Entity\IEntity;
 use Sellastica\Entity\Relation\ManyToManyRelation;
 
 class SupplierCategoryRelation extends ManyToManyRelation
 {
-	/** @var \Sellastica\CatalogSupplier\Entity\CatalogSupplier */
+	/** @var CatalogSupplier */
 	private $supplier;
-	/** @var \Sellastica\CatalogSupplier\Entity\CatalogCategory */
+	/** @var CatalogCategory */
 	private $category;
 	/** @var int */
 	private $command;
 
 
 	/**
-	 * @param \Sellastica\CatalogSupplier\Entity\CatalogSupplier $supplier
-	 * @param \Sellastica\CatalogSupplier\Entity\CatalogCategory $category
+	 * @param CatalogSupplier $supplier
+	 * @param CatalogCategory $category
 	 * @param int $command
 	 */
 	public function __construct(
-		\Sellastica\CatalogSupplier\Entity\CatalogSupplier $supplier,
-		\Sellastica\CatalogSupplier\Entity\CatalogCategory $category,
+		CatalogSupplier $supplier,
+		CatalogCategory $category,
 		int $command
 	)
 	{
@@ -66,10 +66,10 @@ class SupplierCategoryRelation extends ManyToManyRelation
 	}
 
 	/**
-	 * @return bool
+	 * @return string
 	 */
-	public function isCrmDatabase(): bool
+	public function getTableName(): string
 	{
-		return true;
+		return 'crm_all.suppliers_supplier_catetory_rel';
 	}
 }

@@ -30,6 +30,8 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	private $description;
 	/** @var bool @optional */
 	private $visible = true;
+	/** @var CatalogCategoryCollection|CatalogCategory[] */
+	private $categories;
 
 
 	/**
@@ -241,6 +243,70 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 		return $this->company
 			&& $this->homepage
 			&& $this->description;
+	}
+
+	/**
+	 * @return CatalogCategoryCollection|CatalogCategory[]
+	 */
+	public function getCategories(): CatalogCategoryCollection
+	{
+		$this->initializeCategories();
+		return $this->categories;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getCategoryIds(): array
+	{
+		$ids = [];
+		foreach ($this->getCategories() as $category) {
+			$ids[] = $category->getId();
+		}
+
+		return $ids;
+	}
+
+	private function initializeCategories(): void
+	{
+		if (!isset($this->categories)) {
+			$this->categories = $this->relationService->getCategories();
+		}
+	}
+
+	/**
+	 * @param CatalogCategory $category
+	 * @return bool
+	 */
+	public function isInCategories(CatalogCategory $category): bool
+	{
+		return in_array($category->getId(), $this->getCategoryIds());
+	}
+
+	/**
+	 * @param CatalogCategory $category
+	 */
+	public function addCategory(CatalogCategory $category): void
+	{
+		if ($this->isInCategories($category)) {
+			return;
+		}
+
+		$this->categories[] = $category;
+		$this->eventPublisher->publish(new SupplierCategoryAdded($this, $category));
+	}
+
+	/**
+	 * @param CatalogCategory $category
+	 */
+	public function removeCategory(CatalogCategory $category): void
+	{
+		if (!$this->isInCategories($category)) {
+			return;
+		}
+
+		$this->categories[] = $category;
+		$this->eventPublisher->publish(new SupplierCategoryRemoved($this, $category));
 	}
 
 	/**
