@@ -79,7 +79,6 @@ class CatalogSupplierProxy extends \Sellastica\Twig\Model\ProxyEntity
 		return $this->parent->getPhone();
 	}
 
-
 	/**
 	 * @return string
 	 */
