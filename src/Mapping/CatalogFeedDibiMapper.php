@@ -10,6 +10,42 @@ class CatalogFeedDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 
 
 	/**
+	 * @param int $categoryId
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return array
+	 */
+	public function findByCategoryId(
+		int $categoryId,
+		\Sellastica\Entity\Configuration $configuration = null
+	): array
+	{
+		return $this->getResourceWithIds($configuration)
+			//->innerJoin('crm_all.suppliers_feed sf')
+			//->on('sf.id = %n.supplierId', $this->getTableName())
+			->innerJoin('crm_all.suppliers_supplier_category_rel scr')
+			->on('scr.supplierId = %n.supplierId', $this->getTableName())
+			->where('scr.categoryId = %i', $categoryId)
+			->fetchPairs();
+	}
+
+	/**
+	 * @param int $categoryId
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return array
+	 */
+	public function findVisibleByCategoryId(
+		int $categoryId,
+		\Sellastica\Entity\Configuration $configuration = null
+	): array
+	{
+		return $this->getPublishableResourceWithIds($configuration)
+			->innerJoin('crm_all.suppliers_supplier_category_rel scr')
+			->on('scr.supplierId = %n.supplierId', $this->getTableName())
+			->where('scr.categoryId = %i', $categoryId)
+			->fetchPairs();
+	}
+
+	/**
 	 * @param array $hosts
 	 * @return array
 	 */

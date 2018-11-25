@@ -70,6 +70,6 @@ class SupplierCategoryRelation extends ManyToManyRelation
 	 */
 	public function getTableName(): string
 	{
-		return 'crm_all.suppliers_supplier_catetory_rel';
+		return 'crm_all.suppliers_supplier_category_rel';
 	}
 }

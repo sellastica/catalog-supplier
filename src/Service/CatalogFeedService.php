@@ -82,4 +82,32 @@ class CatalogFeedService
 		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogFeed::class)
 			->findBy($filter, $configuration);
 	}
+
+	/**
+	 * @param int $categoryId
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection|\Sellastica\CatalogSupplier\Entity\CatalogFeed[]
+	 */
+	public function findByCategoryId(
+		int $categoryId,
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogFeed::class)
+			->findByCategoryId($categoryId, $configuration);
+	}
+
+	/**
+	 * @param int $categoryId
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection|\Sellastica\CatalogSupplier\Entity\CatalogFeed[]
+	 */
+	public function findVisibleByCategoryId(
+		int $categoryId,
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogFeed::class)
+			->findVisibleByCategoryId($categoryId, $configuration);
+	}
 }

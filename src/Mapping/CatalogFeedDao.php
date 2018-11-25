@@ -11,6 +11,32 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 
 
 	/**
+	 * @param int $categoryId
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
+	 */
+	public function findByCategoryId(
+		int $categoryId,
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
+	{
+		return $this->getEntitiesFromCacheOrStorage($this->mapper->findByCategoryId($categoryId, $configuration));
+	}
+
+	/**
+	 * @param int $categoryId
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
+	 */
+	public function findVisibleByCategoryId(
+		int $categoryId,
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
+	{
+		return $this->getEntitiesFromCacheOrStorage($this->mapper->findVisibleByCategoryId($categoryId, $configuration));
+	}
+
+	/**
 	 * @param array $hosts
 	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection|\Sellastica\Entity\Entity\EntityCollection
 	 */
