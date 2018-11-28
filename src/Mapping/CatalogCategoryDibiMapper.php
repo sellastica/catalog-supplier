@@ -13,7 +13,7 @@ class CatalogCategoryDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	public function findCategories(int $supplierId): array
 	{
 		return $this->database->select('categoryId')
-			->from('crm_all.suppliers_supplier_catetory_rel')
+			->from('crm_all.suppliers_supplier_category_rel')
 			->where('supplierId = %i', $supplierId)
 			->fetchPairs();
 	}
