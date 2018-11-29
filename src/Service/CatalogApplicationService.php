@@ -6,7 +6,8 @@ class CatalogApplicationService
 	const
 		UPDATE_STOCK = 'update_stock',
 		ORDERS = 'orders',
-		CNB = 'cnb';
+		CNB = 'cnb',
+		FTP = 'ftp';
 
 	/** @var \Sellastica\Entity\EntityManager */
 	private $em;
