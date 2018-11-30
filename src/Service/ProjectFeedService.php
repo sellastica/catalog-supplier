@@ -28,11 +28,16 @@ class ProjectFeedService
 
 	/**
 	 * @param array $filter
+	 * @param \Sellastica\Entity\Configuration|null $configuration
 	 * @return null|\Sellastica\CatalogSupplier\Entity\ProjectFeed
 	 */
-	public function findOneBy(array $filter): ?\Sellastica\CatalogSupplier\Entity\ProjectFeed
+	public function findOneBy(
+		array $filter,
+		\Sellastica\Entity\Configuration $configuration = null
+	): ?\Sellastica\CatalogSupplier\Entity\ProjectFeed
 	{
-		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)->findOneBy($filter);
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)
+			->findOneBy($filter, $configuration);
 	}
 
 	/**
