@@ -36,53 +36,59 @@ class ProjectFeedService
 	}
 
 	/**
-	 * @param \Sellastica\Project\Entity\Project $project
-	 * @param \Suppliers\Entity\Feed\Entity\Feed $feed
+	 * @param int $projectId
+	 * @param string $feedId
+	 * @param int $catalogFeedId
 	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeed|null
 	 */
 	public function findOneByProjectAndFeed(
-		\Sellastica\Project\Entity\Project $project,
-		\Suppliers\Entity\Feed\Entity\Feed $feed
+		int $projectId,
+		string $feedId,
+		int $catalogFeedId
 	): ?\Sellastica\CatalogSupplier\Entity\ProjectFeed
 	{
 		return $this->findOneBy([
-			'projectId' => $project->getId(),
-			'feedId' => $feed->getId(),
-			'catalogFeedId' => $feed->getCatalogFeed()->getId(),
+			'projectId' => $projectId,
+			'feedId' => $feedId,
+			'catalogFeedId' => $catalogFeedId,
 		]);
 	}
 
 	/**
-	 * @param \Sellastica\Project\Entity\Project $project
-	 * @param \Suppliers\Entity\Feed\Entity\Feed $feed
+	 * @param int $projectId
+	 * @param string $feedId
+	 * @param int $catalogFeedId
 	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeed
 	 */
 	public function getByProjectAndFeed(
-		\Sellastica\Project\Entity\Project $project,
-		\Suppliers\Entity\Feed\Entity\Feed $feed
+		int $projectId,
+		string $feedId,
+		int $catalogFeedId
 	): \Sellastica\CatalogSupplier\Entity\ProjectFeed
 	{
-		if (!$projectFeed = $this->findOneByProjectAndFeed($project, $feed)) {
-			$projectFeed = $this->create($project, $feed);
+		if (!$projectFeed = $this->findOneByProjectAndFeed($projectId, $feedId, $catalogFeedId)) {
+			$projectFeed = $this->create($projectId, $feedId, $catalogFeedId);
 		}
 
 		return $projectFeed;
 	}
 
 	/**
-	 * @param \Sellastica\Project\Entity\Project $project
-	 * @param \Suppliers\Entity\Feed\Entity\Feed $feed
+	 * @param int $projectId
+	 * @param string $feedId
+	 * @param int $catalogFeedId
 	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeed
 	 */
 	public function create(
-		\Sellastica\Project\Entity\Project $project,
-		\Suppliers\Entity\Feed\Entity\Feed $feed
+		int $projectId,
+		string $feedId,
+		int $catalogFeedId
 	): \Sellastica\CatalogSupplier\Entity\ProjectFeed
 	{
 		$projectFeed = \Sellastica\CatalogSupplier\Entity\ProjectFeedBuilder::create(
-			$project->getId(),
-			$feed->getId(),
-			$feed->getCatalogFeed()->getId()
+			$projectId,
+			$feedId,
+			$catalogFeedId
 		)->build();
 		$this->em->persist($projectFeed);
 
