@@ -1,9 +1,9 @@
 <?php
 namespace Sellastica\CatalogSupplier\Mapping;
 
-use Sellastica\Entity\Mapping\Repository;
 use Sellastica\CatalogSupplier\Entity\CatalogSupplier;
 use Sellastica\CatalogSupplier\Entity\ICatalogSupplierRepository;
+use Sellastica\Entity\Mapping\Repository;
 
 /**
  * @property CatalogSupplierDao $dao

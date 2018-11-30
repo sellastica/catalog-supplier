@@ -1,9 +1,9 @@
 <?php
 namespace Sellastica\CatalogSupplier\Mapping;
 
-use Sellastica\Entity\Mapping\Repository;
-use Sellastica\CatalogSupplier\Entity\SupplierInquiry;
 use Sellastica\CatalogSupplier\Entity\ISupplierInquiryRepository;
+use Sellastica\CatalogSupplier\Entity\SupplierInquiry;
+use Sellastica\Entity\Mapping\Repository;
 
 /**
  * @property SupplierInquiryDao $dao

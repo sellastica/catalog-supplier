@@ -1,9 +1,9 @@
 <?php
 namespace Sellastica\CatalogSupplier\Mapping;
 
-use Sellastica\Entity\Mapping\RepositoryProxy;
 use Sellastica\CatalogSupplier\Entity\ISupplierInquiryRepository;
 use Sellastica\CatalogSupplier\Entity\SupplierInquiry;
+use Sellastica\Entity\Mapping\RepositoryProxy;
 
 /**
  * @method SupplierInquiryRepository getRepository()

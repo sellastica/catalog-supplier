@@ -1,9 +1,9 @@
 <?php
 namespace Sellastica\CatalogSupplier\Mapping;
 
-use Sellastica\Entity\Mapping\Repository;
 use Sellastica\CatalogSupplier\Entity\CatalogFeedRule;
 use Sellastica\CatalogSupplier\Entity\ICatalogFeedRuleRepository;
+use Sellastica\Entity\Mapping\Repository;
 
 /**
  * @property CatalogFeedRuleDao $dao

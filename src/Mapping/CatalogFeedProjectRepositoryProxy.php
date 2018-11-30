@@ -1,9 +1,9 @@
 <?php
 namespace Sellastica\CatalogSupplier\Mapping;
 
-use Sellastica\Entity\Mapping\RepositoryProxy;
-use Sellastica\CatalogSupplier\Entity\ICatalogFeedProjectRepository;
 use Sellastica\CatalogSupplier\Entity\CatalogFeedProject;
+use Sellastica\CatalogSupplier\Entity\ICatalogFeedProjectRepository;
+use Sellastica\Entity\Mapping\RepositoryProxy;
 
 /**
  * @method CatalogFeedProjectRepository getRepository()
