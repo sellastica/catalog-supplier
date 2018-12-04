@@ -143,15 +143,15 @@ class ProjectFeedBuilder implements IBuilder
 	 */
 	public function generateId(): bool
 	{
-		return !\Sellastica\CatalogSupplier\Entity\ProjectFeed::isIdGeneratedByStorage();
+		return !ProjectFeed::isIdGeneratedByStorage();
 	}
 
 	/**
-	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeed
+	 * @return ProjectFeed
 	 */
-	public function build(): \Sellastica\CatalogSupplier\Entity\ProjectFeed
+	public function build(): ProjectFeed
 	{
-		return new \Sellastica\CatalogSupplier\Entity\ProjectFeed($this);
+		return new ProjectFeed($this);
 	}
 
 	/**

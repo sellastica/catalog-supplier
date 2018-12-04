@@ -13,7 +13,7 @@ class CatalogFeedBuilder implements IBuilder
 
 	/** @var int */
 	private $supplierId;
-	/** @var string */
+	/** @var string|null */
 	private $url;
 	/** @var string */
 	private $converterClass;
@@ -68,14 +68,14 @@ class CatalogFeedBuilder implements IBuilder
 
 	/**
 	 * @param int $supplierId
-	 * @param string $url
+	 * @param string|null $url
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @param \Sellastica\Localization\Model\Country $defaultCountry
 	 */
 	public function __construct(
 		int $supplierId,
-		string $url,
+		string $url = null,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
 		\Sellastica\Localization\Model\Country $defaultCountry
@@ -97,9 +97,9 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getUrl(): string
+	public function getUrl()
 	{
 		return $this->url;
 	}
@@ -542,7 +542,7 @@ class CatalogFeedBuilder implements IBuilder
 
 	/**
 	 * @param int $supplierId
-	 * @param string $url
+	 * @param string|null $url
 	 * @param string $converterClass
 	 * @param \Sellastica\Localization\Model\Currency $defaultCurrency
 	 * @param \Sellastica\Localization\Model\Country $defaultCountry
@@ -550,7 +550,7 @@ class CatalogFeedBuilder implements IBuilder
 	 */
 	public static function create(
 		int $supplierId,
-		string $url,
+		string $url = null,
 		string $converterClass,
 		\Sellastica\Localization\Model\Currency $defaultCurrency,
 		\Sellastica\Localization\Model\Country $defaultCountry
