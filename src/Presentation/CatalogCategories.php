@@ -1,5 +1,5 @@
 <?php
-namespace Sellastica\CatalogCategory\Presentation;
+namespace Sellastica\CatalogSupplier\Presentation;
 
 class CatalogCategories extends \Sellastica\Twig\Model\TwigObject
 {
