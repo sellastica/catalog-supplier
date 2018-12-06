@@ -60,10 +60,10 @@ class CatalogCategory extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return \Sellastica\CatalogCategory\Presentation\CatalogCategoryProxy
+	 * @return \Sellastica\CatalogSupplier\Presentation\CatalogCategoryProxy
 	 */
-	public function toProxy(): \Sellastica\CatalogCategory\Presentation\CatalogCategoryProxy
+	public function toProxy(): \Sellastica\CatalogSupplier\Presentation\CatalogCategoryProxy
 	{
-		return new \Sellastica\CatalogCategory\Presentation\CatalogCategoryProxy($this);
+		return new \Sellastica\CatalogSupplier\Presentation\CatalogCategoryProxy($this);
 	}
 }

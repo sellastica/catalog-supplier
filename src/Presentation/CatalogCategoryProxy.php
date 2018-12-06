@@ -1,5 +1,5 @@
 <?php
-namespace Sellastica\CatalogCategory\Presentation;
+namespace Sellastica\CatalogSupplier\Presentation;
 
 /**
  * {@inheritdoc}

@@ -10,6 +10,32 @@ class CatalogSupplierDao extends \Sellastica\Entity\Mapping\Dao
 	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesDao;
 
 	/**
+	 * @param int $categoryId
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
+	 */
+	public function findByCategoryId(
+		int $categoryId,
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
+	{
+		return $this->getEntitiesFromCacheOrStorage($this->mapper->findByCategoryId($categoryId, $configuration));
+	}
+
+	/**
+	 * @param int $categoryId
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
+	 */
+	public function findVisibleByCategoryId(
+		int $categoryId,
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\CatalogSupplierCollection
+	{
+		return $this->getEntitiesFromCacheOrStorage($this->mapper->findVisibleByCategoryId($categoryId, $configuration));
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	protected function getBuilder(

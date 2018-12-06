@@ -60,6 +60,27 @@ class CatalogSuppliers extends \Sellastica\Twig\Model\TwigObject
 	}
 
 	/**
+	 * @param null $id
+	 * @return \Sellastica\Twig\Model\ArrayProxy
+	 */
+	public function getCategory($id = null): \Sellastica\Twig\Model\ArrayProxy
+	{
+		if (($convertedId = \Sellastica\Utils\Conversions::toInt($id)) === false) {
+			$this->errorHandler->getAssertionHandler()->intError($id, __FUNCTION__);
+			return null;
+		}
+
+		$suppliers = new \Sellastica\Twig\Model\ArrayProxy();
+		/** @var \Sellastica\CatalogSupplier\Entity\CatalogSupplier $supplier */
+		foreach ($this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogSupplier::class)
+					 ->findVisibleByCategoryId($id, \Sellastica\Entity\Configuration::sortBy('title')) as $supplier) {
+			$suppliers[] = $supplier->toProxy();
+		}
+
+		return $suppliers;
+	}
+
+	/**
 	 * @return \Sellastica\Twig\Model\ArrayProxy
 	 */
 	public function getRandom(): \Sellastica\Twig\Model\ArrayProxy
@@ -89,6 +110,7 @@ class CatalogSuppliers extends \Sellastica\Twig\Model\TwigObject
 	{
 		return [
 			'all',
+			'category',
 			'id',
 			'random',
 		];
