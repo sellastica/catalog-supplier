@@ -3,7 +3,7 @@ namespace Sellastica\CatalogCategory\Presentation;
 
 /**
  * {@inheritdoc}
- * @property \Sellastica\CatalogCategory\Entity\CatalogCategory $parent
+ * @property \Sellastica\CatalogSupplier\Entity\CatalogCategory $parent
  */
 class CatalogCategoryProxy extends \Sellastica\Twig\Model\ProxyEntity
 {
