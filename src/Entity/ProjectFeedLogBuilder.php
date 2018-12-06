@@ -96,15 +96,15 @@ class ProjectFeedLogBuilder implements IBuilder
 	 */
 	public function generateId(): bool
 	{
-		return !\Sellastica\CatalogSupplier\Entity\ProjectFeedLog::isIdGeneratedByStorage();
+		return !ProjectFeedLog::isIdGeneratedByStorage();
 	}
 
 	/**
-	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedLog
+	 * @return ProjectFeedLog
 	 */
-	public function build(): \Sellastica\CatalogSupplier\Entity\ProjectFeedLog
+	public function build(): ProjectFeedLog
 	{
-		return new \Sellastica\CatalogSupplier\Entity\ProjectFeedLog($this);
+		return new ProjectFeedLog($this);
 	}
 
 	/**
