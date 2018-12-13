@@ -37,17 +37,17 @@ class ProjectFeedLogService
 
 	/**
 	 * @param \Sellastica\Project\Entity\Project $project
-	 * @param \Suppliers\Entity\Feed\Entity\Feed $feed
+	 * @param \Sellastica\CatalogSupplier\Entity\CatalogFeed $catalogFeed
 	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedLog|null
 	 */
 	public function findOneByProjectAndFeed(
 		\Sellastica\Project\Entity\Project $project,
-		\Suppliers\Entity\Feed\Entity\Feed $feed
+		\Sellastica\CatalogSupplier\Entity\CatalogFeed $catalogFeed
 	): ?\Sellastica\CatalogSupplier\Entity\ProjectFeedLog
 	{
 		return $this->findOneBy([
 			'projectId' => $project->getId(),
-			'catalogFeedId' => $feed->getCatalogFeed()->getId(),
+			'catalogFeedId' => $catalogFeed->getId(),
 		]);
 	}
 
