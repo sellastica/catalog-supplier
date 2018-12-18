@@ -11,4 +11,16 @@ use Sellastica\Entity\Mapping\Repository;
  */
 class ProjectFeedLogRepository extends Repository implements IProjectFeedLogRepository
 {
+	/**
+	 * @param \DateTime $date
+	 * @param int $projectId
+	 * @return int|null
+	 */
+	public function getProductsSumCount(
+		\DateTime $date,
+		int $projectId
+	): ?int
+	{
+		return $this->dao->getProductsSumCount($date, $projectId);
+	}
 }

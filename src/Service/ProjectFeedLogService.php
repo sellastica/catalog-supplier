@@ -28,11 +28,30 @@ class ProjectFeedLogService
 
 	/**
 	 * @param array $filter
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedLogCollection|\Sellastica\CatalogSupplier\Entity\ProjectFeedLog[]
+	 */
+	public function findBy(
+		array $filter,
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\ProjectFeedLogCollection
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeedLog::class)
+			->findBy($filter, $configuration);
+	}
+
+	/**
+	 * @param array $filter
+	 * @param \Sellastica\Entity\Configuration|null $configuration
 	 * @return null|\Sellastica\CatalogSupplier\Entity\ProjectFeedLog
 	 */
-	public function findOneBy(array $filter): ?\Sellastica\CatalogSupplier\Entity\ProjectFeedLog
+	public function findOneBy(
+		array $filter,
+		\Sellastica\Entity\Configuration $configuration = null
+	): ?\Sellastica\CatalogSupplier\Entity\ProjectFeedLog
 	{
-		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeedLog::class)->findOneBy($filter);
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeedLog::class)
+			->findOneBy($filter, $configuration);
 	}
 
 	/**
@@ -49,6 +68,20 @@ class ProjectFeedLogService
 			'projectId' => $project->getId(),
 			'catalogFeedId' => $catalogFeed->getId(),
 		]);
+	}
+
+	/**
+	 * @param \DateTime $date
+	 * @param \Sellastica\Project\Entity\Project $project
+	 * @return int|null
+	 */
+	public function getProductsSumCount(
+		\DateTime $date,
+		\Sellastica\Project\Entity\Project $project
+	): ?int
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeedLog::class)
+			->getProductsSumCount($date, $project->getId());
 	}
 
 	/**

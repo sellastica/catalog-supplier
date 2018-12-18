@@ -18,6 +18,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 
 	/** @var int @required */
 	private $supplierId;
+	/** @var string|null @optional */
+	private $title;
 	/** @var bool @optional */
 	private $updateOnly = false;
 	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat @optional */
@@ -132,11 +134,33 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getTitle(): string
+	public function getTitle(): ?string
 	{
-		return \Sellastica\Project\Utils\Helpers::getProjectTitle($this->getSupplier()->getHomepage());
+		return $this->title;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getTitleOrSupplierUrl(): ?string
+	{
+		if (isset($this->title)) {
+			return $this->title;
+		} elseif ($this->getSupplier()->getHomepage()) {
+			return \Sellastica\Project\Utils\Helpers::getProjectTitle($this->getSupplier()->getHomepage());
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * @param string|null $title
+	 */
+	public function setTitle(?string $title): void
+	{
+		$this->title = $title;
 	}
 
 	/**
@@ -574,6 +598,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 			$this->parentToArray(),
 			[
 				'supplierId' => $this->supplierId,
+				'title' => $this->title,
 				'updateOnly' => $this->updateOnly,
 				'url' => $this->url,
 				'itemXPath' => $this->itemXPath,

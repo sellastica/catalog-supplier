@@ -21,6 +21,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $defaultCurrency;
 	/** @var \Sellastica\Localization\Model\Country */
 	private $defaultCountry;
+	/** @var string|null */
+	private $title;
 	/** @var bool */
 	private $updateOnly = false;
 	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat */
@@ -126,6 +128,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function getDefaultCountry(): \Sellastica\Localization\Model\Country
 	{
 		return $this->defaultCountry;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getTitle()
+	{
+		return $this->title;
+	}
+
+	/**
+	 * @param string|null $title
+	 * @return $this
+	 */
+	public function title(string $title = null)
+	{
+		$this->title = $title;
+		return $this;
 	}
 
 	/**

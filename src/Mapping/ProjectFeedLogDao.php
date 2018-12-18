@@ -8,6 +8,20 @@ namespace Sellastica\CatalogSupplier\Mapping;
 class ProjectFeedLogDao extends \Sellastica\Entity\Mapping\Dao
 {
 	/**
+	 * @param \DateTime $date
+	 * @param int $projectId
+	 * @return int|null
+	 */
+	public function getProductsSumCount(
+		\DateTime $date,
+		int $projectId
+	): ?int
+	{
+		$count = $this->mapper->getProductsSumCount($date, $projectId);
+		return $count !== false ? (int)$count : null;
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	protected function getBuilder(
