@@ -144,7 +144,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return string|null
 	 */
-	public function getTitleOrSupplierUrl(): ?string
+	public function getTitleOrTitleByHomepage(): ?string
 	{
 		if (isset($this->title)) {
 			return $this->title;
@@ -153,6 +153,14 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getTitleByHomepage(): ?string
+	{
+		return \Sellastica\Project\Utils\Helpers::getProjectTitle($this->getSupplier()->getHomepage());
 	}
 
 	/**
