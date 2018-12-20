@@ -41,6 +41,20 @@ class ProjectFeedService
 	}
 
 	/**
+	 * @param array $filter
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection|\Sellastica\CatalogSupplier\Entity\ProjectFeed[]
+	 */
+	public function findBy(
+		array $filter,
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)
+			->findBy($filter, $configuration);
+	}
+
+	/**
 	 * @param int $projectId
 	 * @param string $feedId
 	 * @param int $catalogFeedId
