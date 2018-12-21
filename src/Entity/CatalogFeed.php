@@ -68,8 +68,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $visible = true;
 	/** @var string|null @optional */
 	private $overrideScheme;
-	/** @var int @optional */
-	private $period = 7200;
+	/** @var string @optional */
+	private $crontab = '0 */2 * * *';
 	/** @var bool @optional */
 	private $saveSourceData = true;
 
@@ -566,19 +566,19 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
-	public function getPeriod(): int
+	public function getCrontab(): string
 	{
-		return $this->period;
+		return $this->crontab;
 	}
 
 	/**
-	 * @param int $period
+	 * @param string $crontab
 	 */
-	public function setPeriod(int $period): void
+	public function setCrontab(string $crontab): void
 	{
-		$this->period = $period;
+		$this->crontab = $crontab;
 	}
 
 	/**
@@ -631,7 +631,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'timeout' => $this->timeout,
 				'overrideScheme' => $this->overrideScheme,
 				'csvDelimiter' => $this->csvDelimiter,
-				'period' => $this->period,
+				'crontab' => $this->crontab,
 				'saveSourceData' => $this->saveSourceData,
 			]
 		);

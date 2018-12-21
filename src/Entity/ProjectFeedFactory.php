@@ -6,13 +6,13 @@ use Sellastica\Entity\Entity\IEntity;
 use Sellastica\Entity\IBuilder;
 
 /**
- * @method ProjectFeed build(IBuilder $builder, bool $initialize = true, int $assignedId = null)
+ * @method \Sellastica\CatalogSupplier\Entity\ProjectFeed build(IBuilder $builder, bool $initialize = true, int $assignedId = null)
  * @see ProjectFeed
  */
 class ProjectFeedFactory extends EntityFactory
 {
 	/**
-	 * @param IEntity|ProjectFeed $entity
+	 * @param IEntity|\Sellastica\CatalogSupplier\Entity\ProjectFeed $entity
 	 */
 	public function doInitialize(IEntity $entity)
 	{
@@ -24,6 +24,6 @@ class ProjectFeedFactory extends EntityFactory
 	 */
 	public function getEntityClass(): string
 	{
-		return ProjectFeed::class;
+		return \Sellastica\CatalogSupplier\Entity\ProjectFeed::class;
 	}
 }

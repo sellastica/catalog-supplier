@@ -63,8 +63,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $visible = true;
 	/** @var string|null */
 	private $overrideScheme;
-	/** @var int */
-	private $period = 7200;
+	/** @var string */
+	private $crontab = '0 */2 * * *';
 	/** @var bool */
 	private $saveSourceData = true;
 
@@ -509,20 +509,20 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return int
+	 * @return string
 	 */
-	public function getPeriod(): int
+	public function getCrontab(): string
 	{
-		return $this->period;
+		return $this->crontab;
 	}
 
 	/**
-	 * @param int $period
+	 * @param string $crontab
 	 * @return $this
 	 */
-	public function period(int $period = 7200)
+	public function crontab(string $crontab = '0 */2 * * *')
 	{
-		$this->period = $period;
+		$this->crontab = $crontab;
 		return $this;
 	}
 

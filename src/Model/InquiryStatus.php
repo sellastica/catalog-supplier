@@ -7,8 +7,7 @@ class InquiryStatus
 		CONFIRMED = 'confirmed',
 		ACCOMPLISHED = 'accomplished',
 		CLOSED = 'closed',
-		CANCELLED = 'cancelled',
-		PENDING = 'pending';
+		CANCELLED = 'cancelled';
 
 	/** @var string */
 	private $value;
@@ -79,14 +78,6 @@ class InquiryStatus
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function isPending(): bool
-	{
-		return $this->value === self::PENDING;
-	}
-
-	/**
 	 * @param InquiryStatus $status
 	 * @return bool
 	 */
@@ -122,14 +113,6 @@ class InquiryStatus
 	/**
 	 * @return InquiryStatus
 	 */
-	public static function pending(): InquiryStatus
-	{
-		return new self(self::PENDING);
-	}
-
-	/**
-	 * @return InquiryStatus
-	 */
 	public static function closed(): InquiryStatus
 	{
 		return new self(self::CLOSED);
@@ -146,7 +129,6 @@ class InquiryStatus
 	/**
 	 * @param string $format
 	 * @return InquiryStatus
-	 * @throws \InvalidArgumentException
 	 */
 	public static function from(string $format): InquiryStatus
 	{

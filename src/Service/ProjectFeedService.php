@@ -29,20 +29,6 @@ class ProjectFeedService
 	/**
 	 * @param array $filter
 	 * @param \Sellastica\Entity\Configuration|null $configuration
-	 * @return null|\Sellastica\CatalogSupplier\Entity\ProjectFeed
-	 */
-	public function findOneBy(
-		array $filter,
-		\Sellastica\Entity\Configuration $configuration = null
-	): ?\Sellastica\CatalogSupplier\Entity\ProjectFeed
-	{
-		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)
-			->findOneBy($filter, $configuration);
-	}
-
-	/**
-	 * @param array $filter
-	 * @param \Sellastica\Entity\Configuration|null $configuration
 	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection|\Sellastica\CatalogSupplier\Entity\ProjectFeed[]
 	 */
 	public function findBy(
@@ -52,6 +38,34 @@ class ProjectFeedService
 	{
 		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)
 			->findBy($filter, $configuration);
+	}
+
+	/**
+	 * @param int $projectId
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection|\Sellastica\CatalogSupplier\Entity\ProjectFeed[]
+	 */
+	public function findByProjectId(
+		int $projectId,
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)
+			->findBy(['projectId' => $projectId], $configuration);
+	}
+
+	/**
+	 * @param array $filter
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return null|\Sellastica\CatalogSupplier\Entity\ProjectFeed
+	 */
+	public function findOneBy(
+		array $filter,
+		\Sellastica\Entity\Configuration $configuration = null
+	): ?\Sellastica\CatalogSupplier\Entity\ProjectFeed
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)
+			->findOneBy($filter, $configuration);
 	}
 
 	/**

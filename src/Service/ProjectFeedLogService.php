@@ -55,22 +55,6 @@ class ProjectFeedLogService
 	}
 
 	/**
-	 * @param \Sellastica\Project\Entity\Project $project
-	 * @param \Sellastica\CatalogSupplier\Entity\CatalogFeed $catalogFeed
-	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedLog|null
-	 */
-	public function findOneByProjectAndFeed(
-		\Sellastica\Project\Entity\Project $project,
-		\Sellastica\CatalogSupplier\Entity\CatalogFeed $catalogFeed
-	): ?\Sellastica\CatalogSupplier\Entity\ProjectFeedLog
-	{
-		return $this->findOneBy([
-			'projectId' => $project->getId(),
-			'catalogFeedId' => $catalogFeed->getId(),
-		]);
-	}
-
-	/**
 	 * @param \DateTime $date
 	 * @param \Sellastica\Project\Entity\Project $project
 	 * @return int|null
