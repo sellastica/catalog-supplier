@@ -25,6 +25,8 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var \DateTime|null @optional */
 	private $lastNapojseDownload;
 	/** @var \DateTime|null @optional */
+	private $ordered;
+	/** @var \DateTime|null @optional */
 	private $removed;
 
 
@@ -159,6 +161,22 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return \DateTime|null
 	 */
+	public function getOrdered(): ?\DateTime
+	{
+		return $this->ordered;
+	}
+
+	/**
+	 * @param \DateTime|null $ordered
+	 */
+	public function setOrdered(?\DateTime $ordered): void
+	{
+		$this->ordered = $ordered;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
 	public function getTrialTill(): ?\DateTime
 	{
 		return $this->trialTill;
@@ -186,6 +204,36 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getTrialDaysLeft(): int
+	{
+		$today = new \DateTime('today midnight');
+		if (!isset($this->trialTill)
+			|| $this->trialTill <= $today) {
+			return 0;
+		} else {
+			return (int)$this->trialTill->diff($today)->format('%a') + 1;
+		}
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isTrialExpired(): bool
+	{
+		return $this->getTrialDaysLeft() === 0;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function canBeExported(): bool
+	{
+		return (bool)$this->getOrdered();
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -199,6 +247,7 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'lastSupplierDownload' => $this->lastSupplierDownload,
 				'lastNapojseDownload' => $this->lastNapojseDownload,
 				'trialTill' => $this->trialTill,
+				'ordered' => $this->ordered,
 				'removed' => $this->removed,
 			]
 		);

@@ -24,6 +24,8 @@ class ProjectFeedBuilder implements IBuilder
 	/** @var \DateTime|null */
 	private $lastNapojseDownload;
 	/** @var \DateTime|null */
+	private $ordered;
+	/** @var \DateTime|null */
 	private $removed;
 
 	/**
@@ -117,6 +119,24 @@ class ProjectFeedBuilder implements IBuilder
 	public function lastNapojseDownload(\DateTime $lastNapojseDownload = null)
 	{
 		$this->lastNapojseDownload = $lastNapojseDownload;
+		return $this;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getOrdered()
+	{
+		return $this->ordered;
+	}
+
+	/**
+	 * @param \DateTime|null $ordered
+	 * @return $this
+	 */
+	public function ordered(\DateTime $ordered = null)
+	{
+		$this->ordered = $ordered;
 		return $this;
 	}
 
