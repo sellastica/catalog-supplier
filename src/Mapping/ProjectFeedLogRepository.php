@@ -14,13 +14,15 @@ class ProjectFeedLogRepository extends Repository implements IProjectFeedLogRepo
 	/**
 	 * @param \DateTime $date
 	 * @param int $projectId
+	 * @param bool $includeTrials
 	 * @return int|null
 	 */
 	public function getProductsSumCount(
 		\DateTime $date,
-		int $projectId
+		int $projectId,
+		bool $includeTrials = false
 	): ?int
 	{
-		return $this->dao->getProductsSumCount($date, $projectId);
+		return $this->dao->getProductsSumCount($date, $projectId, $includeTrials);
 	}
 }

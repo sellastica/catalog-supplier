@@ -10,14 +10,16 @@ class ProjectFeedLogDao extends \Sellastica\Entity\Mapping\Dao
 	/**
 	 * @param \DateTime $date
 	 * @param int $projectId
+	 * @param bool $includeTrials
 	 * @return int|null
 	 */
 	public function getProductsSumCount(
 		\DateTime $date,
-		int $projectId
+		int $projectId,
+		bool $includeTrials = false
 	): ?int
 	{
-		$count = $this->mapper->getProductsSumCount($date, $projectId);
+		$count = $this->mapper->getProductsSumCount($date, $projectId, $includeTrials);
 		return $count !== false ? (int)$count : null;
 	}
 
