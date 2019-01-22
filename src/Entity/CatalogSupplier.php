@@ -32,6 +32,8 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	private $visible = true;
 	/** @var CatalogCategoryCollection|CatalogCategory[] */
 	private $categories;
+	/** @var \Sellastica\Identity\Model\BillingAddress|null @optional */
+	private $billingAddress;
 
 
 	/**
@@ -310,6 +312,22 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return null|\Sellastica\Identity\Model\BillingAddress
+	 */
+	public function getBillingAddress(): ?\Sellastica\Identity\Model\BillingAddress
+	{
+		return $this->billingAddress;
+	}
+
+	/**
+	 * @param null|\Sellastica\Identity\Model\BillingAddress $billingAddress
+	 */
+	public function setBillingAddress(?\Sellastica\Identity\Model\BillingAddress $billingAddress): void
+	{
+		$this->billingAddress = $billingAddress;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -321,13 +339,23 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 				'code' => $this->code,
 				'homepage' => $this->homepage
 					? $this->homepage->getAbsoluteUrl()
-				 	: null,
+					: null,
 				'logo' => $this->logo,
 				'company' => $this->company,
 				'email' => $this->getEmail(),
 				'phone' => $this->phone,
 				'description' => $this->description,
 				'visible' => $this->visible,
+			],
+			//billing address
+			$this->billingAddress ? $this->billingAddress->toArray() : [
+				'company' => null,
+				'street' => null,
+				'city' => null,
+				'zip' => null,
+				'countryCode' => null,
+				'cin' => null,
+				'tin' => null,
 			]
 		);
 	}

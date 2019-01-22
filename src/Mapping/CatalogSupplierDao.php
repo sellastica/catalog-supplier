@@ -52,8 +52,10 @@ class CatalogSupplierDao extends \Sellastica\Entity\Mapping\Dao
 			$data->email = new \Sellastica\Identity\Model\Email($data->email);
 		}
 
+		$billingAddress = \Sellastica\Identity\Model\BillingAddress::fromArray((array)$data);
 		return \Sellastica\CatalogSupplier\Entity\CatalogSupplierBuilder::create($data->title, $data->code)
-			->hydrate($data);
+			->hydrate($data)
+			->billingAddress(!$billingAddress->isEmpty() ? $billingAddress : null);
 	}
 
 	/**

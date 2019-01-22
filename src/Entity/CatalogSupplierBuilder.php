@@ -29,6 +29,8 @@ class CatalogSupplierBuilder implements IBuilder
 	private $description;
 	/** @var bool */
 	private $visible = true;
+	/** @var \Sellastica\Identity\Model\BillingAddress|null */
+	private $billingAddress;
 
 	/**
 	 * @param string $title
@@ -182,6 +184,24 @@ class CatalogSupplierBuilder implements IBuilder
 	public function visible(bool $visible = true)
 	{
 		$this->visible = $visible;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\Identity\Model\BillingAddress|null
+	 */
+	public function getBillingAddress()
+	{
+		return $this->billingAddress;
+	}
+
+	/**
+	 * @param \Sellastica\Identity\Model\BillingAddress|null $billingAddress
+	 * @return $this
+	 */
+	public function billingAddress(\Sellastica\Identity\Model\BillingAddress $billingAddress = null)
+	{
+		$this->billingAddress = $billingAddress;
 		return $this;
 	}
 
