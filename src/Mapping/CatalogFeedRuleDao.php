@@ -17,7 +17,7 @@ class CatalogFeedRuleDao extends \Sellastica\Entity\Mapping\Dao
 	): \Sellastica\Entity\IBuilder
 	{
 		$data->element = \Suppliers\Model\Rule\RuleElement::from($data->element);
-		return \Sellastica\CatalogSupplier\Entity\CatalogFeedRuleBuilder::create($data->element, $data->type, $data->value)
+		return \Sellastica\CatalogSupplier\Entity\CatalogFeedRuleBuilder::create($data->element, $data->type)
 			->hydrate($data);
 	}
 

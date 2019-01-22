@@ -15,23 +15,20 @@ class CatalogFeedRuleBuilder implements IBuilder
 	private $element;
 	/** @var string */
 	private $type;
-	/** @var string */
+	/** @var string|null */
 	private $value;
 
 	/**
 	 * @param \Suppliers\Model\Rule\RuleElement $element
 	 * @param string $type
-	 * @param string $value
 	 */
 	public function __construct(
 		\Suppliers\Model\Rule\RuleElement $element,
-		string $type,
-		string $value
+		string $type
 	)
 	{
 		$this->element = $element;
 		$this->type = $type;
-		$this->value = $value;
 	}
 
 	/**
@@ -51,11 +48,21 @@ class CatalogFeedRuleBuilder implements IBuilder
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getValue(): string
+	public function getValue()
 	{
 		return $this->value;
+	}
+
+	/**
+	 * @param string|null $value
+	 * @return $this
+	 */
+	public function value(string $value = null)
+	{
+		$this->value = $value;
+		return $this;
 	}
 
 	/**
@@ -77,15 +84,13 @@ class CatalogFeedRuleBuilder implements IBuilder
 	/**
 	 * @param \Suppliers\Model\Rule\RuleElement $element
 	 * @param string $type
-	 * @param string $value
 	 * @return self
 	 */
 	public static function create(
 		\Suppliers\Model\Rule\RuleElement $element,
-		string $type,
-		string $value
+		string $type
 	): self
 	{
-		return new self($element, $type, $value);
+		return new self($element, $type);
 	}
 }

@@ -101,6 +101,8 @@ class ProjectFeedService
 	{
 		if (!$projectFeed = $this->findOneByProjectAndFeed($projectId, $feedId, $catalogFeedId)) {
 			$projectFeed = $this->create($projectId, $feedId, $catalogFeedId);
+			$projectFeed->setCreated(new \DateTime());
+			$projectFeed->setTrialTill(new \DateTime());
 		}
 
 		return $projectFeed;

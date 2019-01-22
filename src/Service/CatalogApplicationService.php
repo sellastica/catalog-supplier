@@ -7,7 +7,8 @@ class CatalogApplicationService
 		UPDATE_STOCK = 'update_stock',
 		ORDERS = 'orders',
 		CNB = 'cnb',
-		FTP = 'ftp';
+		FTP = 'ftp',
+		STOCK_20 = 'stock_20';
 
 	/** @var \Sellastica\Entity\EntityManager */
 	private $em;

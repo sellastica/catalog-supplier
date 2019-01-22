@@ -42,6 +42,7 @@ class CatalogFeedDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 			->innerJoin('crm_all.suppliers_supplier_category_rel scr')
 			->on('scr.supplierId = %n.supplierId', $this->getTableName())
 			->where('scr.categoryId = %i', $categoryId)
+			->where('%n.visible = 1', $this->getTableName())
 			->fetchPairs();
 	}
 

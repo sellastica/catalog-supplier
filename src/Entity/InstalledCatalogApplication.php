@@ -4,8 +4,6 @@ namespace Sellastica\CatalogSupplier\Entity;
 /**
  * @generate-builder
  * @see InstalledCatalogApplicationBuilder
- *
- * @property InstalledCatalogApplicationRelations $relationService
  */
 class InstalledCatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 	implements \Sellastica\Entity\Entity\IEntity

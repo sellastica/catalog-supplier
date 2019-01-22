@@ -14,7 +14,7 @@ class CatalogFeedRule extends \Sellastica\Entity\Entity\AbstractEntity
 	private $element;
 	/** @var string @required */
 	private $type;
-	/** @var string @required */
+	/** @var string|null @optional */
 	private $value;
 
 
@@ -67,17 +67,17 @@ class CatalogFeedRule extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getValue(): string
+	public function getValue(): ?string
 	{
 		return $this->value;
 	}
 
 	/**
-	 * @param string $value
+	 * @param string|null $value
 	 */
-	public function setValue(string $value): void
+	public function setValue(?string $value): void
 	{
 		$this->value = $value;
 	}
