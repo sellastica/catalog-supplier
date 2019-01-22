@@ -67,6 +67,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $crontab = '0 */2 * * *';
 	/** @var bool */
 	private $saveSourceData = true;
+	/** @var bool */
+	private $groupProductsWhenCounting = false;
 
 	/**
 	 * @param int $supplierId
@@ -541,6 +543,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function saveSourceData(bool $saveSourceData = true)
 	{
 		$this->saveSourceData = $saveSourceData;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getGroupProductsWhenCounting(): bool
+	{
+		return $this->groupProductsWhenCounting;
+	}
+
+	/**
+	 * @param bool $groupProductsWhenCounting
+	 * @return $this
+	 */
+	public function groupProductsWhenCounting(bool $groupProductsWhenCounting)
+	{
+		$this->groupProductsWhenCounting = $groupProductsWhenCounting;
 		return $this;
 	}
 

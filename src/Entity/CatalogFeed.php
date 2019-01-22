@@ -72,6 +72,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $crontab = '0 */2 * * *';
 	/** @var bool @optional */
 	private $saveSourceData = true;
+	/** @var bool @optional */
+	private $groupProductsWhenCounting = false;
 
 
 	/**
@@ -598,6 +600,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isGroupProductsWhenCounting(): bool
+	{
+		return $this->groupProductsWhenCounting;
+	}
+
+	/**
+	 * @param bool $groupProductsWhenCounting
+	 */
+	public function setGroupProductsWhenCounting(bool $groupProductsWhenCounting): void
+	{
+		$this->groupProductsWhenCounting = $groupProductsWhenCounting;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -633,6 +651,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'csvDelimiter' => $this->csvDelimiter,
 				'crontab' => $this->crontab,
 				'saveSourceData' => $this->saveSourceData,
+				'groupProductsWhenCounting' => $this->groupProductsWhenCounting,
 			]
 		);
 	}
