@@ -95,9 +95,9 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return CatalogFeed
+	 * @return CatalogFeed|null
 	 */
-	public function getCatalogFeed(): CatalogFeed
+	public function getCatalogFeed(): ?CatalogFeed
 	{
 		return $this->relationService->getCatalogFeed();
 	}

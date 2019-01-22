@@ -32,9 +32,9 @@ class ProjectFeedRelations implements \Sellastica\Entity\Relation\IEntityRelatio
 	}
 
 	/**
-	 * @return CatalogFeed
+	 * @return CatalogFeed|null
 	 */
-	public function getCatalogFeed(): CatalogFeed
+	public function getCatalogFeed(): ?CatalogFeed
 	{
 		return $this->em->getRepository(CatalogFeed::class)->find($this->projectFeed->getCatalogFeedId());
 	}
