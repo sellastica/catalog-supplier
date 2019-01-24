@@ -51,6 +51,14 @@ class Stream
 	}
 
 	/**
+	 * @return Stream
+	 */
+	public static function curl(): Stream
+	{
+		return new self(self::CURL);
+	}
+
+	/**
 	 * @param string $stream
 	 * @return Stream
 	 */

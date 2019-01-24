@@ -25,6 +25,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $title;
 	/** @var bool */
 	private $updateOnly = false;
+	/** @var int|null */
+	private $parentId;
 	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat */
 	private $feedFormat;
 	/** @var \Sellastica\CatalogSupplier\Model\Compression */
@@ -71,6 +73,10 @@ class CatalogFeedBuilder implements IBuilder
 	private $saveSourceData = true;
 	/** @var bool */
 	private $groupProductsWhenCounting = false;
+	/** @var \Sellastica\Price\Price|null */
+	private $priceCzk;
+	/** @var \Sellastica\Price\Price|null */
+	private $priceEur;
 
 	/**
 	 * @param int $supplierId
@@ -167,6 +173,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function updateOnly(bool $updateOnly)
 	{
 		$this->updateOnly = $updateOnly;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getParentId()
+	{
+		return $this->parentId;
+	}
+
+	/**
+	 * @param int|null $parentId
+	 * @return $this
+	 */
+	public function parentId(int $parentId = null)
+	{
+		$this->parentId = $parentId;
 		return $this;
 	}
 
@@ -581,6 +605,42 @@ class CatalogFeedBuilder implements IBuilder
 	public function groupProductsWhenCounting(bool $groupProductsWhenCounting)
 	{
 		$this->groupProductsWhenCounting = $groupProductsWhenCounting;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\Price\Price|null
+	 */
+	public function getPriceCzk()
+	{
+		return $this->priceCzk;
+	}
+
+	/**
+	 * @param \Sellastica\Price\Price|null $priceCzk
+	 * @return $this
+	 */
+	public function priceCzk(\Sellastica\Price\Price $priceCzk = null)
+	{
+		$this->priceCzk = $priceCzk;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\Price\Price|null
+	 */
+	public function getPriceEur()
+	{
+		return $this->priceEur;
+	}
+
+	/**
+	 * @param \Sellastica\Price\Price|null $priceEur
+	 * @return $this
+	 */
+	public function priceEur(\Sellastica\Price\Price $priceEur = null)
+	{
+		$this->priceEur = $priceEur;
 		return $this;
 	}
 

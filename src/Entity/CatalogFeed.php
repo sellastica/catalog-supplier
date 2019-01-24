@@ -22,6 +22,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $title;
 	/** @var bool @optional */
 	private $updateOnly = false;
+	/** @var int|null @optional */
+	private $parentId;
 	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat @optional */
 	private $feedFormat;
 	/** @var \Sellastica\CatalogSupplier\Model\Compression @optional */
@@ -76,6 +78,10 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $saveSourceData = true;
 	/** @var bool @optional */
 	private $groupProductsWhenCounting = false;
+	/** @var \Sellastica\Price\Price|null @optional */
+	private $priceCzk;
+	/** @var \Sellastica\Price\Price|null @optional */
+	private $priceEur;
 
 
 	/**
@@ -135,6 +141,30 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setUpdateOnly(bool $updateOnly): void
 	{
 		$this->updateOnly = $updateOnly;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getParentId(): ?int
+	{
+		return $this->parentId;
+	}
+
+	/**
+	 * @param int|null $parentId
+	 */
+	public function setParentId(?int $parentId): void
+	{
+		$this->parentId = $parentId;
+	}
+
+	/**
+	 * @return CatalogFeed|null
+	 */
+	public function getParent(): ?CatalogFeed
+	{
+		return $this->relationService->getParent();
 	}
 
 	/**
@@ -634,6 +664,38 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \Sellastica\Price\Price|null
+	 */
+	public function getPriceCzk(): ?\Sellastica\Price\Price
+	{
+		return $this->priceCzk;
+	}
+
+	/**
+	 * @param \Sellastica\Price\Price|null $priceCzk
+	 */
+	public function setPriceCzk(?\Sellastica\Price\Price $priceCzk): void
+	{
+		$this->priceCzk = $priceCzk;
+	}
+
+	/**
+	 * @return \Sellastica\Price\Price|null
+	 */
+	public function getPriceEur(): ?\Sellastica\Price\Price
+	{
+		return $this->priceEur;
+	}
+
+	/**
+	 * @param \Sellastica\Price\Price|null $priceEur
+	 */
+	public function setPriceEur(?\Sellastica\Price\Price $priceEur): void
+	{
+		$this->priceEur = $priceEur;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -644,6 +706,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'supplierId' => $this->supplierId,
 				'title' => $this->title,
 				'updateOnly' => $this->updateOnly,
+				'parentId' => $this->parentId,
 				'url' => $this->url,
 				'domain' => $this->domain,
 				'itemXPath' => $this->itemXPath,
@@ -671,6 +734,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'crontab' => $this->crontab,
 				'saveSourceData' => $this->saveSourceData,
 				'groupProductsWhenCounting' => $this->groupProductsWhenCounting,
+				'priceCzk' => $this->priceCzk ? $this->priceCzk->getDefaultPrice() : null,
+				'priceEur' => $this->priceEur ? $this->priceEur->getDefaultPrice() : null,
 			]
 		);
 	}

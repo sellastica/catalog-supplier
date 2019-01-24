@@ -63,6 +63,24 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 			$data->secondCurrency = \Sellastica\Localization\Model\Currency::from($data->secondCurrency);
 		}
 
+		if (isset($data->priceCzk)) {
+			$data->priceCzk = new \Sellastica\Price\Price(
+				$data->priceCzk,
+				false,
+				\Accounting\Model\VatRateTypeFactory::getVatRate(\Sellastica\Localization\Model\Country::from('CZ')),
+				\Sellastica\Localization\Model\Currency::from('CZK')
+			);
+		}
+
+		if (isset($data->priceEur)) {
+			$data->priceEur = new \Sellastica\Price\Price(
+				$data->priceEur,
+				false,
+				\Accounting\Model\VatRateTypeFactory::getVatRate(\Sellastica\Localization\Model\Country::from('CZ')),
+				\Sellastica\Localization\Model\Currency::from('CZK')
+			);
+		}
+
 		return \Sellastica\CatalogSupplier\Entity\CatalogFeedBuilder::create(
 			$data->supplierId,
 			$data->url,

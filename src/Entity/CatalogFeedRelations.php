@@ -31,6 +31,16 @@ class CatalogFeedRelations implements \Sellastica\Entity\Relation\IEntityRelatio
 	}
 
 	/**
+	 * @return CatalogFeed|null
+	 */
+	public function getParent(): ?CatalogFeed
+	{
+		return $this->catalogFeed->getParentId()
+			? $this->em->getRepository(CatalogFeed::class)->find($this->catalogFeed->getParentId())
+			: null;
+	}
+
+	/**
 	 * @return CatalogFeedRuleCollection
 	 */
 	public function getRules(): CatalogFeedRuleCollection
