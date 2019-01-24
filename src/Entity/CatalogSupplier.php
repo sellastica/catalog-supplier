@@ -263,7 +263,8 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 		return $this->company
 			&& $this->homepage
 			&& $this->domain
-			&& $this->description;
+			&& $this->description
+			&& $this->billingAddress;
 	}
 
 	/**
