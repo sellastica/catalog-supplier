@@ -67,7 +67,7 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 			$data->priceCzk = new \Sellastica\Price\Price(
 				$data->priceCzk,
 				false,
-				\Accounting\Model\VatRateTypeFactory::getVatRate(\Sellastica\Localization\Model\Country::from('CZ')),
+				\Sellastica\Accounting\VatRateTypeFactory::getVatRate(\Sellastica\Localization\Model\Country::from('CZ')),
 				\Sellastica\Localization\Model\Currency::from('CZK')
 			);
 		}
@@ -76,7 +76,7 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 			$data->priceEur = new \Sellastica\Price\Price(
 				$data->priceEur,
 				false,
-				\Accounting\Model\VatRateTypeFactory::getVatRate(\Sellastica\Localization\Model\Country::from('CZ')),
+				\Sellastica\Accounting\VatRateTypeFactory::getVatRate(\Sellastica\Localization\Model\Country::from('CZ')),
 				\Sellastica\Localization\Model\Currency::from('CZK')
 			);
 		}
