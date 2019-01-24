@@ -19,6 +19,8 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var \Nette\Http\Url|null @optional */
 	private $homepage;
 	/** @var string|null @optional */
+	private $domain;
+	/** @var string|null @optional */
 	private $logo;
 	/** @var string|null @optional */
 	private $company;
@@ -98,6 +100,22 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setHomepage(?\Nette\Http\Url $homepage): void
 	{
 		$this->homepage = $homepage;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getDomain(): ?string
+	{
+		return $this->domain;
+	}
+
+	/**
+	 * @param string|null $domain
+	 */
+	public function setDomain(?string $domain): void
+	{
+		$this->domain = $domain;
 	}
 
 	/**
@@ -244,6 +262,7 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	{
 		return $this->company
 			&& $this->homepage
+			&& $this->domain
 			&& $this->description;
 	}
 
@@ -340,6 +359,7 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 				'homepage' => $this->homepage
 					? $this->homepage->getAbsoluteUrl()
 					: null,
+				'domain' => $this->domain,
 				'logo' => $this->logo,
 				'company' => $this->company,
 				'email' => $this->getEmail(),

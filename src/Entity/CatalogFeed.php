@@ -31,6 +31,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var string|null @required */
 	private $url;
 	/** @var string|null @optional */
+	private $domain;
+	/** @var string|null @optional */
 	private $itemXPath;
 	/** @var string|null @optional */
 	private $secondaryXPath;
@@ -187,6 +189,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setUrl(?string $url): void
 	{
 		$this->url = $url;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getDomain(): ?string
+	{
+		return $this->domain;
+	}
+
+	/**
+	 * @param string|null $domain
+	 */
+	public function setDomain(?string $domain): void
+	{
+		$this->domain = $domain;
 	}
 
 	/**
@@ -627,6 +645,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'title' => $this->title,
 				'updateOnly' => $this->updateOnly,
 				'url' => $this->url,
+				'domain' => $this->domain,
 				'itemXPath' => $this->itemXPath,
 				'secondaryXPath' => $this->secondaryXPath,
 				'converterClass' => $this->converterClass,

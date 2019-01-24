@@ -32,6 +32,8 @@ class CatalogFeedBuilder implements IBuilder
 	/** @var string|null */
 	private $uncompressedFilename;
 	/** @var string|null */
+	private $domain;
+	/** @var string|null */
 	private $itemXPath;
 	/** @var string|null */
 	private $secondaryXPath;
@@ -219,6 +221,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function uncompressedFilename(string $uncompressedFilename = null)
 	{
 		$this->uncompressedFilename = $uncompressedFilename;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getDomain()
+	{
+		return $this->domain;
+	}
+
+	/**
+	 * @param string|null $domain
+	 * @return $this
+	 */
+	public function domain(string $domain = null)
+	{
+		$this->domain = $domain;
 		return $this;
 	}
 

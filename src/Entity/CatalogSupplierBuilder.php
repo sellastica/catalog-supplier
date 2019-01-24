@@ -18,6 +18,8 @@ class CatalogSupplierBuilder implements IBuilder
 	/** @var \Nette\Http\Url|null */
 	private $homepage;
 	/** @var string|null */
+	private $domain;
+	/** @var string|null */
 	private $logo;
 	/** @var string|null */
 	private $company;
@@ -76,6 +78,24 @@ class CatalogSupplierBuilder implements IBuilder
 	public function homepage(\Nette\Http\Url $homepage = null)
 	{
 		$this->homepage = $homepage;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getDomain()
+	{
+		return $this->domain;
+	}
+
+	/**
+	 * @param string|null $domain
+	 * @return $this
+	 */
+	public function domain(string $domain = null)
+	{
+		$this->domain = $domain;
 		return $this;
 	}
 
