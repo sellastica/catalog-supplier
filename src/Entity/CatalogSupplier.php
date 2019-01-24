@@ -264,7 +264,12 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 			&& $this->homepage
 			&& $this->domain
 			&& $this->description
-			&& $this->billingAddress;
+			&& $this->billingAddress
+			&& $this->billingAddress->getCin()
+			&& $this->billingAddress->getStreet()
+			&& $this->billingAddress->getCity()
+			&& $this->billingAddress->getZip()
+			&& $this->billingAddress->getCountry();
 	}
 
 	/**
