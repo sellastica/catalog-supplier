@@ -226,14 +226,6 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function canBeExported(): bool
-	{
-		return (bool)$this->getOrdered();
-	}
-
-	/**
 	 * @return array
 	 */
 	public function toArray(): array
