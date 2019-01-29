@@ -53,6 +53,8 @@ class SupplierInquiryBuilder implements IBuilder
 	private $status;
 	/** @var float|null */
 	private $price;
+	/** @var \DateTime|null */
+	private $paid;
 
 	/**
 	 * @param \Sellastica\Identity\Model\Contact $contact
@@ -422,6 +424,24 @@ class SupplierInquiryBuilder implements IBuilder
 	public function price(float $price = null)
 	{
 		$this->price = $price;
+		return $this;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getPaid()
+	{
+		return $this->paid;
+	}
+
+	/**
+	 * @param \DateTime|null $paid
+	 * @return $this
+	 */
+	public function paid(\DateTime $paid = null)
+	{
+		$this->paid = $paid;
 		return $this;
 	}
 

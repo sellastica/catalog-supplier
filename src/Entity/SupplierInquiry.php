@@ -54,6 +54,8 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	private $status;
 	/** @var float|null @optional */
 	private $price;
+	/** @var \DateTime|null @optional */
+	private $paid;
 
 
 	/**
@@ -468,6 +470,22 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \DateTime|null
+	 */
+	public function getPaid(): ?\DateTime
+	{
+		return $this->paid;
+	}
+
+	/**
+	 * @param \DateTime|null $paid
+	 */
+	public function setPaid(?\DateTime $paid): void
+	{
+		$this->paid = $paid;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -496,6 +514,7 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'feedId' => $this->feedId,
 				'status' => $this->status->getValue(),
 				'price' => $this->price,
+				'paid' => $this->paid,
 			]
 		);
 	}
