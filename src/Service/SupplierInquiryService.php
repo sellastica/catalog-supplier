@@ -24,24 +24,24 @@ class SupplierInquiryService
 
 	/**
 	 * @param int $id
-	 * @return null|\Sellastica\CatalogSupplier\Entity\CatalogFeed
+	 * @return null|\Sellastica\CatalogSupplier\Entity\SupplierInquiry
 	 */
-	public function find(int $id): ?\Sellastica\CatalogSupplier\Entity\CatalogFeed
+	public function find(int $id): ?\Sellastica\CatalogSupplier\Entity\SupplierInquiry
 	{
-		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogFeed::class)->find($id);
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\SupplierInquiry::class)->find($id);
 	}
 
 	/**
 	 * @param array $filter
 	 * @param \Sellastica\Entity\Configuration|null $configuration
-	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection|\Sellastica\CatalogSupplier\Entity\CatalogFeed[]
+	 * @return \Sellastica\CatalogSupplier\Entity\SupplierInquiryCollection|\Sellastica\CatalogSupplier\Entity\SupplierInquiry[]
 	 */
 	public function findBy(
 		array $filter,
 		\Sellastica\Entity\Configuration $configuration = null
-	): \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
+	): \Sellastica\CatalogSupplier\Entity\SupplierInquiryCollection
 	{
-		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogFeed::class)
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\SupplierInquiry::class)
 			->findBy($filter, $configuration);
 	}
 
