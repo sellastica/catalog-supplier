@@ -9,19 +9,26 @@ class ProjectFeedLogDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	/**
 	 * @param \DateTime $date
 	 * @param int $projectId
+	 * @param bool $nonTrialOnly
 	 * @return int|false
 	 */
 	public function getProductsSumCount(
 		\DateTime $date,
-		int $projectId
+		int $projectId,
+		bool $nonTrialOnly = false
 	)
 	{
-		return $this->getResource()
+		$resource =  $this->getResource()
 			->select(false)
 			->select('SUM(productsCount)')
 			->where('projectId = %i', $projectId)
-			->where('date = %d', $date)
-			->fetchSingle();
+			->where('date = %d', $date);
+
+		if ($nonTrialOnly) {
+			$resource->where('trial = 0');
+		}
+
+		return $resource->fetchSingle();
 	}
 
 	/**

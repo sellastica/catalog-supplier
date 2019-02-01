@@ -57,15 +57,17 @@ class ProjectFeedLogService
 	/**
 	 * @param \DateTime $date
 	 * @param \Sellastica\Project\Entity\Project $project
+	 * @param bool $nonTrialOnly
 	 * @return int|null
 	 */
 	public function getProductsSumCount(
 		\DateTime $date,
-		\Sellastica\Project\Entity\Project $project
+		\Sellastica\Project\Entity\Project $project,
+		bool $nonTrialOnly = false
 	): ?int
 	{
 		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeedLog::class)
-			->getProductsSumCount($date, $project->getId());
+			->getProductsSumCount($date, $project->getId(), $nonTrialOnly);
 	}
 
 	/**
