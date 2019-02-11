@@ -27,6 +27,18 @@ class ProjectFeedService
 	}
 
 	/**
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection|\Sellastica\CatalogSupplier\Entity\ProjectFeed[]
+	 */
+	public function findAll(
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)
+			->findAll($configuration);
+	}
+
+	/**
 	 * @param array $filter
 	 * @param \Sellastica\Entity\Configuration|null $configuration
 	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection|\Sellastica\CatalogSupplier\Entity\ProjectFeed[]
@@ -52,6 +64,22 @@ class ProjectFeedService
 	{
 		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)
 			->findBy(['projectId' => $projectId], $configuration);
+	}
+
+	/**
+	 * @param int $projectId
+	 * @param \Sellastica\Entity\Configuration|null $configuration
+	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection|\Sellastica\CatalogSupplier\Entity\ProjectFeed[]
+	 */
+	public function findActiveByProjectId(
+		int $projectId,
+		\Sellastica\Entity\Configuration $configuration = null
+	): \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)->findBy([
+			'projectId' => $projectId,
+			'removed IS NULL',
+		], $configuration);
 	}
 
 	/**

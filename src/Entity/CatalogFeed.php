@@ -72,12 +72,14 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $visible = true;
 	/** @var string|null @optional */
 	private $overrideScheme;
-	/** @var string @optional */
-	private $crontab = '0 */2 * * *';
+	/** @var string|null @optional */
+	private $crontab;
 	/** @var bool @optional */
 	private $saveSourceData = true;
 	/** @var bool @optional */
 	private $groupProductsWhenCounting = false;
+	/** @var bool @optional */
+	private $hideMissingProducts = true;
 	/** @var \Sellastica\Price\Price|null @optional */
 	private $priceCzk;
 	/** @var \Sellastica\Price\Price|null @optional */
@@ -616,17 +618,17 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getCrontab(): string
+	public function getCrontab(): ?string
 	{
 		return $this->crontab;
 	}
 
 	/**
-	 * @param string $crontab
+	 * @param string|null $crontab
 	 */
-	public function setCrontab(string $crontab): void
+	public function setCrontab(?string $crontab): void
 	{
 		$this->crontab = $crontab;
 	}
@@ -696,6 +698,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function hideMissingProducts(): bool
+	{
+		return $this->hideMissingProducts;
+	}
+
+	/**
+	 * @param bool $hideMissingProducts
+	 */
+	public function setHideMissingProducts(bool $hideMissingProducts): void
+	{
+		$this->hideMissingProducts = $hideMissingProducts;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -734,6 +752,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'crontab' => $this->crontab,
 				'saveSourceData' => $this->saveSourceData,
 				'groupProductsWhenCounting' => $this->groupProductsWhenCounting,
+				'hideMissingProducts' => $this->hideMissingProducts,
 				'priceCzk' => $this->priceCzk ? $this->priceCzk->getDefaultPrice() : null,
 				'priceEur' => $this->priceEur ? $this->priceEur->getDefaultPrice() : null,
 			]

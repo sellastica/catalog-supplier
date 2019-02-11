@@ -67,12 +67,14 @@ class CatalogFeedBuilder implements IBuilder
 	private $visible = true;
 	/** @var string|null */
 	private $overrideScheme;
-	/** @var string */
-	private $crontab = '0 */2 * * *';
+	/** @var string|null */
+	private $crontab;
 	/** @var bool */
 	private $saveSourceData = true;
 	/** @var bool */
 	private $groupProductsWhenCounting = false;
+	/** @var bool */
+	private $hideMissingProducts = true;
 	/** @var \Sellastica\Price\Price|null */
 	private $priceCzk;
 	/** @var \Sellastica\Price\Price|null */
@@ -555,18 +557,18 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getCrontab(): string
+	public function getCrontab()
 	{
 		return $this->crontab;
 	}
 
 	/**
-	 * @param string $crontab
+	 * @param string|null $crontab
 	 * @return $this
 	 */
-	public function crontab(string $crontab = '0 */2 * * *')
+	public function crontab(string $crontab = null)
 	{
 		$this->crontab = $crontab;
 		return $this;
@@ -605,6 +607,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function groupProductsWhenCounting(bool $groupProductsWhenCounting)
 	{
 		$this->groupProductsWhenCounting = $groupProductsWhenCounting;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getHideMissingProducts(): bool
+	{
+		return $this->hideMissingProducts;
+	}
+
+	/**
+	 * @param bool $hideMissingProducts
+	 * @return $this
+	 */
+	public function hideMissingProducts(bool $hideMissingProducts = true)
+	{
+		$this->hideMissingProducts = $hideMissingProducts;
 		return $this;
 	}
 
