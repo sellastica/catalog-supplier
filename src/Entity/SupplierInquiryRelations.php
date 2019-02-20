@@ -45,4 +45,12 @@ class SupplierInquiryRelations implements \Sellastica\Entity\Relation\IEntityRel
 	{
 		return $this->em->getRepository(\Sellastica\Helpdesk\Entity\Ticket::class)->find($this->inquiry->getTicketId());
 	}
+
+	/**
+	 * @return \Sellastica\Crm\Entity\Invoice\Entity\Invoice|null
+	 */
+	public function getInvoice(): ?\Sellastica\Crm\Entity\Invoice\Entity\Invoice
+	{
+		return $this->em->getRepository(\Sellastica\Crm\Entity\Invoice\Entity\Invoice::class)->find($this->inquiry->getInvoiceId());
+	}
 }

@@ -52,10 +52,8 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	private $feedId;
 	/** @var \Sellastica\CatalogSupplier\Model\InquiryStatus @optional */
 	private $status;
-	/** @var float|null @optional */
-	private $price;
-	/** @var \DateTime|null @optional */
-	private $paid;
+	/** @var int|null @optional */
+	private $invoiceId;
 
 
 	/**
@@ -454,35 +452,27 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return float|null
+	 * @return int|null
 	 */
-	public function getPrice(): ?float
+	public function getInvoiceId(): ?int
 	{
-		return $this->price;
+		return $this->invoiceId;
 	}
 
 	/**
-	 * @param float|null $price
+	 * @param int|null $invoiceId
 	 */
-	public function setPrice(?float $price): void
+	public function setInvoiceId(?int $invoiceId): void
 	{
-		$this->price = $price;
+		$this->invoiceId = $invoiceId;
 	}
 
 	/**
-	 * @return \DateTime|null
+	 * @return \Sellastica\Crm\Entity\Invoice\Entity\Invoice|null
 	 */
-	public function getPaid(): ?\DateTime
+	public function getInvoice(): ?\Sellastica\Crm\Entity\Invoice\Entity\Invoice
 	{
-		return $this->paid;
-	}
-
-	/**
-	 * @param \DateTime|null $paid
-	 */
-	public function setPaid(?\DateTime $paid): void
-	{
-		$this->paid = $paid;
+		return $this->relationService->getInvoice();
 	}
 
 	/**
@@ -513,8 +503,7 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'supplierId' => $this->supplierId,
 				'feedId' => $this->feedId,
 				'status' => $this->status->getValue(),
-				'price' => $this->price,
-				'paid' => $this->paid,
+				'invoiceId' => $this->invoiceId,
 			]
 		);
 	}

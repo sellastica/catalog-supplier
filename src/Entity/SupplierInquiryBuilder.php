@@ -51,10 +51,8 @@ class SupplierInquiryBuilder implements IBuilder
 	private $feedId;
 	/** @var \Sellastica\CatalogSupplier\Model\InquiryStatus */
 	private $status;
-	/** @var float|null */
-	private $price;
-	/** @var \DateTime|null */
-	private $paid;
+	/** @var int|null */
+	private $invoiceId;
 
 	/**
 	 * @param \Sellastica\Identity\Model\Contact $contact
@@ -410,38 +408,20 @@ class SupplierInquiryBuilder implements IBuilder
 	}
 
 	/**
-	 * @return float|null
+	 * @return int|null
 	 */
-	public function getPrice()
+	public function getInvoiceId()
 	{
-		return $this->price;
+		return $this->invoiceId;
 	}
 
 	/**
-	 * @param float|null $price
+	 * @param int|null $invoiceId
 	 * @return $this
 	 */
-	public function price(float $price = null)
+	public function invoiceId(int $invoiceId = null)
 	{
-		$this->price = $price;
-		return $this;
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getPaid()
-	{
-		return $this->paid;
-	}
-
-	/**
-	 * @param \DateTime|null $paid
-	 * @return $this
-	 */
-	public function paid(\DateTime $paid = null)
-	{
-		$this->paid = $paid;
+		$this->invoiceId = $invoiceId;
 		return $this;
 	}
 
