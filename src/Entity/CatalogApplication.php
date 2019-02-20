@@ -22,6 +22,8 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 	private $shoptet = false;
 	/** @var bool @optional */
 	private $visible = true;
+	/** @var bool @optional */
+	private $global = false;
 
 
 	/**
@@ -137,6 +139,22 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isGlobal(): bool
+	{
+		return $this->global;
+	}
+
+	/**
+	 * @param bool $global
+	 */
+	public function setGlobal(bool $global): void
+	{
+		$this->global = $global;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -150,6 +168,7 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 				'description' => $this->description,
 				'shoptet' => $this->shoptet,
 				'visible' => $this->visible,
+				'global' => $this->global,
 			]
 		);
 	}

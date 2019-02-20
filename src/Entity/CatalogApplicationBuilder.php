@@ -23,6 +23,8 @@ class CatalogApplicationBuilder implements IBuilder
 	private $shoptet = false;
 	/** @var bool */
 	private $visible = true;
+	/** @var bool */
+	private $global = false;
 
 	/**
 	 * @param string $title
@@ -122,6 +124,24 @@ class CatalogApplicationBuilder implements IBuilder
 	public function visible(bool $visible = true)
 	{
 		$this->visible = $visible;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getGlobal(): bool
+	{
+		return $this->global;
+	}
+
+	/**
+	 * @param bool $global
+	 * @return $this
+	 */
+	public function global(bool $global)
+	{
+		$this->global = $global;
 		return $this;
 	}
 

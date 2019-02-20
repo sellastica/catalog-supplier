@@ -13,7 +13,7 @@ class InstalledCatalogApplicationBuilder implements IBuilder
 
 	/** @var int */
 	private $applicationId;
-	/** @var int */
+	/** @var int|null */
 	private $catalogFeedId;
 	/** @var int */
 	private $projectId;
@@ -22,12 +22,12 @@ class InstalledCatalogApplicationBuilder implements IBuilder
 
 	/**
 	 * @param int $applicationId
-	 * @param int $catalogFeedId
+	 * @param int|null $catalogFeedId
 	 * @param int $projectId
 	 */
 	public function __construct(
 		int $applicationId,
-		int $catalogFeedId,
+		int $catalogFeedId = null,
 		int $projectId
 	)
 	{
@@ -45,9 +45,9 @@ class InstalledCatalogApplicationBuilder implements IBuilder
 	}
 
 	/**
-	 * @return int
+	 * @return int|null
 	 */
-	public function getCatalogFeedId(): int
+	public function getCatalogFeedId()
 	{
 		return $this->catalogFeedId;
 	}
@@ -96,13 +96,13 @@ class InstalledCatalogApplicationBuilder implements IBuilder
 
 	/**
 	 * @param int $applicationId
-	 * @param int $catalogFeedId
+	 * @param int|null $catalogFeedId
 	 * @param int $projectId
 	 * @return self
 	 */
 	public static function create(
 		int $applicationId,
-		int $catalogFeedId,
+		int $catalogFeedId = null,
 		int $projectId
 	): self
 	{

@@ -16,7 +16,7 @@ class InstalledCatalogApplication extends \Sellastica\Entity\Entity\AbstractEnti
 
 	/** @var int @required */
 	private $applicationId;
-	/** @var int @required */
+	/** @var int|null @required */
 	private $catalogFeedId;
 	/** @var int @required */
 	private $projectId;
@@ -57,17 +57,17 @@ class InstalledCatalogApplication extends \Sellastica\Entity\Entity\AbstractEnti
 	}
 
 	/**
-	 * @return int
+	 * @return int|null
 	 */
-	public function getCatalogFeedId(): int
+	public function getCatalogFeedId(): ?int
 	{
 		return $this->catalogFeedId;
 	}
 
 	/**
-	 * @param int $catalogFeedId
+	 * @param int|null $catalogFeedId
 	 */
-	public function setCatalogFeedId(int $catalogFeedId): void
+	public function setCatalogFeedId(?int $catalogFeedId): void
 	{
 		$this->catalogFeedId = $catalogFeedId;
 	}
