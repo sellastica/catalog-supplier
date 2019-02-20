@@ -4,6 +4,8 @@ namespace Sellastica\CatalogSupplier\Entity;
 /**
  * @generate-builder
  * @see InstalledCatalogApplicationBuilder
+ *
+ * @property InstalledCatalogApplicationRelations $relationService
  */
 class InstalledCatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 	implements \Sellastica\Entity\Entity\IEntity
@@ -86,6 +88,14 @@ class InstalledCatalogApplication extends \Sellastica\Entity\Entity\AbstractEnti
 	public function setProjectId(int $projectId): void
 	{
 		$this->projectId = $projectId;
+	}
+
+	/**
+	 * @return \Sellastica\Project\Entity\Project|null
+	 */
+	public function getProject(): ?\Sellastica\Project\Entity\Project
+	{
+		return $this->relationService->getProject();
 	}
 
 	/**
