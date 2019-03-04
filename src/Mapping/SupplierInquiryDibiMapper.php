@@ -23,7 +23,7 @@ class SupplierInquiryDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	 */
 	protected function getTableName($databaseName = false): string
 	{
-		return ($databaseName ? $this->environment->getCommonCrmDatabaseName() . '.' : '')
+		return ($databaseName ? $this->environment->getNapojSeCrmDatabaseName() . '.' : '')
 			. 'suppliers_inquiry';
 	}
 

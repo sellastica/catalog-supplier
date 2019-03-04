@@ -13,7 +13,7 @@ class CatalogCategoryDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	public function findCategories(int $supplierId): array
 	{
 		return $this->database->select('categoryId')
-			->from('crm_all.suppliers_supplier_category_rel')
+			->from('%n.suppliers_supplier_category_rel', \Sellastica\Core\Model\Environment::NAPOJSE_CRM)
 			->where('supplierId = %i', $supplierId)
 			->fetchPairs();
 	}
@@ -32,7 +32,7 @@ class CatalogCategoryDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	 */
 	protected function getTableName($databaseName = false): string
 	{
-		return ($databaseName ? $this->environment->getCommonCrmDatabaseName() . '.' : '')
+		return ($databaseName ? $this->environment->getNapojSeCrmDatabaseName() . '.' : '')
 			. 'suppliers_category';
 	}
 }

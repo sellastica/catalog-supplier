@@ -21,7 +21,7 @@ class ProjectFeedService
 	 * @param int $id
 	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeed|null
 	 */
-	public function find(int $id): ?\Sellastica\CatalogSupplier\Entity\ProjectFeed
+	public function find(?int $id): ?\Sellastica\CatalogSupplier\Entity\ProjectFeed
 	{
 		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)->find($id);
 	}

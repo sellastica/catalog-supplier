@@ -20,9 +20,7 @@ class CatalogFeedDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	): array
 	{
 		return $this->getResourceWithIds($configuration)
-			//->innerJoin('crm_all.suppliers_feed sf')
-			//->on('sf.id = %n.supplierId', $this->getTableName())
-			->innerJoin('crm_all.suppliers_supplier_category_rel scr')
+			->innerJoin('%n.suppliers_supplier_category_rel scr', \Sellastica\Core\Model\Environment::NAPOJSE_CRM)
 			->on('scr.supplierId = %n.supplierId', $this->getTableName())
 			->where('scr.categoryId = %i', $categoryId)
 			->fetchPairs();
@@ -39,7 +37,7 @@ class CatalogFeedDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	): array
 	{
 		return $this->getPublishableResourceWithIds($configuration)
-			->innerJoin('crm_all.suppliers_supplier_category_rel scr')
+			->innerJoin('%n.suppliers_supplier_category_rel scr', \Sellastica\Core\Model\Environment::NAPOJSE_CRM)
 			->on('scr.supplierId = %n.supplierId', $this->getTableName())
 			->where('scr.categoryId = %i', $categoryId)
 			->where('%n.visible = 1', $this->getTableName())
@@ -72,7 +70,7 @@ class CatalogFeedDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	 */
 	protected function getTableName($databaseName = false): string
 	{
-		return ($databaseName ? $this->environment->getCommonCrmDatabaseName() . '.' : '')
+		return ($databaseName ? $this->environment->getNapojSeCrmDatabaseName() . '.' : '')
 			. 'suppliers_feed';
 	}
 }
