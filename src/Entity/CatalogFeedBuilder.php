@@ -45,6 +45,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $schemaFilename;
 	/** @var string|null */
 	private $csvDelimiter;
+	/** @var int|null */
+	private $csvHeaderOffset = 0;
 	/** @var string|null */
 	private $login;
 	/** @var string|null */
@@ -355,6 +357,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function csvDelimiter(string $csvDelimiter = null)
 	{
 		$this->csvDelimiter = $csvDelimiter;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getCsvHeaderOffset()
+	{
+		return $this->csvHeaderOffset;
+	}
+
+	/**
+	 * @param int|null $csvHeaderOffset
+	 * @return $this
+	 */
+	public function csvHeaderOffset(int $csvHeaderOffset = null)
+	{
+		$this->csvHeaderOffset = $csvHeaderOffset;
 		return $this;
 	}
 

@@ -50,6 +50,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $schemaFilename;
 	/** @var string|null @optional */
 	private $csvDelimiter;
+	/** @var int|null @optional */
+	private $csvHeaderOffset = 0;
 	/** @var string|null @optional */
 	private $login;
 	/** @var string|null @optional */
@@ -714,6 +716,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return int|null
+	 */
+	public function getCsvHeaderOffset(): ?int
+	{
+		return $this->csvHeaderOffset;
+	}
+
+	/**
+	 * @param int|null $csvHeaderOffset
+	 */
+	public function setCsvHeaderOffset(?int $csvHeaderOffset): void
+	{
+		$this->csvHeaderOffset = $csvHeaderOffset;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -749,6 +767,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'timeout' => $this->timeout,
 				'overrideScheme' => $this->overrideScheme,
 				'csvDelimiter' => $this->csvDelimiter,
+				'csvHeaderOffset' => $this->csvHeaderOffset,
 				'crontab' => $this->crontab,
 				'saveSourceData' => $this->saveSourceData,
 				'groupProductsWhenCounting' => $this->groupProductsWhenCounting,
