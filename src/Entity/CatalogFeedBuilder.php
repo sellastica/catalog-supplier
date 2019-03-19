@@ -55,6 +55,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $timeout = 180;
 	/** @var bool */
 	private $supportsHead = true;
+	/** @var string|null */
+	private $customDownloader;
 	/** @var \Sellastica\CatalogSupplier\Model\Stream */
 	private $stream;
 	/** @var bool */
@@ -447,6 +449,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function supportsHead(bool $supportsHead = true)
 	{
 		$this->supportsHead = $supportsHead;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCustomDownloader()
+	{
+		return $this->customDownloader;
+	}
+
+	/**
+	 * @param string|null $customDownloader
+	 * @return $this
+	 */
+	public function customDownloader(string $customDownloader = null)
+	{
+		$this->customDownloader = $customDownloader;
 		return $this;
 	}
 
