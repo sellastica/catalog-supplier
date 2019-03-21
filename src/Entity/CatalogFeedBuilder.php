@@ -57,6 +57,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $supportsHead = true;
 	/** @var string|null */
 	private $customDownloader;
+	/** @var string|null */
+	private $customImageDownloader;
 	/** @var \Sellastica\CatalogSupplier\Model\Stream */
 	private $stream;
 	/** @var bool */
@@ -467,6 +469,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function customDownloader(string $customDownloader = null)
 	{
 		$this->customDownloader = $customDownloader;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCustomImageDownloader()
+	{
+		return $this->customImageDownloader;
+	}
+
+	/**
+	 * @param string|null $customImageDownloader
+	 * @return $this
+	 */
+	public function customImageDownloader(string $customImageDownloader = null)
+	{
+		$this->customImageDownloader = $customImageDownloader;
 		return $this;
 	}
 

@@ -62,6 +62,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $supportsHead = true;
 	/** @var string|null @optional */
 	private $customDownloader;
+	/** @var string|null @optional */
+	private $customImageDownloader;
 	/** @var \Sellastica\CatalogSupplier\Model\Stream @optional */
 	private $stream;
 	/** @var bool @optional */
@@ -742,6 +744,30 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @param string|null $customDownloader
+	 */
+	public function setCustomDownloader(?string $customDownloader): void
+	{
+		$this->customDownloader = $customDownloader;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCustomImageDownloader(): ?string
+	{
+		return $this->customImageDownloader;
+	}
+
+	/**
+	 * @param string|null $customImageDownloader
+	 */
+	public function setCustomImageDownloader(?string $customImageDownloader): void
+	{
+		$this->customImageDownloader = $customImageDownloader;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -766,6 +792,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'password' => $this->password,
 				'supportsHead' => $this->supportsHead,
 				'customDownloader' => $this->customDownloader,
+				'customImageDownloader' => $this->customImageDownloader,
 				'stream' => $this->stream->getValue(),
 				'customUrl' => $this->customUrl,
 				'demo' => $this->demo,
