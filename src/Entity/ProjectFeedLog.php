@@ -4,6 +4,8 @@ namespace Sellastica\CatalogSupplier\Entity;
 /**
  * @generate-builder
  * @see ProjectFeedLogBuilder
+ *
+ * @property ProjectFeedLogRelations $relationService
  */
 class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 	implements \Sellastica\Entity\Entity\IEntity
@@ -47,6 +49,14 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \Sellastica\Project\Entity\Project
+	 */
+	public function getProject(): \Sellastica\Project\Entity\Project
+	{
+		return $this->relationService->getProject();
+	}
+
+	/**
 	 * @param int $projectId
 	 */
 	public function setProjectId(int $projectId): void
@@ -60,6 +70,14 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 	public function getCatalogFeedId(): int
 	{
 		return $this->catalogFeedId;
+	}
+
+	/**
+	 * @return CatalogFeed|null
+	 */
+	public function getCatalogFeed(): ?CatalogFeed
+	{
+		return $this->relationService->getCatalogFeed();
 	}
 
 	/**
