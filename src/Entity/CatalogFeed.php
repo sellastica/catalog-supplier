@@ -16,6 +16,9 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 		AUTH_BASIC = 'basic',
 		AUTH_NTLM = 'ntlm';
 
+	const ENCODING_UTF8 = 'utf-8',
+		ENCODING_WINDOWS_1250 = 'windows-1250';
+
 	/** @var int @required */
 	private $supplierId;
 	/** @var string|null @optional */
@@ -90,6 +93,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $priceCzk;
 	/** @var \Sellastica\Price\Price|null @optional */
 	private $priceEur;
+	/** @var string @optional */
+	private $encoding = self::ENCODING_UTF8;
 
 
 	/**
@@ -768,6 +773,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getEncoding(): string
+	{
+		return $this->encoding;
+	}
+
+	/**
+	 * @param string $encoding
+	 */
+	public function setEncoding(string $encoding): void
+	{
+		$this->encoding = $encoding;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -812,6 +833,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'hideMissingProducts' => $this->hideMissingProducts,
 				'priceCzk' => $this->priceCzk ? $this->priceCzk->getDefaultPrice() : null,
 				'priceEur' => $this->priceEur ? $this->priceEur->getDefaultPrice() : null,
+				'encoding' => $this->encoding,
 			]
 		);
 	}

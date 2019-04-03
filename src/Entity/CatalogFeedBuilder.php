@@ -85,6 +85,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $priceCzk;
 	/** @var \Sellastica\Price\Price|null */
 	private $priceEur;
+	/** @var string */
+	private $encoding = 'utf-8';
 
 	/**
 	 * @param int $supplierId
@@ -721,6 +723,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function priceEur(\Sellastica\Price\Price $priceEur = null)
 	{
 		$this->priceEur = $priceEur;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEncoding(): string
+	{
+		return $this->encoding;
+	}
+
+	/**
+	 * @param string $encoding
+	 * @return $this
+	 */
+	public function encoding(string $encoding = 'utf-8')
+	{
+		$this->encoding = $encoding;
 		return $this;
 	}
 
