@@ -54,6 +54,9 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
+		$data->modifiedProperties = !empty($data->modifiedProperties)
+			? \Nette\Utils\Json::decode($data->modifiedProperties, \Nette\Utils\Json::FORCE_ARRAY)
+			: [];
 		$data->stream = \Sellastica\CatalogSupplier\Model\Stream::from($data->stream);
 		$data->compression = \Sellastica\CatalogSupplier\Model\Compression::from($data->compression);
 		$data->feedFormat = \Sellastica\CatalogSupplier\Model\FeedFormat::from($data->feedFormat);

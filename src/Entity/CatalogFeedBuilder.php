@@ -87,6 +87,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $priceEur;
 	/** @var string */
 	private $encoding = 'utf-8';
+	/** @var array */
+	private $modifiedProperties = [];
 
 	/**
 	 * @param int $supplierId
@@ -741,6 +743,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function encoding(string $encoding = 'utf-8')
 	{
 		$this->encoding = $encoding;
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getModifiedProperties(): array
+	{
+		return $this->modifiedProperties;
+	}
+
+	/**
+	 * @param array $modifiedProperties
+	 * @return $this
+	 */
+	public function modifiedProperties(array $modifiedProperties)
+	{
+		$this->modifiedProperties = $modifiedProperties;
 		return $this;
 	}
 

@@ -95,6 +95,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $priceEur;
 	/** @var string @optional */
 	private $encoding = self::ENCODING_UTF8;
+	/** @var array @optional */
+	private $modifiedProperties = [];
 
 
 	/**
@@ -791,6 +793,32 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return array
 	 */
+	public function getModifiedProperties(): array
+	{
+		return $this->modifiedProperties;
+	}
+
+	/**
+	 * @param array $modifiedProperties
+	 */
+	public function setModifiedProperties(array $modifiedProperties): void
+	{
+		$this->modifiedProperties = $modifiedProperties;
+	}
+
+	/**
+	 * @param string $property
+	 */
+	public function addModifiedProperty(string $property): void
+	{
+		if (!in_array($property, $this->modifiedProperties)) {
+			$this->modifiedProperties[] = $property;
+		}
+	}
+
+	/**
+	 * @return array
+	 */
 	public function toArray(): array
 	{
 		return array_merge(
@@ -834,6 +862,9 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'priceCzk' => $this->priceCzk ? $this->priceCzk->getDefaultPrice() : null,
 				'priceEur' => $this->priceEur ? $this->priceEur->getDefaultPrice() : null,
 				'encoding' => $this->encoding,
+				'modifiedProperties' => $this->modifiedProperties
+					? \Nette\Utils\Json::encode($this->modifiedProperties)
+					: null,
 			]
 		);
 	}
