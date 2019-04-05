@@ -54,12 +54,16 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
-		$data->modifiedProperties = !empty($data->modifiedProperties)
-			? \Nette\Utils\Json::decode($data->modifiedProperties, \Nette\Utils\Json::FORCE_ARRAY)
-			: [];
 		$data->stream = \Sellastica\CatalogSupplier\Model\Stream::from($data->stream);
 		$data->compression = \Sellastica\CatalogSupplier\Model\Compression::from($data->compression);
 		$data->feedFormat = \Sellastica\CatalogSupplier\Model\FeedFormat::from($data->feedFormat);
+		$data->modifiedProperties = !empty($data->modifiedProperties)
+			? \Nette\Utils\Json::decode($data->modifiedProperties, \Nette\Utils\Json::FORCE_ARRAY)
+			: [];
+		$data->options = !empty($data->options)
+			? \Nette\Utils\Json::decode($data->options, \Nette\Utils\Json::FORCE_ARRAY)
+			: [];
+
 		$data->defaultCurrency = \Sellastica\Localization\Model\Currency::from($data->defaultCurrency);
 		$data->defaultCountry = \Sellastica\Localization\Model\Country::from($data->defaultCountry);
 		if ($data->secondCurrency) {

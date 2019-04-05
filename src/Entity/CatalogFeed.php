@@ -97,6 +97,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $encoding = self::ENCODING_UTF8;
 	/** @var array @optional */
 	private $modifiedProperties = [];
+	/** @var array @optional */
+	private $options = [];
 
 
 	/**
@@ -827,6 +829,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return array
 	 */
+	public function getOptions(): array
+	{
+		return $this->options;
+	}
+
+	/**
+	 * @param array $options
+	 */
+	public function setOptions(array $options): void
+	{
+		$this->options = $options;
+	}
+
+	/**
+	 * @return array
+	 */
 	public function toArray(): array
 	{
 		return array_merge(
@@ -872,6 +890,9 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'encoding' => $this->encoding,
 				'modifiedProperties' => $this->modifiedProperties
 					? \Nette\Utils\Json::encode($this->modifiedProperties)
+					: null,
+				'options' => $this->options
+					? \Nette\Utils\Json::encode($this->options)
 					: null,
 			]
 		);
