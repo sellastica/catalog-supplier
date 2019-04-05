@@ -183,6 +183,14 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isMainFeed(): bool
+	{
+		return !$this->parentId;
+	}
+
+	/**
 	 * @return string|null
 	 */
 	public function getTitle(): ?string
