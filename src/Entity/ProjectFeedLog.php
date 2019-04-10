@@ -20,6 +20,12 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 	private $date;
 	/** @var int @required */
 	private $productsCount;
+	/** @var int @optional */
+	private $approvedProductsCount = 0;
+	/** @var int @optional */
+	private $hiddenProductsCount = 0;
+	/** @var int @optional */
+	private $totalProductsCount = 0;
 	/** @var bool @optional */
 	private $trial = false;
 
@@ -121,6 +127,54 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getApprovedProductsCount(): int
+	{
+		return $this->approvedProductsCount;
+	}
+
+	/**
+	 * @param int $approvedProductsCount
+	 */
+	public function setApprovedProductsCount(int $approvedProductsCount): void
+	{
+		$this->approvedProductsCount = $approvedProductsCount;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getHiddenProductsCount(): int
+	{
+		return $this->hiddenProductsCount;
+	}
+
+	/**
+	 * @param int $hiddenProductsCount
+	 */
+	public function setHiddenProductsCount(int $hiddenProductsCount): void
+	{
+		$this->hiddenProductsCount = $hiddenProductsCount;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getTotalProductsCount(): int
+	{
+		return $this->totalProductsCount;
+	}
+
+	/**
+	 * @param int $totalProductsCount
+	 */
+	public function setTotalProductsCount(int $totalProductsCount): void
+	{
+		$this->totalProductsCount = $totalProductsCount;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function isTrial(): bool
@@ -148,6 +202,9 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 				'catalogFeedId' => $this->catalogFeedId,
 				'date' => $this->date,
 				'productsCount' => $this->productsCount,
+				'approvedProductsCount' => $this->approvedProductsCount,
+				'hiddenProductsCount' => $this->hiddenProductsCount,
+				'totalProductsCount' => $this->totalProductsCount,
 				'trial' => $this->trial,
 			]
 		);

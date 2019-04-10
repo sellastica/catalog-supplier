@@ -19,6 +19,12 @@ class ProjectFeedLogBuilder implements IBuilder
 	private $date;
 	/** @var int */
 	private $productsCount;
+	/** @var int */
+	private $approvedProductsCount = 0;
+	/** @var int */
+	private $hiddenProductsCount = 0;
+	/** @var int */
+	private $totalProductsCount = 0;
 	/** @var bool */
 	private $trial = false;
 
@@ -71,6 +77,60 @@ class ProjectFeedLogBuilder implements IBuilder
 	public function getProductsCount(): int
 	{
 		return $this->productsCount;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getApprovedProductsCount(): int
+	{
+		return $this->approvedProductsCount;
+	}
+
+	/**
+	 * @param int $approvedProductsCount
+	 * @return $this
+	 */
+	public function approvedProductsCount(int $approvedProductsCount)
+	{
+		$this->approvedProductsCount = $approvedProductsCount;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getHiddenProductsCount(): int
+	{
+		return $this->hiddenProductsCount;
+	}
+
+	/**
+	 * @param int $hiddenProductsCount
+	 * @return $this
+	 */
+	public function hiddenProductsCount(int $hiddenProductsCount)
+	{
+		$this->hiddenProductsCount = $hiddenProductsCount;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getTotalProductsCount(): int
+	{
+		return $this->totalProductsCount;
+	}
+
+	/**
+	 * @param int $totalProductsCount
+	 * @return $this
+	 */
+	public function totalProductsCount(int $totalProductsCount)
+	{
+		$this->totalProductsCount = $totalProductsCount;
+		return $this;
 	}
 
 	/**
