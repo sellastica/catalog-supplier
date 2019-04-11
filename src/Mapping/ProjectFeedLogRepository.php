@@ -25,4 +25,17 @@ class ProjectFeedLogRepository extends Repository implements IProjectFeedLogRepo
 	{
 		return $this->dao->getProductsSumCount($date, $projectId, $nonTrialOnly);
 	}
+
+	/**
+	 * @param array $dates
+	 * @param int $projectId
+	 * @return array
+	 */
+	public function getProductsSumCountByDates(
+		array $dates,
+		int $projectId
+	): array
+	{
+		return $this->dao->getProductsSumCountByDates($dates, $projectId);
+	}
 }

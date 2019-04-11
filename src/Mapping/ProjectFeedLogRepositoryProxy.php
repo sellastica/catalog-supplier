@@ -19,4 +19,12 @@ class ProjectFeedLogRepositoryProxy extends RepositoryProxy implements IProjectF
 	{
 		return $this->getRepository()->getProductsSumCount($date, $projectId, $nonTrialOnly);
 	}
+
+	public function getProductsSumCountByDates(
+		array $dates,
+		int $projectId
+	): array
+	{
+		return $this->getRepository()->getProductsSumCountByDates($dates, $projectId);
+	}
 }

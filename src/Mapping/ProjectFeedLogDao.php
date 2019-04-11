@@ -24,6 +24,19 @@ class ProjectFeedLogDao extends \Sellastica\Entity\Mapping\Dao
 	}
 
 	/**
+	 * @param array $dates
+	 * @param int $projectId
+	 * @return array
+	 */
+	public function getProductsSumCountByDates(
+		array $dates,
+		int $projectId
+	): array
+	{
+		return $this->mapper->getProductsSumCountByDates($dates, $projectId);
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	protected function getBuilder(

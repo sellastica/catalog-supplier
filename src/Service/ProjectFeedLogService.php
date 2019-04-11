@@ -71,6 +71,20 @@ class ProjectFeedLogService
 	}
 
 	/**
+	 * @param array $dates
+	 * @param \Sellastica\Project\Entity\Project $project
+	 * @return array
+	 */
+	public function getProductsSumCountByDates(
+		array $dates,
+		\Sellastica\Project\Entity\Project $project
+	): array
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeedLog::class)
+			->getProductsSumCountByDates($dates, $project->getId());
+	}
+
+	/**
 	 * @param \Sellastica\Project\Entity\Project $project
 	 * @param \Sellastica\CatalogSupplier\Entity\CatalogFeed $catalogFeed
 	 * @param int $productsCount
