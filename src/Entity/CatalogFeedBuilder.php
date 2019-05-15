@@ -95,7 +95,7 @@ class CatalogFeedBuilder implements IBuilder
 	private $modifiedProperties = [];
 	/** @var array */
 	private $options = [];
-	/** @var \Suppliers\Entity\Feed\Model\FeedStatistics|null */
+	/** @var \Sellastica\CatalogSupplier\Model\FeedStatistics|null */
 	private $statistics;
 
 	/**
@@ -827,7 +827,7 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \Suppliers\Entity\Feed\Model\FeedStatistics|null
+	 * @return \Sellastica\CatalogSupplier\Model\FeedStatistics|null
 	 */
 	public function getStatistics()
 	{
@@ -835,10 +835,10 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @param \Suppliers\Entity\Feed\Model\FeedStatistics|null $statistics
+	 * @param \Sellastica\CatalogSupplier\Model\FeedStatistics|null $statistics
 	 * @return $this
 	 */
-	public function statistics(\Suppliers\Entity\Feed\Model\FeedStatistics $statistics = null)
+	public function statistics(\Sellastica\CatalogSupplier\Model\FeedStatistics $statistics = null)
 	{
 		$this->statistics = $statistics;
 		return $this;

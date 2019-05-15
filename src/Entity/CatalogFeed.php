@@ -108,7 +108,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $modifiedProperties = [];
 	/** @var array @optional */
 	private $options = [];
-	/** @var \Suppliers\Entity\Feed\Model\FeedStatistics|null @optional */
+	/** @var \Sellastica\CatalogSupplier\Model\FeedStatistics|null @optional */
 	private $statistics;
 
 
@@ -886,17 +886,17 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return \Suppliers\Entity\Feed\Model\FeedStatistics|null
+	 * @return \Sellastica\CatalogSupplier\Model\FeedStatistics|null
 	 */
-	public function getStatistics(): ?\Suppliers\Entity\Feed\Model\FeedStatistics
+	public function getStatistics(): ?\Sellastica\CatalogSupplier\Model\FeedStatistics
 	{
 		return $this->statistics;
 	}
 
 	/**
-	 * @param \Suppliers\Entity\Feed\Model\FeedStatistics|null $statistics
+	 * @param \Sellastica\CatalogSupplier\Model\FeedStatistics|null $statistics
 	 */
-	public function setStatistics(?\Suppliers\Entity\Feed\Model\FeedStatistics $statistics): void
+	public function setStatistics(?\Sellastica\CatalogSupplier\Model\FeedStatistics $statistics): void
 	{
 		$this->statistics = $statistics;
 	}

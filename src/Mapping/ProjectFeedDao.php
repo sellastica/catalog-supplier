@@ -17,7 +17,7 @@ class ProjectFeedDao extends \Sellastica\Entity\Mapping\Dao
 	): \Sellastica\Entity\IBuilder
 	{
 		if ($data->statistics) {
-			$data->statistics = new \Suppliers\Entity\Feed\Model\FeedStatistics(
+			$data->statistics = new \Sellastica\CatalogSupplier\Model\FeedStatistics(
 				\Nette\Utils\Json::decode($data->statistics, \Nette\Utils\Json::FORCE_ARRAY)
 			);
 		}

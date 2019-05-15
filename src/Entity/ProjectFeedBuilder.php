@@ -27,7 +27,7 @@ class ProjectFeedBuilder implements IBuilder
 	private $ordered;
 	/** @var \DateTime|null */
 	private $removed;
-	/** @var \Suppliers\Entity\Feed\Model\FeedStatistics|null */
+	/** @var \Sellastica\CatalogSupplier\Model\FeedStatistics|null */
 	private $statistics;
 
 	/**
@@ -161,7 +161,7 @@ class ProjectFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \Suppliers\Entity\Feed\Model\FeedStatistics|null
+	 * @return \Sellastica\CatalogSupplier\Model\FeedStatistics|null
 	 */
 	public function getStatistics()
 	{
@@ -169,10 +169,10 @@ class ProjectFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @param \Suppliers\Entity\Feed\Model\FeedStatistics|null $statistics
+	 * @param \Sellastica\CatalogSupplier\Model\FeedStatistics|null $statistics
 	 * @return $this
 	 */
-	public function statistics(\Suppliers\Entity\Feed\Model\FeedStatistics $statistics = null)
+	public function statistics(\Sellastica\CatalogSupplier\Model\FeedStatistics $statistics = null)
 	{
 		$this->statistics = $statistics;
 		return $this;
