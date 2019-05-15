@@ -27,30 +27,18 @@ class CatalogFeedBuilder implements IBuilder
 	private $updateOnly = false;
 	/** @var int|null */
 	private $parentId;
-	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat */
-	private $feedFormat;
-	/** @var \Sellastica\CatalogSupplier\Model\Compression */
-	private $compression;
-	/** @var string|null */
-	private $uncompressedFilename;
 	/** @var string|null */
 	private $domain;
-	/** @var string|null */
-	private $itemXPath;
-	/** @var string|null */
-	private $secondaryXPath;
-	/** @var \Sellastica\Localization\Model\Currency|null */
-	private $secondCurrency;
-	/** @var string|null */
-	private $schemaFilename;
-	/** @var string|null */
-	private $csvDelimiter;
 	/** @var int|null */
-	private $csvHeaderOffset = 0;
+	private $port;
 	/** @var string|null */
 	private $login;
 	/** @var string|null */
 	private $password;
+	/** @var string|null */
+	private $root;
+	/** @var string */
+	private $authentication = 'none';
 	/** @var int */
 	private $timeout = 180;
 	/** @var bool */
@@ -61,18 +49,36 @@ class CatalogFeedBuilder implements IBuilder
 	private $customImageDownloader;
 	/** @var \Sellastica\CatalogSupplier\Model\Stream */
 	private $stream;
+	/** @var string|null */
+	private $overrideScheme;
+	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat */
+	private $feedFormat;
+	/** @var string|null */
+	private $itemXPath;
+	/** @var string|null */
+	private $secondaryXPath;
+	/** @var string|null */
+	private $schemaFilename;
+	/** @var string|null */
+	private $csvDelimiter;
+	/** @var int|null */
+	private $csvHeaderOffset = 0;
+	/** @var string */
+	private $encoding = 'utf-8';
+	/** @var \Sellastica\CatalogSupplier\Model\Compression */
+	private $compression;
+	/** @var string|null */
+	private $uncompressedFilename;
+	/** @var \Sellastica\Localization\Model\Currency|null */
+	private $secondCurrency;
 	/** @var bool */
 	private $customUrl = true;
 	/** @var bool */
 	private $demo = false;
-	/** @var string */
-	private $authentication = 'none';
 	/** @var bool */
 	private $hasUniqueIdentifier = true;
 	/** @var bool */
 	private $visible = true;
-	/** @var string|null */
-	private $overrideScheme;
 	/** @var string|null */
 	private $crontab;
 	/** @var bool */
@@ -85,12 +91,12 @@ class CatalogFeedBuilder implements IBuilder
 	private $priceCzk;
 	/** @var \Sellastica\Price\Price|null */
 	private $priceEur;
-	/** @var string */
-	private $encoding = 'utf-8';
 	/** @var array */
 	private $modifiedProperties = [];
 	/** @var array */
 	private $options = [];
+	/** @var \Suppliers\Entity\Feed\Model\FeedStatistics|null */
+	private $statistics;
 
 	/**
 	 * @param int $supplierId
@@ -209,60 +215,6 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \Sellastica\CatalogSupplier\Model\FeedFormat
-	 */
-	public function getFeedFormat(): \Sellastica\CatalogSupplier\Model\FeedFormat
-	{
-		return $this->feedFormat;
-	}
-
-	/**
-	 * @param \Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat
-	 * @return $this
-	 */
-	public function feedFormat(\Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat)
-	{
-		$this->feedFormat = $feedFormat;
-		return $this;
-	}
-
-	/**
-	 * @return \Sellastica\CatalogSupplier\Model\Compression
-	 */
-	public function getCompression(): \Sellastica\CatalogSupplier\Model\Compression
-	{
-		return $this->compression;
-	}
-
-	/**
-	 * @param \Sellastica\CatalogSupplier\Model\Compression $compression
-	 * @return $this
-	 */
-	public function compression(\Sellastica\CatalogSupplier\Model\Compression $compression)
-	{
-		$this->compression = $compression;
-		return $this;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getUncompressedFilename()
-	{
-		return $this->uncompressedFilename;
-	}
-
-	/**
-	 * @param string|null $uncompressedFilename
-	 * @return $this
-	 */
-	public function uncompressedFilename(string $uncompressedFilename = null)
-	{
-		$this->uncompressedFilename = $uncompressedFilename;
-		return $this;
-	}
-
-	/**
 	 * @return string|null
 	 */
 	public function getDomain()
@@ -281,110 +233,20 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return string|null
-	 */
-	public function getItemXPath()
-	{
-		return $this->itemXPath;
-	}
-
-	/**
-	 * @param string|null $itemXPath
-	 * @return $this
-	 */
-	public function itemXPath(string $itemXPath = null)
-	{
-		$this->itemXPath = $itemXPath;
-		return $this;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getSecondaryXPath()
-	{
-		return $this->secondaryXPath;
-	}
-
-	/**
-	 * @param string|null $secondaryXPath
-	 * @return $this
-	 */
-	public function secondaryXPath(string $secondaryXPath = null)
-	{
-		$this->secondaryXPath = $secondaryXPath;
-		return $this;
-	}
-
-	/**
-	 * @return \Sellastica\Localization\Model\Currency|null
-	 */
-	public function getSecondCurrency()
-	{
-		return $this->secondCurrency;
-	}
-
-	/**
-	 * @param \Sellastica\Localization\Model\Currency|null $secondCurrency
-	 * @return $this
-	 */
-	public function secondCurrency(\Sellastica\Localization\Model\Currency $secondCurrency = null)
-	{
-		$this->secondCurrency = $secondCurrency;
-		return $this;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getSchemaFilename()
-	{
-		return $this->schemaFilename;
-	}
-
-	/**
-	 * @param string|null $schemaFilename
-	 * @return $this
-	 */
-	public function schemaFilename(string $schemaFilename = null)
-	{
-		$this->schemaFilename = $schemaFilename;
-		return $this;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getCsvDelimiter()
-	{
-		return $this->csvDelimiter;
-	}
-
-	/**
-	 * @param string|null $csvDelimiter
-	 * @return $this
-	 */
-	public function csvDelimiter(string $csvDelimiter = null)
-	{
-		$this->csvDelimiter = $csvDelimiter;
-		return $this;
-	}
-
-	/**
 	 * @return int|null
 	 */
-	public function getCsvHeaderOffset()
+	public function getPort()
 	{
-		return $this->csvHeaderOffset;
+		return $this->port;
 	}
 
 	/**
-	 * @param int|null $csvHeaderOffset
+	 * @param int|null $port
 	 * @return $this
 	 */
-	public function csvHeaderOffset(int $csvHeaderOffset = null)
+	public function port(int $port = null)
 	{
-		$this->csvHeaderOffset = $csvHeaderOffset;
+		$this->port = $port;
 		return $this;
 	}
 
@@ -421,6 +283,42 @@ class CatalogFeedBuilder implements IBuilder
 	public function password(string $password = null)
 	{
 		$this->password = $password;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getRoot()
+	{
+		return $this->root;
+	}
+
+	/**
+	 * @param string|null $root
+	 * @return $this
+	 */
+	public function root(string $root = null)
+	{
+		$this->root = $root;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAuthentication(): string
+	{
+		return $this->authentication;
+	}
+
+	/**
+	 * @param string $authentication
+	 * @return $this
+	 */
+	public function authentication(string $authentication = 'none')
+	{
+		$this->authentication = $authentication;
 		return $this;
 	}
 
@@ -515,6 +413,204 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
+	 * @return string|null
+	 */
+	public function getOverrideScheme()
+	{
+		return $this->overrideScheme;
+	}
+
+	/**
+	 * @param string|null $overrideScheme
+	 * @return $this
+	 */
+	public function overrideScheme(string $overrideScheme = null)
+	{
+		$this->overrideScheme = $overrideScheme;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Model\FeedFormat
+	 */
+	public function getFeedFormat(): \Sellastica\CatalogSupplier\Model\FeedFormat
+	{
+		return $this->feedFormat;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat
+	 * @return $this
+	 */
+	public function feedFormat(\Sellastica\CatalogSupplier\Model\FeedFormat $feedFormat)
+	{
+		$this->feedFormat = $feedFormat;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getItemXPath()
+	{
+		return $this->itemXPath;
+	}
+
+	/**
+	 * @param string|null $itemXPath
+	 * @return $this
+	 */
+	public function itemXPath(string $itemXPath = null)
+	{
+		$this->itemXPath = $itemXPath;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getSecondaryXPath()
+	{
+		return $this->secondaryXPath;
+	}
+
+	/**
+	 * @param string|null $secondaryXPath
+	 * @return $this
+	 */
+	public function secondaryXPath(string $secondaryXPath = null)
+	{
+		$this->secondaryXPath = $secondaryXPath;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getSchemaFilename()
+	{
+		return $this->schemaFilename;
+	}
+
+	/**
+	 * @param string|null $schemaFilename
+	 * @return $this
+	 */
+	public function schemaFilename(string $schemaFilename = null)
+	{
+		$this->schemaFilename = $schemaFilename;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCsvDelimiter()
+	{
+		return $this->csvDelimiter;
+	}
+
+	/**
+	 * @param string|null $csvDelimiter
+	 * @return $this
+	 */
+	public function csvDelimiter(string $csvDelimiter = null)
+	{
+		$this->csvDelimiter = $csvDelimiter;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getCsvHeaderOffset()
+	{
+		return $this->csvHeaderOffset;
+	}
+
+	/**
+	 * @param int|null $csvHeaderOffset
+	 * @return $this
+	 */
+	public function csvHeaderOffset(int $csvHeaderOffset = null)
+	{
+		$this->csvHeaderOffset = $csvHeaderOffset;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getEncoding(): string
+	{
+		return $this->encoding;
+	}
+
+	/**
+	 * @param string $encoding
+	 * @return $this
+	 */
+	public function encoding(string $encoding = 'utf-8')
+	{
+		$this->encoding = $encoding;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Model\Compression
+	 */
+	public function getCompression(): \Sellastica\CatalogSupplier\Model\Compression
+	{
+		return $this->compression;
+	}
+
+	/**
+	 * @param \Sellastica\CatalogSupplier\Model\Compression $compression
+	 * @return $this
+	 */
+	public function compression(\Sellastica\CatalogSupplier\Model\Compression $compression)
+	{
+		$this->compression = $compression;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getUncompressedFilename()
+	{
+		return $this->uncompressedFilename;
+	}
+
+	/**
+	 * @param string|null $uncompressedFilename
+	 * @return $this
+	 */
+	public function uncompressedFilename(string $uncompressedFilename = null)
+	{
+		$this->uncompressedFilename = $uncompressedFilename;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\Localization\Model\Currency|null
+	 */
+	public function getSecondCurrency()
+	{
+		return $this->secondCurrency;
+	}
+
+	/**
+	 * @param \Sellastica\Localization\Model\Currency|null $secondCurrency
+	 * @return $this
+	 */
+	public function secondCurrency(\Sellastica\Localization\Model\Currency $secondCurrency = null)
+	{
+		$this->secondCurrency = $secondCurrency;
+		return $this;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function getCustomUrl(): bool
@@ -551,24 +647,6 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getAuthentication(): string
-	{
-		return $this->authentication;
-	}
-
-	/**
-	 * @param string $authentication
-	 * @return $this
-	 */
-	public function authentication(string $authentication = 'none')
-	{
-		$this->authentication = $authentication;
-		return $this;
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function getHasUniqueIdentifier(): bool
@@ -601,24 +679,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function visible(bool $visible = true)
 	{
 		$this->visible = $visible;
-		return $this;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getOverrideScheme()
-	{
-		return $this->overrideScheme;
-	}
-
-	/**
-	 * @param string|null $overrideScheme
-	 * @return $this
-	 */
-	public function overrideScheme(string $overrideScheme = null)
-	{
-		$this->overrideScheme = $overrideScheme;
 		return $this;
 	}
 
@@ -731,24 +791,6 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getEncoding(): string
-	{
-		return $this->encoding;
-	}
-
-	/**
-	 * @param string $encoding
-	 * @return $this
-	 */
-	public function encoding(string $encoding = 'utf-8')
-	{
-		$this->encoding = $encoding;
-		return $this;
-	}
-
-	/**
 	 * @return array
 	 */
 	public function getModifiedProperties(): array
@@ -781,6 +823,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function options(array $options)
 	{
 		$this->options = $options;
+		return $this;
+	}
+
+	/**
+	 * @return \Suppliers\Entity\Feed\Model\FeedStatistics|null
+	 */
+	public function getStatistics()
+	{
+		return $this->statistics;
+	}
+
+	/**
+	 * @param \Suppliers\Entity\Feed\Model\FeedStatistics|null $statistics
+	 * @return $this
+	 */
+	public function statistics(\Suppliers\Entity\Feed\Model\FeedStatistics $statistics = null)
+	{
+		$this->statistics = $statistics;
 		return $this;
 	}
 

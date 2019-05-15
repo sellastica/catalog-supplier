@@ -16,6 +16,12 @@ class ProjectFeedDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
+		if ($data->statistics) {
+			$data->statistics = new \Suppliers\Entity\Feed\Model\FeedStatistics(
+				\Nette\Utils\Json::decode($data->statistics, \Nette\Utils\Json::FORCE_ARRAY)
+			);
+		}
+
 		return \Sellastica\CatalogSupplier\Entity\ProjectFeedBuilder::create(
 			$data->projectId,
 			$data->feedId,

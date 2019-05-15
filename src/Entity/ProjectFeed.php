@@ -28,6 +28,8 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $ordered;
 	/** @var \DateTime|null @optional */
 	private $removed;
+	/** @var \Suppliers\Entity\Feed\Model\FeedStatistics|null @optional */
+	private $statistics;
 
 
 	/**
@@ -226,6 +228,22 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \Suppliers\Entity\Feed\Model\FeedStatistics|null
+	 */
+	public function getStatistics(): ?\Suppliers\Entity\Feed\Model\FeedStatistics
+	{
+		return $this->statistics;
+	}
+
+	/**
+	 * @param \Suppliers\Entity\Feed\Model\FeedStatistics|null $statistics
+	 */
+	public function setStatistics(?\Suppliers\Entity\Feed\Model\FeedStatistics $statistics): void
+	{
+		$this->statistics = $statistics;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -236,6 +254,9 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'projectId' => $this->projectId,
 				'feedId' => $this->feedId,
 				'catalogFeedId' => $this->catalogFeedId,
+				'statistics' => $this->statistics && $this->statistics->getProductsCount()
+					? \Nette\Utils\Json::encode($this->statistics->toArray())
+					: null,
 				'lastSupplierDownload' => $this->lastSupplierDownload,
 				'lastNapojseDownload' => $this->lastNapojseDownload,
 				'trialTill' => $this->trialTill,

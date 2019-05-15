@@ -13,7 +13,7 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 	/**
 	 * @param int $categoryId
 	 * @param \Sellastica\Entity\Configuration|null $configuration
-	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection|\Sellastica\Entity\Entity\EntityCollection
 	 */
 	public function findByCategoryId(
 		int $categoryId,
@@ -26,7 +26,7 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 	/**
 	 * @param int $categoryId
 	 * @param \Sellastica\Entity\Configuration|null $configuration
-	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection
+	 * @return \Sellastica\CatalogSupplier\Entity\CatalogFeedCollection|\Sellastica\Entity\Entity\EntityCollection
 	 */
 	public function findVisibleByCategoryId(
 		int $categoryId,
@@ -85,6 +85,12 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 				false,
 				\Sellastica\Accounting\VatRateTypeFactory::getVatRate(\Sellastica\Localization\Model\Country::from('CZ')),
 				\Sellastica\Localization\Model\Currency::from('CZK')
+			);
+		}
+
+		if ($data->statistics) {
+			$data->statistics = new \Suppliers\Entity\Feed\Model\FeedStatistics(
+				\Nette\Utils\Json::decode($data->statistics, \Nette\Utils\Json::FORCE_ARRAY)
 			);
 		}
 

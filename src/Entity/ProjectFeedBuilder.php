@@ -27,6 +27,8 @@ class ProjectFeedBuilder implements IBuilder
 	private $ordered;
 	/** @var \DateTime|null */
 	private $removed;
+	/** @var \Suppliers\Entity\Feed\Model\FeedStatistics|null */
+	private $statistics;
 
 	/**
 	 * @param int $projectId
@@ -155,6 +157,24 @@ class ProjectFeedBuilder implements IBuilder
 	public function removed(\DateTime $removed = null)
 	{
 		$this->removed = $removed;
+		return $this;
+	}
+
+	/**
+	 * @return \Suppliers\Entity\Feed\Model\FeedStatistics|null
+	 */
+	public function getStatistics()
+	{
+		return $this->statistics;
+	}
+
+	/**
+	 * @param \Suppliers\Entity\Feed\Model\FeedStatistics|null $statistics
+	 * @return $this
+	 */
+	public function statistics(\Suppliers\Entity\Feed\Model\FeedStatistics $statistics = null)
+	{
+		$this->statistics = $statistics;
 		return $this;
 	}
 

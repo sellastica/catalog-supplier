@@ -14,7 +14,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 
 	const AUTH_NONE = 'none',
 		AUTH_BASIC = 'basic',
-		AUTH_NTLM = 'ntlm';
+		AUTH_NTLM = 'ntlm',
+		AUTH_SFTP = 'sftp';
 
 	const ENCODING_UTF8 = 'utf-8',
 		ENCODING_WINDOWS_1250 = 'windows-1250';
@@ -27,38 +28,21 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $updateOnly = false;
 	/** @var int|null @optional */
 	private $parentId;
-	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat @optional */
-	private $feedFormat;
-	/** @var \Sellastica\CatalogSupplier\Model\Compression @optional */
-	private $compression;
-	/** @var string|null @optional */
-	private $uncompressedFilename;
-	/** @var string|null @required */
-	private $url;
 	/** @var string|null @optional */
 	private $domain;
-	/** @var string|null @optional */
-	private $itemXPath;
-	/** @var string|null @optional */
-	private $secondaryXPath;
-	/** @var string @required */
-	private $converterClass;
-	/** @var \Sellastica\Localization\Model\Currency @required */
-	private $defaultCurrency;
-	/** @var \Sellastica\Localization\Model\Country @required */
-	private $defaultCountry;
-	/** @var \Sellastica\Localization\Model\Currency|null @optional */
-	private $secondCurrency;
-	/** @var string|null @optional */
-	private $schemaFilename;
-	/** @var string|null @optional */
-	private $csvDelimiter;
+
+	/** @var string|null @required */
+	private $url;
 	/** @var int|null @optional */
-	private $csvHeaderOffset = 0;
+	private $port;
 	/** @var string|null @optional */
 	private $login;
 	/** @var string|null @optional */
 	private $password;
+	/** @var string|null @optional */
+	private $root;
+	/** @var string @optional */
+	private $authentication = self::AUTH_NONE;
 	/** @var int @optional */
 	private $timeout = 180;
 	/** @var bool @optional */
@@ -69,18 +53,45 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $customImageDownloader;
 	/** @var \Sellastica\CatalogSupplier\Model\Stream @optional */
 	private $stream;
+	/** @var string|null @optional */
+	private $overrideScheme;
+
+	/** @var \Sellastica\CatalogSupplier\Model\FeedFormat @optional */
+	private $feedFormat;
+	/** @var string|null @optional */
+	private $itemXPath;
+	/** @var string|null @optional */
+	private $secondaryXPath;
+	/** @var string @required */
+	private $converterClass;
+	/** @var string|null @optional */
+	private $schemaFilename;
+	/** @var string|null @optional */
+	private $csvDelimiter;
+	/** @var int|null @optional */
+	private $csvHeaderOffset = 0;
+	/** @var string @optional */
+	private $encoding = self::ENCODING_UTF8;
+	/** @var \Sellastica\CatalogSupplier\Model\Compression @optional */
+	private $compression;
+	/** @var string|null @optional */
+	private $uncompressedFilename;
+
+	/** @var \Sellastica\Localization\Model\Currency @required */
+	private $defaultCurrency;
+	/** @var \Sellastica\Localization\Model\Country @required */
+	private $defaultCountry;
+	/** @var \Sellastica\Localization\Model\Currency|null @optional */
+	private $secondCurrency;
+
 	/** @var bool @optional */
 	private $customUrl = true;
 	/** @var bool @optional */
 	private $demo = false;
-	/** @var string @optional */
-	private $authentication = self::AUTH_NONE;
 	/** @var bool @optional */
 	private $hasUniqueIdentifier = true;
 	/** @var bool @optional */
 	private $visible = true;
-	/** @var string|null @optional */
-	private $overrideScheme;
 	/** @var string|null @optional */
 	private $crontab;
 	/** @var bool @optional */
@@ -93,12 +104,12 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $priceCzk;
 	/** @var \Sellastica\Price\Price|null @optional */
 	private $priceEur;
-	/** @var string @optional */
-	private $encoding = self::ENCODING_UTF8;
 	/** @var array @optional */
 	private $modifiedProperties = [];
 	/** @var array @optional */
 	private $options = [];
+	/** @var \Suppliers\Entity\Feed\Model\FeedStatistics|null @optional */
+	private $statistics;
 
 
 	/**
@@ -244,6 +255,38 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setUrl(?string $url): void
 	{
 		$this->url = $url;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getPort(): ?int
+	{
+		return $this->port;
+	}
+
+	/**
+	 * @param int|null $port
+	 */
+	public function setPort(?int $port): void
+	{
+		$this->port = $port;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getRoot(): ?string
+	{
+		return $this->root;
+	}
+
+	/**
+	 * @param string|null $root
+	 */
+	public function setRoot(?string $root): void
+	{
+		$this->root = $root;
 	}
 
 	/**
@@ -843,6 +886,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \Suppliers\Entity\Feed\Model\FeedStatistics|null
+	 */
+	public function getStatistics(): ?\Suppliers\Entity\Feed\Model\FeedStatistics
+	{
+		return $this->statistics;
+	}
+
+	/**
+	 * @param \Suppliers\Entity\Feed\Model\FeedStatistics|null $statistics
+	 */
+	public function setStatistics(?\Suppliers\Entity\Feed\Model\FeedStatistics $statistics): void
+	{
+		$this->statistics = $statistics;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -855,6 +914,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'updateOnly' => $this->updateOnly,
 				'parentId' => $this->parentId,
 				'url' => $this->url,
+				'port' => $this->port,
+				'root' => $this->root,
 				'domain' => $this->domain,
 				'itemXPath' => $this->itemXPath,
 				'secondaryXPath' => $this->secondaryXPath,
@@ -893,6 +954,9 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 					: null,
 				'options' => $this->options
 					? \Nette\Utils\Json::encode($this->options)
+					: null,
+				'statistics' => $this->statistics && $this->statistics->getProductsCount()
+					? \Nette\Utils\Json::encode($this->statistics->toArray())
 					: null,
 			]
 		);
