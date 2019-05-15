@@ -41,6 +41,9 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $password;
 	/** @var string|null @optional */
 	private $root;
+	/** @var string|null @optional */
+	private $filename;
+
 	/** @var string @optional */
 	private $authentication = self::AUTH_NONE;
 	/** @var int @optional */
@@ -287,6 +290,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setRoot(?string $root): void
 	{
 		$this->root = $root;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getFilename(): ?string
+	{
+		return $this->filename;
+	}
+
+	/**
+	 * @param string|null $filename
+	 */
+	public function setFilename(?string $filename): void
+	{
+		$this->filename = $filename;
 	}
 
 	/**
@@ -916,6 +935,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'url' => $this->url,
 				'port' => $this->port,
 				'root' => $this->root,
+				'filename' => $this->filename,
 				'domain' => $this->domain,
 				'itemXPath' => $this->itemXPath,
 				'secondaryXPath' => $this->secondaryXPath,

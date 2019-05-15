@@ -37,6 +37,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $password;
 	/** @var string|null */
 	private $root;
+	/** @var string|null */
+	private $filename;
 	/** @var string */
 	private $authentication = 'none';
 	/** @var int */
@@ -301,6 +303,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function root(string $root = null)
 	{
 		$this->root = $root;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getFilename()
+	{
+		return $this->filename;
+	}
+
+	/**
+	 * @param string|null $filename
+	 * @return $this
+	 */
+	public function filename(string $filename = null)
+	{
+		$this->filename = $filename;
 		return $this;
 	}
 
