@@ -54,10 +54,35 @@ class CatalogSupplierDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	 * @param \Sellastica\Entity\Configuration $configuration
 	 * @return \Dibi\Fluent
 	 */
-	protected function getPublishableResource(\Sellastica\Entity\Configuration $configuration = NULL)
+	protected function getPublishableResource(\Sellastica\Entity\Configuration $configuration = null)
 	{
 		return parent::getResource($configuration)
 			->where('visible = 1');
+	}
+
+	/**
+	 * @param \Sellastica\Entity\Configuration $configuration
+	 * @param \Sellastica\DataGrid\Model\FilterRuleCollection $rules
+	 * @return \Dibi\Fluent
+	 */
+	protected function getAdminResource(
+		\Sellastica\Entity\Configuration $configuration = null,
+		\Sellastica\DataGrid\Model\FilterRuleCollection $rules = null
+	): \Dibi\Fluent
+	{
+		$resource = $this->database->select('%n.*', $this->getTableName(true))
+			->from($this->getTableName(true));
+
+		if (isset($rules)) {
+			//category
+			if ($rules['categoryId']) {
+				$resource->innerJoin('%n.suppliers_supplier_category_rel scr', \Sellastica\Core\Model\Environment::NAPOJSE_CRM)
+					->on('scr.supplierId = %n.id', $this->getTableName(true))
+					->where('scr.categoryId = %i', $rules['categoryId']->getValue());
+			}
+		}
+
+		return $resource;
 	}
 
 	/**
