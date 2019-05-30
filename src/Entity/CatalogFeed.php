@@ -15,7 +15,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	const AUTH_NONE = 'none',
 		AUTH_BASIC = 'basic',
 		AUTH_NTLM = 'ntlm',
-		AUTH_SFTP = 'sftp';
+		AUTH_SFTP = 'sftp',
+		AUTH_DIGEST = 'digest';
 
 	const ENCODING_UTF8 = 'utf-8',
 		ENCODING_WINDOWS_1250 = 'windows-1250';
