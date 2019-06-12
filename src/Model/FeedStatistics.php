@@ -110,6 +110,15 @@ class FeedStatistics
 
 	/**
 	 * @param string $property
+	 * @param int $count
+	 */
+	public function setCount(string $property, int $count): void
+	{
+		$this->data[$property] = $count;
+	}
+
+	/**
+	 * @param string $property
 	 * @return int
 	 */
 	public function getMissingCount(string $property): int
@@ -142,6 +151,21 @@ class FeedStatistics
 
 		arsort($data);
 		return $data;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getAveragePercentage(): int
+	{
+		$count = 0;
+		foreach (self::$titles as $property => $title) {
+			$count += $this->getCount($property);
+		}
+
+		return $this->productsCount
+			? round($count / (count(self::$titles) * $this->productsCount) * 100)
+			: 0;
 	}
 
 	/**

@@ -922,6 +922,14 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return CatalogFeedCollection|CatalogFeed[]
+	 */
+	public function getSubordinateFeeds(): CatalogFeedCollection
+	{
+		return $this->relationService->getSubordinateFeeds();
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array

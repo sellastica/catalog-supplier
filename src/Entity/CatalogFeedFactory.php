@@ -11,12 +11,30 @@ use Sellastica\Entity\IBuilder;
  */
 class CatalogFeedFactory extends EntityFactory
 {
+	/** @var \Sellastica\CatalogSupplier\Service\CatalogFeedService */
+	private $catalogFeedService;
+
+	/**
+	 * @param \Sellastica\Entity\EntityManager $em
+	 * @param \Sellastica\Entity\Event\IDomainEventPublisher $eventPublisher
+	 * @param \Sellastica\CatalogSupplier\Service\CatalogFeedService $catalogFeedService
+	 */
+	public function __construct(
+		\Sellastica\Entity\EntityManager $em,
+		\Sellastica\Entity\Event\IDomainEventPublisher $eventPublisher,
+		\Sellastica\CatalogSupplier\Service\CatalogFeedService $catalogFeedService
+	)
+	{
+		parent::__construct($em, $eventPublisher);
+		$this->catalogFeedService = $catalogFeedService;
+	}
+
 	/**
 	 * @param IEntity|CatalogFeed $entity
 	 */
 	public function doInitialize(IEntity $entity)
 	{
-		$entity->setRelationService(new CatalogFeedRelations($entity, $this->em));
+		$entity->setRelationService(new CatalogFeedRelations($entity, $this->catalogFeedService, $this->em));
 	}
 
 	/**

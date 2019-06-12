@@ -7,19 +7,24 @@ class CatalogFeedRelations implements \Sellastica\Entity\Relation\IEntityRelatio
 	private $catalogFeed;
 	/** @var \Sellastica\Entity\EntityManager */
 	private $em;
+	/** @var \Sellastica\CatalogSupplier\Service\CatalogFeedService */
+	private $catalogFeedService;
 
 
 	/**
 	 * @param CatalogFeed $catalogFeed
+	 * @param \Sellastica\CatalogSupplier\Service\CatalogFeedService $catalogFeedService
 	 * @param \Sellastica\Entity\EntityManager $em
 	 */
 	public function __construct(
 		CatalogFeed $catalogFeed,
+		\Sellastica\CatalogSupplier\Service\CatalogFeedService $catalogFeedService,
 		\Sellastica\Entity\EntityManager $em
 	)
 	{
 		$this->catalogFeed = $catalogFeed;
 		$this->em = $em;
+		$this->catalogFeedService = $catalogFeedService;
 	}
 
 	/**
@@ -36,7 +41,7 @@ class CatalogFeedRelations implements \Sellastica\Entity\Relation\IEntityRelatio
 	public function getParent(): ?CatalogFeed
 	{
 		return $this->catalogFeed->getParentId()
-			? $this->em->getRepository(CatalogFeed::class)->find($this->catalogFeed->getParentId())
+			? $this->catalogFeedService->find($this->catalogFeed->getParentId())
 			: null;
 	}
 
@@ -47,6 +52,16 @@ class CatalogFeedRelations implements \Sellastica\Entity\Relation\IEntityRelatio
 	{
 		return $this->em->getRepository(CatalogFeedRule::class)->findBy([
 			'feedId' => $this->catalogFeed->getId(),
+		]);
+	}
+
+	/**
+	 * @return CatalogFeedCollection
+	 */
+	public function getSubordinateFeeds(): CatalogFeedCollection
+	{
+		return $this->catalogFeedService->findBy([
+			'parentId' => $this->catalogFeed->getId(),
 		]);
 	}
 }
