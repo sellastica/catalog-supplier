@@ -45,6 +45,28 @@ class FeedStatistics
 		self::EAN => 'apps.suppliers.statistics.ean',
 		self::OPTIONS => 'apps.suppliers.statistics.options',
 	];
+	/** @var array */
+	public static $weights = [
+		self::TITLE => 1,
+		self::PEREX => 0.9,
+		self::DESCRIPTION => 1,
+		self::MANUFACTURER => 0.8,
+		self::WARRANTY => 0.1,
+		self::CATEGORIES => 1,
+		self::IMAGES => 1,
+		self::ATTACHMENTS => 0.1,
+		self::CUSTOM_FIELDS => 1,
+		self::RELATED_PRODUCTS => 0.7,
+		self::ALTERNATIVE_PRODUCTS => 0.1,
+		self::CODE => 1,
+		self::PRICE => 1,
+		self::PURCHASE_PRICE => 0.7,
+		self::NORMAL_MARKET_PRICE => 0.3,
+		self::AVAILABILITY => 1,
+		self::QUANTITY => 1,
+		self::EAN => 1,
+		self::OPTIONS => 0.8,
+	];
 	/** @var int */
 	private $productsCount = 0;
 	/** @var array */
@@ -158,14 +180,14 @@ class FeedStatistics
 	 */
 	public function getAveragePercentage(): int
 	{
-		$count = 0;
+		$numerator = 0;
+		$denominator = 0;
 		foreach (self::$titles as $property => $title) {
-			$count += $this->getCount($property);
+			$numerator += self::$weights[$property] * $this->getPercent($property);
+			$denominator += self::$weights[$property];
 		}
 
-		return $this->productsCount
-			? round($count / (count(self::$titles) * $this->productsCount) * 100)
-			: 0;
+		return round($numerator / $denominator);
 	}
 
 	/**
