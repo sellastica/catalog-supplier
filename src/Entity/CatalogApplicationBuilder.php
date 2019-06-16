@@ -25,6 +25,8 @@ class CatalogApplicationBuilder implements IBuilder
 	private $visible = true;
 	/** @var bool */
 	private $global = false;
+	/** @var bool */
+	private $settings = true;
 
 	/**
 	 * @param string $title
@@ -142,6 +144,24 @@ class CatalogApplicationBuilder implements IBuilder
 	public function global(bool $global)
 	{
 		$this->global = $global;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getSettings(): bool
+	{
+		return $this->settings;
+	}
+
+	/**
+	 * @param bool $settings
+	 * @return $this
+	 */
+	public function settings(bool $settings = true)
+	{
+		$this->settings = $settings;
 		return $this;
 	}
 

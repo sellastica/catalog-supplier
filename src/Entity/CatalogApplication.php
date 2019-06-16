@@ -24,6 +24,8 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 	private $visible = true;
 	/** @var bool @optional */
 	private $global = false;
+	/** @var bool @optional */
+	private $settings = true;
 
 
 	/**
@@ -155,6 +157,22 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function hasSettings(): bool
+	{
+		return $this->settings;
+	}
+
+	/**
+	 * @param bool $settings
+	 */
+	public function setSettings(bool $settings): void
+	{
+		$this->settings = $settings;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -169,6 +187,7 @@ class CatalogApplication extends \Sellastica\Entity\Entity\AbstractEntity
 				'shoptet' => $this->shoptet,
 				'visible' => $this->visible,
 				'global' => $this->global,
+				'settings' => $this->settings,
 			]
 		);
 	}
