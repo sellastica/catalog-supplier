@@ -8,7 +8,6 @@ class CatalogApplicationService
 		ORDERS = 'orders',
 		CNB = 'cnb',
 		FTP = 'ftp',
-		STOCK_20 = 'stock_20',
 		ABF3 = 'abf3';
 
 	/** @var \Sellastica\Entity\EntityManager */

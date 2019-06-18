@@ -114,6 +114,10 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $options = [];
 	/** @var \Sellastica\CatalogSupplier\Model\FeedStatistics|null @optional */
 	private $statistics;
+	/** @var int|null @optional */
+	private $lastDownloadTime;
+	/** @var int|null @optional */
+	private $lastImportTime;
 
 
 	/**
@@ -930,6 +934,38 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return int|null
+	 */
+	public function getLastDownloadTime(): ?int
+	{
+		return $this->lastDownloadTime;
+	}
+
+	/**
+	 * @param int|null $lastDownloadTime
+	 */
+	public function setLastDownloadTime(?int $lastDownloadTime): void
+	{
+		$this->lastDownloadTime = $lastDownloadTime;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getLastImportTime(): ?int
+	{
+		return $this->lastImportTime;
+	}
+
+	/**
+	 * @param int|null $lastImportTime
+	 */
+	public function setLastImportTime(?int $lastImportTime): void
+	{
+		$this->lastImportTime = $lastImportTime;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -987,6 +1023,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'statistics' => $this->statistics && $this->statistics->getProductsCount()
 					? \Nette\Utils\Json::encode($this->statistics->toArray())
 					: null,
+				'lastDownloadTime' => $this->lastDownloadTime,
+				'lastImportTime' => $this->lastImportTime,
 			]
 		);
 	}

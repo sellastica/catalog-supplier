@@ -99,6 +99,10 @@ class CatalogFeedBuilder implements IBuilder
 	private $options = [];
 	/** @var \Sellastica\CatalogSupplier\Model\FeedStatistics|null */
 	private $statistics;
+	/** @var int|null */
+	private $lastDownloadTime;
+	/** @var int|null */
+	private $lastImportTime;
 
 	/**
 	 * @param int $supplierId
@@ -861,6 +865,42 @@ class CatalogFeedBuilder implements IBuilder
 	public function statistics(\Sellastica\CatalogSupplier\Model\FeedStatistics $statistics = null)
 	{
 		$this->statistics = $statistics;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getLastDownloadTime()
+	{
+		return $this->lastDownloadTime;
+	}
+
+	/**
+	 * @param int|null $lastDownloadTime
+	 * @return $this
+	 */
+	public function lastDownloadTime(int $lastDownloadTime = null)
+	{
+		$this->lastDownloadTime = $lastDownloadTime;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getLastImportTime()
+	{
+		return $this->lastImportTime;
+	}
+
+	/**
+	 * @param int|null $lastImportTime
+	 * @return $this
+	 */
+	public function lastImportTime(int $lastImportTime = null)
+	{
+		$this->lastImportTime = $lastImportTime;
 		return $this;
 	}
 
