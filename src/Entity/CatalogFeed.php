@@ -128,7 +128,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 		$this->hydrate($builder);
 		$this->feedFormat = $this->feedFormat ?? \Sellastica\CatalogSupplier\Model\FeedFormat::xml();
 		$this->compression = $this->compression ?? \Sellastica\CatalogSupplier\Model\Compression::none();
-		$this->stream = $this->stream ?? \Sellastica\CatalogSupplier\Model\Stream::http();
+		$this->stream = $this->stream ?? \Sellastica\CatalogSupplier\Model\Stream::curl();
 	}
 
 	/**
