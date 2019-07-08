@@ -28,9 +28,13 @@ class CatalogSupplierBuilder implements IBuilder
 	/** @var string|null */
 	private $phone;
 	/** @var string|null */
+	private $perex;
+	/** @var string|null */
 	private $description;
 	/** @var bool */
 	private $visible = true;
+	/** @var \DateTime|null */
+	private $visibleFrom;
 	/** @var \Sellastica\Identity\Model\BillingAddress|null */
 	private $billingAddress;
 
@@ -174,6 +178,24 @@ class CatalogSupplierBuilder implements IBuilder
 	/**
 	 * @return string|null
 	 */
+	public function getPerex()
+	{
+		return $this->perex;
+	}
+
+	/**
+	 * @param string|null $perex
+	 * @return $this
+	 */
+	public function perex(string $perex = null)
+	{
+		$this->perex = $perex;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
 	public function getDescription()
 	{
 		return $this->description;
@@ -204,6 +226,24 @@ class CatalogSupplierBuilder implements IBuilder
 	public function visible(bool $visible = true)
 	{
 		$this->visible = $visible;
+		return $this;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getVisibleFrom()
+	{
+		return $this->visibleFrom;
+	}
+
+	/**
+	 * @param \DateTime|null $visibleFrom
+	 * @return $this
+	 */
+	public function visibleFrom(\DateTime $visibleFrom = null)
+	{
+		$this->visibleFrom = $visibleFrom;
 		return $this;
 	}
 

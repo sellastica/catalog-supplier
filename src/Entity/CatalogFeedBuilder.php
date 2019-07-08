@@ -74,6 +74,8 @@ class CatalogFeedBuilder implements IBuilder
 	/** @var \Sellastica\Localization\Model\Currency|null */
 	private $secondCurrency;
 	/** @var bool */
+	private $commonImport = true;
+	/** @var bool */
 	private $customUrl = true;
 	/** @var bool */
 	private $demo = false;
@@ -631,6 +633,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function secondCurrency(\Sellastica\Localization\Model\Currency $secondCurrency = null)
 	{
 		$this->secondCurrency = $secondCurrency;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getCommonImport(): bool
+	{
+		return $this->commonImport;
+	}
+
+	/**
+	 * @param bool $commonImport
+	 * @return $this
+	 */
+	public function commonImport(bool $commonImport = true)
+	{
+		$this->commonImport = $commonImport;
 		return $this;
 	}
 

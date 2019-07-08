@@ -88,6 +88,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var \Sellastica\Localization\Model\Currency|null @optional */
 	private $secondCurrency;
 
+	/** @var bool @optional Update with common import script call? (UpdatePresenter) */
+	private $commonImport = true;
 	/** @var bool @optional */
 	private $customUrl = true;
 	/** @var bool @optional */
@@ -966,6 +968,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isCommonImport(): bool
+	{
+		return $this->commonImport;
+	}
+
+	/**
+	 * @param bool $commonImport
+	 */
+	public function setCommonImport(bool $commonImport): void
+	{
+		$this->commonImport = $commonImport;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -1025,6 +1043,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 					: null,
 				'lastDownloadTime' => $this->lastDownloadTime,
 				'lastImportTime' => $this->lastImportTime,
+				'commonImport' => $this->commonImport,
 			]
 		);
 	}

@@ -29,9 +29,13 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var string|null @optional */
 	private $phone;
 	/** @var string|null @optional */
+	private $perex;
+	/** @var string|null @optional */
 	private $description;
 	/** @var bool @optional */
 	private $visible = true;
+	/** @var \DateTime|null @optional */
+	private $visibleFrom;
 	/** @var CatalogCategoryCollection|CatalogCategory[] */
 	private $categories;
 	/** @var \Sellastica\Identity\Model\BillingAddress|null @optional */
@@ -240,6 +244,38 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \DateTime|null
+	 */
+	public function getVisibleFrom(): ?\DateTime
+	{
+		return $this->visibleFrom;
+	}
+
+	/**
+	 * @param \DateTime|null $visibleFrom
+	 */
+	public function setVisibleFrom(?\DateTime $visibleFrom): void
+	{
+		$this->visibleFrom = $visibleFrom;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getPerex(): ?string
+	{
+		return $this->perex;
+	}
+
+	/**
+	 * @param string|null $perex
+	 */
+	public function setPerex(?string $perex): void
+	{
+		$this->perex = $perex;
+	}
+
+	/**
 	 * @return null|string
 	 */
 	public function getDescription(): ?string
@@ -370,7 +406,9 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 				'email' => $this->getEmail(),
 				'phone' => $this->phone,
 				'description' => $this->description,
+				'perex' => $this->perex,
 				'visible' => $this->visible,
+				'visibleFrom' => $this->visibleFrom,
 			],
 			//billing address
 			$this->billingAddress ? $this->billingAddress->toArray() : [

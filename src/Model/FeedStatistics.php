@@ -48,24 +48,24 @@ class FeedStatistics
 	/** @var array */
 	public static $weights = [
 		self::TITLE => 1,
-		self::PEREX => 0.9,
+		self::PEREX => 0.5,
 		self::DESCRIPTION => 1,
-		self::MANUFACTURER => 0.8,
+		self::MANUFACTURER => 0.5,
 		self::WARRANTY => 0.1,
 		self::CATEGORIES => 1,
 		self::IMAGES => 1,
 		self::ATTACHMENTS => 0.1,
-		self::CUSTOM_FIELDS => 1,
-		self::RELATED_PRODUCTS => 0.7,
+		self::CUSTOM_FIELDS => 0.9,
+		self::RELATED_PRODUCTS => 0.5,
 		self::ALTERNATIVE_PRODUCTS => 0.1,
 		self::CODE => 1,
 		self::PRICE => 1,
 		self::PURCHASE_PRICE => 0.7,
-		self::NORMAL_MARKET_PRICE => 0.3,
+		self::NORMAL_MARKET_PRICE => 0.2,
 		self::AVAILABILITY => 1,
 		self::QUANTITY => 1,
 		self::EAN => 1,
-		self::OPTIONS => 0.8,
+		self::OPTIONS => 0.5,
 	];
 	/** @var int */
 	private $productsCount = 0;
