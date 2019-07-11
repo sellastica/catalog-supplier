@@ -279,6 +279,10 @@ class FeedStatistics
 		if ($variantData->getOptions()) {
 			$this->add('options');
 		}
+
+		if ($variantData->getParameters() || $variantData->getFilters()) {
+			$this->add('parameters');
+		}
 	}
 
 	/**
