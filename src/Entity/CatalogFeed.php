@@ -12,6 +12,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 {
 	use \Sellastica\Entity\Entity\TAbstractEntity;
 
+	const DEMO_FEED_ID = 13;
+
 	const AUTH_NONE = 'none',
 		AUTH_BASIC = 'basic',
 		AUTH_NTLM = 'ntlm',
