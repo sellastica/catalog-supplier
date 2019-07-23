@@ -80,6 +80,11 @@ class CatalogSupplierDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 					->on('scr.supplierId = %n.id', $this->getTableName(true))
 					->where('scr.categoryId = %i', $rules['categoryId']->getValue());
 			}
+
+			//visible from
+			if ($rules['visibleFrom']) {
+				$resource->where('%n.visibleFrom <= %d', $this->getTableName(true), new \DateTime());
+			}
 		}
 
 		return $resource;

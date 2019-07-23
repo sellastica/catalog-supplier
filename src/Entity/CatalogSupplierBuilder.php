@@ -31,8 +31,6 @@ class CatalogSupplierBuilder implements IBuilder
 	private $perex;
 	/** @var string|null */
 	private $description;
-	/** @var bool */
-	private $visible = true;
 	/** @var \DateTime|null */
 	private $visibleFrom;
 	/** @var \Sellastica\Identity\Model\BillingAddress|null */
@@ -208,24 +206,6 @@ class CatalogSupplierBuilder implements IBuilder
 	public function description(string $description = null)
 	{
 		$this->description = $description;
-		return $this;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function getVisible(): bool
-	{
-		return $this->visible;
-	}
-
-	/**
-	 * @param bool $visible
-	 * @return $this
-	 */
-	public function visible(bool $visible = true)
-	{
-		$this->visible = $visible;
 		return $this;
 	}
 

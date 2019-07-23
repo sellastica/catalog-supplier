@@ -32,8 +32,6 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	private $perex;
 	/** @var string|null @optional */
 	private $description;
-	/** @var bool @optional */
-	private $visible = true;
 	/** @var \DateTime|null @optional */
 	private $visibleFrom;
 	/** @var CatalogCategoryCollection|CatalogCategory[] */
@@ -232,15 +230,8 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	 */
 	public function isVisible(): bool
 	{
-		return $this->visible;
-	}
-
-	/**
-	 * @param bool $visible
-	 */
-	public function setVisible(bool $visible): void
-	{
-		$this->visible = $visible;
+		return $this->visibleFrom
+			&& $this->visibleFrom <= new \DateTime('today');
 	}
 
 	/**
@@ -407,7 +398,6 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 				'phone' => $this->phone,
 				'description' => $this->description,
 				'perex' => $this->perex,
-				'visible' => $this->visible,
 				'visibleFrom' => $this->visibleFrom,
 			],
 			//billing address
