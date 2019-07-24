@@ -57,7 +57,7 @@ class CatalogSupplierDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	protected function getPublishableResource(\Sellastica\Entity\Configuration $configuration = null)
 	{
 		return parent::getResource($configuration)
-			->where('visible = 1');
+			->where('visibleFrom <= %d', new \DateTime());
 	}
 
 	/**
