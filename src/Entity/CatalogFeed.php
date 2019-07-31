@@ -87,8 +87,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $defaultCurrency;
 	/** @var \Sellastica\Localization\Model\Country @required */
 	private $defaultCountry;
-	/** @var \Sellastica\Localization\Model\Currency|null @optional */
-	private $secondCurrency;
 
 	/** @var bool @optional Update with common import script call? (UpdatePresenter) */
 	private $commonImport = true;
@@ -411,22 +409,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setDefaultCountry(\Sellastica\Localization\Model\Country $defaultCountry): void
 	{
 		$this->defaultCountry = $defaultCountry;
-	}
-
-	/**
-	 * @return null|\Sellastica\Localization\Model\Currency
-	 */
-	public function getSecondCurrency(): ?\Sellastica\Localization\Model\Currency
-	{
-		return $this->secondCurrency;
-	}
-
-	/**
-	 * @param null|\Sellastica\Localization\Model\Currency $secondCurrency
-	 */
-	public function setSecondCurrency(?\Sellastica\Localization\Model\Currency $secondCurrency): void
-	{
-		$this->secondCurrency = $secondCurrency;
 	}
 
 	/**
@@ -1007,7 +989,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'converterClass' => $this->converterClass,
 				'defaultCurrency' => $this->defaultCurrency->getCode(),
 				'defaultCountry' => $this->defaultCountry->getCode(),
-				'secondCurrency' => $this->secondCurrency ? $this->secondCurrency->getCode() : null,
 				'schemaFilename' => $this->schemaFilename,
 				'login' => $this->login,
 				'password' => $this->password,

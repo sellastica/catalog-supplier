@@ -66,9 +66,6 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 
 		$data->defaultCurrency = \Sellastica\Localization\Model\Currency::from($data->defaultCurrency);
 		$data->defaultCountry = \Sellastica\Localization\Model\Country::from($data->defaultCountry);
-		if ($data->secondCurrency) {
-			$data->secondCurrency = \Sellastica\Localization\Model\Currency::from($data->secondCurrency);
-		}
 
 		if (isset($data->priceCzk)) {
 			$data->priceCzk = new \Sellastica\Price\Price(

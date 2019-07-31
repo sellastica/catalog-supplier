@@ -71,8 +71,6 @@ class CatalogFeedBuilder implements IBuilder
 	private $compression;
 	/** @var string|null */
 	private $uncompressedFilename;
-	/** @var \Sellastica\Localization\Model\Currency|null */
-	private $secondCurrency;
 	/** @var bool */
 	private $commonImport = true;
 	/** @var bool */
@@ -615,24 +613,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function uncompressedFilename(string $uncompressedFilename = null)
 	{
 		$this->uncompressedFilename = $uncompressedFilename;
-		return $this;
-	}
-
-	/**
-	 * @return \Sellastica\Localization\Model\Currency|null
-	 */
-	public function getSecondCurrency()
-	{
-		return $this->secondCurrency;
-	}
-
-	/**
-	 * @param \Sellastica\Localization\Model\Currency|null $secondCurrency
-	 * @return $this
-	 */
-	public function secondCurrency(\Sellastica\Localization\Model\Currency $secondCurrency = null)
-	{
-		$this->secondCurrency = $secondCurrency;
 		return $this;
 	}
 

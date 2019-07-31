@@ -117,6 +117,23 @@ class ProjectFeedService
 
 	/**
 	 * @param int $projectId
+	 * @param int $catalogFeedId
+	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeed|null
+	 */
+	public function findActiveOneByProjectAndCatalogFeed(
+		int $projectId,
+		int $catalogFeedId
+	): ?\Sellastica\CatalogSupplier\Entity\ProjectFeed
+	{
+		return $this->findOneBy([
+			'projectId' => $projectId,
+			'catalogFeedId' => $catalogFeedId,
+			'removed IS NULL',
+		]);
+	}
+
+	/**
+	 * @param int $projectId
 	 * @param string $feedId
 	 * @param int $catalogFeedId
 	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeed
