@@ -4,7 +4,8 @@ namespace Sellastica\CatalogSupplier\Model;
 class FeedFormat
 {
 	const XML = 'xml',
-		CSV = 'csv';
+		CSV = 'csv',
+		JSON = 'json';
 
 	/** @var string */
 	private $value;
@@ -48,6 +49,14 @@ class FeedFormat
 	public function isCsv(): bool
 	{
 		return $this->value === self::CSV;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isJson(): bool
+	{
+		return $this->value === self::JSON;
 	}
 
 	/**

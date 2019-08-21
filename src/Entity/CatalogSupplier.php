@@ -179,6 +179,14 @@ class CatalogSupplier extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getCompanyOrTitle(): string
+	{
+		return $this->company ?? $this->title;
+	}
+
+	/**
 	 * @param null|string $company
 	 */
 	public function setCompany(?string $company): void

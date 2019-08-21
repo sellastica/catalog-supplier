@@ -25,25 +25,31 @@ class FeedStatistics
 
 	/** @var array */
 	public static $titles = [
-		self::TITLE => 'apps.suppliers.statistics.title',
-		self::PEREX => 'apps.suppliers.statistics.perex',
-		self::DESCRIPTION => 'apps.suppliers.statistics.description',
-		self::MANUFACTURER => 'apps.suppliers.statistics.manufacturer',
-		self::WARRANTY => 'apps.suppliers.statistics.warranty',
-		self::CATEGORIES => 'apps.suppliers.statistics.categories',
-		self::IMAGES => 'apps.suppliers.statistics.images',
-		self::ATTACHMENTS => 'apps.suppliers.statistics.attachments',
-		self::CUSTOM_FIELDS => 'apps.suppliers.statistics.custom_fields',
-		self::RELATED_PRODUCTS => 'apps.suppliers.statistics.related_products',
-		self::ALTERNATIVE_PRODUCTS => 'apps.suppliers.statistics.alternative_products',
-		self::CODE => 'apps.suppliers.statistics.code',
-		self::PRICE => 'apps.suppliers.statistics.price',
-		self::PURCHASE_PRICE => 'apps.suppliers.statistics.purchase_price',
-		self::NORMAL_MARKET_PRICE => 'apps.suppliers.statistics.normal_market_price',
-		self::AVAILABILITY => 'apps.suppliers.statistics.availability',
-		self::QUANTITY => 'apps.suppliers.statistics.quantity',
-		self::EAN => 'apps.suppliers.statistics.ean',
-		self::OPTIONS => 'apps.suppliers.statistics.options',
+		self::TITLE => 'apps.suppliers.statistics.titles.title',
+		self::PEREX => 'apps.suppliers.statistics.titles.perex',
+		self::DESCRIPTION => 'apps.suppliers.statistics.titles.description',
+		self::MANUFACTURER => 'apps.suppliers.statistics.titles.manufacturer',
+		self::WARRANTY => 'apps.suppliers.statistics.titles.warranty',
+		self::CATEGORIES => 'apps.suppliers.statistics.titles.categories',
+		self::IMAGES => 'apps.suppliers.statistics.titles.images',
+		self::ATTACHMENTS => 'apps.suppliers.statistics.titles.attachments',
+		self::CUSTOM_FIELDS => 'apps.suppliers.statistics.titles.custom_fields',
+		self::RELATED_PRODUCTS => 'apps.suppliers.statistics.titles.related_products',
+		self::ALTERNATIVE_PRODUCTS => 'apps.suppliers.statistics.titles.alternative_products',
+		self::CODE => 'apps.suppliers.statistics.titles.code',
+		self::PRICE => 'apps.suppliers.statistics.titles.price',
+		self::PURCHASE_PRICE => 'apps.suppliers.statistics.titles.purchase_price',
+		self::NORMAL_MARKET_PRICE => 'apps.suppliers.statistics.titles.normal_market_price',
+		self::AVAILABILITY => 'apps.suppliers.statistics.titles.availability',
+		self::QUANTITY => 'apps.suppliers.statistics.titles.quantity',
+		self::EAN => 'apps.suppliers.statistics.titles.ean',
+		self::OPTIONS => 'apps.suppliers.statistics.titles.options',
+	];
+	/** @var array */
+	public static $descriptions = [
+		self::PRICE => 'apps.suppliers.statistics.descriptions.price',
+		self::PURCHASE_PRICE => 'apps.suppliers.statistics.descriptions.purchase_price',
+		self::NORMAL_MARKET_PRICE => 'apps.suppliers.statistics.descriptions.normal_market_price',
 	];
 	/** @var array */
 	public static $weights = [
@@ -94,6 +100,15 @@ class FeedStatistics
 	public function getTitle(string $property): ?string
 	{
 		return self::$titles[$property] ?? null;
+	}
+
+	/**
+	 * @param string $property
+	 * @return string|null
+	 */
+	public function getDescription(string $property): ?string
+	{
+		return self::$descriptions[$property] ?? null;
 	}
 
 	/**
