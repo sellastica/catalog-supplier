@@ -112,8 +112,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $priceEur;
 	/** @var array @optional */
 	private $modifiedProperties = [];
-	/** @var array @optional */
-	private $options = [];
 	/** @var \Sellastica\CatalogSupplier\Model\FeedStatistics|null @optional */
 	private $statistics;
 	/** @var int|null @optional */
@@ -678,6 +676,14 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return CatalogFeedOptionCollection|CatalogFeedOption[]
+	 */
+	public function getOptions(): CatalogFeedOptionCollection
+	{
+		return $this->relationService->getOptions();
+	}
+
+	/**
 	 * @return null|string
 	 */
 	public function getCsvDelimiter(): ?string
@@ -880,22 +886,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getOptions(): array
-	{
-		return $this->options;
-	}
-
-	/**
-	 * @param array $options
-	 */
-	public function setOptions(array $options): void
-	{
-		$this->options = $options;
-	}
-
-	/**
 	 * @return \Sellastica\CatalogSupplier\Model\FeedStatistics|null
 	 */
 	public function getStatistics(): ?\Sellastica\CatalogSupplier\Model\FeedStatistics
@@ -1017,9 +1007,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'encoding' => $this->encoding,
 				'modifiedProperties' => $this->modifiedProperties
 					? \Nette\Utils\Json::encode($this->modifiedProperties)
-					: null,
-				'options' => $this->options
-					? \Nette\Utils\Json::encode($this->options)
 					: null,
 				'statistics' => $this->statistics && $this->statistics->getProductsCount()
 					? \Nette\Utils\Json::encode($this->statistics->toArray())

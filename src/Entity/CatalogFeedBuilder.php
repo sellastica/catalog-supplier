@@ -95,8 +95,6 @@ class CatalogFeedBuilder implements IBuilder
 	private $priceEur;
 	/** @var array */
 	private $modifiedProperties = [];
-	/** @var array */
-	private $options = [];
 	/** @var \Sellastica\CatalogSupplier\Model\FeedStatistics|null */
 	private $statistics;
 	/** @var int|null */
@@ -829,24 +827,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function modifiedProperties(array $modifiedProperties)
 	{
 		$this->modifiedProperties = $modifiedProperties;
-		return $this;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getOptions(): array
-	{
-		return $this->options;
-	}
-
-	/**
-	 * @param array $options
-	 * @return $this
-	 */
-	public function options(array $options)
-	{
-		$this->options = $options;
 		return $this;
 	}
 

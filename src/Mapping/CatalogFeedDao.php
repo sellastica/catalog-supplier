@@ -60,10 +60,6 @@ class CatalogFeedDao extends \Sellastica\Entity\Mapping\Dao
 		$data->modifiedProperties = !empty($data->modifiedProperties)
 			? \Nette\Utils\Json::decode($data->modifiedProperties, \Nette\Utils\Json::FORCE_ARRAY)
 			: [];
-		$data->options = !empty($data->options)
-			? \Nette\Utils\Json::decode($data->options, \Nette\Utils\Json::FORCE_ARRAY)
-			: [];
-
 		$data->defaultCurrency = \Sellastica\Localization\Model\Currency::from($data->defaultCurrency);
 		$data->defaultCountry = \Sellastica\Localization\Model\Country::from($data->defaultCountry);
 
