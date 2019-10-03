@@ -65,12 +65,18 @@ class CatalogFeedBuilder implements IBuilder
 	private $csvDelimiter;
 	/** @var int|null */
 	private $csvHeaderOffset = 0;
+	/** @var bool */
+	private $csvIncludeEmptyColumns = false;
 	/** @var string */
 	private $encoding = 'utf-8';
 	/** @var \Sellastica\CatalogSupplier\Model\Compression */
 	private $compression;
 	/** @var string|null */
 	private $uncompressedFilename;
+	/** @var bool */
+	private $feesToPurchasePrice = false;
+	/** @var bool */
+	private $feesToPrice = false;
 	/** @var bool */
 	private $commonImport = true;
 	/** @var bool */
@@ -561,6 +567,24 @@ class CatalogFeedBuilder implements IBuilder
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function getCsvIncludeEmptyColumns(): bool
+	{
+		return $this->csvIncludeEmptyColumns;
+	}
+
+	/**
+	 * @param bool $csvIncludeEmptyColumns
+	 * @return $this
+	 */
+	public function csvIncludeEmptyColumns(bool $csvIncludeEmptyColumns)
+	{
+		$this->csvIncludeEmptyColumns = $csvIncludeEmptyColumns;
+		return $this;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getEncoding(): string
@@ -611,6 +635,42 @@ class CatalogFeedBuilder implements IBuilder
 	public function uncompressedFilename(string $uncompressedFilename = null)
 	{
 		$this->uncompressedFilename = $uncompressedFilename;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getFeesToPurchasePrice(): bool
+	{
+		return $this->feesToPurchasePrice;
+	}
+
+	/**
+	 * @param bool $feesToPurchasePrice
+	 * @return $this
+	 */
+	public function feesToPurchasePrice(bool $feesToPurchasePrice)
+	{
+		$this->feesToPurchasePrice = $feesToPurchasePrice;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getFeesToPrice(): bool
+	{
+		return $this->feesToPrice;
+	}
+
+	/**
+	 * @param bool $feesToPrice
+	 * @return $this
+	 */
+	public function feesToPrice(bool $feesToPrice)
+	{
+		$this->feesToPrice = $feesToPrice;
 		return $this;
 	}
 

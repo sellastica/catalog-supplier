@@ -76,6 +76,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $csvDelimiter;
 	/** @var int|null @optional */
 	private $csvHeaderOffset = 0;
+	/** @var bool @optional */
+	private $csvIncludeEmptyColumns = false;
 	/** @var string @optional */
 	private $encoding = self::ENCODING_UTF8;
 	/** @var \Sellastica\CatalogSupplier\Model\Compression @optional */
@@ -87,6 +89,10 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $defaultCurrency;
 	/** @var \Sellastica\Localization\Model\Country @required */
 	private $defaultCountry;
+	/** @var bool @optional */
+	private $feesToPurchasePrice = false;
+	/** @var bool @optional */
+	private $feesToPrice = false;
 
 	/** @var bool @optional Update with common import script call? (UpdatePresenter) */
 	private $commonImport = true;
@@ -407,6 +413,38 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setDefaultCountry(\Sellastica\Localization\Model\Country $defaultCountry): void
 	{
 		$this->defaultCountry = $defaultCountry;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isFeesToPurchasePrice(): bool
+	{
+		return $this->feesToPurchasePrice;
+	}
+
+	/**
+	 * @param bool $feesToPurchasePrice
+	 */
+	public function setFeesToPurchasePrice(bool $feesToPurchasePrice): void
+	{
+		$this->feesToPurchasePrice = $feesToPurchasePrice;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isFeesToPrice(): bool
+	{
+		return $this->feesToPrice;
+	}
+
+	/**
+	 * @param bool $feesToPrice
+	 */
+	public function setFeesToPrice(bool $feesToPrice): void
+	{
+		$this->feesToPrice = $feesToPrice;
 	}
 
 	/**
@@ -812,6 +850,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isCsvIncludeEmptyColumns(): bool
+	{
+		return $this->csvIncludeEmptyColumns;
+	}
+
+	/**
+	 * @param bool $csvIncludeEmptyColumns
+	 */
+	public function setCsvIncludeEmptyColumns(bool $csvIncludeEmptyColumns): void
+	{
+		$this->csvIncludeEmptyColumns = $csvIncludeEmptyColumns;
+	}
+
+	/**
 	 * @return string|null
 	 */
 	public function getCustomDownloader(): ?string
@@ -998,6 +1052,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'overrideScheme' => $this->overrideScheme,
 				'csvDelimiter' => $this->csvDelimiter,
 				'csvHeaderOffset' => $this->csvHeaderOffset,
+				'csvIncludeEmptyColumns' => $this->csvIncludeEmptyColumns,
 				'crontab' => $this->crontab,
 				'saveSourceData' => $this->saveSourceData,
 				'groupProductsWhenCounting' => $this->groupProductsWhenCounting,
