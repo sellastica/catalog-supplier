@@ -1033,6 +1033,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'converterClass' => $this->converterClass,
 				'defaultCurrency' => $this->defaultCurrency->getCode(),
 				'defaultCountry' => $this->defaultCountry->getCode(),
+				'feesToPurchasePrice' => $this->feesToPurchasePrice,
+				'feesToPrice' => $this->feesToPrice,
 				'schemaFilename' => $this->schemaFilename,
 				'login' => $this->login,
 				'password' => $this->password,

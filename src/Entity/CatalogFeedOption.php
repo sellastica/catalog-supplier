@@ -16,7 +16,7 @@ class CatalogFeedOption extends \Sellastica\Entity\Entity\AbstractEntity
 	private $code;
 	/** @var string @required */
 	private $title;
-	/** @var string @required */
+	/** @var string|null @required */
 	private $value;
 
 
@@ -37,17 +37,17 @@ class CatalogFeedOption extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return string
+	 * @return \Sellastica\CatalogSupplier\Model\FeedOptionType
 	 */
-	public function getType(): string
+	public function getType(): \Sellastica\CatalogSupplier\Model\FeedOptionType
 	{
 		return $this->type;
 	}
 
 	/**
-	 * @param string $type
+	 * @param \Sellastica\CatalogSupplier\Model\FeedOptionType $type
 	 */
-	public function setType(string $type): void
+	public function setType(\Sellastica\CatalogSupplier\Model\FeedOptionType $type): void
 	{
 		$this->type = $type;
 	}
@@ -108,7 +108,7 @@ class CatalogFeedOption extends \Sellastica\Entity\Entity\AbstractEntity
 		return array_merge(
 			$this->parentToArray(),
 			[
-				'type' => $this->type,
+				'type' => $this->type->getValue(),
 				'code' => $this->code,
 				'title' => $this->title,
 				'value' => $this->value,

@@ -17,20 +17,20 @@ class CatalogFeedOptionBuilder implements IBuilder
 	private $code;
 	/** @var string */
 	private $title;
-	/** @var string */
+	/** @var string|null */
 	private $value;
 
 	/**
 	 * @param \Sellastica\CatalogSupplier\Model\FeedOptionType $type
 	 * @param string $code
 	 * @param string $title
-	 * @param string $value
+	 * @param string|null $value
 	 */
 	public function __construct(
 		\Sellastica\CatalogSupplier\Model\FeedOptionType $type,
 		string $code,
 		string $title,
-		string $value
+		string $value = null
 	)
 	{
 		$this->type = $type;
@@ -64,9 +64,9 @@ class CatalogFeedOptionBuilder implements IBuilder
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getValue(): string
+	public function getValue()
 	{
 		return $this->value;
 	}
@@ -91,14 +91,14 @@ class CatalogFeedOptionBuilder implements IBuilder
 	 * @param \Sellastica\CatalogSupplier\Model\FeedOptionType $type
 	 * @param string $code
 	 * @param string $title
-	 * @param string $value
+	 * @param string|null $value
 	 * @return self
 	 */
 	public static function create(
 		\Sellastica\CatalogSupplier\Model\FeedOptionType $type,
 		string $code,
 		string $title,
-		string $value
+		string $value = null
 	): self
 	{
 		return new self($type, $code, $title, $value);

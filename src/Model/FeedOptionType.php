@@ -3,7 +3,8 @@ namespace Sellastica\CatalogSupplier\Model;
 
 class FeedOptionType
 {
-	const CHECKBOX = 'checkbox';
+	const CHECKBOX = 'checkbox',
+		TEXT = 'text';
 
 	/** @var string */
 	private $value;
@@ -39,6 +40,14 @@ class FeedOptionType
 	public function isCheckbox(): bool
 	{
 		return $this->value === self::CHECKBOX;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isText(): bool
+	{
+		return $this->value === self::TEXT;
 	}
 
 	/**
