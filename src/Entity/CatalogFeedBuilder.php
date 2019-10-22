@@ -45,6 +45,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $timeout = 180;
 	/** @var bool */
 	private $supportsHead = true;
+	/** @var bool */
+	private $downloadMetadata = true;
 	/** @var string|null */
 	private $customDownloader;
 	/** @var string|null */
@@ -383,6 +385,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function supportsHead(bool $supportsHead = true)
 	{
 		$this->supportsHead = $supportsHead;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getDownloadMetadata(): bool
+	{
+		return $this->downloadMetadata;
+	}
+
+	/**
+	 * @param bool $downloadMetadata
+	 * @return $this
+	 */
+	public function downloadMetadata(bool $downloadMetadata = true)
+	{
+		$this->downloadMetadata = $downloadMetadata;
 		return $this;
 	}
 
