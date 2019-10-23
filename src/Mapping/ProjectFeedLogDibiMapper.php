@@ -20,7 +20,7 @@ class ProjectFeedLogDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	{
 		$resource =  $this->getResource()
 			->select(false)
-			->select('SUM(productsCount)')
+			->select('SUM(activeProductsCount)')
 			->where('projectId = %i', $projectId)
 			->where('date = %d', $date);
 
@@ -44,14 +44,26 @@ class ProjectFeedLogDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 		return $this->getResource()
 			->select(false)
 			->select('[date]')
-			->select('SUM(productsCount)')->as('productsCount')
-			->select('SUM(hiddenProductsCount)')->as('hiddenProductsCount')
+			->select('SUM(activeProductsCount)')->as('activeProductsCount')
+			->select('SUM(pendingProductsCount)')->as('pendingProductsCount')
 			->select('SUM(totalProductsCount)')->as('totalProductsCount')
 			->where('projectId = %i', $projectId)
 			->where('[date] IN (%sN)', $dates)
 			->groupBy('[date]')
 			->orderBy('[date]')
 			->fetchAll();
+	}
+
+	/**
+	 * @param int $projectId
+	 * @return \DateTime|null
+	 */
+	public function findLastUpdateTimestamp(int $projectId): ?\DateTime
+	{
+		return $this->database->select('MAX([created])')
+			->from($this->getTableName(true))
+			->where('projectId = %i', $projectId)
+			->fetchSingle();
 	}
 
 	/**

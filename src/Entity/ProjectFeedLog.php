@@ -18,14 +18,26 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 	private $catalogFeedId;
 	/** @var \DateTime @required */
 	private $date;
-	/** @var int @required */
-	private $productsCount;
+	/** @var int @optional */
+	private $activeProductsCount;
+	/** @var int @optional */
+	private $activeVariantsCount;
 	/** @var int @optional */
 	private $approvedProductsCount = 0;
 	/** @var int @optional */
+	private $approvedVariantsCount = 0;
+	/** @var int @optional */
+	private $pendingProductsCount = 0;
+	/** @var int @optional */
+	private $pendingVariantsCount = 0;
+	/** @var int @optional */
 	private $hiddenProductsCount = 0;
 	/** @var int @optional */
+	private $hiddenVariantsCount = 0;
+	/** @var int @optional */
 	private $totalProductsCount = 0;
+	/** @var int @optional */
+	private $totalVariantsCount = 0;
 	/** @var bool @optional */
 	private $trial = false;
 
@@ -113,17 +125,33 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return int
 	 */
-	public function getProductsCount(): int
+	public function getActiveProductsCount(): int
 	{
-		return $this->productsCount;
+		return $this->activeProductsCount;
 	}
 
 	/**
-	 * @param int $productsCount
+	 * @param int $activeProductsCount
 	 */
-	public function setProductsCount(int $productsCount): void
+	public function setActiveProductsCount(int $activeProductsCount): void
 	{
-		$this->productsCount = $productsCount;
+		$this->activeProductsCount = $activeProductsCount;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getActiveVariantsCount(): int
+	{
+		return $this->activeVariantsCount;
+	}
+
+	/**
+	 * @param int $activeVariantsCount
+	 */
+	public function setActiveVariantsCount(int $activeVariantsCount): void
+	{
+		$this->activeVariantsCount = $activeVariantsCount;
 	}
 
 	/**
@@ -145,6 +173,54 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return int
 	 */
+	public function getApprovedVariantsCount(): int
+	{
+		return $this->approvedVariantsCount;
+	}
+
+	/**
+	 * @param int $approvedVariantsCount
+	 */
+	public function setApprovedVariantsCount(int $approvedVariantsCount): void
+	{
+		$this->approvedVariantsCount = $approvedVariantsCount;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getPendingProductsCount(): int
+	{
+		return $this->pendingProductsCount;
+	}
+
+	/**
+	 * @param int $pendingProductsCount
+	 */
+	public function setPendingProductsCount(int $pendingProductsCount): void
+	{
+		$this->pendingProductsCount = $pendingProductsCount;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getPendingVariantsCount(): int
+	{
+		return $this->pendingVariantsCount;
+	}
+
+	/**
+	 * @param int $pendingVariantsCount
+	 */
+	public function setPendingVariantsCount(int $pendingVariantsCount): void
+	{
+		$this->pendingVariantsCount = $pendingVariantsCount;
+	}
+
+	/**
+	 * @return int
+	 */
 	public function getHiddenProductsCount(): int
 	{
 		return $this->hiddenProductsCount;
@@ -161,6 +237,22 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return int
 	 */
+	public function getHiddenVariantsCount(): int
+	{
+		return $this->hiddenVariantsCount;
+	}
+
+	/**
+	 * @param int $hiddenVariantsCount
+	 */
+	public function setHiddenVariantsCount(int $hiddenVariantsCount): void
+	{
+		$this->hiddenVariantsCount = $hiddenVariantsCount;
+	}
+
+	/**
+	 * @return int
+	 */
 	public function getTotalProductsCount(): int
 	{
 		return $this->totalProductsCount;
@@ -172,6 +264,22 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setTotalProductsCount(int $totalProductsCount): void
 	{
 		$this->totalProductsCount = $totalProductsCount;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getTotalVariantsCount(): int
+	{
+		return $this->totalVariantsCount;
+	}
+
+	/**
+	 * @param int $totalVariantsCount
+	 */
+	public function setTotalVariantsCount(int $totalVariantsCount): void
+	{
+		$this->totalVariantsCount = $totalVariantsCount;
 	}
 
 	/**
@@ -201,10 +309,16 @@ class ProjectFeedLog extends \Sellastica\Entity\Entity\AbstractEntity
 				'projectId' => $this->projectId,
 				'catalogFeedId' => $this->catalogFeedId,
 				'date' => $this->date,
-				'productsCount' => $this->productsCount,
+				'activeProductsCount' => $this->activeProductsCount,
+				'activeVariantsCount' => $this->activeVariantsCount,
 				'approvedProductsCount' => $this->approvedProductsCount,
+				'approvedVariantsCount' => $this->approvedVariantsCount,
+				'pendingProductsCount' => $this->pendingProductsCount,
+				'pendingVariantsCount' => $this->pendingVariantsCount,
 				'hiddenProductsCount' => $this->hiddenProductsCount,
+				'hiddenVariantsCount' => $this->hiddenVariantsCount,
 				'totalProductsCount' => $this->totalProductsCount,
+				'totalVariantsCount' => $this->totalVariantsCount,
 				'trial' => $this->trial,
 			]
 		);

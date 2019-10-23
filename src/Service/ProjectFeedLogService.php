@@ -85,24 +85,31 @@ class ProjectFeedLogService
 	}
 
 	/**
+	 * @param int $projectId
+	 * @return \DateTime|null
+	 */
+	public function findLastUpdateTimestamp(int $projectId): ?\DateTime
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeedLog::class)
+			->findLastUpdateTimestamp($projectId);
+	}
+
+	/**
 	 * @param \Sellastica\Project\Entity\Project $project
 	 * @param \Sellastica\CatalogSupplier\Entity\CatalogFeed $catalogFeed
-	 * @param int $productsCount
 	 * @param \DateTime|null $date
 	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedLog
 	 */
 	public function create(
 		\Sellastica\Project\Entity\Project $project,
 		\Sellastica\CatalogSupplier\Entity\CatalogFeed $catalogFeed,
-		int $productsCount,
 		\DateTime $date = null
 	): \Sellastica\CatalogSupplier\Entity\ProjectFeedLog
 	{
 		$projectFeedLog = \Sellastica\CatalogSupplier\Entity\ProjectFeedLogBuilder::create(
 			$project->getId(),
 			$catalogFeed->getId(),
-			$date ?? (new \DateTime()),
-			$productsCount
+			$date ?? (new \DateTime())
 		)->build();
 		$this->em->persist($projectFeedLog);
 

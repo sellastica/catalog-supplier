@@ -38,4 +38,13 @@ class ProjectFeedLogRepository extends Repository implements IProjectFeedLogRepo
 	{
 		return $this->dao->getProductsSumCountByDates($dates, $projectId);
 	}
+
+	/**
+	 * @param int $projectId
+	 * @return \DateTime|null
+	 */
+	public function findLastUpdateTimestamp(int $projectId): ?\DateTime
+	{
+		return $this->dao->findLastUpdateTimestamp($projectId);
+	}
 }

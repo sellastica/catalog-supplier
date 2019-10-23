@@ -18,13 +18,25 @@ class ProjectFeedLogBuilder implements IBuilder
 	/** @var \DateTime */
 	private $date;
 	/** @var int */
-	private $productsCount;
+	private $activeProductsCount;
+	/** @var int */
+	private $activeVariantsCount;
 	/** @var int */
 	private $approvedProductsCount = 0;
 	/** @var int */
+	private $approvedVariantsCount = 0;
+	/** @var int */
+	private $pendingProductsCount = 0;
+	/** @var int */
+	private $pendingVariantsCount = 0;
+	/** @var int */
 	private $hiddenProductsCount = 0;
 	/** @var int */
+	private $hiddenVariantsCount = 0;
+	/** @var int */
 	private $totalProductsCount = 0;
+	/** @var int */
+	private $totalVariantsCount = 0;
 	/** @var bool */
 	private $trial = false;
 
@@ -32,19 +44,16 @@ class ProjectFeedLogBuilder implements IBuilder
 	 * @param int $projectId
 	 * @param int $catalogFeedId
 	 * @param \DateTime $date
-	 * @param int $productsCount
 	 */
 	public function __construct(
 		int $projectId,
 		int $catalogFeedId,
-		\DateTime $date,
-		int $productsCount
+		\DateTime $date
 	)
 	{
 		$this->projectId = $projectId;
 		$this->catalogFeedId = $catalogFeedId;
 		$this->date = $date;
-		$this->productsCount = $productsCount;
 	}
 
 	/**
@@ -74,9 +83,37 @@ class ProjectFeedLogBuilder implements IBuilder
 	/**
 	 * @return int
 	 */
-	public function getProductsCount(): int
+	public function getActiveProductsCount(): int
 	{
-		return $this->productsCount;
+		return $this->activeProductsCount;
+	}
+
+	/**
+	 * @param int $activeProductsCount
+	 * @return $this
+	 */
+	public function activeProductsCount(int $activeProductsCount)
+	{
+		$this->activeProductsCount = $activeProductsCount;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getActiveVariantsCount(): int
+	{
+		return $this->activeVariantsCount;
+	}
+
+	/**
+	 * @param int $activeVariantsCount
+	 * @return $this
+	 */
+	public function activeVariantsCount(int $activeVariantsCount)
+	{
+		$this->activeVariantsCount = $activeVariantsCount;
+		return $this;
 	}
 
 	/**
@@ -94,6 +131,60 @@ class ProjectFeedLogBuilder implements IBuilder
 	public function approvedProductsCount(int $approvedProductsCount)
 	{
 		$this->approvedProductsCount = $approvedProductsCount;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getApprovedVariantsCount(): int
+	{
+		return $this->approvedVariantsCount;
+	}
+
+	/**
+	 * @param int $approvedVariantsCount
+	 * @return $this
+	 */
+	public function approvedVariantsCount(int $approvedVariantsCount)
+	{
+		$this->approvedVariantsCount = $approvedVariantsCount;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getPendingProductsCount(): int
+	{
+		return $this->pendingProductsCount;
+	}
+
+	/**
+	 * @param int $pendingProductsCount
+	 * @return $this
+	 */
+	public function pendingProductsCount(int $pendingProductsCount)
+	{
+		$this->pendingProductsCount = $pendingProductsCount;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getPendingVariantsCount(): int
+	{
+		return $this->pendingVariantsCount;
+	}
+
+	/**
+	 * @param int $pendingVariantsCount
+	 * @return $this
+	 */
+	public function pendingVariantsCount(int $pendingVariantsCount)
+	{
+		$this->pendingVariantsCount = $pendingVariantsCount;
 		return $this;
 	}
 
@@ -118,6 +209,24 @@ class ProjectFeedLogBuilder implements IBuilder
 	/**
 	 * @return int
 	 */
+	public function getHiddenVariantsCount(): int
+	{
+		return $this->hiddenVariantsCount;
+	}
+
+	/**
+	 * @param int $hiddenVariantsCount
+	 * @return $this
+	 */
+	public function hiddenVariantsCount(int $hiddenVariantsCount)
+	{
+		$this->hiddenVariantsCount = $hiddenVariantsCount;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
 	public function getTotalProductsCount(): int
 	{
 		return $this->totalProductsCount;
@@ -130,6 +239,24 @@ class ProjectFeedLogBuilder implements IBuilder
 	public function totalProductsCount(int $totalProductsCount)
 	{
 		$this->totalProductsCount = $totalProductsCount;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getTotalVariantsCount(): int
+	{
+		return $this->totalVariantsCount;
+	}
+
+	/**
+	 * @param int $totalVariantsCount
+	 * @return $this
+	 */
+	public function totalVariantsCount(int $totalVariantsCount)
+	{
+		$this->totalVariantsCount = $totalVariantsCount;
 		return $this;
 	}
 
@@ -171,16 +298,14 @@ class ProjectFeedLogBuilder implements IBuilder
 	 * @param int $projectId
 	 * @param int $catalogFeedId
 	 * @param \DateTime $date
-	 * @param int $productsCount
 	 * @return self
 	 */
 	public static function create(
 		int $projectId,
 		int $catalogFeedId,
-		\DateTime $date,
-		int $productsCount
+		\DateTime $date
 	): self
 	{
-		return new self($projectId, $catalogFeedId, $date, $productsCount);
+		return new self($projectId, $catalogFeedId, $date);
 	}
 }

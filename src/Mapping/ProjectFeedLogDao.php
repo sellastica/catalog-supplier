@@ -37,6 +37,15 @@ class ProjectFeedLogDao extends \Sellastica\Entity\Mapping\Dao
 	}
 
 	/**
+	 * @param int $projectId
+	 * @return \DateTime|null
+	 */
+	public function findLastUpdateTimestamp(int $projectId): ?\DateTime
+	{
+		return $this->mapper->findLastUpdateTimestamp($projectId);
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	protected function getBuilder(
@@ -45,8 +54,11 @@ class ProjectFeedLogDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
-		return \Sellastica\CatalogSupplier\Entity\ProjectFeedLogBuilder::create($data->projectId, $data->catalogFeedId, $data->date, $data->productsCount)
-			->hydrate($data);
+		return \Sellastica\CatalogSupplier\Entity\ProjectFeedLogBuilder::create(
+			$data->projectId,
+			$data->catalogFeedId,
+			$data->date
+		)->hydrate($data);
 	}
 
 	/**

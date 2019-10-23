@@ -27,4 +27,9 @@ class ProjectFeedLogRepositoryProxy extends RepositoryProxy implements IProjectF
 	{
 		return $this->getRepository()->getProductsSumCountByDates($dates, $projectId);
 	}
+
+	public function findLastUpdateTimestamp(int $projectId): ?\DateTime
+	{
+		return $this->getRepository()->findLastUpdateTimestamp($projectId);
+	}
 }

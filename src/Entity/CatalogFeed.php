@@ -111,8 +111,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var bool @optional */
 	private $saveSourceData = true;
 	/** @var bool @optional */
-	private $groupProductsWhenCounting = false;
-	/** @var bool @optional */
 	private $hideMissingProducts = true;
 	/** @var \Sellastica\Price\Price|null @optional */
 	private $priceCzk;
@@ -788,22 +786,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function isGroupProductsWhenCounting(): bool
-	{
-		return $this->groupProductsWhenCounting;
-	}
-
-	/**
-	 * @param bool $groupProductsWhenCounting
-	 */
-	public function setGroupProductsWhenCounting(bool $groupProductsWhenCounting): void
-	{
-		$this->groupProductsWhenCounting = $groupProductsWhenCounting;
-	}
-
-	/**
 	 * @return \Sellastica\Price\Price|null
 	 */
 	public function getPriceCzk(): ?\Sellastica\Price\Price
@@ -1076,7 +1058,6 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'csvIncludeEmptyColumns' => $this->csvIncludeEmptyColumns,
 				'crontab' => $this->crontab,
 				'saveSourceData' => $this->saveSourceData,
-				'groupProductsWhenCounting' => $this->groupProductsWhenCounting,
 				'hideMissingProducts' => $this->hideMissingProducts,
 				'priceCzk' => $this->priceCzk ? $this->priceCzk->getDefaultPrice() : null,
 				'priceEur' => $this->priceEur ? $this->priceEur->getDefaultPrice() : null,

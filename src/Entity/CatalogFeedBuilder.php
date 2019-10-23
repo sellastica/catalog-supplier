@@ -94,8 +94,6 @@ class CatalogFeedBuilder implements IBuilder
 	/** @var bool */
 	private $saveSourceData = true;
 	/** @var bool */
-	private $groupProductsWhenCounting = false;
-	/** @var bool */
 	private $hideMissingProducts = true;
 	/** @var \Sellastica\Price\Price|null */
 	private $priceCzk;
@@ -817,24 +815,6 @@ class CatalogFeedBuilder implements IBuilder
 	public function saveSourceData(bool $saveSourceData = true)
 	{
 		$this->saveSourceData = $saveSourceData;
-		return $this;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function getGroupProductsWhenCounting(): bool
-	{
-		return $this->groupProductsWhenCounting;
-	}
-
-	/**
-	 * @param bool $groupProductsWhenCounting
-	 * @return $this
-	 */
-	public function groupProductsWhenCounting(bool $groupProductsWhenCounting)
-	{
-		$this->groupProductsWhenCounting = $groupProductsWhenCounting;
 		return $this;
 	}
 
