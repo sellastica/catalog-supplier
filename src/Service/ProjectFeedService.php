@@ -53,6 +53,16 @@ class ProjectFeedService
 	}
 
 	/**
+	 * @param array $filter
+	 * @return int
+	 */
+	public function findCountBy(array $filter): int
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\ProjectFeed::class)
+			->findCountBy($filter);
+	}
+
+	/**
 	 * @param int $projectId
 	 * @param \Sellastica\Entity\Configuration|null $configuration
 	 * @return \Sellastica\CatalogSupplier\Entity\ProjectFeedCollection|\Sellastica\CatalogSupplier\Entity\ProjectFeed[]
