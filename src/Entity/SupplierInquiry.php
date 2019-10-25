@@ -12,20 +12,10 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 {
 	use \Sellastica\Entity\Entity\TAbstractEntity;
 
-	/** @var int|null @optional */
+	/** @var int @required */
 	private $projectId;
 	/** @var int|null @optional */
 	private $adminUserId;
-	/** @var \Sellastica\Identity\Model\Contact @required */
-	private $contact;
-	/** @var string @required */
-	private $supplier;
-	/** @var string|null @optional */
-	private $supplierHomepage;
-	/** @var string|null @optional */
-	private $supplierEmail;
-	/** @var string|null @optional */
-	private $supplierPhone;
 	/** @var string|null @optional */
 	private $feedUrl;
 	/** @var string|null @optional */
@@ -34,26 +24,10 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	private $password;
 	/** @var string|null @optional */
 	private $note;
-	/** @var \DateTime|null @optional */
-	private $confirmed;
-	/** @var \DateTime|null @optional */
-	private $deadline;
-	/** @var \DateTime|null @optional */
-	private $accomplished;
+	/** @var bool @optional */
+	private $regular = true;
 	/** @var \DateTime|null @optional */
 	private $closed;
-	/** @var \DateTime|null @optional */
-	private $cancelled;
-	/** @var int|null @optional */
-	private $ticketId;
-	/** @var int|null @optional */
-	private $supplierId;
-	/** @var int|null @optional */
-	private $feedId;
-	/** @var \Sellastica\CatalogSupplier\Model\InquiryStatus @optional */
-	private $status;
-	/** @var int|null @optional */
-	private $invoiceId;
 
 
 	/**
@@ -62,7 +36,6 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	public function __construct(SupplierInquiryBuilder $builder)
 	{
 		$this->hydrate($builder);
-		$this->status = $this->status ?? \Sellastica\CatalogSupplier\Model\InquiryStatus::new();
 	}
 
 	/**
@@ -82,33 +55,25 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return string
+	 * @return int
 	 */
-	public function getTitle(): string
-	{
-		return $this->getNumber() . ': ' . $this->getSupplier();
-	}
-
-	/**
-	 * @return int|null
-	 */
-	public function getProjectId(): ?int
+	public function getProjectId(): int
 	{
 		return $this->projectId;
 	}
 
 	/**
-	 * @param int|null $projectId
+	 * @param int $projectId
 	 */
-	public function setProjectId(?int $projectId): void
+	public function setProjectId(int $projectId): void
 	{
 		$this->projectId = $projectId;
 	}
 
 	/**
-	 * @return \Sellastica\Project\Entity\Project|null
+	 * @return \Sellastica\Project\Entity\Project
 	 */
-	public function getProject(): ?\Sellastica\Project\Entity\Project
+	public function getProject(): \Sellastica\Project\Entity\Project
 	{
 		return $this->relationService->getProject();
 	}
@@ -130,43 +95,11 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return null|\Sellastica\Integroid\Entity\IntegroidUser
+	 * @return \Sellastica\Integroid\Entity\IntegroidUser|null
 	 */
 	public function getAdminUser(): ?\Sellastica\Integroid\Entity\IntegroidUser
 	{
 		return $this->relationService->getAdminUser();
-	}
-
-	/**
-	 * @return \Sellastica\Identity\Model\Contact
-	 */
-	public function getContact(): \Sellastica\Identity\Model\Contact
-	{
-		return $this->contact;
-	}
-
-	/**
-	 * @param \Sellastica\Identity\Model\Contact $contact
-	 */
-	public function setContact(\Sellastica\Identity\Model\Contact $contact): void
-	{
-		$this->contact = $contact;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getSupplier(): string
-	{
-		return $this->supplier;
-	}
-
-	/**
-	 * @param string $supplier
-	 */
-	public function setSupplier(string $supplier): void
-	{
-		$this->supplier = $supplier;
 	}
 
 	/**
@@ -183,192 +116,6 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setFeedUrl(?string $feedUrl): void
 	{
 		$this->feedUrl = $feedUrl;
-	}
-
-	/**
-	 * @return null|string
-	 */
-	public function getNote(): ?string
-	{
-		return $this->note;
-	}
-
-	/**
-	 * @param null|string $note
-	 */
-	public function setNote(?string $note): void
-	{
-		$this->note = $note;
-	}
-
-	/**
-	 * @return null|string
-	 */
-	public function getSupplierHomepage(): ?string
-	{
-		return $this->supplierHomepage;
-	}
-
-	/**
-	 * @param null|string $supplierHomepage
-	 */
-	public function setSupplierHomepage(?string $supplierHomepage): void
-	{
-		$this->supplierHomepage = $supplierHomepage;
-	}
-
-	/**
-	 * @return null|string
-	 */
-	public function getSupplierEmail(): ?string
-	{
-		return $this->supplierEmail;
-	}
-
-	/**
-	 * @param null|string $supplierEmail
-	 */
-	public function setSupplierEmail(?string $supplierEmail): void
-	{
-		$this->supplierEmail = $supplierEmail;
-	}
-
-	/**
-	 * @return null|string
-	 */
-	public function getSupplierPhone(): ?string
-	{
-		return $this->supplierPhone;
-	}
-
-	/**
-	 * @param null|string $supplierPhone
-	 */
-	public function setSupplierPhone(?string $supplierPhone): void
-	{
-		$this->supplierPhone = $supplierPhone;
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getConfirmed(): ?\DateTime
-	{
-		return $this->confirmed;
-	}
-
-	/**
-	 * @param \DateTime|null $confirmed
-	 */
-	public function setConfirmed(?\DateTime $confirmed): void
-	{
-		$this->confirmed = $confirmed;
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getDeadline(): ?\DateTime
-	{
-		return $this->deadline;
-	}
-
-	/**
-	 * @param \DateTime|null $deadline
-	 */
-	public function setDeadline(?\DateTime $deadline): void
-	{
-		$this->deadline = $deadline;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isDeadline(): bool
-	{
-		return isset($this->deadline)
-			&& $this->deadline == new \DateTime('today');
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isDeadlineOverdue(): bool
-	{
-		return isset($this->deadline)
-			&& $this->deadline < new \DateTime('today');
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getAccomplished(): ?\DateTime
-	{
-		return $this->accomplished;
-	}
-
-	/**
-	 * @param \DateTime|null $accomplished
-	 */
-	public function setAccomplished(?\DateTime $accomplished): void
-	{
-		$this->accomplished = $accomplished;
-	}
-
-	/**
-	 * @return int|null
-	 */
-	public function getTicketId(): ?int
-	{
-		return $this->ticketId;
-	}
-
-	/**
-	 * @param int|null $ticketId
-	 */
-	public function setTicketId(?int $ticketId): void
-	{
-		$this->ticketId = $ticketId;
-	}
-
-	/**
-	 * @return null|\Sellastica\Helpdesk\Entity\Ticket
-	 */
-	public function getTicket(): ?\Sellastica\Helpdesk\Entity\Ticket
-	{
-		return $this->relationService->getTicket();
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getClosed(): ?\DateTime
-	{
-		return $this->closed;
-	}
-
-	/**
-	 * @param \DateTime|null $closed
-	 */
-	public function setClosed(?\DateTime $closed): void
-	{
-		$this->closed = $closed;
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getCancelled(): ?\DateTime
-	{
-		return $this->cancelled;
-	}
-
-	/**
-	 * @param \DateTime|null $cancelled
-	 */
-	public function setCancelled(?\DateTime $cancelled): void
-	{
-		$this->cancelled = $cancelled;
 	}
 
 	/**
@@ -404,75 +151,51 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return int|null
+	 * @return null|string
 	 */
-	public function getSupplierId(): ?int
+	public function getNote(): ?string
 	{
-		return $this->supplierId;
+		return $this->note;
 	}
 
 	/**
-	 * @param int|null $supplierId
+	 * @param null|string $note
 	 */
-	public function setSupplierId(?int $supplierId): void
+	public function setNote(?string $note): void
 	{
-		$this->supplierId = $supplierId;
+		$this->note = $note;
 	}
 
 	/**
-	 * @return int|null
+	 * @return bool
 	 */
-	public function getFeedId(): ?int
+	public function isRegular(): bool
 	{
-		return $this->feedId;
+		return $this->regular;
 	}
 
 	/**
-	 * @param int|null $feedId
+	 * @param bool $regular
 	 */
-	public function setFeedId(?int $feedId): void
+	public function setRegular(bool $regular): void
 	{
-		$this->feedId = $feedId;
+		$this->regular = $regular;
 	}
 
 	/**
-	 * @return \Sellastica\CatalogSupplier\Model\InquiryStatus
+	 * @return \DateTime|null
 	 */
-	public function getStatus(): \Sellastica\CatalogSupplier\Model\InquiryStatus
+	public function getClosed(): ?\DateTime
 	{
-		return $this->status;
+		return $this->closed;
 	}
 
 	/**
-	 * @param \Sellastica\CatalogSupplier\Model\InquiryStatus $status
+	 * @param \DateTime|null $closed
 	 */
-	public function setStatus(\Sellastica\CatalogSupplier\Model\InquiryStatus $status): void
+	public function setClosed(?\DateTime $closed): void
 	{
-		$this->status = $status;
-	}
-
-	/**
-	 * @return int|null
-	 */
-	public function getInvoiceId(): ?int
-	{
-		return $this->invoiceId;
-	}
-
-	/**
-	 * @param int|null $invoiceId
-	 */
-	public function setInvoiceId(?int $invoiceId): void
-	{
-		$this->invoiceId = $invoiceId;
-	}
-
-	/**
-	 * @return \Sellastica\Crm\Entity\Invoice\Entity\Invoice|null
-	 */
-	public function getInvoice(): ?\Sellastica\Crm\Entity\Invoice\Entity\Invoice
-	{
-		return $this->relationService->getInvoice();
+		$this->closed = $closed;
 	}
 
 	/**
@@ -482,28 +205,15 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	{
 		return array_merge(
 			$this->parentToArray(),
-			$this->getContact()->toArray(),
 			[
-				'supplier' => $this->supplier,
 				'projectId' => $this->projectId,
 				'adminUserId' => $this->adminUserId,
-				'supplierHomepage' => $this->supplierHomepage,
-				'supplierEmail' => $this->supplierEmail,
-				'supplierPhone' => $this->supplierPhone,
 				'feedUrl' => $this->feedUrl,
 				'login' => $this->login,
 				'password' => $this->password,
 				'note' => $this->note,
-				'confirmed' => $this->confirmed,
-				'deadline' => $this->deadline,
-				'accomplished' => $this->accomplished,
+				'regular' => $this->regular,
 				'closed' => $this->closed,
-				'cancelled' => $this->cancelled,
-				'ticketId' => $this->ticketId,
-				'supplierId' => $this->supplierId,
-				'feedId' => $this->feedId,
-				'status' => $this->status->getValue(),
-				'invoiceId' => $this->invoiceId,
 			]
 		);
 	}

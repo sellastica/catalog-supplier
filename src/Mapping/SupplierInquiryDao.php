@@ -19,15 +19,7 @@ class SupplierInquiryDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
-		$contact = new \Sellastica\Identity\Model\Contact(
-			$data->firstName,
-			$data->lastName,
-			new \Sellastica\Identity\Model\Email($data->email)
-		);
-		$contact->setPhone($data->phone);
-		$data->status = \Sellastica\CatalogSupplier\Model\InquiryStatus::from($data->status);
-
-		return \Sellastica\CatalogSupplier\Entity\SupplierInquiryBuilder::create($contact, $data->supplier)
+		return \Sellastica\CatalogSupplier\Entity\SupplierInquiryBuilder::create($data->projectId)
 			->hydrate($data);
 	}
 

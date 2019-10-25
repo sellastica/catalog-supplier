@@ -46,16 +46,12 @@ class SupplierInquiryService
 	}
 
 	/**
-	 * @param \Sellastica\Identity\Model\Contact $contact
-	 * @param string $supplier
+	 * @param int $projectId
 	 * @return \Sellastica\CatalogSupplier\Entity\SupplierInquiry
 	 */
-	public function create(
-		\Sellastica\Identity\Model\Contact $contact,
-		string $supplier
-	): \Sellastica\CatalogSupplier\Entity\SupplierInquiry
+	public function create(int $projectId): \Sellastica\CatalogSupplier\Entity\SupplierInquiry
 	{
-		$inquiry = \Sellastica\CatalogSupplier\Entity\SupplierInquiryBuilder::create($contact, $supplier)
+		$inquiry = \Sellastica\CatalogSupplier\Entity\SupplierInquiryBuilder::create($projectId)
 			->build();
 		$this->em->persist($inquiry);
 

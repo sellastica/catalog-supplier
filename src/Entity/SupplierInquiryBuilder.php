@@ -11,20 +11,10 @@ class SupplierInquiryBuilder implements IBuilder
 {
 	use TBuilder;
 
-	/** @var \Sellastica\Identity\Model\Contact */
-	private $contact;
-	/** @var string */
-	private $supplier;
-	/** @var int|null */
+	/** @var int */
 	private $projectId;
 	/** @var int|null */
 	private $adminUserId;
-	/** @var string|null */
-	private $supplierHomepage;
-	/** @var string|null */
-	private $supplierEmail;
-	/** @var string|null */
-	private $supplierPhone;
 	/** @var string|null */
 	private $feedUrl;
 	/** @var string|null */
@@ -33,72 +23,25 @@ class SupplierInquiryBuilder implements IBuilder
 	private $password;
 	/** @var string|null */
 	private $note;
-	/** @var \DateTime|null */
-	private $confirmed;
-	/** @var \DateTime|null */
-	private $deadline;
-	/** @var \DateTime|null */
-	private $accomplished;
+	/** @var bool */
+	private $regular = true;
 	/** @var \DateTime|null */
 	private $closed;
-	/** @var \DateTime|null */
-	private $cancelled;
-	/** @var int|null */
-	private $ticketId;
-	/** @var int|null */
-	private $supplierId;
-	/** @var int|null */
-	private $feedId;
-	/** @var \Sellastica\CatalogSupplier\Model\InquiryStatus */
-	private $status;
-	/** @var int|null */
-	private $invoiceId;
 
 	/**
-	 * @param \Sellastica\Identity\Model\Contact $contact
-	 * @param string $supplier
+	 * @param int $projectId
 	 */
-	public function __construct(
-		\Sellastica\Identity\Model\Contact $contact,
-		string $supplier
-	)
-	{
-		$this->contact = $contact;
-		$this->supplier = $supplier;
-	}
-
-	/**
-	 * @return \Sellastica\Identity\Model\Contact
-	 */
-	public function getContact(): \Sellastica\Identity\Model\Contact
-	{
-		return $this->contact;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getSupplier(): string
-	{
-		return $this->supplier;
-	}
-
-	/**
-	 * @return int|null
-	 */
-	public function getProjectId()
-	{
-		return $this->projectId;
-	}
-
-	/**
-	 * @param int|null $projectId
-	 * @return $this
-	 */
-	public function projectId(int $projectId = null)
+	public function __construct(int $projectId)
 	{
 		$this->projectId = $projectId;
-		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getProjectId(): int
+	{
+		return $this->projectId;
 	}
 
 	/**
@@ -116,60 +59,6 @@ class SupplierInquiryBuilder implements IBuilder
 	public function adminUserId(int $adminUserId = null)
 	{
 		$this->adminUserId = $adminUserId;
-		return $this;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getSupplierHomepage()
-	{
-		return $this->supplierHomepage;
-	}
-
-	/**
-	 * @param string|null $supplierHomepage
-	 * @return $this
-	 */
-	public function supplierHomepage(string $supplierHomepage = null)
-	{
-		$this->supplierHomepage = $supplierHomepage;
-		return $this;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getSupplierEmail()
-	{
-		return $this->supplierEmail;
-	}
-
-	/**
-	 * @param string|null $supplierEmail
-	 * @return $this
-	 */
-	public function supplierEmail(string $supplierEmail = null)
-	{
-		$this->supplierEmail = $supplierEmail;
-		return $this;
-	}
-
-	/**
-	 * @return string|null
-	 */
-	public function getSupplierPhone()
-	{
-		return $this->supplierPhone;
-	}
-
-	/**
-	 * @param string|null $supplierPhone
-	 * @return $this
-	 */
-	public function supplierPhone(string $supplierPhone = null)
-	{
-		$this->supplierPhone = $supplierPhone;
 		return $this;
 	}
 
@@ -246,56 +135,20 @@ class SupplierInquiryBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \DateTime|null
+	 * @return bool
 	 */
-	public function getConfirmed()
+	public function getRegular(): bool
 	{
-		return $this->confirmed;
+		return $this->regular;
 	}
 
 	/**
-	 * @param \DateTime|null $confirmed
+	 * @param bool $regular
 	 * @return $this
 	 */
-	public function confirmed(\DateTime $confirmed = null)
+	public function regular(bool $regular = true)
 	{
-		$this->confirmed = $confirmed;
-		return $this;
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getDeadline()
-	{
-		return $this->deadline;
-	}
-
-	/**
-	 * @param \DateTime|null $deadline
-	 * @return $this
-	 */
-	public function deadline(\DateTime $deadline = null)
-	{
-		$this->deadline = $deadline;
-		return $this;
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getAccomplished()
-	{
-		return $this->accomplished;
-	}
-
-	/**
-	 * @param \DateTime|null $accomplished
-	 * @return $this
-	 */
-	public function accomplished(\DateTime $accomplished = null)
-	{
-		$this->accomplished = $accomplished;
+		$this->regular = $regular;
 		return $this;
 	}
 
@@ -318,114 +171,6 @@ class SupplierInquiryBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \DateTime|null
-	 */
-	public function getCancelled()
-	{
-		return $this->cancelled;
-	}
-
-	/**
-	 * @param \DateTime|null $cancelled
-	 * @return $this
-	 */
-	public function cancelled(\DateTime $cancelled = null)
-	{
-		$this->cancelled = $cancelled;
-		return $this;
-	}
-
-	/**
-	 * @return int|null
-	 */
-	public function getTicketId()
-	{
-		return $this->ticketId;
-	}
-
-	/**
-	 * @param int|null $ticketId
-	 * @return $this
-	 */
-	public function ticketId(int $ticketId = null)
-	{
-		$this->ticketId = $ticketId;
-		return $this;
-	}
-
-	/**
-	 * @return int|null
-	 */
-	public function getSupplierId()
-	{
-		return $this->supplierId;
-	}
-
-	/**
-	 * @param int|null $supplierId
-	 * @return $this
-	 */
-	public function supplierId(int $supplierId = null)
-	{
-		$this->supplierId = $supplierId;
-		return $this;
-	}
-
-	/**
-	 * @return int|null
-	 */
-	public function getFeedId()
-	{
-		return $this->feedId;
-	}
-
-	/**
-	 * @param int|null $feedId
-	 * @return $this
-	 */
-	public function feedId(int $feedId = null)
-	{
-		$this->feedId = $feedId;
-		return $this;
-	}
-
-	/**
-	 * @return \Sellastica\CatalogSupplier\Model\InquiryStatus
-	 */
-	public function getStatus(): \Sellastica\CatalogSupplier\Model\InquiryStatus
-	{
-		return $this->status;
-	}
-
-	/**
-	 * @param \Sellastica\CatalogSupplier\Model\InquiryStatus $status
-	 * @return $this
-	 */
-	public function status(\Sellastica\CatalogSupplier\Model\InquiryStatus $status)
-	{
-		$this->status = $status;
-		return $this;
-	}
-
-	/**
-	 * @return int|null
-	 */
-	public function getInvoiceId()
-	{
-		return $this->invoiceId;
-	}
-
-	/**
-	 * @param int|null $invoiceId
-	 * @return $this
-	 */
-	public function invoiceId(int $invoiceId = null)
-	{
-		$this->invoiceId = $invoiceId;
-		return $this;
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function generateId(): bool
@@ -442,15 +187,11 @@ class SupplierInquiryBuilder implements IBuilder
 	}
 
 	/**
-	 * @param \Sellastica\Identity\Model\Contact $contact
-	 * @param string $supplier
+	 * @param int $projectId
 	 * @return self
 	 */
-	public static function create(
-		\Sellastica\Identity\Model\Contact $contact,
-		string $supplier
-	): self
+	public static function create(int $projectId): self
 	{
-		return new self($contact, $supplier);
+		return new self($projectId);
 	}
 }
