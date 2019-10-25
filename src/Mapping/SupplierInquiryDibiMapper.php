@@ -44,8 +44,8 @@ class SupplierInquiryDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 			if ($rules['deadline']) {
 				$resource->where('deadline <= NOW()')
 					->where('status IN (%sN)', [
-						\Sellastica\CatalogSupplier\Model\InquiryStatus::CONFIRMED,
-						\Sellastica\CatalogSupplier\Model\InquiryStatus::NEW,
+						\Sellastica\CatalogSupplier\Model\OrderStatus::CONFIRMED,
+						\Sellastica\CatalogSupplier\Model\OrderStatus::NEW,
 					]);
 			}
 
