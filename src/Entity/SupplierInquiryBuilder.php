@@ -27,6 +27,8 @@ class SupplierInquiryBuilder implements IBuilder
 	private $regular = true;
 	/** @var \DateTime|null */
 	private $closed;
+	/** @var int|null */
+	private $ticketId;
 
 	/**
 	 * @param int $projectId
@@ -167,6 +169,24 @@ class SupplierInquiryBuilder implements IBuilder
 	public function closed(\DateTime $closed = null)
 	{
 		$this->closed = $closed;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getTicketId()
+	{
+		return $this->ticketId;
+	}
+
+	/**
+	 * @param int|null $ticketId
+	 * @return $this
+	 */
+	public function ticketId(int $ticketId = null)
+	{
+		$this->ticketId = $ticketId;
 		return $this;
 	}
 

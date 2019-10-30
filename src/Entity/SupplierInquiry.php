@@ -28,6 +28,8 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	private $regular = true;
 	/** @var \DateTime|null @optional */
 	private $closed;
+	/** @var int|null @optional */
+	private $ticketId;
 
 
 	/**
@@ -199,6 +201,22 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return int|null
+	 */
+	public function getTicketId(): ?int
+	{
+		return $this->ticketId;
+	}
+
+	/**
+	 * @param int|null $ticketId
+	 */
+	public function setTicketId(?int $ticketId): void
+	{
+		$this->ticketId = $ticketId;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -214,6 +232,7 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 				'note' => $this->note,
 				'regular' => $this->regular,
 				'closed' => $this->closed,
+				'ticketId' => $this->ticketId,
 			]
 		);
 	}
