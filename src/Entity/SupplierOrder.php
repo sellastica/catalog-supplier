@@ -130,6 +130,20 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return string|null
+	 */
+	public function getFeedDomain(): ?string
+	{
+		if (!$this->feedUrl) {
+			return null;
+		}
+
+		$extract = new \LayerShifter\TLDExtract\Extract();
+		$result = $extract->parse($this->feedUrl);
+		return $result->getRegistrableDomain();
+	}
+
+	/**
 	 * @return null|string
 	 */
 	public function getNote(): ?string
