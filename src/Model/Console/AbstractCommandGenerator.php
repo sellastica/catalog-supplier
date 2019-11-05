@@ -161,4 +161,13 @@ abstract class AbstractCommandGenerator
 	{
 		return sprintf('/snap/phpstorm/current/bin/phpstorm.sh "%s"', $path);
 	}
+
+	/**
+	 * @param string $arguments
+	 * @return string
+	 */
+	protected function php(string $arguments)
+	{
+		return sprintf('php www/index.php %s', $arguments);
+	}
 }

@@ -87,6 +87,9 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 					$this->createRelativePath("$formattedFile"),
 					$this->createRelativePath("$supplierDir/$schemaBasename")
 				),
+				$this->htmlBreak(),
+				$this->phpBreak(),
+				$this->php('xsd:modify ' . $this->createRelativePath("$supplierDir/$schemaBasename"))
 			]);
 		}
 
