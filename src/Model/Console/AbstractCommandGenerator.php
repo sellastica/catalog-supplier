@@ -65,6 +65,16 @@ abstract class AbstractCommandGenerator
 	}
 
 	/**
+	 * @param string $from
+	 * @param string $to
+	 * @return string
+	 */
+	protected function cp(string $from, string $to): string
+	{
+		return "cp $from $to";
+	}
+
+	/**
 	 * @param string $path
 	 * @return string
 	 */
@@ -104,6 +114,19 @@ abstract class AbstractCommandGenerator
 	 * @param string $to
 	 * @return string
 	 */
+	protected function trang(
+		string $from,
+		string $to
+	): string
+	{
+		return sprintf('trang -o indent=4 "%s" "%s"', $from, $to);
+	}
+
+	/**
+	 * @param string $from
+	 * @param string $to
+	 * @return string
+	 */
 	protected function xml_pp(
 		string $from,
 		string $to
@@ -128,5 +151,14 @@ abstract class AbstractCommandGenerator
 	protected function glogg(string $path): string
 	{
 		return sprintf('glogg "%s"', $path);
+	}
+
+	/**
+	 * @param string $path
+	 * @return string
+	 */
+	protected function phpstorm(string $path): string
+	{
+		return sprintf('/snap/phpstorm/current/bin/phpstorm.sh "%s"', $path);
 	}
 }
