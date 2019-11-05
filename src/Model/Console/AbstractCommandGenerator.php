@@ -61,7 +61,7 @@ abstract class AbstractCommandGenerator
 	 */
 	protected function mkdir(string $path): string
 	{
-		return 'mkdir ' . $path;
+		return 'mkdir -p ' . $path;
 	}
 
 	/**
