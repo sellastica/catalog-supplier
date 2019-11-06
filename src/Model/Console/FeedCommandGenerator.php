@@ -89,6 +89,12 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 				),
 				$this->htmlBreak(),
 				$this->phpBreak(),
+				$this->cp(
+					$this->createRelativePath("$supplierDir/$schemaBasename"),
+					$this->createRelativePath("{$supplierDir}/{$schemaBasename}b")
+				),
+				$this->htmlBreak(),
+				$this->phpBreak(),
 				$this->php('xsd:modify ' . $this->createRelativePath("$supplierDir/$schemaBasename"))
 			]);
 		}
@@ -112,6 +118,14 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 						$this->createRelativePath("$suppliersDir/pattern/$scriptBasename"),
 						$this->createRelativePath("$supplierDir/$scriptBasename")
 					),
+					$this->htmlBreak(),
+					$this->phpBreak(),
+					$this->php(
+						'dataconverter:modify '
+						. $this->createRelativePath("$supplierDir/$scriptBasename")
+						. ' '
+						. $this->feed->getSupplier()->getCode()
+					)
 				]);
 
 				//open data converter in phpstorm
