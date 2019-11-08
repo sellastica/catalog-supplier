@@ -11,6 +11,12 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 	private $revalidate = false;
 	/** @var bool */
 	private $edit = true;
+	/** @var string|null */
+	private $url;
+	/** @var string|null */
+	private $login;
+	/** @var string|null */
+	private $password;
 
 
 	/**
@@ -21,6 +27,9 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 	)
 	{
 		$this->feed = $feed;
+		$this->url = $this->feed->getUrl();
+		$this->login = $this->feed->getLogin();
+		$this->password = $this->feed->getPassword();
 	}
 
 	/**
@@ -54,10 +63,10 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 			$this->htmlBreak(),
 			$this->phpBreak(),
 			$this->wget(
-				$this->feed->getUrl(),
+				$this->url,
 				$this->createRelativePath($this->reformat ? $unformattedFile : $formattedFile),
-				$this->feed->getLogin(),
-				$this->feed->getPassword()
+				$this->login,
+				$this->password
 			),
 		];
 
@@ -173,5 +182,29 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 	public function setEdit(bool $edit): void
 	{
 		$this->edit = $edit;
+	}
+
+	/**
+	 * @param string|null $url
+	 */
+	public function setUrl(?string $url): void
+	{
+		$this->url = $url;
+	}
+
+	/**
+	 * @param string|null $login
+	 */
+	public function setLogin(?string $login): void
+	{
+		$this->login = $login;
+	}
+
+	/**
+	 * @param string|null $password
+	 */
+	public function setPassword(?string $password): void
+	{
+		$this->password = $password;
 	}
 }
