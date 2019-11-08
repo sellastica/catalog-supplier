@@ -45,6 +45,7 @@ class ModifyXsd extends \Symfony\Component\Console\Command\Command
 			'xs:unsignedShort',
 			'xs:unsignedByte',
 			//date
+			'xs:dateTime',
 			'xs:date',
 			'xs:time',
 			'xs:duration',
