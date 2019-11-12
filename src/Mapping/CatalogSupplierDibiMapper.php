@@ -96,7 +96,7 @@ class CatalogSupplierDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	 */
 	protected function getTableName($databaseName = false): string
 	{
-		return ($databaseName ? $this->environment->getNapojSeCrmDatabaseName() . '.' : '')
+		return ($databaseName ? $this->environment->getNapojseCrmDatabaseName() . '.' : '')
 			. 'suppliers_supplier';
 	}
 }

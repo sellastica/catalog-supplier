@@ -4,7 +4,7 @@ namespace Sellastica\CatalogSupplier\Model\Console;
 abstract class AbstractCommandGenerator
 {
 	/** @var string */
-	protected $baseDir = '~/Projects/NapojSe/Admin';
+	protected $baseDir = '~/Projects/Napojse/Admin';
 	/** @var string */
 	protected $userAgent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0';
 

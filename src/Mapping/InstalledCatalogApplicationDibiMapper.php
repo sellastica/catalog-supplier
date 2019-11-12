@@ -12,7 +12,7 @@ class InstalledCatalogApplicationDibiMapper extends \Sellastica\Entity\Mapping\D
 	 */
 	protected function getTableName($databaseName = false): string
 	{
-		return ($databaseName ? $this->environment->getNapojSeCrmDatabaseName() . '.' : '')
+		return ($databaseName ? $this->environment->getNapojseCrmDatabaseName() . '.' : '')
 			. 'suppliers_application_project';
 	}
 }
