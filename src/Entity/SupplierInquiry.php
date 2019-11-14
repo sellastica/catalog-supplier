@@ -57,6 +57,16 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getTitle(): string
+	{
+		return $this->getFeedDomain()
+			? \Nette\Utils\Strings::firstUpper($this->getFeedDomain())
+			: $this->getNumber();
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getProjectId(): int
@@ -118,6 +128,20 @@ class SupplierInquiry extends \Sellastica\Entity\Entity\AbstractEntity
 	public function setFeedUrl(?string $feedUrl): void
 	{
 		$this->feedUrl = $feedUrl;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getFeedDomain(): ?string
+	{
+		if (!$this->feedUrl) {
+			return null;
+		}
+
+		$extract = new \LayerShifter\TLDExtract\Extract();
+		$result = $extract->parse($this->feedUrl);
+		return $result->getRegistrableDomain();
 	}
 
 	/**

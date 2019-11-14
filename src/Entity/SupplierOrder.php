@@ -66,6 +66,16 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getTitle(): string
+	{
+		return $this->getFeedDomain()
+			? \Nette\Utils\Strings::firstUpper($this->getFeedDomain())
+			: $this->getNumber();
+	}
+
+	/**
 	 * @return int|null
 	 */
 	public function getProjectId(): ?int
