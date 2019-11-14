@@ -41,11 +41,19 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 			$this->reformat = false;
 		}
 
-		$suppliersDir = 'app/model/Suppliers/Suppliers';
-		$supplierDir = sprintf('%s/%s', $suppliersDir, $this->feed->getSupplier()->getCode());
 		$filename = $this->feed->getSchemaFilename()
 			? pathinfo($this->feed->getSchemaFilename(), PATHINFO_FILENAME)
 			: 'products';
+		if (($namespace = pathinfo($this->feed->getSchemaFilename(), PATHINFO_DIRNAME)) === '.') {
+			$namespace = null;
+		}
+
+		$suppliersDir = 'app/model/Suppliers/Suppliers';
+		$supplierDir = sprintf('%s/%s', $suppliersDir, $this->feed->getSupplier()->getCode());
+		if ($namespace !== null) {
+			$supplierDir .= "/$namespace";
+		}
+
 		$formattedFile = $this->feed->getCompression()->isNone()
 			? sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getFeedFormat()->getValue())
 			: sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getCompression()->getValue());
@@ -104,7 +112,7 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 				),
 				$this->htmlBreak(),
 				$this->phpBreak(),
-				$this->php('xsd:modify ' . $this->createRelativePath("$supplierDir/$schemaBasename"))
+				$this->php('xsd:modify ' . $this->createRelativePath("$supplierDir/$schemaBasename")),
 			]);
 		}
 
@@ -129,13 +137,18 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 					),
 					$this->htmlBreak(),
 					$this->phpBreak(),
-					$this->php(
-						'dataconverter:modify '
-						. $this->createRelativePath("$supplierDir/$scriptBasename")
-						. ' '
-						. $this->feed->getSupplier()->getCode()
-					)
 				]);
+
+				//modify dataconverter namespace
+				$modifyCommand = 'dataconverter:modify '
+					. $this->createRelativePath("$supplierDir/$scriptBasename")
+					. ' '
+					. $this->feed->getSupplier()->getCode();
+				if ($namespace) {
+					$modifyCommand .= ' ' . $namespace;
+				}
+
+				$commands[] = $this->php($modifyCommand);
 
 				//open data converter in phpstorm
 				$commands = array_merge($commands, [

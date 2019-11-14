@@ -8,6 +8,7 @@ class ModifyDataConverter extends \Symfony\Component\Console\Command\Command
 		$this->setName('dataconverter:modify');
 		$this->addArgument('path', \Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Path to PHP file');
 		$this->addArgument('supplierCode', \Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Supplier code');
+		$this->addArgument('namespace', \Symfony\Component\Console\Input\InputArgument::OPTIONAL, 'Namespace');
 	}
 
 	/**
@@ -29,9 +30,14 @@ class ModifyDataConverter extends \Symfony\Component\Console\Command\Command
 		$content = file_get_contents($path);
 
 		//replace namespace
+		$namespace = 'Suppliers\Suppliers\\' . $input->getArgument('supplierCode');
+		if ($input->getArgument('namespace')) {
+			$namespace .= '\\' . $input->getArgument('namespace');
+		}
+
 		$content = str_ireplace(
 			'Suppliers\Suppliers\pattern',
-			'Suppliers\Suppliers\\' . $input->getArgument('supplierCode'),
+			$namespace,
 			$content
 		);
 
