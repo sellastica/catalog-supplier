@@ -19,6 +19,8 @@ class CatalogFeedOptionBuilder implements IBuilder
 	private $title;
 	/** @var string|null */
 	private $value;
+	/** @var int|null */
+	private $priority;
 
 	/**
 	 * @param \Sellastica\CatalogSupplier\Model\FeedOptionType $type
@@ -69,6 +71,24 @@ class CatalogFeedOptionBuilder implements IBuilder
 	public function getValue()
 	{
 		return $this->value;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getPriority()
+	{
+		return $this->priority;
+	}
+
+	/**
+	 * @param int|null $priority
+	 * @return $this
+	 */
+	public function priority(int $priority = null)
+	{
+		$this->priority = $priority;
+		return $this;
 	}
 
 	/**

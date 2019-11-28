@@ -18,6 +18,8 @@ class CatalogFeedOption extends \Sellastica\Entity\Entity\AbstractEntity
 	private $title;
 	/** @var string|null @required */
 	private $value;
+	/** @var int|null @optional */
+	private $priority;
 
 
 	/**
@@ -101,6 +103,22 @@ class CatalogFeedOption extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return int|null
+	 */
+	public function getPriority(): ?int
+	{
+		return $this->priority;
+	}
+
+	/**
+	 * @param int|null $priority
+	 */
+	public function setPriority(?int $priority): void
+	{
+		$this->priority = $priority;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -112,6 +130,7 @@ class CatalogFeedOption extends \Sellastica\Entity\Entity\AbstractEntity
 				'code' => $this->code,
 				'title' => $this->title,
 				'value' => $this->value,
+				'priority' => $this->priority,
 			]
 		);
 	}

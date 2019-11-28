@@ -60,9 +60,10 @@ class CatalogFeedRelations implements \Sellastica\Entity\Relation\IEntityRelatio
 	 */
 	public function getOptions(): CatalogFeedOptionCollection
 	{
-		return $this->em->getRepository(CatalogFeedOption::class)->findBy([
-			'feedId' => $this->catalogFeed->getId(),
-		]);
+		return $this->em->getRepository(CatalogFeedOption::class)->findBy(
+			['feedId' => $this->catalogFeed->getId()],
+			\Sellastica\Entity\Configuration::sortBy('priority')
+		);
 	}
 
 	/**
