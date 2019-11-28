@@ -24,6 +24,8 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $lastSupplierDownload;
 	/** @var \DateTime|null @optional */
 	private $lastNapojseDownload;
+	/** @var bool|null @optional */
+	private $success;
 	/** @var \DateTime|null @optional */
 	private $ordered;
 	/** @var \DateTime|null @optional */
@@ -244,6 +246,22 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool|null
+	 */
+	public function isSuccess(): ?bool
+	{
+		return $this->success;
+	}
+
+	/**
+	 * @param bool|null $success
+	 */
+	public function setSuccess(?bool $success): void
+	{
+		$this->success = $success;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -259,6 +277,7 @@ class ProjectFeed extends \Sellastica\Entity\Entity\AbstractEntity
 					: null,
 				'lastSupplierDownload' => $this->lastSupplierDownload,
 				'lastNapojseDownload' => $this->lastNapojseDownload,
+				'success' => $this->success,
 				'trialTill' => $this->trialTill,
 				'ordered' => $this->ordered,
 				'removed' => $this->removed,

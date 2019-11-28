@@ -23,6 +23,8 @@ class ProjectFeedBuilder implements IBuilder
 	private $lastSupplierDownload;
 	/** @var \DateTime|null */
 	private $lastNapojseDownload;
+	/** @var bool|null */
+	private $success;
 	/** @var \DateTime|null */
 	private $ordered;
 	/** @var \DateTime|null */
@@ -121,6 +123,24 @@ class ProjectFeedBuilder implements IBuilder
 	public function lastNapojseDownload(\DateTime $lastNapojseDownload = null)
 	{
 		$this->lastNapojseDownload = $lastNapojseDownload;
+		return $this;
+	}
+
+	/**
+	 * @return bool|null
+	 */
+	public function getSuccess()
+	{
+		return $this->success;
+	}
+
+	/**
+	 * @param bool|null $success
+	 * @return $this
+	 */
+	public function success(bool $success = null)
+	{
+		$this->success = $success;
 		return $this;
 	}
 
