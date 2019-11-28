@@ -74,6 +74,9 @@ class ModifyXsd extends \Symfony\Component\Console\Command\Command
 		$content = str_ireplace('<xs:element ref=', '<xs:element minOccurs="0" ref=', $content);
 		$content = str_ireplace('<xs:element maxOccurs', '<xs:element minOccurs="0" maxOccurs', $content);
 
+		//replace empty complex type by simple type
+		$content = str_ireplace('<xs:complexType/>', '<xs:simpleType><xs:restriction base="xs:string"/></xs:simpleType>', $content);
+
 		file_put_contents($path, $content);
 		return 0;
 	}

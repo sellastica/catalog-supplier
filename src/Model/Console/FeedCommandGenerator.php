@@ -50,7 +50,7 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 
 		$suppliersDir = 'app/model/Suppliers/Suppliers';
 		$supplierDir = sprintf('%s/%s', $suppliersDir, $this->feed->getSupplier()->getCode());
-		if ($namespace !== null) {
+		if (!empty($namespace)) {
 			$supplierDir .= "/$namespace";
 		}
 
@@ -79,7 +79,8 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 		];
 
 		//reformat
-		if ($this->reformat) {
+		if ($this->reformat
+			&& $this->feed->getFeedFormat()->isXml()) {
 			$commands = array_merge($commands, [
 				$this->htmlBreak(2),
 				$this->phpBreak(),
@@ -95,7 +96,8 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 		}
 
 		//generate xsd
-		if ($this->edit) {
+		if ($this->edit
+			&& $this->feed->getFeedFormat()->isXml()) {
 			$commands = array_merge($commands, [
 				$this->htmlBreak(2),
 				$this->phpBreak(),
@@ -113,6 +115,9 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 				$this->htmlBreak(),
 				$this->phpBreak(),
 				$this->php('xsd:modify ' . $this->createRelativePath("$supplierDir/$schemaBasename")),
+				$this->htmlBreak(),
+				$this->phpBreak(),
+				$this->php('xml:reformat ' . $this->createRelativePath("$supplierDir/$schemaBasename")),
 			]);
 		}
 
