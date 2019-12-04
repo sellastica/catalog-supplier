@@ -112,6 +112,8 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	private $saveSourceData = true;
 	/** @var bool @optional */
 	private $markMissingProducts = true;
+	/** @var bool @optional */
+	private $availabilityToMissingProducts = true;
 	/** @var \Sellastica\Price\Price|null @optional */
 	private $priceCzk;
 	/** @var \Sellastica\Price\Price|null @optional */
@@ -834,6 +836,22 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isAvailabilityToMissingProducts(): bool
+	{
+		return $this->availabilityToMissingProducts;
+	}
+
+	/**
+	 * @param bool $availabilityToMissingProducts
+	 */
+	public function setAvailabilityToMissingProducts(bool $availabilityToMissingProducts): void
+	{
+		$this->availabilityToMissingProducts = $availabilityToMissingProducts;
+	}
+
+	/**
 	 * @return int|null
 	 */
 	public function getCsvHeaderOffset(): ?int
@@ -1059,6 +1077,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'crontab' => $this->crontab,
 				'saveSourceData' => $this->saveSourceData,
 				'markMissingProducts' => $this->markMissingProducts,
+				'availabilityToMissingProducts' => $this->availabilityToMissingProducts,
 				'priceCzk' => $this->priceCzk ? $this->priceCzk->getDefaultPrice() : null,
 				'priceEur' => $this->priceEur ? $this->priceEur->getDefaultPrice() : null,
 				'encoding' => $this->encoding,

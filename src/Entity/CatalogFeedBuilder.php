@@ -95,6 +95,8 @@ class CatalogFeedBuilder implements IBuilder
 	private $saveSourceData = true;
 	/** @var bool */
 	private $markMissingProducts = true;
+	/** @var bool */
+	private $availabilityToMissingProducts = true;
 	/** @var \Sellastica\Price\Price|null */
 	private $priceCzk;
 	/** @var \Sellastica\Price\Price|null */
@@ -833,6 +835,24 @@ class CatalogFeedBuilder implements IBuilder
 	public function markMissingProducts(bool $markMissingProducts = true)
 	{
 		$this->markMissingProducts = $markMissingProducts;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getAvailabilityToMissingProducts(): bool
+	{
+		return $this->availabilityToMissingProducts;
+	}
+
+	/**
+	 * @param bool $availabilityToMissingProducts
+	 * @return $this
+	 */
+	public function availabilityToMissingProducts(bool $availabilityToMissingProducts = true)
+	{
+		$this->availabilityToMissingProducts = $availabilityToMissingProducts;
 		return $this;
 	}
 
