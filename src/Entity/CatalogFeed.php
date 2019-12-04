@@ -111,7 +111,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var bool @optional */
 	private $saveSourceData = true;
 	/** @var bool @optional */
-	private $hideMissingProducts = true;
+	private $markMissingProducts = true;
 	/** @var \Sellastica\Price\Price|null @optional */
 	private $priceCzk;
 	/** @var \Sellastica\Price\Price|null @optional */
@@ -820,17 +820,17 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return bool
 	 */
-	public function hideMissingProducts(): bool
+	public function markMissingProducts(): bool
 	{
-		return $this->hideMissingProducts;
+		return $this->markMissingProducts;
 	}
 
 	/**
-	 * @param bool $hideMissingProducts
+	 * @param bool $markMissingProducts
 	 */
-	public function setHideMissingProducts(bool $hideMissingProducts): void
+	public function setMarkMissingProducts(bool $markMissingProducts): void
 	{
-		$this->hideMissingProducts = $hideMissingProducts;
+		$this->markMissingProducts = $markMissingProducts;
 	}
 
 	/**
@@ -1058,7 +1058,7 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 				'csvIncludeEmptyColumns' => $this->csvIncludeEmptyColumns,
 				'crontab' => $this->crontab,
 				'saveSourceData' => $this->saveSourceData,
-				'hideMissingProducts' => $this->hideMissingProducts,
+				'markMissingProducts' => $this->markMissingProducts,
 				'priceCzk' => $this->priceCzk ? $this->priceCzk->getDefaultPrice() : null,
 				'priceEur' => $this->priceEur ? $this->priceEur->getDefaultPrice() : null,
 				'encoding' => $this->encoding,

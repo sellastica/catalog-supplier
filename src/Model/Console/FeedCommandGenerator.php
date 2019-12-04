@@ -59,7 +59,10 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 			: sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getCompression()->getValue());
 		$unformattedFile = sprintf('%s/%s_unformatted.%s', $supplierDir, $filename, $this->feed->getFeedFormat()->getValue());
 		$schemaBasename = $filename . '.' . pathinfo($this->feed->getSchemaFilename(), PATHINFO_EXTENSION);
-		$scriptBasename = 'DataConverter.php';
+		$sourceScriptBasename = 'DataConverter.php';
+		$scriptBasename = $this->feed->getConverterClass()
+			? \Sellastica\Utils\Strings::after($this->feed->getConverterClass(), '\\', -1) . '.php'
+			: 'DataConverter.php';
 
 		$commands = [
 			$this->comment('change directory'),
@@ -137,7 +140,7 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 					$this->phpBreak(),
 					$this->comment("copy $scriptBasename"),
 					$this->cp(
-						$this->createRelativePath("$suppliersDir/pattern/$scriptBasename"),
+						$this->createRelativePath("$suppliersDir/pattern/$sourceScriptBasename"),
 						$this->createRelativePath("$supplierDir/$scriptBasename")
 					),
 					$this->htmlBreak(),
