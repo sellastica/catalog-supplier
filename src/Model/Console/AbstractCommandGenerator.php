@@ -157,6 +157,15 @@ abstract class AbstractCommandGenerator
 	 * @param string $path
 	 * @return string
 	 */
+	protected function libreoffice(string $path): string
+	{
+		return sprintf('libreoffice "%s"', $path);
+	}
+
+	/**
+	 * @param string $path
+	 * @return string
+	 */
 	protected function phpstorm(string $path): string
 	{
 		return sprintf('/snap/phpstorm/current/bin/phpstorm.sh "%s"', $path);

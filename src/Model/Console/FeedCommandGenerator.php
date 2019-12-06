@@ -173,12 +173,21 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 
 			//glogg
 			if ($this->feed->getCompression()->isNone()) {
-				$commands = array_merge($commands, [
-					$this->htmlBreak(2),
-					$this->phpBreak(),
-					$this->comment('open in glogg'),
-					$this->glogg($this->createRelativePath($formattedFile)),
-				]);
+				if ($this->feed->getFeedFormat()->isCsv()) {
+					$commands = array_merge($commands, [
+						$this->htmlBreak(2),
+						$this->phpBreak(),
+						$this->comment('open in libre office'),
+						$this->libreoffice($this->createRelativePath($formattedFile)),
+					]);
+				} else {
+					$commands = array_merge($commands, [
+						$this->htmlBreak(2),
+						$this->phpBreak(),
+						$this->comment('open in glogg'),
+						$this->glogg($this->createRelativePath($formattedFile)),
+					]);
+				}
 			}
 		}
 
