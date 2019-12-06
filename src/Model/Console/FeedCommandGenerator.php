@@ -142,7 +142,7 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 					$this->phpBreak(),
 					$this->comment("copy $scriptBasename"),
 					$this->cp(
-						$this->createRelativePath("$suppliersDir/pattern/$sourceScriptBasename"),
+						$this->createRelativePath("$suppliersDir/pattern/{$this->feed->getFeedFormat()->getValue()}/$sourceScriptBasename"),
 						$this->createRelativePath("$supplierDir/$scriptBasename")
 					),
 					$this->htmlBreak(),
@@ -151,9 +151,11 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 
 				//modify dataconverter namespace
 				$modifyCommand = 'dataconverter:modify '
-					. $this->createRelativePath("$supplierDir/$scriptBasename")
+					. $this->createRelativePath("$supplierDir/$scriptBasename") //path
 					. ' '
-					. $this->feed->getSupplier()->getCode();
+					. $this->feed->getSupplier()->getCode() //supplier code
+					. ' '
+					. $this->feed->getFeedFormat()->getValue(); //format
 				if ($namespace) {
 					$modifyCommand .= ' ' . $namespace;
 				}

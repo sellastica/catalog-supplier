@@ -8,6 +8,7 @@ class ModifyDataConverter extends \Symfony\Component\Console\Command\Command
 		$this->setName('dataconverter:modify');
 		$this->addArgument('path', \Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Path to PHP file');
 		$this->addArgument('supplierCode', \Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Supplier code');
+		$this->addArgument('format', \Symfony\Component\Console\Input\InputArgument::REQUIRED, 'Feed format');
 		$this->addArgument('namespace', \Symfony\Component\Console\Input\InputArgument::OPTIONAL, 'Namespace');
 	}
 
@@ -36,7 +37,7 @@ class ModifyDataConverter extends \Symfony\Component\Console\Command\Command
 		}
 
 		$content = str_ireplace(
-			'Suppliers\Suppliers\pattern',
+			'Suppliers\Suppliers\pattern\\' . $input->getArgument('format'),
 			$namespace,
 			$content
 		);
