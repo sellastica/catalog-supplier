@@ -57,7 +57,9 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 		$formattedFile = $this->feed->getCompression()->isNone()
 			? sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getFeedFormat()->getValue())
 			: sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getCompression()->getValue());
-		$unformattedFile = sprintf('%s/%s_unformatted.%s', $supplierDir, $filename, $this->feed->getFeedFormat()->getValue());
+		$unformattedFile = $this->feed->getFeedFormat()->isXml()
+			? sprintf('%s/%s_unformatted.%s', $supplierDir, $filename, $this->feed->getFeedFormat()->getValue())
+			: sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getFeedFormat()->getValue());
 		$schemaBasename = $filename . '.' . pathinfo($this->feed->getSchemaFilename(), PATHINFO_EXTENSION);
 		$sourceScriptBasename = 'DataConverter.php';
 		$scriptBasename = $this->feed->getConverterClass()
