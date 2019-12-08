@@ -136,6 +136,19 @@ abstract class AbstractCommandGenerator
 	}
 
 	/**
+	 * @param string $from
+	 * @param string $to
+	 * @return string
+	 */
+	protected function unzip(
+		string $from,
+		string $to
+	): string
+	{
+		return sprintf('unzip "%s" -d "%s"', $from, $to);
+	}
+
+	/**
 	 * @param string $path
 	 * @return string
 	 */
@@ -145,6 +158,18 @@ abstract class AbstractCommandGenerator
 	}
 
 	/**
+	 * @param string $from
+	 * @param string $to
+	 * @return string
+	 */
+	protected function mv(
+		string $from,
+		string $to
+	): string
+	{
+		return sprintf('mv "%s" "%s"', $from, $to);
+	}
+ 	/**
 	 * @param string $path
 	 * @return string
 	 */

@@ -37,10 +37,6 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 	 */
 	public function generate(): string
 	{
-		if (!$this->feed->getCompression()->isNone()) {
-			$this->reformat = false;
-		}
-
 		$filename = $this->feed->getSchemaFilename()
 			? pathinfo($this->feed->getSchemaFilename(), PATHINFO_FILENAME)
 			: 'products';
@@ -54,9 +50,11 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 			$supplierDir .= "/$namespace";
 		}
 
-		$formattedFile = $this->feed->getCompression()->isNone()
-			? sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getFeedFormat()->getValue())
-			: sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getCompression()->getValue());
+		if (!$this->feed->getCompression()->isNone()) {
+			$zipFile = sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getCompression()->getValue());
+		}
+
+		$formattedFile = sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getFeedFormat()->getValue());
 		$unformattedFile = $this->feed->getFeedFormat()->isXml()
 			? sprintf('%s/%s_unformatted.%s', $supplierDir, $filename, $this->feed->getFeedFormat()->getValue())
 			: sprintf('%s/%s.%s', $supplierDir, $filename, $this->feed->getFeedFormat()->getValue());
@@ -77,11 +75,33 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 			$this->phpBreak(),
 			$this->wget(
 				$this->url,
-				$this->createRelativePath($this->reformat ? $unformattedFile : $formattedFile),
+				$this->createRelativePath($zipFile ?? ($this->reformat ? $unformattedFile : $formattedFile)),
 				$this->login,
 				$this->password
 			),
 		];
+
+		//unzip
+		if ($this->feed->getCompression()->isZip()) {
+			$commands = array_merge($commands, [
+				$this->htmlBreak(2),
+				$this->phpBreak(),
+				$this->comment('unzip'),
+				$this->unzip(
+					$this->createRelativePath($zipFile),
+					$this->createRelativePath($supplierDir)
+				),
+				$this->htmlBreak(),
+				$this->phpBreak(),
+				$this->mv(
+					$this->createRelativePath("$supplierDir/{$this->feed->getUncompressedFilename()}"),
+					$this->createRelativePath($this->reformat ? $unformattedFile : $formattedFile)
+				),
+				$this->htmlBreak(),
+				$this->phpBreak(),
+				$this->removeFile($zipFile),
+			]);
+		}
 
 		//reformat
 		if ($this->reformat
@@ -172,22 +192,20 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 			}
 
 			//glogg
-			if ($this->feed->getCompression()->isNone()) {
-				if ($this->feed->getFeedFormat()->isCsv()) {
-					$commands = array_merge($commands, [
-						$this->htmlBreak(2),
-						$this->phpBreak(),
-						$this->comment('open in libre office'),
-						$this->libreoffice($this->createRelativePath($formattedFile)),
-					]);
-				} else {
-					$commands = array_merge($commands, [
-						$this->htmlBreak(2),
-						$this->phpBreak(),
-						$this->comment('open in glogg'),
-						$this->glogg($this->createRelativePath($formattedFile)),
-					]);
-				}
+			if ($this->feed->getFeedFormat()->isCsv()) {
+				$commands = array_merge($commands, [
+					$this->htmlBreak(2),
+					$this->phpBreak(),
+					$this->comment('open in libre office'),
+					$this->libreoffice($this->createRelativePath($formattedFile)),
+				]);
+			} else {
+				$commands = array_merge($commands, [
+					$this->htmlBreak(2),
+					$this->phpBreak(),
+					$this->comment('open in glogg'),
+					$this->glogg($this->createRelativePath($formattedFile)),
+				]);
 			}
 		}
 
