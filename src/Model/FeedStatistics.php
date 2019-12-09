@@ -9,6 +9,7 @@ class FeedStatistics
 		MANUFACTURER = 'manufacturer',
 		WARRANTY = 'warranty',
 		CATEGORIES = 'categories',
+		ESHOP_CATEGORIES = 'eshopCategories',
 		IMAGES = 'images',
 		ATTACHMENTS = 'attachments',
 		CUSTOM_FIELDS = 'customFields',
@@ -30,6 +31,7 @@ class FeedStatistics
 		self::DESCRIPTION => 'apps.suppliers.statistics.titles.description',
 		self::MANUFACTURER => 'apps.suppliers.statistics.titles.manufacturer',
 		self::WARRANTY => 'apps.suppliers.statistics.titles.warranty',
+		self::ESHOP_CATEGORIES => 'apps.suppliers.statistics.titles.eshop_categories',
 		self::CATEGORIES => 'apps.suppliers.statistics.titles.categories',
 		self::IMAGES => 'apps.suppliers.statistics.titles.images',
 		self::ATTACHMENTS => 'apps.suppliers.statistics.titles.attachments',
@@ -198,6 +200,10 @@ class FeedStatistics
 		$numerator = 0;
 		$denominator = 0;
 		foreach (self::$titles as $property => $title) {
+			if (!isset(self::$weights[$property])) {
+				continue;
+			}
+
 			$numerator += self::$weights[$property] * $this->getPercent($property);
 			$denominator += self::$weights[$property];
 		}
