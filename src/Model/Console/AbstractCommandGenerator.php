@@ -193,7 +193,7 @@ abstract class AbstractCommandGenerator
 	 */
 	protected function phpstorm(string $path): string
 	{
-		return sprintf('/snap/phpstorm/current/bin/phpstorm.sh "%s"', $path);
+		return sprintf('phpstorm "%s"', $path);
 	}
 
 	/**

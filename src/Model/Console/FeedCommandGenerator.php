@@ -122,7 +122,8 @@ class FeedCommandGenerator extends AbstractCommandGenerator
 
 		//generate xsd
 		if ($this->edit
-			&& $this->feed->getFeedFormat()->isXml()) {
+			&& $this->feed->getFeedFormat()->isXml()
+			&& $this->feed->getSchemaFilename()) {
 			$commands = array_merge($commands, [
 				$this->htmlBreak(2),
 				$this->phpBreak(),
