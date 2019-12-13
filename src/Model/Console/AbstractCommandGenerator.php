@@ -103,10 +103,19 @@ abstract class AbstractCommandGenerator
 		}
 
 		if (isset($password)) {
-			$return .= sprintf(' --password="%s"', $password);
+			$return .= sprintf(' --password="%s"', $this->wgetEscape($password));
 		}
 
 		return $return;
+	}
+
+	/**
+	 * @param string $string
+	 * @return string
+	 */
+	private function wgetEscape(string $string): string
+	{
+		return str_replace('!', '\\!', $string);
 	}
 
 	/**
