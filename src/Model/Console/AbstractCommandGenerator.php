@@ -99,23 +99,14 @@ abstract class AbstractCommandGenerator
 	{
 		$return = sprintf('wget -O "%s" "%s" --user-agent="%s" --no-check-certificate', $to, $from, $this->userAgent);
 		if (isset($login)) {
-			$return .= sprintf(' --user="%s"', $login);
+			$return .= sprintf(" --user='%s'", $login); //single quotes required due to special characters
 		}
 
 		if (isset($password)) {
-			$return .= sprintf(' --password="%s"', $this->wgetEscape($password));
+			$return .= sprintf(" --password='%s'", $password); //single quotes required due to special characters
 		}
 
 		return $return;
-	}
-
-	/**
-	 * @param string $string
-	 * @return string
-	 */
-	private function wgetEscape(string $string): string
-	{
-		return str_replace('!', '\\!', $string);
 	}
 
 	/**
