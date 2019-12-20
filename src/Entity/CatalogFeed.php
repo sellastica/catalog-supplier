@@ -386,6 +386,16 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getConverterClassName(): string
+	{
+		return \Sellastica\Utils\Strings::contains($this->converterClass, '\\')
+			? \Nette\Utils\Strings::after($this->converterClass, '\\', -1)
+			: $this->converterClass;
+	}
+
+	/**
 	 * @return \Sellastica\Localization\Model\Currency
 	 */
 	public function getDefaultCurrency(): \Sellastica\Localization\Model\Currency
