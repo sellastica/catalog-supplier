@@ -46,11 +46,16 @@ class SupplierOrderService
 	}
 
 	/**
+	 * @param int $projectId
+	 * @param \Sellastica\Price\Price $price
 	 * @return \Sellastica\CatalogSupplier\Entity\SupplierOrder
 	 */
-	public function create(): \Sellastica\CatalogSupplier\Entity\SupplierOrder
+	public function create(
+		int $projectId,
+		\Sellastica\Price\Price $price
+	): \Sellastica\CatalogSupplier\Entity\SupplierOrder
 	{
-		$inquiry = \Sellastica\CatalogSupplier\Entity\SupplierOrderBuilder::create()
+		$inquiry = \Sellastica\CatalogSupplier\Entity\SupplierOrderBuilder::create($projectId, $price)
 			->build();
 		$this->em->persist($inquiry);
 

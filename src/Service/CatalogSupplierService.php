@@ -60,6 +60,15 @@ class CatalogSupplierService
 	}
 
 	/**
+	 * @return int
+	 */
+	public function findCount(): int
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\CatalogSupplier::class)
+			->findCount();
+	}
+
+	/**
 	 * @param string $title
 	 * @param string $code
 	 * @return \Sellastica\CatalogSupplier\Entity\CatalogSupplier

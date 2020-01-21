@@ -5,18 +5,18 @@ use Sellastica\Entity\IBuilder;
 use Sellastica\Entity\TBuilder;
 
 /**
- * @see SupplierOrder
+ * @see Offer
  */
-class SupplierOrderBuilder implements IBuilder
+class OfferBuilder implements IBuilder
 {
 	use TBuilder;
 
-	/** @var int */
-	private $projectId;
-	/** @var \Sellastica\Price\Price */
-	private $price;
+	/** @var string|null */
+	private $title;
 	/** @var int|null */
-	private $offerId;
+	private $projectId;
+	/** @var int|null */
+	private $inquiryId;
 	/** @var int|null */
 	private $adminUserId;
 	/** @var string|null */
@@ -37,71 +37,76 @@ class SupplierOrderBuilder implements IBuilder
 	private $password;
 	/** @var string|null */
 	private $note;
-	/** @var \DateTime|null */
-	private $deadline;
 	/** @var int|null */
 	private $ticketId;
 	/** @var int|null */
 	private $feedId;
 	/** @var int|null */
-	private $invoiceId;
-	/** @var \Sellastica\CatalogSupplier\Model\OrderStatus */
-	private $status;
+	private $productsCount;
+	/** @var int|null */
+	private $variantsCount;
+	/** @var \Sellastica\Price\Price */
+	private $price;
 	/** @var bool */
 	private $regular = true;
+	/** @var \Sellastica\CatalogSupplier\Model\OfferStatus */
+	private $status;
 	/** @var \DateTime|null */
-	private $closed;
-	/** @var \DateTime|null */
-	private $cancelled;
-	/** @var \DateTime|null */
-	private $sent;
+	private $statusChanged;
 	/** @var string|null */
-	private $sentToEmail;
+	private $rejectReason;
 
 	/**
-	 * @param int $projectId
-	 * @param \Sellastica\Price\Price $price
+	 * @return string|null
 	 */
-	public function __construct(
-		int $projectId,
-		\Sellastica\Price\Price $price
-	)
+	public function getTitle()
 	{
-		$this->projectId = $projectId;
-		$this->price = $price;
+		return $this->title;
 	}
 
 	/**
-	 * @return int
+	 * @param string|null $title
+	 * @return $this
 	 */
-	public function getProjectId(): int
+	public function title(string $title = null)
 	{
-		return $this->projectId;
-	}
-
-	/**
-	 * @return \Sellastica\Price\Price
-	 */
-	public function getPrice(): \Sellastica\Price\Price
-	{
-		return $this->price;
+		$this->title = $title;
+		return $this;
 	}
 
 	/**
 	 * @return int|null
 	 */
-	public function getOfferId()
+	public function getProjectId()
 	{
-		return $this->offerId;
+		return $this->projectId;
 	}
 
 	/**
-	 * @param int|null $offerId
+	 * @param int|null $projectId
 	 * @return $this
 	 */
-	public function offerId(int $offerId = null)
+	public function projectId(int $projectId = null)
 	{
-		$this->offerId = $offerId;
+		$this->projectId = $projectId;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getInquiryId()
+	{
+		return $this->inquiryId;
+	}
+
+	/**
+	 * @param int|null $inquiryId
+	 * @return $this
+	 */
+	public function inquiryId(int $inquiryId = null)
+	{
+		$this->inquiryId = $inquiryId;
 		return $this;
 	}
 
@@ -286,24 +291,6 @@ class SupplierOrderBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \DateTime|null
-	 */
-	public function getDeadline()
-	{
-		return $this->deadline;
-	}
-
-	/**
-	 * @param \DateTime|null $deadline
-	 * @return $this
-	 */
-	public function deadline(\DateTime $deadline = null)
-	{
-		$this->deadline = $deadline;
-		return $this;
-	}
-
-	/**
 	 * @return int|null
 	 */
 	public function getTicketId()
@@ -342,36 +329,54 @@ class SupplierOrderBuilder implements IBuilder
 	/**
 	 * @return int|null
 	 */
-	public function getInvoiceId()
+	public function getProductsCount()
 	{
-		return $this->invoiceId;
+		return $this->productsCount;
 	}
 
 	/**
-	 * @param int|null $invoiceId
+	 * @param int|null $productsCount
 	 * @return $this
 	 */
-	public function invoiceId(int $invoiceId = null)
+	public function productsCount(int $productsCount = null)
 	{
-		$this->invoiceId = $invoiceId;
+		$this->productsCount = $productsCount;
 		return $this;
 	}
 
 	/**
-	 * @return \Sellastica\CatalogSupplier\Model\OrderStatus
+	 * @return int|null
 	 */
-	public function getStatus(): \Sellastica\CatalogSupplier\Model\OrderStatus
+	public function getVariantsCount()
 	{
-		return $this->status;
+		return $this->variantsCount;
 	}
 
 	/**
-	 * @param \Sellastica\CatalogSupplier\Model\OrderStatus $status
+	 * @param int|null $variantsCount
 	 * @return $this
 	 */
-	public function status(\Sellastica\CatalogSupplier\Model\OrderStatus $status)
+	public function variantsCount(int $variantsCount = null)
 	{
-		$this->status = $status;
+		$this->variantsCount = $variantsCount;
+		return $this;
+	}
+
+	/**
+	 * @return \Sellastica\Price\Price
+	 */
+	public function getPrice(): \Sellastica\Price\Price
+	{
+		return $this->price;
+	}
+
+	/**
+	 * @param \Sellastica\Price\Price $price
+	 * @return $this
+	 */
+	public function price(\Sellastica\Price\Price $price)
+	{
+		$this->price = $price;
 		return $this;
 	}
 
@@ -394,74 +399,56 @@ class SupplierOrderBuilder implements IBuilder
 	}
 
 	/**
-	 * @return \DateTime|null
+	 * @return \Sellastica\CatalogSupplier\Model\OfferStatus
 	 */
-	public function getClosed()
+	public function getStatus(): \Sellastica\CatalogSupplier\Model\OfferStatus
 	{
-		return $this->closed;
+		return $this->status;
 	}
 
 	/**
-	 * @param \DateTime|null $closed
+	 * @param \Sellastica\CatalogSupplier\Model\OfferStatus $status
 	 * @return $this
 	 */
-	public function closed(\DateTime $closed = null)
+	public function status(\Sellastica\CatalogSupplier\Model\OfferStatus $status)
 	{
-		$this->closed = $closed;
+		$this->status = $status;
 		return $this;
 	}
 
 	/**
 	 * @return \DateTime|null
 	 */
-	public function getCancelled()
+	public function getStatusChanged()
 	{
-		return $this->cancelled;
+		return $this->statusChanged;
 	}
 
 	/**
-	 * @param \DateTime|null $cancelled
+	 * @param \DateTime|null $statusChanged
 	 * @return $this
 	 */
-	public function cancelled(\DateTime $cancelled = null)
+	public function statusChanged(\DateTime $statusChanged = null)
 	{
-		$this->cancelled = $cancelled;
-		return $this;
-	}
-
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getSent()
-	{
-		return $this->sent;
-	}
-
-	/**
-	 * @param \DateTime|null $sent
-	 * @return $this
-	 */
-	public function sent(\DateTime $sent = null)
-	{
-		$this->sent = $sent;
+		$this->statusChanged = $statusChanged;
 		return $this;
 	}
 
 	/**
 	 * @return string|null
 	 */
-	public function getSentToEmail()
+	public function getRejectReason()
 	{
-		return $this->sentToEmail;
+		return $this->rejectReason;
 	}
 
 	/**
-	 * @param string|null $sentToEmail
+	 * @param string|null $rejectReason
 	 * @return $this
 	 */
-	public function sentToEmail(string $sentToEmail = null)
+	public function rejectReason(string $rejectReason = null)
 	{
-		$this->sentToEmail = $sentToEmail;
+		$this->rejectReason = $rejectReason;
 		return $this;
 	}
 
@@ -470,27 +457,22 @@ class SupplierOrderBuilder implements IBuilder
 	 */
 	public function generateId(): bool
 	{
-		return !SupplierOrder::isIdGeneratedByStorage();
+		return !Offer::isIdGeneratedByStorage();
 	}
 
 	/**
-	 * @return SupplierOrder
+	 * @return Offer
 	 */
-	public function build(): SupplierOrder
+	public function build(): Offer
 	{
-		return new SupplierOrder($this);
+		return new Offer($this);
 	}
 
 	/**
-	 * @param int $projectId
-	 * @param \Sellastica\Price\Price $price
 	 * @return self
 	 */
-	public static function create(
-		int $projectId,
-		\Sellastica\Price\Price $price
-	): self
+	public static function create(): self
 	{
-		return new self($projectId, $price);
+		return new self();
 	}
 }

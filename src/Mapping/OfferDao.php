@@ -2,10 +2,10 @@
 namespace Sellastica\CatalogSupplier\Mapping;
 
 /**
- * @see \Sellastica\CatalogSupplier\Entity\SupplierOrder
- * @property SupplierOrderDibiMapper $mapper
+ * @see \Sellastica\CatalogSupplier\Entity\Offer
+ * @property OfferDibiMapper $mapper
  */
-class SupplierOrderDao extends \Sellastica\Entity\Mapping\Dao
+class OfferDao extends \Sellastica\Entity\Mapping\Dao
 {
 	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesDao;
 
@@ -18,22 +18,22 @@ class SupplierOrderDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
+		$data->status = \Sellastica\CatalogSupplier\Model\OfferStatus::from($data->status);
 		$data->price = new \Sellastica\Price\Price(
 			$data->price,
 			false,
 			\Sellastica\Accounting\VatRateTypeFactory::getVatRate(\Sellastica\Localization\Model\Country::cz()),
 			\Sellastica\Localization\Model\Currency::from($data->currency)
 		);
-		$data->status = \Sellastica\CatalogSupplier\Model\OrderStatus::from($data->status);
-		return \Sellastica\CatalogSupplier\Entity\SupplierOrderBuilder::create($data->projectId, $data->price)
+		return \Sellastica\CatalogSupplier\Entity\OfferBuilder::create()
 			->hydrate($data);
 	}
 
 	/**
-	 * @return \Sellastica\CatalogSupplier\Entity\SupplierOrderCollection
+	 * @return \Sellastica\CatalogSupplier\Entity\OfferCollection
 	 */
 	public function getEmptyCollection(): \Sellastica\Entity\Entity\EntityCollection
 	{
-		return new \Sellastica\CatalogSupplier\Entity\SupplierOrderCollection;
+		return new \Sellastica\CatalogSupplier\Entity\OfferCollection;
 	}
 }

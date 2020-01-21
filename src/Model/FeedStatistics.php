@@ -6,8 +6,8 @@ class FeedStatistics
 	const TITLE = 'title',
 		PEREX = 'perex',
 		DESCRIPTION = 'description',
-		MANUFACTURER = 'manufacturer',
-		WARRANTY = 'warranty',
+		MANUFACTURER = 'manufacturerId',
+		WARRANTY = 'warrantyId',
 		CATEGORIES = 'categories',
 		ESHOP_CATEGORIES = 'eshopCategories',
 		IMAGES = 'images',
@@ -19,7 +19,7 @@ class FeedStatistics
 		PRICE = 'price',
 		PURCHASE_PRICE = 'purchasePrice',
 		NORMAL_MARKET_PRICE = 'normalMarketPrice',
-		AVAILABILITY = 'availability',
+		AVAILABILITY = 'availabilityId',
 		QUANTITY = 'quantity',
 		EAN = 'ean',
 		OPTIONS = 'options';
@@ -219,35 +219,35 @@ class FeedStatistics
 	): void
 	{
 		if ($productData->getTitle() !== null) {
-			$this->add('title');
+			$this->add(self::TITLE);
 		}
 
 		if ($productData->getDescription() !== null) {
-			$this->add('description');
+			$this->add(self::DESCRIPTION);
 		}
 
 		if ($productData->getPerex() !== null) {
-			$this->add('perex');
+			$this->add(self::PEREX);
 		}
 
 		if ($productData->getManufacturer() !== null) {
-			$this->add('manufacturer');
+			$this->add(self::MANUFACTURER);
 		}
 
 		if ($productData->getWarranty() !== null) {
-			$this->add('warranty');
+			$this->add(self::WARRANTY);
 		}
 
 		if ($productData->getCategories()) {
-			$this->add('categories');
+			$this->add(self::CATEGORIES);
 		}
 
 		if ($productData->getImages()) {
-			$this->add('images');
+			$this->add(self::IMAGES);
 		}
 
 		if ($productData->getAttachments()) {
-			$this->add('attachments');
+			$this->add(self::ATTACHMENTS);
 		}
 
 		if ($productData->getParameters() || $productData->getFilters()) {
@@ -255,11 +255,11 @@ class FeedStatistics
 		}
 
 		if ($productData->getRelatedProductCodes() || $productData->getRelatedProductExternalIds()) {
-			$this->add('relatedProducts');
+			$this->add(self::RELATED_PRODUCTS);
 		}
 
 		if ($productData->getAlternativeProductCodes() || $productData->getAlternativeProductExternalIds()) {
-			$this->add('alternativeProducts');
+			$this->add(self::ALTERNATIVE_PRODUCTS);
 		}
 	}
 
@@ -271,34 +271,34 @@ class FeedStatistics
 	): void
 	{
 		if ($variantData->getCode() !== null) {
-			$this->add('code');
+			$this->add(self::CODE);
 		}
 
 		if ($variantData->getPrice() !== null) {
-			$this->add('price');
+			$this->add(self::PRICE);
 		}
 
 		if ($variantData->getPurchasePrice() !== null) {
-			$this->add('purchasePrice');
+			$this->add(self::PURCHASE_PRICE);
 		}
 
 		if ($variantData->getNormalMarketPrice() !== null) {
-			$this->add('normalMarketPrice');
+			$this->add(self::NORMAL_MARKET_PRICE);
 		}
 
 		if ($variantData->getEan() !== null) {
-			$this->add('ean');
+			$this->add(self::EAN);
 		}
 
 		if ($variantData->getAvailability()) {
-			$this->add('availability');
+			$this->add(self::AVAILABILITY);
 			if ($variantData->getAvailability()->getQuantity() !== null) {
-				$this->add('quantity');
+				$this->add(self::QUANTITY);
 			}
 		}
 
 		if ($variantData->getOptions()) {
-			$this->add('options');
+			$this->add(self::OPTIONS);
 		}
 
 		if ($variantData->getParameters() || $variantData->getFilters()) {

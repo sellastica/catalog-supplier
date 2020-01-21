@@ -830,6 +830,21 @@ class CatalogFeed extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @param \Sellastica\Localization\Model\Currency $currency
+	 * @return \Sellastica\Price\Price|null
+	 */
+	public function getPrice(\Sellastica\Localization\Model\Currency $currency): ?\Sellastica\Price\Price
+	{
+		if ($currency->isEur()) {
+			return $this->priceEur;
+		} elseif ($currency->isCzk()) {
+			return $this->priceCzk;
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function markMissingProducts(): bool

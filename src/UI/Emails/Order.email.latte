@@ -1,0 +1,17 @@
+{layout $layout}
+
+{block content}
+	<p>
+		Hezký den,<br><br>
+		potvrzujeme, že objednávka napojení feedu <strong>{$order->getTitle()}</strong>
+		{if $order->getProject()}na eshop <strong>{$order->getProject()->getShortTitle()}</strong>{/if}
+		byla v našem systému založena a čeká na své vyřízení. Objednávku vyřídíme po úhradě proforma faktury, kterou Vám v nejbližsí době zašleme.
+	</p>
+
+	<p>Pokud byste chtěli k objednávce cokoliv doplnit, stačí odpovědět na tento email.</p>
+
+	<p class="mb-30">Děkujeme za projevenou důvěru.</p>
+
+    {* signature *}
+    {include '../../../../integroid/src/UI/Emails/signature.latte'}
+{/block}

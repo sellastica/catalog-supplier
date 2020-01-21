@@ -1,0 +1,102 @@
+<table width="100%">
+	<colgroup>
+		<col width="20%">
+		<col>
+	</colgroup>
+	<tbody>
+
+    {* supplier *}
+	<tr>
+		<td>Dodavatel</td>
+		<td>{if $order->getFeed()}{$order->getFeed()->getSupplier()->getTitle()}{else}<em>neznámý</em>{/if}</td>
+	</tr>
+
+    {* feed URL *}
+    {if $order->getFeedUrl()}
+		<tr>
+			<td>URL adresa feedu</td>
+			<td><a href="{$order->getFeedUrl()}">{$order->getFeedUrl()}</a></td>
+		</tr>
+    {/if}
+
+    {* login *}
+    {if $order->getLogin()}
+		<tr>
+			<td>Login</td>
+			<td>{$order->getLogin()}</td>
+		</tr>
+    {/if}
+
+    {* password *}
+    {if $order->getPassword()}
+		<tr>
+			<td>Heslo</td>
+			<td>{$order->getPassword()}</td>
+		</tr>
+    {/if}
+	</tbody>
+
+    {* feed *}
+    {if $order->getPrice()}
+		<tr>
+			<td>Cena</td>
+			<td>{$order->getPrice()->getCurrency()->format($order->getPrice()->getWithoutTax())}</td>
+		</tr>
+    {else}
+		<tr>
+			<td>Cena</td>
+			<td><em>neurčena</em></td>
+		</tr>
+    {/if}
+
+	{* update feeds *}
+	{if $order->getAdditionalFeedUrls()}
+		<tr valign="top">
+			<td>Doplňkové feedy</td>
+			<td>
+                {foreach $order->getAdditionalFeedUrls() as $url}
+					{$url}
+					{sep}<br>{/sep}
+                {/foreach}
+			</td>
+		</tr>
+	{/if}
+
+	<tr>
+		<td>Typ spolupráce</td>
+		<td>
+            {if $order->isRegular()}
+                pravidelná
+            {else}
+                jednorázová
+            {/if}
+		</td>
+	</tr>
+    {if $order->getNote()}
+		<tr>
+			<td>Poznámka</td>
+			<td>{$order->getNote()}</td>
+		</tr>
+    {/if}
+</table>
+<br>
+
+
+{* attachments *}
+{if $attachmentUrls}
+	<br>
+	<p>
+        {foreach $attachmentUrls as $key => $attachment}
+			<a href="{$attachment}" class="btn">{basename($attachment)}</a>
+        {/foreach}
+	</p>
+{/if}
+
+
+{* order *}
+<a href="https://crm.napojse.cz/admin/orders/{$order->getId()}" class="btn">Objednávka</a>
+
+{* feed *}
+{if $order->getFeedId()}
+	<a href="https://crm.napojse.cz/admin/feeds/{$order->getFeedId()}" class="btn">Feed</a>
+{/if}

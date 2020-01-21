@@ -12,12 +12,26 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 {
 	use \Sellastica\Entity\Entity\TAbstractEntity;
 
-	/** @var int|null @optional */
+	/** @var int @required */
 	private $projectId;
+	/** @var \Sellastica\Price\Price @required */
+	private $price;
+	/** @var int|null @optional */
+	private $offerId;
 	/** @var int|null @optional */
 	private $adminUserId;
 	/** @var string|null @optional */
 	private $feedUrl;
+	/** @var string|null @optional */
+	private $additionalFeedUrl1;
+	/** @var string|null @optional */
+	private $additionalFeedUrl2;
+	/** @var string|null @optional */
+	private $additionalFeedUrl3;
+	/** @var string|null @optional */
+	private $additionalFeedUrl4;
+	/** @var string|null @optional */
+	private $additionalFeedUrl5;
 	/** @var string|null @optional */
 	private $login;
 	/** @var string|null @optional */
@@ -34,10 +48,16 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 	private $invoiceId;
 	/** @var \Sellastica\CatalogSupplier\Model\OrderStatus @optional */
 	private $status;
+	/** @var bool @optional */
+	private $regular = true;
 	/** @var \DateTime|null @optional */
 	private $closed;
 	/** @var \DateTime|null @optional */
 	private $cancelled;
+	/** @var \DateTime|null @optional */
+	private $sent;
+	/** @var string|null @optional */
+	private $sentToEmail;
 
 
 	/**
@@ -76,27 +96,43 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
-	 * @return int|null
+	 * @return int
 	 */
-	public function getProjectId(): ?int
+	public function getProjectId(): int
 	{
 		return $this->projectId;
 	}
 
 	/**
-	 * @param int|null $projectId
+	 * @param int $projectId
 	 */
-	public function setProjectId(?int $projectId): void
+	public function setProjectId(int $projectId): void
 	{
 		$this->projectId = $projectId;
 	}
 
 	/**
-	 * @return \Sellastica\Project\Entity\Project|null
+	 * @return \Sellastica\Project\Entity\Project
 	 */
-	public function getProject(): ?\Sellastica\Project\Entity\Project
+	public function getProject(): \Sellastica\Project\Entity\Project
 	{
 		return $this->relationService->getProject();
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getOfferId(): ?int
+	{
+		return $this->offerId;
+	}
+
+	/**
+	 * @param int|null $offerId
+	 */
+	public function setOfferId(?int $offerId): void
+	{
+		$this->offerId = $offerId;
 	}
 
 	/**
@@ -151,6 +187,101 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 		$extract = new \LayerShifter\TLDExtract\Extract();
 		$result = $extract->parse($this->feedUrl);
 		return $result->getRegistrableDomain();
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getAdditionalFeedUrl1(): ?string
+	{
+		return $this->additionalFeedUrl1;
+	}
+
+	/**
+	 * @param string|null $additionalFeedUrl1
+	 */
+	public function setAdditionalFeedUrl1(?string $additionalFeedUrl1): void
+	{
+		$this->additionalFeedUrl1 = $additionalFeedUrl1;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getAdditionalFeedUrl2(): ?string
+	{
+		return $this->additionalFeedUrl2;
+	}
+
+	/**
+	 * @param string|null $additionalFeedUrl2
+	 */
+	public function setAdditionalFeedUrl2(?string $additionalFeedUrl2): void
+	{
+		$this->additionalFeedUrl2 = $additionalFeedUrl2;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getAdditionalFeedUrl3(): ?string
+	{
+		return $this->additionalFeedUrl3;
+	}
+
+	/**
+	 * @param string|null $additionalFeedUrl3
+	 */
+	public function setAdditionalFeedUrl3(?string $additionalFeedUrl3): void
+	{
+		$this->additionalFeedUrl3 = $additionalFeedUrl3;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getAdditionalFeedUrl4(): ?string
+	{
+		return $this->additionalFeedUrl4;
+	}
+
+	/**
+	 * @param string|null $additionalFeedUrl4
+	 */
+	public function setAdditionalFeedUrl4(?string $additionalFeedUrl4): void
+	{
+		$this->additionalFeedUrl4 = $additionalFeedUrl4;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getAdditionalFeedUrl5(): ?string
+	{
+		return $this->additionalFeedUrl5;
+	}
+
+	/**
+	 * @param string|null $additionalFeedUrl5
+	 */
+	public function setAdditionalFeedUrl5(?string $additionalFeedUrl5): void
+	{
+		$this->additionalFeedUrl5 = $additionalFeedUrl5;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getAdditionalFeedUrls(): array
+	{
+		$return = [];
+		for ($i = 1; $i <= 5; $i++) {
+			if ($url = $this->{"additionalFeedUrl$i"}) {
+				$return[] = $url;
+			}
+		}
+
+		return $return;
 	}
 
 	/**
@@ -348,6 +479,70 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return \Sellastica\Price\Price
+	 */
+	public function getPrice(): \Sellastica\Price\Price
+	{
+		return $this->price;
+	}
+
+	/**
+	 * @param \Sellastica\Price\Price $price
+	 */
+	public function setPrice(\Sellastica\Price\Price $price): void
+	{
+		$this->price = $price;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isRegular(): bool
+	{
+		return $this->regular;
+	}
+
+	/**
+	 * @param bool $regular
+	 */
+	public function setRegular(bool $regular): void
+	{
+		$this->regular = $regular;
+	}
+
+	/**
+	 * @return \DateTime|null
+	 */
+	public function getSent(): ?\DateTime
+	{
+		return $this->sent;
+	}
+
+	/**
+	 * @param \DateTime|null $sent
+	 */
+	public function setSent(?\DateTime $sent): void
+	{
+		$this->sent = $sent;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getSentToEmail(): ?string
+	{
+		return $this->sentToEmail;
+	}
+
+	/**
+	 * @param string|null $sentToEmail
+	 */
+	public function setSentToEmail(?string $sentToEmail): void
+	{
+		$this->sentToEmail = $sentToEmail;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -356,18 +551,29 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 			$this->parentToArray(),
 			[
 				'projectId' => $this->projectId,
+				'offerId' => $this->offerId,
 				'adminUserId' => $this->adminUserId,
 				'feedUrl' => $this->feedUrl,
+				'additionalFeedUrl1' => $this->additionalFeedUrl1,
+				'additionalFeedUrl2' => $this->additionalFeedUrl2,
+				'additionalFeedUrl3' => $this->additionalFeedUrl3,
+				'additionalFeedUrl4' => $this->additionalFeedUrl4,
+				'additionalFeedUrl5' => $this->additionalFeedUrl5,
 				'login' => $this->login,
 				'password' => $this->password,
 				'note' => $this->note,
 				'deadline' => $this->deadline,
-				'closed' => $this->closed,
-				'cancelled' => $this->cancelled,
 				'ticketId' => $this->ticketId,
 				'feedId' => $this->feedId,
 				'status' => $this->status->getValue(),
 				'invoiceId' => $this->invoiceId,
+				'price' => $this->price->getWithoutTax(),
+				'currency' => $this->price->getCurrency()->getCode(),
+				'regular' => $this->regular,
+				'closed' => $this->closed,
+				'cancelled' => $this->cancelled,
+				'sent' => $this->sent,
+				'sentToEmail' => $this->sentToEmail,
 			]
 		);
 	}

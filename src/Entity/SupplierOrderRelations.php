@@ -23,11 +23,12 @@ class SupplierOrderRelations implements \Sellastica\Entity\Relation\IEntityRelat
 	}
 
 	/**
-	 * @return \Sellastica\Project\Entity\Project|null
+	 * @return \Sellastica\Project\Entity\Project
 	 */
-	public function getProject(): ?\Sellastica\Project\Entity\Project
+	public function getProject(): \Sellastica\Project\Entity\Project
 	{
-		return $this->em->getRepository(\Sellastica\Project\Entity\Project::class)->find($this->order->getProjectId());
+		return $this->em->getRepository(\Sellastica\Project\Entity\Project::class)
+			->find($this->order->getProjectId());
 	}
 
 	/**
@@ -43,7 +44,8 @@ class SupplierOrderRelations implements \Sellastica\Entity\Relation\IEntityRelat
 	 */
 	public function getAdminUser(): ?\Sellastica\Integroid\Entity\IntegroidUser
 	{
-		return $this->em->getRepository(\Sellastica\Integroid\Entity\IntegroidUser::class)->find($this->order->getAdminUserId());
+		return $this->em->getRepository(\Sellastica\Integroid\Entity\IntegroidUser::class)
+			->find($this->order->getAdminUserId());
 	}
 
 	/**
@@ -51,6 +53,7 @@ class SupplierOrderRelations implements \Sellastica\Entity\Relation\IEntityRelat
 	 */
 	public function getInvoice(): ?\Sellastica\Crm\Entity\Invoice\Entity\Invoice
 	{
-		return $this->em->getRepository(\Sellastica\Crm\Entity\Invoice\Entity\Invoice::class)->find($this->order->getInvoiceId());
+		return $this->em->getRepository(\Sellastica\Crm\Entity\Invoice\Entity\Invoice::class)
+			->find($this->order->getInvoiceId());
 	}
 }

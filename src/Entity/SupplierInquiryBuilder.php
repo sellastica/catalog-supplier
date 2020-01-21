@@ -25,6 +25,8 @@ class SupplierInquiryBuilder implements IBuilder
 	private $note;
 	/** @var bool */
 	private $regular = true;
+	/** @var int|null */
+	private $ticketId;
 	/** @var \DateTime|null */
 	private $closed;
 
@@ -149,6 +151,24 @@ class SupplierInquiryBuilder implements IBuilder
 	public function regular(bool $regular = true)
 	{
 		$this->regular = $regular;
+		return $this;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getTicketId()
+	{
+		return $this->ticketId;
+	}
+
+	/**
+	 * @param int|null $ticketId
+	 * @return $this
+	 */
+	public function ticketId(int $ticketId = null)
+	{
+		$this->ticketId = $ticketId;
 		return $this;
 	}
 

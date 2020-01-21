@@ -1,0 +1,14 @@
+Hezký den,<br><br>
+<p>
+	děkujeme za Váš zájem o naše služby. Zasílám Vám cenovou nabídku na zpracování Vámi poptávaných dat.
+    {if $offer->getProject()}
+		Pokud budete s nabídkou souhlasit, stačí jí potvrdit tlačítkem
+		<strong>Souhlasím s nabídkou</strong> v její spodní části a v Napojse se automaticky vytvoří objednávka.
+		O dalším postupu Vás budeme následně informovat.
+    {else}
+		Pokud budete s nabídkou souhlasit, stačí odpovědět na tento email a nabídku potvrdit.
+		Následně Vám pošlu proforma fakturu na dohodnutou částku a po její úhradě začneme na napojení pracovat.
+    {/if}
+</p>
+<p>Nabídku naleznete on-line na adrese <a href="{$offer->getUrl()}">{$offer->getUrl()}</a>.</p>
+<p>V případě jakýchkoliv dotazů stačí odpovědět na tento email, případně zavolat na telefonní číslo +420 737 690 090.</p>
