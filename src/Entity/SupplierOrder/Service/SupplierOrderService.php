@@ -46,6 +46,16 @@ class SupplierOrderService
 	}
 
 	/**
+	 * @param array $filter
+	 * @return bool
+	 */
+	public function existsBy(array $filter): bool
+	{
+		return $this->em->getRepository(\Sellastica\CatalogSupplier\Entity\SupplierOrder::class)
+			->existsBy($filter);
+	}
+
+	/**
 	 * @param int $projectId
 	 * @param \Sellastica\Price\Price $price
 	 * @return \Sellastica\CatalogSupplier\Entity\SupplierOrder
