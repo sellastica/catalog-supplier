@@ -16,8 +16,19 @@ class B2bPartnerDao extends \Sellastica\Entity\Mapping\Dao
 		$second = null
 	): \Sellastica\Entity\IBuilder
 	{
-		return \Sellastica\CatalogSupplier\Entity\B2bPartner\Entity\B2bPartnerBuilder::create($data->contact, $data->currency)
-			->hydrate($data);
+		$data->contact = new \Sellastica\Identity\Model\Contact(
+			$data->firstName,
+			$data->lastName,
+			new \Sellastica\Identity\Model\Email($data->email),
+			$data->phone
+		);
+		$data->currency = \Sellastica\Localization\Model\Currency::from($data->currency);
+		$data->password = new \Sellastica\Identity\Model\Password($data->password);
+
+		return \Sellastica\CatalogSupplier\Entity\B2bPartner\Entity\B2bPartnerBuilder::create(
+			$data->contact,
+			$data->currency
+		)->hydrate($data);
 	}
 
 	/**

@@ -5,12 +5,15 @@ namespace Sellastica\CatalogSupplier\Entity\B2bPartner\Entity;
  * @generate-builder
  * @see B2bPartnerBuilder
  */
-class B2bPartner extends \Sellastica\Entity\Entity\AbstractEntity implements \Sellastica\Entity\Entity\IEntity
+class B2bPartner extends \Sellastica\Entity\Entity\AbstractEntity
+	implements \Sellastica\Entity\Entity\IEntity, \Sellastica\Twig\Model\IProxable
 {
 	use \Sellastica\Entity\Entity\TAbstractEntity;
 
 	/** @var \Sellastica\Identity\Model\Contact @required */
 	private $contact;
+	/** @var \Sellastica\Identity\Model\Password|null @optional */
+	protected $password;
 	/** @var \Sellastica\Localization\Model\Currency @required */
 	private $currency;
 	/** @var \Sellastica\Identity\Model\BillingAddress|null @optional */
@@ -49,6 +52,29 @@ class B2bPartner extends \Sellastica\Entity\Entity\AbstractEntity implements \Se
 	public function setContact(\Sellastica\Identity\Model\Contact $contact): void
 	{
 		$this->contact = $contact;
+	}
+
+	/**
+	 * @return \Sellastica\Identity\Model\Password|null
+	 */
+	public function getPassword(): ?\Sellastica\Identity\Model\Password
+	{
+		return $this->password;
+	}
+
+	public function hashPassword(): void
+	{
+		$this->password = new \Sellastica\Identity\Model\Password(
+			\Nette\Security\Passwords::hash($this->password->getPassword())
+		);
+	}
+
+	/**
+	 * @param \Sellastica\Identity\Model\Password|null $password
+	 */
+	public function setPassword(?\Sellastica\Identity\Model\Password $password): void
+	{
+		$this->password = $password;
 	}
 
 	/**
@@ -106,8 +132,12 @@ class B2bPartner extends \Sellastica\Entity\Entity\AbstractEntity implements \Se
 	{
 		return array_merge(
 			$this->parentToArray(),
-			$this->contact->toArray(),
 			[
+				'firstName' => $this->contact->getFirstName(),
+				'lastName' => $this->contact->getLastName(),
+				'email' => $this->contact->getEmail()->getEmail(),
+				'password' => $this->password ? $this->password->getPassword() : null,
+				'phone' => $this->contact->getPhone(),
 				'currency' => $this->currency->getCode(),
 				'commissionRatio' => $this->commissionRatio,
 			],
@@ -122,5 +152,13 @@ class B2bPartner extends \Sellastica\Entity\Entity\AbstractEntity implements \Se
 				'tin' => null,
 			]
 		);
+	}
+
+	/**
+	 * @return \Sellastica\CatalogSupplier\Entity\B2bPartner\Presentation\B2bPartnerProxy
+	 */
+	public function toProxy(): \Sellastica\CatalogSupplier\Entity\B2bPartner\Presentation\B2bPartnerProxy
+	{
+		return new \Sellastica\CatalogSupplier\Entity\B2bPartner\Presentation\B2bPartnerProxy($this);
 	}
 }

@@ -15,6 +15,8 @@ class B2bPartnerBuilder implements IBuilder
 	private $contact;
 	/** @var \Sellastica\Localization\Model\Currency */
 	private $currency;
+	/** @var \Sellastica\Identity\Model\Password|null */
+	private $password;
 	/** @var \Sellastica\Identity\Model\BillingAddress|null */
 	private $billingAddress;
 	/** @var float */
@@ -47,6 +49,24 @@ class B2bPartnerBuilder implements IBuilder
 	public function getCurrency(): \Sellastica\Localization\Model\Currency
 	{
 		return $this->currency;
+	}
+
+	/**
+	 * @return \Sellastica\Identity\Model\Password|null
+	 */
+	public function getPassword()
+	{
+		return $this->password;
+	}
+
+	/**
+	 * @param \Sellastica\Identity\Model\Password|null $password
+	 * @return $this
+	 */
+	public function password(\Sellastica\Identity\Model\Password $password = null)
+	{
+		$this->password = $password;
+		return $this;
 	}
 
 	/**
