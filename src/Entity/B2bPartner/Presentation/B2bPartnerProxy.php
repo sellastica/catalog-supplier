@@ -32,6 +32,14 @@ class B2bPartnerProxy extends \Sellastica\Twig\Model\ProxyEntity
 	}
 
 	/**
+	 * @return string|null
+	 */
+	public function getFull_name(): ?string
+	{
+		return $this->parent->getContact()->getFullName();
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getEmail(): string
@@ -58,6 +66,14 @@ class B2bPartnerProxy extends \Sellastica\Twig\Model\ProxyEntity
 	}
 
 	/**
+	 * @return \Sellastica\Localization\Presentation\CurrencyProxy
+	 */
+	public function getCurrency(): \Sellastica\Localization\Presentation\CurrencyProxy
+	{
+		return $this->parent->getCurrency()->toProxy();
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getShortName(): string
@@ -72,8 +88,10 @@ class B2bPartnerProxy extends \Sellastica\Twig\Model\ProxyEntity
 	{
 		return [
 			'company',
+			'currency',
 			'first_name',
 			'last_name',
+			'full_name',
 			'email',
 			'phone',
 			'id',

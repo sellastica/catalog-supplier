@@ -146,7 +146,7 @@ class CommissionService
 	 * @param int $invoiceId
 	 * @param int $projectId
 	 * @param int $b2bProjectId
-	 * @param int $percentCommission
+	 * @param int $commissionRatio
 	 * @param \Sellastica\Price\Price $commission
 	 * @return \Sellastica\CatalogSupplier\Entity\Commission\Entity\Commission
 	 */
@@ -154,7 +154,7 @@ class CommissionService
 		int $invoiceId,
 		int $projectId,
 		int $b2bProjectId,
-		int $percentCommission,
+		int $commissionRatio,
 		\Sellastica\Price\Price $commission
 	): \Sellastica\CatalogSupplier\Entity\Commission\Entity\Commission
 	{
@@ -162,7 +162,7 @@ class CommissionService
 			$invoiceId,
 			$projectId,
 			$b2bProjectId,
-			$percentCommission,
+			$commissionRatio,
 			$commission
 		)->build();
 		$this->em->persist($commission);

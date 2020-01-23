@@ -16,9 +16,9 @@ class Commission extends \Sellastica\Entity\Entity\AbstractEntity
 	/** @var int @required */
 	private $projectId;
 	/** @var int @required */
-	private $b2bProjectId;
+	private $b2bPartnerId;
 	/** @var int @required */
-	private $percentCommission;
+	private $commissionRatio;
 	/** @var \Sellastica\Price\Price @required */
 	private $commission;
 	/** @var \DateTime|null @optional */
@@ -84,33 +84,33 @@ class Commission extends \Sellastica\Entity\Entity\AbstractEntity
 	/**
 	 * @return int
 	 */
-	public function getB2bProjectId(): int
+	public function getB2bPartnerId(): int
 	{
-		return $this->b2bProjectId;
+		return $this->b2bPartnerId;
 	}
 
 	/**
-	 * @param int $b2bProjectId
+	 * @param int $b2bPartnerId
 	 */
-	public function setB2bProjectId(int $b2bProjectId): void
+	public function setB2bPartnerId(int $b2bPartnerId): void
 	{
-		$this->b2bProjectId = $b2bProjectId;
+		$this->b2bPartnerId = $b2bPartnerId;
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getPercentCommission(): int
+	public function getCommissionRatio(): int
 	{
-		return $this->percentCommission;
+		return $this->commissionRatio;
 	}
 
 	/**
-	 * @param int $percentCommission
+	 * @param int $commissionRatio
 	 */
-	public function setPercentCommission(int $percentCommission): void
+	public function setCommissionRatio(int $commissionRatio): void
 	{
-		$this->percentCommission = $percentCommission;
+		$this->commissionRatio = $commissionRatio;
 	}
 
 	/**
@@ -155,8 +155,8 @@ class Commission extends \Sellastica\Entity\Entity\AbstractEntity
 			[
 				'invoiceId' => $this->invoiceId,
 				'projectId' => $this->projectId,
-				'b2bProjectId' => $this->b2bProjectId,
-				'percentCommission' => $this->percentCommission,
+				'b2bPartnerId' => $this->b2bPartnerId,
+				'commissionRatio' => $this->commissionRatio,
 				'commission' => $this->commission->getWithoutTax(),
 				'currency' => $this->commission->getCurrency()->getCode(),
 				'vatRate' => $this->commission->getTaxRate(),

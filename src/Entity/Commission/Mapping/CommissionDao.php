@@ -48,7 +48,7 @@ class CommissionDao extends \Sellastica\Entity\Mapping\Dao
 			$data->invoiceId,
 			$data->projectId,
 			$data->b2bProjectId,
-			$data->percentCommission,
+			$data->commissionRatio,
 			$data->commission
 		)->hydrate($data);
 	}

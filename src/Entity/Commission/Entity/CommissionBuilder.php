@@ -16,9 +16,9 @@ class CommissionBuilder implements IBuilder
 	/** @var int */
 	private $projectId;
 	/** @var int */
-	private $b2bProjectId;
+	private $b2bPartnerId;
 	/** @var int */
-	private $percentCommission;
+	private $commissionRatio;
 	/** @var \Sellastica\Price\Price */
 	private $commission;
 	/** @var \DateTime|null */
@@ -27,22 +27,22 @@ class CommissionBuilder implements IBuilder
 	/**
 	 * @param int $invoiceId
 	 * @param int $projectId
-	 * @param int $b2bProjectId
-	 * @param int $percentCommission
+	 * @param int $b2bPartnerId
+	 * @param int $commissionRatio
 	 * @param \Sellastica\Price\Price $commission
 	 */
 	public function __construct(
 		int $invoiceId,
 		int $projectId,
-		int $b2bProjectId,
-		int $percentCommission,
+		int $b2bPartnerId,
+		int $commissionRatio,
 		\Sellastica\Price\Price $commission
 	)
 	{
 		$this->invoiceId = $invoiceId;
 		$this->projectId = $projectId;
-		$this->b2bProjectId = $b2bProjectId;
-		$this->percentCommission = $percentCommission;
+		$this->b2bPartnerId = $b2bPartnerId;
+		$this->commissionRatio = $commissionRatio;
 		$this->commission = $commission;
 	}
 
@@ -65,17 +65,17 @@ class CommissionBuilder implements IBuilder
 	/**
 	 * @return int
 	 */
-	public function getB2bProjectId(): int
+	public function getB2bPartnerId(): int
 	{
-		return $this->b2bProjectId;
+		return $this->b2bPartnerId;
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getPercentCommission(): int
+	public function getCommissionRatio(): int
 	{
-		return $this->percentCommission;
+		return $this->commissionRatio;
 	}
 
 	/**
@@ -123,19 +123,19 @@ class CommissionBuilder implements IBuilder
 	/**
 	 * @param int $invoiceId
 	 * @param int $projectId
-	 * @param int $b2bProjectId
-	 * @param int $percentCommission
+	 * @param int $b2bPartnerId
+	 * @param int $commissionRatio
 	 * @param \Sellastica\Price\Price $commission
 	 * @return self
 	 */
 	public static function create(
 		int $invoiceId,
 		int $projectId,
-		int $b2bProjectId,
-		int $percentCommission,
+		int $b2bPartnerId,
+		int $commissionRatio,
 		\Sellastica\Price\Price $commission
 	): self
 	{
-		return new self($invoiceId, $projectId, $b2bProjectId, $percentCommission, $commission);
+		return new self($invoiceId, $projectId, $b2bPartnerId, $commissionRatio, $commission);
 	}
 }

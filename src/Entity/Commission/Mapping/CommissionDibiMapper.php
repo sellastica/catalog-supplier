@@ -15,14 +15,24 @@ class CommissionDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	}
 
 	/**
-	 * @param int $b2bProjectId
+	 * @param bool $databaseName
+	 * @return string
+	 */
+	protected function getTableName($databaseName = false): string
+	{
+		return ($databaseName ? $this->environment->getNapojseCrmDatabaseName() . '.' : '')
+			. 'b2b_partner_commission';
+	}
+
+	/**
+	 * @param int $b2bPartnerId
 	 * @return array
 	 */
-	public function findCommissionSummaries(int $b2bProjectId): array
+	public function findCommissionSummaries(int $b2bPartnerId): array
 	{
 		$subselect = $this->database->select('SUM(commission)')
 			->from($this->getTableName(true))->as('t2')
-			->where('t2.b2bProjectId = %i', $b2bProjectId)
+			->where('t2.b2bPartnerId = %i', $b2bPartnerId)
 			->where('t2.commissionPaid IS NULL')
 			->where('MONTH(t2.created) = commissionMonth')
 			->where('YEAR(t2.created) = commissionYear');
@@ -33,7 +43,7 @@ class CommissionDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 			->select('currency')
 			->select($subselect)->as('priceToPay')
 			->from($this->getTableName(true))
-			->where('b2bProjectId = %i', $b2bProjectId)
+			->where('b2bPartnerId = %i', $b2bPartnerId)
 			->groupBy('commissionYear')
 			->groupBy('commissionMonth')
 			->groupBy('currency')
@@ -41,12 +51,12 @@ class CommissionDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 	}
 
 	/**
-	 * @param int $b2bProjectId
+	 * @param int $b2bPartnerId
 	 * @param \Sellastica\Localization\Model\Currency $currency
 	 * @return \Sellastica\Price\Price
 	 */
 	public function getPriceToPay(
-		int $b2bProjectId,
+		int $b2bPartnerId,
 		\Sellastica\Localization\Model\Currency $currency
 	): \Sellastica\Price\Price
 	{
@@ -54,7 +64,7 @@ class CommissionDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 			->select('SUM(commission)')->as('withoutVat')
 			->select('SUM(commission * vatRate / 100)')->as('vat')
 			->from($this->getTableName(true))
-			->where('b2bProjectId = %i', $b2bProjectId)
+			->where('b2bPartnerId = %i', $b2bPartnerId)
 			->where('currency = %s', $currency->getCode())
 			->where('commissionPaid IS NULL')
 			->fetch();
