@@ -58,6 +58,8 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 	private $sent;
 	/** @var string|null @optional */
 	private $sentToEmail;
+	/** @var bool @optional */
+	private $supportNotified = false;
 
 
 	/**
@@ -543,6 +545,22 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isSupportNotified(): bool
+	{
+		return $this->supportNotified;
+	}
+
+	/**
+	 * @param bool $supportNotified
+	 */
+	public function setSupportNotified(bool $supportNotified): void
+	{
+		$this->supportNotified = $supportNotified;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function toArray(): array
@@ -574,6 +592,7 @@ class SupplierOrder extends \Sellastica\Entity\Entity\AbstractEntity
 				'cancelled' => $this->cancelled,
 				'sent' => $this->sent,
 				'sentToEmail' => $this->sentToEmail,
+				'supportNotified' => $this->supportNotified,
 			]
 		);
 	}

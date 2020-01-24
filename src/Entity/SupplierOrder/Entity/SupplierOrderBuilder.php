@@ -57,6 +57,8 @@ class SupplierOrderBuilder implements IBuilder
 	private $sent;
 	/** @var string|null */
 	private $sentToEmail;
+	/** @var bool */
+	private $supportNotified = false;
 
 	/**
 	 * @param int $projectId
@@ -462,6 +464,24 @@ class SupplierOrderBuilder implements IBuilder
 	public function sentToEmail(string $sentToEmail = null)
 	{
 		$this->sentToEmail = $sentToEmail;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getSupportNotified(): bool
+	{
+		return $this->supportNotified;
+	}
+
+	/**
+	 * @param bool $supportNotified
+	 * @return $this
+	 */
+	public function supportNotified(bool $supportNotified)
+	{
+		$this->supportNotified = $supportNotified;
 		return $this;
 	}
 
