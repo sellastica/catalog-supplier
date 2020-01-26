@@ -89,4 +89,12 @@ class B2bPartnerService
 
 		return $supplier;
 	}
+
+	/**
+	 * @param B2bPartner $b2bPartner
+	 */
+	public function remove(B2bPartner $b2bPartner): void
+	{
+		$this->em->remove($b2bPartner);
+	}
 }

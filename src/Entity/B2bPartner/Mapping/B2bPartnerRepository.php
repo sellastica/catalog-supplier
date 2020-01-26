@@ -11,4 +11,5 @@ use Sellastica\CatalogSupplier\Entity\B2bPartner\Entity\IB2bPartnerRepository;
  */
 class B2bPartnerRepository extends Repository implements IB2bPartnerRepository
 {
+	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesRepository;
 }

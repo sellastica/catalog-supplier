@@ -7,6 +7,8 @@ namespace Sellastica\CatalogSupplier\Entity\B2bPartner\Mapping;
  */
 class B2bPartnerDao extends \Sellastica\Entity\Mapping\Dao
 {
+	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesDao;
+
 	/**
 	 * @inheritDoc
 	 */

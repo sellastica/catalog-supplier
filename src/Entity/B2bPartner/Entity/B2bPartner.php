@@ -118,6 +118,14 @@ class B2bPartner extends \Sellastica\Entity\Entity\AbstractEntity
 	}
 
 	/**
+	 * @return float
+	 */
+	public function getCommissionPercent(): float
+	{
+		return $this->commissionRatio * 100;
+	}
+
+	/**
 	 * @param float $commissionRatio
 	 */
 	public function setCommissionRatio(float $commissionRatio): void

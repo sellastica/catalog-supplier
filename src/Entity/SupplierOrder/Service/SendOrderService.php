@@ -44,7 +44,7 @@ class SendOrderService
 	{
 		$latte = $this->latteFactory->create();
 		$body = $latte->renderToString(__DIR__ . '/../UI/Emails/Order.email.latte', [
-			'layout' => __DIR__ . '/../../../integroid/src/UI/Emails/@layout_napojse.latte',
+			'layout' => __DIR__ . '/../../../../../integroid/src/UI/Emails/@layout_napojse.latte',
 			'order' => $order,
 		]);
 		$message = new \Nette\Mail\Message();

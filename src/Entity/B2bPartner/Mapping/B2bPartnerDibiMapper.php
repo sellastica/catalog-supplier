@@ -6,6 +6,8 @@ namespace Sellastica\CatalogSupplier\Entity\B2bPartner\Mapping;
  */
 class B2bPartnerDibiMapper extends \Sellastica\Entity\Mapping\DibiMapper
 {
+	use \Sellastica\DataGrid\Mapping\Dibi\TFilterRulesDibiMapper;
+
 	/**
 	 * @return bool
 	 */
